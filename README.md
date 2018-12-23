@@ -15,9 +15,9 @@ Progetto di ingegneria del software
       </td>
       </td>
         <td align="center" valign="top">
-        <img width="100" height="100" src="https://github.com/.png?s=150">
+        <img width="100" height="100" src="https://github.com/Pio98.png?s=150">
         <br>
-        <a href="https://github.com/">Pio D'Auria</a>
+        <a href="https://github.com/Pio98">Pio D'Auria</a>
       </td>      
       <td align="center" valign="top">
         <img width="100" height="100" src="https://github.com/HandyMenny.png?s=150">
