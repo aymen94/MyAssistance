@@ -152,3 +152,6 @@ buildNumber.properties
 *.iml
 .project
 .classpath
+.idea/
+src/main/view/WEB-INF/classes/
+src/main/view/WEB-INF/lib/
