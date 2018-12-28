@@ -1,3 +1,4 @@
+# File: https://github.com/github/gitignore/blob/master/Global/JetBrains.gitignore
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio and WebStorm
 # Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
 
@@ -28,9 +29,9 @@
 # When using Gradle or Maven with auto-import, you should exclude module files,
 # since they will be recreated, and may cause churn.  Uncomment if using
 # auto-import.
-# .idea/modules.xml
-# .idea/*.iml
-# .idea/modules
+.idea/modules.xml
+.idea/*.iml
+.idea/modules
 
 # CMake
 cmake-build-*/
@@ -64,10 +65,9 @@ fabric.properties
 
 # Android studio 3.1+ serialized cache file
 .idea/caches/build_file_checksums.ser
-*.xml
-MyAssistance.iml
 
 # Eclipse
+# Reference: https://github.com/github/gitignore/blob/master/Global/Eclipse.gitignore
 .metadata
 bin/
 tmp/
@@ -123,4 +123,32 @@ local.properties
 .cache-main
 .scala_dependencies
 .worksheet
-.idea/workspace.xml___jb_tmp___
+
+# NetBeans
+# Reference: https://github.com/github/gitignore/blob/master/Global/NetBeans.gitignore
+**/nbproject/private/
+**/nbproject/Makefile-*.mk
+**/nbproject/Package-*.bash
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+
+# Maven
+# Reference: https://github.com/github/gitignore/blob/master/Maven.gitignore
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+.mvn/wrapper/maven-wrapper.jar
+
+# Custom
+*.iml
+.project
+.classpath
