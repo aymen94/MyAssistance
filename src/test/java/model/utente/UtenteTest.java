@@ -26,8 +26,7 @@ public class UtenteTest {
         csu.setPassword("4321");
 
         //Test metodi get
-        csu.getId();
-        csu.getNome();
+        csu.getId(
         csu.getCognome();
         csu.getDataSospensione();
         csu.getUserName();
