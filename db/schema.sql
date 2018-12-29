@@ -8,7 +8,7 @@ CREATE TABLE my_assistance.utente
   email            VARCHAR(80) UNIQUE NOT NULL,
   nome             VARCHAR(50)        NOT NULL,
   cognome          VARCHAR(50)        NOT NULL,
-  sesso            TINYINT            NOT NULL, -- 0 = Altro, 1 = M, 2 = F
+  sesso            TINYINT            NOT NULL, -- 0 = Altro, 1 = Maschio, 2 = Femmina
   data_sospensione DATE,
   is_gestore       BOOLEAN DEFAULT FALSE
 );
@@ -26,7 +26,7 @@ CREATE TABLE my_assistance.tipologia
 (
   id       INT PRIMARY KEY,
   nome     VARCHAR(20) UNIQUE NOT NULL,
-  priorita TINYINT            NOT NULL
+  priorita TINYINT            NOT NULL --  da 1 (priorità bassa) a 10 (priorità alta)
 );
 
 CREATE TABLE my_assistance.segnalazione
