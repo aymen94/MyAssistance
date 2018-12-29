@@ -10,7 +10,7 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, shrink-to-fit=no">
 		<title>Pagina Principale - MyAssistance</title>
-		<link rel="stylesheet" href="res/style.css">
+		<link rel="stylesheet" href="assets/css/style.css">
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
@@ -37,7 +37,7 @@
 					<br>
 					<ul class="list-unstyled alert-list">
 						<li class="media">
-							<img src="res/alert-open.png" class="mr-3 alert-image" alt="Segnalazione">
+							<img src="assets/images/alert-open.png" class="mr-3 alert-image" alt="Segnalazione">
 							<div class="media-body">
 								<h5 class="mt-0 mb-1">Microfono Non Funziona In P4</h5>
 								Purtroppo questa classe è una cloaca, quindi non funziona il microfono per i professori.
@@ -48,21 +48,21 @@
 							</div>
 						</li>
 						<li class="media">
-							<img src="res/alert-working.png" class="mr-3 alert-image" alt="Segnalazione">
+							<img src="assets/images/alert-working.png" class="mr-3 alert-image" alt="Segnalazione">
 							<div class="media-body">
 								<h5 class="mt-0 mb-1">Microfono Non Funziona In P4</h5>
 								Purtroppo questa classe è una cloaca, quindi non funziona il microfono per i professori.
 							</div>
 						</li>
 						<li class="media">
-							<img src="res/alert-resolved.png" class="mr-3 alert-image" alt="Segnalazione">
+							<img src="assets/images/alert-resolved.png" class="mr-3 alert-image" alt="Segnalazione">
 							<div class="media-body">
 								<h5 class="mt-0 mb-1">Microfono Non Funziona In P4</h5>
 								Purtroppo questa classe è una cloaca, quindi non funziona il microfono per i professori.
 							</div>
 						</li>
 						<li class="media">
-							<img src="res/alert-refused.png" class="mr-3 alert-image" alt="Segnalazione">
+							<img src="assets/images/alert-refused.png" class="mr-3 alert-image" alt="Segnalazione">
 							<div class="media-body">
 								<h5 class="mt-0 mb-1">Microfono Non Funziona In P4</h5>
 								Purtroppo questa classe è una cloaca, quindi non funziona il microfono per i professori.
@@ -72,7 +72,7 @@
 				</div>
 				<div>
 					<div class="card user">
-						<img class="card-img-top" src="images/user.png" alt="User">
+						<img class="card-img-top" src="assets/images/user.png" alt="User">
 						<div class="card-body">
 							Sei loggato come utente <b>Guest</b>.
 						</div>
