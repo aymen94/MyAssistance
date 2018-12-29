@@ -17,143 +17,120 @@ public abstract class Utente {
     private Date dataSospensione;
     private Boolean isGestore;
 
+
     /**
-     * Costruttore Utente vuoto
+     * @return id ottienti l'identificatore dell'utente.
      */
-    public Utente(){ }
-    /**
-     * Costruttore Utentechang
-     * @param id
-     * @param userName
-     * @param password
-     * @param email
-     * @param nome
-     * @param cognome
-     * @param dataSospensione
-     * @param isGestore
-     */
-    public Utente(Integer id, String userName, String password, String email, String nome, String cognome, Date dataSospensione, Boolean isGestore) {
-        this.id = id;
-        this.userName = userName;
-        this.password = password;
-        this.email = email;
-        this.nome = nome;
-        this.cognome = cognome;
-        this.dataSospensione = dataSospensione;
-        this.isGestore = isGestore;
-    }
-    /**
-     * @return id
-     */
-    private Integer getId() {
+    Integer getId() {
         return id;
     }
 
     /**
-     * @param id
+     * @param id imposta il valore id dell'utente.
      */
-    private void setId(Integer id) {
+    void setId(Integer id) {
         this.id = id;
     }
 
     /**
-     * @return username
+     * @return username Ottieni l'username dell'utente.
      */
-    private String getUserName() {
+    String getUserName() {
         return userName;
     }
 
     /**
-     * @param userName
+     * @param userName imposta il valore di username.
      */
-    private void setUserName(String userName) {
+    void setUserName(String userName) {
         this.userName = userName;
     }
 
     /**
-     * @return password
+     * @return password ottieni la passoword dell'utente.
      */
-    private String getPassword() {
+    String getPassword() {
         return password;
     }
 
     /**
-     * @param password
+     * @param password imposta la password dell'utente.
      */
-    private void setPassword(String password) {
+    void setPassword(String password) {
         this.password = password;
     }
 
     /**
-     * @return email
+     * @return email  ottieni l'email dell'utente.
      */
-    private String getEmail() {
+    String getEmail() {
         return email;
     }
 
     /**
-     * @param email
+     * @param email imposta l'emaio dell'utente.
      */
-    private void setEmail(String email) {
+    void setEmail(String email) {
         this.email = email;
     }
     /**
-     * @return nome
+     * @return nome ottieni il nome dell'utente.
      */
-    private String getNome() {
+    String getNome() {
         return nome;
     }
 
     /**
-     * @param nome
+     * @param nome imposta il nome dell'utente.
      */
-    private void setNome(String nome) {
+    void setNome(String nome) {
         this.nome = nome;
     }
 
     /**
-     * @return congnome
+     * @return cognome ottieni il cognome dell'utente.
      */
-    private String getCognome() {
+    String getCognome() {
         return cognome;
     }
 
     /**
-     * @param cognome
+     * @param cognome imposta il cognome dell'utente.
      */
-    private void setCognome(String cognome) {
+    void setCognome(String cognome) {
         this.cognome = cognome;
     }
 
     /**
-     * @return dataSospensione
+     * @return dataSospensione ottieni la data di sospensione dell'utente.
      */
-    private Date getDataSospensione() {
+    Date getDataSospensione() {
         return dataSospensione;
     }
 
     /**
-     * @param dataSospensione
+     * @param dataSospensione imposta la data di sospensione dell'utente.
      */
-    private void setDataSospensione(Date dataSospensione) {
+    void setDataSospensione(Date dataSospensione) {
         this.dataSospensione = dataSospensione;
     }
 
     /**
-     * @return isGestore
+     * @return isGestore ritorna la tipologia dell'utente, se è 'true' allore è gestore, altrimenti e CSU.
      */
-    private Boolean getIsGestore() {
+    Boolean getIsGestore() {
         return isGestore;
     }
 
     /**
-     * @param isGestore
+     * @param isGestore imposta il ruolo dell'utente.
      */
-    private void setIsGestore(Boolean isGestore) {
-        isGestore = isGestore;
+    void setIsGestore(Boolean isGestore) {
+        this.isGestore = isGestore;
     }
 
     /**
+     * ritorna tutti i valori istanziati.
      * @return toString Utente
      */
     @Override
