@@ -8,14 +8,14 @@ import java.util.Date;
 
 public abstract class Utente {
 
-    protected Integer id;
-    protected String userName;
-    protected String password;
-    protected String email;
-    protected String nome;
-    protected String cognome;
-    protected Date dataSospensione;
-    protected Boolean isGestore;
+    private Integer id;
+    private String userName;
+    private String password;
+    private String email;
+    private String nome;
+    private String cognome;
+    private Date dataSospensione;
+    private Boolean isGestore;
 
     /**
      * Costruttore Utente vuoto
@@ -45,111 +45,111 @@ public abstract class Utente {
     /**
      * @return id
      */
-    protected Integer getId() {
+    private Integer getId() {
         return id;
     }
 
     /**
      * @param id
      */
-    protected void setId(Integer id) {
+    private void setId(Integer id) {
         this.id = id;
     }
 
     /**
      * @return username
      */
-    protected String getUserName() {
+    private String getUserName() {
         return userName;
     }
 
     /**
      * @param userName
      */
-    protected void setUserName(String userName) {
+    private void setUserName(String userName) {
         this.userName = userName;
     }
 
     /**
      * @return password
      */
-    protected String getPassword() {
+    private String getPassword() {
         return password;
     }
 
     /**
      * @param password
      */
-    protected void setPassword(String password) {
+    private void setPassword(String password) {
         this.password = password;
     }
 
     /**
      * @return email
      */
-    protected String getEmail() {
+    private String getEmail() {
         return email;
     }
 
     /**
      * @param email
      */
-    protected void setEmail(String email) {
+    private void setEmail(String email) {
         this.email = email;
     }
     /**
      * @return nome
      */
-    protected String getNome() {
+    private String getNome() {
         return nome;
     }
 
     /**
      * @param nome
      */
-    protected void setNome(String nome) {
+    private void setNome(String nome) {
         this.nome = nome;
     }
 
     /**
      * @return congnome
      */
-    protected String getCognome() {
+    private String getCognome() {
         return cognome;
     }
 
     /**
      * @param cognome
      */
-    protected void setCognome(String cognome) {
+    private void setCognome(String cognome) {
         this.cognome = cognome;
     }
 
     /**
      * @return dataSospensione
      */
-    protected Date getDataSospensione() {
+    private Date getDataSospensione() {
         return dataSospensione;
     }
 
     /**
      * @param dataSospensione
      */
-    protected void setDataSospensione(Date dataSospensione) {
+    private void setDataSospensione(Date dataSospensione) {
         this.dataSospensione = dataSospensione;
     }
 
     /**
      * @return isGestore
      */
-    protected Boolean getIsGestore() {
+    private Boolean getIsGestore() {
         return isGestore;
     }
 
     /**
      * @param isGestore
      */
-    protected void setIsGestore(Boolean isGestore) {
+    private void setIsGestore(Boolean isGestore) {
         isGestore = isGestore;
     }
 

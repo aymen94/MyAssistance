@@ -52,7 +52,6 @@ public class UtenteTest {
         ges1.setCognome("Bianchi");
         ges1.setDataSospensione(data3);
         ges1.setIsGestore(false);
-
         UtenteDB x = new UtenteDB();
     }
 }
