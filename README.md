@@ -1,6 +1,7 @@
 # MyAssistance
 Progetto di ingegneria del software
 
+[![Build Status](https://travis-ci.com/aymen94/MyAssistance.svg?token=wySBgxnzay5d17jYnobS&branch=master)](https://travis-ci.com/aymen94/MyAssistance)
 
 <h2>Core Team</h2>
 
