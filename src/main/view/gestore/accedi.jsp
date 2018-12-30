@@ -12,8 +12,6 @@
   <title>Accedi | Gestore </title>
   <!-- Bootstrap -->
   <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
-  <!-- Style -->
-  <link rel="stylesheet" href="/assets/css/style.css">
 </head>
 
 <body class="bg-dark">
@@ -50,10 +48,6 @@
       </div>
     </div>
   </div>
-  <!-- jQuery -->
-  <script src="/assets/js/jquery-3.3.1.min.js"></script>
-  <!-- Bootstrap -->
-  <script src="/assets/js/bootstrap.min.js"></script>
 </body>
 
 </html>
