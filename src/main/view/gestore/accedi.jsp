@@ -39,7 +39,7 @@
                     <input type="password" class="form-control form-control-lg" autocomplete="current-password" id="pwd">
                   </div>
                   <button type="submit" class="btn btn-success btn-lg btn-block" id="btnLogin">Accedi</button>
-                  <div class="text-center m-4">Se sei un utente <a href="/utente/accedi.html">clicca qui</a></div>
+                  <div class="text-center m-4">Se sei un utente <a href="/utente/accedi.jsp">clicca qui</a></div>
                 </form>
               </div>
             </div>
