@@ -31,7 +31,7 @@
               <div class="card-body">
                 <form class="form" role="form" id="formLogin" method="POST">
                   <div class="form-group">
-                    <label for="uname1">Username</label>
+                    <label>Username</label>
                     <input type="text" class="form-control form-control-lg" autocomplete="username" id="usr">
                   </div>
                   <div class="form-group">
