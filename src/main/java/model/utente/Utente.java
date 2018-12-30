@@ -8,7 +8,7 @@ import java.util.Date;
 
 public abstract class Utente {
 
-    private Integer id;
+    Integer id;
     private String userName;
     private String password;
     private String email;
@@ -19,113 +19,136 @@ public abstract class Utente {
 
 
     /**
+     * Costruttore Utente
+     * @param id identificatore
+     * @param userName username utente
+     * @param password parolasegreta per identificazione
+     * @param email email utente
+     * @param nome nome utente
+     * @param cognome congome utente
+     * @param dataSospensione data di sospensione
+     * @param isGestore parametro per determinare il tipo di utente
+     */
+
+    public Utente(Integer id, String userName, String password, String email, String nome, String cognome, Date dataSospensione, Boolean isGestore) {
+        this.id = id;
+        this.userName = userName;
+        this.password = password;
+        this.email = email;
+        this.nome = nome;
+        this.cognome = cognome;
+        this.dataSospensione = dataSospensione;
+        this.isGestore = isGestore;
+    }
+
+    /**
      * @return id ottienti l'identificatore dell'utente.
      */
-    Integer getId() {
+    public Integer getId() {
         return id;
     }
 
     /**
      * @param id imposta il valore id dell'utente.
      */
-    void setId(Integer id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
     /**
      * @return username Ottieni l'username dell'utente.
      */
-    String getUserName() {
+    public String getUserName() {
         return userName;
     }
 
     /**
      * @param userName imposta il valore di username.
      */
-    void setUserName(String userName) {
+    public void setUserName(String userName) {
         this.userName = userName;
     }
 
     /**
      * @return password ottieni la passoword dell'utente.
      */
-    String getPassword() {
+    public String getPassword() {
         return password;
     }
 
     /**
      * @param password imposta la password dell'utente.
      */
-    void setPassword(String password) {
+    public void setPassword(String password) {
         this.password = password;
     }
 
     /**
      * @return email  ottieni l'email dell'utente.
      */
-    String getEmail() {
+    public String getEmail() {
         return email;
     }
 
     /**
      * @param email imposta l'emaio dell'utente.
      */
-    void setEmail(String email) {
+    public void setEmail(String email) {
         this.email = email;
     }
     /**
      * @return nome ottieni il nome dell'utente.
      */
-    String getNome() {
+    public String getNome() {
         return nome;
     }
 
     /**
      * @param nome imposta il nome dell'utente.
      */
-    void setNome(String nome) {
+    public void setNome(String nome) {
         this.nome = nome;
     }
 
     /**
      * @return cognome ottieni il cognome dell'utente.
      */
-    String getCognome() {
+    public String getCognome() {
         return cognome;
     }
 
     /**
      * @param cognome imposta il cognome dell'utente.
      */
-    void setCognome(String cognome) {
+    public void setCognome(String cognome) {
         this.cognome = cognome;
     }
 
     /**
      * @return dataSospensione ottieni la data di sospensione dell'utente.
      */
-    Date getDataSospensione() {
+    public Date getDataSospensione() {
         return dataSospensione;
     }
 
     /**
      * @param dataSospensione imposta la data di sospensione dell'utente.
      */
-    void setDataSospensione(Date dataSospensione) {
+    public void setDataSospensione(Date dataSospensione) {
         this.dataSospensione = dataSospensione;
     }
 
     /**
      * @return isGestore ritorna la tipologia dell'utente, se è 'true' allore è gestore, altrimenti e CSU.
      */
-    Boolean getIsGestore() {
+    public Boolean getIsGestore() {
         return isGestore;
     }
 
     /**
      * @param isGestore imposta il ruolo dell'utente.
      */
-    void setIsGestore(Boolean isGestore) {
+    public void setIsGestore(Boolean isGestore) {
         this.isGestore = isGestore;
     }
 
