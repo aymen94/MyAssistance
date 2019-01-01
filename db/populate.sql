@@ -6,7 +6,7 @@ VALUES ('a.naghmouchi', 'abcd1234', 'a.naghmouchi@test.it', 'aymen', 'naghmouchi
        ('p.dauria', 'abcd1234', 'a.dauria@test.it', 'pio', 'd auria ', 1,
         0);
 
-INSERT INTO my_assistance.ufficio_tecnico (nome, tel, email, ubriacazione)
+INSERT INTO my_assistance.ufficio_tecnico (nome, tel, email, ubicazione)
 VALUES (' Ifix ', ' 1112223334', ' assistenza@ifix.it ', ' Via della Biblioteca, 84084 Fisciano SA '),
        (' MR.ripara ', ' 1112223334', ' assistenza@mrripara.it ', ' Via della mensa, 84084 Fisciano SA '),
        (' Aggiustiamo sedie ', ' 1112223334', ' assistenza@sedieee.it ', ' Via delle sedie, 84084 Fisciano SA ');
