@@ -19,7 +19,7 @@ CREATE TABLE my_assistance.ufficio_tecnico
   nome         VARCHAR(50) UNIQUE NOT NULL,
   tel          CHAR(15),
   email        VARCHAR(55) UNIQUE NOT NULL,
-  ubriacazione VARCHAR(50)
+  ubicazione VARCHAR(50)
 );
 
 CREATE TABLE my_assistance.tipologia
