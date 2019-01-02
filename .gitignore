@@ -181,4 +181,6 @@ buildNumber.properties
 .classpath
 .idea/
 src/main/view/META-INF/MANIFEST.MF
+src/main/view/WEB-INF/classes/
+src/main/view/WEB-INF/lib/
 .checkstyle
