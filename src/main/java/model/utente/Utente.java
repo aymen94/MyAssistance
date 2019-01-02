@@ -41,7 +41,7 @@ public abstract class Utente {
      * Costruttore Utente.
      *
      * @param d               identificatore
-     * @param userName        username utente
+     * @param uName        username utente
      * @param password        parolasegreta per identificazione
      * @param email           email utente
      * @param nome            nome utente
@@ -50,12 +50,12 @@ public abstract class Utente {
      * @param isGestore       parametro per determinare il tipo di utente
      */
 
-    public Utente(final Integer d, final String userName,
+    public Utente(final Integer d, final String uName,
             final String password, String email, final String nome,
             final String cognome, final Date dataSospensione,
             final Boolean isGestore) {
         this.id = d;
-        this.userName = userName;
+        this.userName = uName;
         this.password = password;
         this.email = email;
         this.nome = nome;
