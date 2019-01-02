@@ -42,6 +42,11 @@ public abstract class Utente {
     }
 
     /**
+     * Costruttore vuoto
+     */
+    public Utente(){ }
+
+    /**
      * @return id ottienti l'identificatore dell'utente.
      */
     public Integer getId() {
