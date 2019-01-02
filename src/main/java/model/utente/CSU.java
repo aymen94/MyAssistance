@@ -13,27 +13,51 @@ import java.sql.Date;
  */
 public class CSU extends Utente {
 
+
+    private Date dataSospensione;
+
+
     /**
-     * Costruttore CSU.
+     * Costruttore Utente.
      *
-     * @param id              identificatore
-     * @param userName        username utente
-     * @param password        parolasegreta per identificazione
-     * @param email           email utente
-     * @param nome            nome utente
-     * @param cognome         congome utente
-     * @param dataSospensione data di sospensione
+     * @param id        identificatore
+     * @param userName  username utente
+     * @param password  parolasegreta per identificazione
+     * @param email     email utente
+     * @param nome      nome utente
+     * @param cognome   congome utente
+     * @param sesso     sesso utente
+     * @param isGestore tipo di utente
      */
-    public CSU(final Integer id, final String userName, final String password,
-            final String email, final String nome, final String cognome,
-            final Date dataSospensione) {
-        super(id, userName, password, email, nome, cognome, dataSospensione,
-                false);
+    public CSU(Integer id, String userName, String password, String email, String nome, String cognome, String sesso, Boolean isGestore, Date dataSospensione) {
+        super(id, userName, password, email, nome, cognome, sesso, isGestore);
+        this.dataSospensione = dataSospensione;
     }
 
     /**
-     * Costruttore CSU vuoto.
+     * Instantiates a new csu.
      */
-    public CSU() {
+    public CSU( ) {
+
     }
+
+    /**
+     * Ottieni la data sospensione.
+     *
+     * @return dataSospensione ottieni la data di sospensione dell'utente.
+     */
+    public Date getDataSospensione() {
+
+        return dataSospensione;
+    }
+
+    /**
+     * Imposta la data sospensione.
+     *
+     * @param dataSospensione imposta la data di sospensione dell'utente.
+     */
+    public void setDataSospensione(Date dataSospensione) {
+        this.dataSospensione = dataSospensione;
+    }
+
 }

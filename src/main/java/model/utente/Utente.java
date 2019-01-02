@@ -31,8 +31,6 @@ public abstract class Utente {
     /** il cognome. */
     private String cognome;
 
-    /** la data sospensione. */
-    private Date dataSospensione;
 
     /** is gestore. */
     private Boolean isGestore;
@@ -46,14 +44,13 @@ public abstract class Utente {
      * @param email           email utente
      * @param nome            nome utente
      * @param cognome         congome utente
-     * @param dataSospensione data di sospensione
-     * @param isGestore       parametro per determinare il tipo di utente
+     * @param sesso           sesso utente
+     * @param isGestore       tipo di utente
      */
 
     public Utente(final Integer id, final String userName,
             final String password, String email, final String nome,
-            final String cognome, final Date dataSospensione,
-            final Boolean isGestore) {
+            final String cognome,final String sesso, final Boolean isGestore) {
 
         this.id = id;
         this.userName = userName;
@@ -61,7 +58,6 @@ public abstract class Utente {
         this.email = email;
         this.nome = nome;
         this.cognome = cognome;
-        this.dataSospensione = dataSospensione;
         this.isGestore = isGestore;
     }
 
@@ -179,42 +175,6 @@ public abstract class Utente {
         this.cognome = cognome;
     }
 
-    /**
-     * Ottieni la data sospensione.
-     *
-     * @return dataSospensione ottieni la data di sospensione dell'utente.
-     */
-    public Date getDataSospensione() {
-        return dataSospensione;
-    }
-
-    /**
-     * Imposta la data sospensione.
-     *
-     * @param dataSospensione imposta la data di sospensione dell'utente.
-     */
-    public void setDataSospensione(Date dataSospensione) {
-        this.dataSospensione = dataSospensione;
-    }
-
-    /**
-     * controlli è gestore o no.
-     *
-     * @return isGestore ritorna la tipologia dell'utente, se è 'true' allore è
-     *         gestore, altrimenti e CSU.
-     */
-    public Boolean getIsGestore() {
-        return isGestore;
-    }
-
-    /**
-     * Imposti iSgestore.
-     *
-     * @param isGestore imposta il ruolo dell'utente.
-     */
-    public void setIsGestore(Boolean isGestore) {
-        this.isGestore = isGestore;
-    }
 
     /**
      * ritorna tutti i valori istanziati.
@@ -226,8 +186,7 @@ public abstract class Utente {
         return "Utente {" + "id = " + id + ", userName = '" + userName + '\''
                 + ", password = " + password + ", email = '" + email + '\''
                 + ", nome = '" + nome + '\'' + ", cognome = '" + cognome + '\''
-                + ", dataSospensione = " + dataSospensione + ", isGestore = "
-                + isGestore + '}';
+                + "}";
     }
 
     /**
