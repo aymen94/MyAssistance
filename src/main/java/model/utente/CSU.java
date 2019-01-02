@@ -14,7 +14,7 @@ import java.sql.Date;
 public class CSU extends Utente {
 
     /**
-     * Costruttore Utente.
+     * Costruttore CSU.
      *
      * @param id              identificatore
      * @param userName        username utente
@@ -32,7 +32,7 @@ public class CSU extends Utente {
     }
 
     /**
-     * Instantiates a new csu.
+     * Costruttore CSU vuoto.
      */
     public CSU() {
     }

@@ -13,28 +13,28 @@ import java.sql.Date;
  */
 public abstract class Utente {
 
-    /** The id. */
+    /** l' id. */
     private Integer id;
 
-    /** The user name. */
+    /** lo user name. */
     private String userName;
 
-    /** The password. */
+    /** la password. */
     private String password;
 
-    /** The email. */
+    /** la email. */
     private String email;
 
-    /** The nome. */
+    /** il nome. */
     private String nome;
 
-    /** The cognome. */
+    /** il cognome. */
     private String cognome;
 
-    /** The data sospensione. */
+    /** la data sospensione. */
     private Date dataSospensione;
 
-    /** The is gestore. */
+    /** is gestore. */
     private Boolean isGestore;
 
     /**
@@ -89,7 +89,7 @@ public abstract class Utente {
     }
 
     /**
-     * Gets the user name.
+     * Ottieni l' username.
      *
      * @return username Ottieni l'username dell'utente.
      */
@@ -98,7 +98,7 @@ public abstract class Utente {
     }
 
     /**
-     * Sets the user name.
+     * imposta l'username.
      *
      * @param userName imposta il valore di username.
      */
@@ -107,7 +107,7 @@ public abstract class Utente {
     }
 
     /**
-     * Gets the password.
+     * Ottieni the password.
      *
      * @return password ottieni la passoword dell'utente.
      */
@@ -116,7 +116,7 @@ public abstract class Utente {
     }
 
     /**
-     * Sets the password.
+     * Imposta la password.
      *
      * @param password imposta la password dell'utente.
      */
@@ -125,7 +125,7 @@ public abstract class Utente {
     }
 
     /**
-     * Gets the email.
+     * Ottieni le email.
      *
      * @return email ottieni l'email dell'utente.
      */
@@ -134,7 +134,7 @@ public abstract class Utente {
     }
 
     /**
-     * Sets the email.
+     * Imposta la email.
      *
      * @param email imposta l'emaio dell'utente.
      */
@@ -143,7 +143,7 @@ public abstract class Utente {
     }
 
     /**
-     * Gets the nome.
+     * Ottieni il nome.
      *
      * @return nome ottieni il nome dell'utente.
      */
@@ -152,7 +152,7 @@ public abstract class Utente {
     }
 
     /**
-     * Sets the nome.
+     * Imposta il nome.
      *
      * @param nome imposta il nome dell'utente.
      */
@@ -161,7 +161,7 @@ public abstract class Utente {
     }
 
     /**
-     * Gets the cognome.
+     * Ottieni il cognome.
      *
      * @return cognome ottieni il cognome dell'utente.
      */
@@ -170,7 +170,7 @@ public abstract class Utente {
     }
 
     /**
-     * Sets the cognome.
+     * Imposta il cognome.
      *
      * @param cognome imposta il cognome dell'utente.
      */
@@ -179,7 +179,7 @@ public abstract class Utente {
     }
 
     /**
-     * Gets the data sospensione.
+     * Ottieni la data sospensione.
      *
      * @return dataSospensione ottieni la data di sospensione dell'utente.
      */
@@ -188,7 +188,7 @@ public abstract class Utente {
     }
 
     /**
-     * Sets the data sospensione.
+     * Imposta la data sospensione.
      *
      * @param dataSospensione imposta la data di sospensione dell'utente.
      */
@@ -197,7 +197,7 @@ public abstract class Utente {
     }
 
     /**
-     * Gets the checks if is gestore.
+     * controlli è gestore o no.
      *
      * @return isGestore ritorna la tipologia dell'utente, se è 'true' allore è
      *         gestore, altrimenti e CSU.
@@ -207,7 +207,7 @@ public abstract class Utente {
     }
 
     /**
-     * Sets the checks if is gestore.
+     * Imposti iSgestore.
      *
      * @param isGestore imposta il ruolo dell'utente.
      */
