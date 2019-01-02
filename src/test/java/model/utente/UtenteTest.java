@@ -6,6 +6,11 @@ import static org.junit.Assert.*;
 
 public class UtenteTest {
 
+
+
+    public static void main(String[] args){
+
+    }
     @Test
     public void getId() {
     }
