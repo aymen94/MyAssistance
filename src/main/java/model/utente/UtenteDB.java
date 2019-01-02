@@ -18,18 +18,18 @@ import java.sql.Connection;
  */
 public class UtenteDB {
     /**
-     * Questo attributo privato Ë una stringa contenete il nome della tabella
+     * Questo attributo privato √® una stringa contenete il nome della tabella
      * contenente i dati da gestire.
      */
     private static final String TABLE_NAME = "utente";
 
     /**
      * Questo metodo effettua l'inserimento di un utente nel database.
-     * @param u Ë l'oggetto di tipo Utente che deve essere inserito
+     * @param u √® l'oggetto di tipo Utente che deve essere inserito
      * all'interno del database.
-     * @throws SQLException Ë l'eccezione che puÚ essere lanciata
+     * @throws SQLException √® l'eccezione che pu√≤ essere lanciata
      * durante l'esecuzione del metodo.
-     * @return res Ë vale 0 se l'inserimento non Ë stato effettuato,
+     * @return res √® vale 0 se l'inserimento non √® stato effettuato,
      * altrimenti un intero maggiore di 0.
      */
     public synchronized int insert(final Utente u) throws SQLException {
@@ -70,11 +70,11 @@ public class UtenteDB {
                 }
             } finally {
                 // .releaseConnection(connection);
-                /*la successiva riga Ë da cancellare quando sara‡
+                /*la successiva riga √® da cancellare quando sara√†
                 implementata la classe per la connessione*/
                 connection = null;
             }
-            /*la successiva riga Ë da cancellare quando sara‡
+            /*la successiva riga √® da cancellare quando sara√†
             implementata la classe per la connessione*/
             res = 1;
         }
@@ -86,11 +86,11 @@ public class UtenteDB {
      * Questo metodo permette di prelevare
      * dal database le informazioni
      * relative ad un utente dato il suo indirizzo email.
-     * @param email Ë l'indirizzo email dell'utente di cui
+     * @param email √® l'indirizzo email dell'utente di cui
      * si vuole ottenere le informazioni.
-     * @return user Ë l'utente il cui indirizzo email
+     * @return user √® l'utente il cui indirizzo email
      * corrisponde a quello fornito in input al metodo.
-     * @throws SQLException Ë l'eccezione che puÚ essere
+     * @throws SQLException √® l'eccezione che pu√≤ essere
      * lanciata durante l'esecuzione del metodo.
      */
     public synchronized Utente getByEmail(final String email)
@@ -133,12 +133,12 @@ public class UtenteDB {
                 }
             } finally {
                 //.releaseConnection(connection);
-                /*la successiva riga Ë da cancellare quando sara‡
+                /*la successiva riga √® da cancellare quando sara√†
                 implementata la classe per la connessione*/
                 connection = null;
             }
         }
-        /*la successiva riga Ë da cancellare
+        /*la successiva riga √® da cancellare
         quando saranno implementate le classi utenti*/
         user = new Utente();
         return user;
@@ -148,9 +148,9 @@ public class UtenteDB {
      * Questo metodo consente di prelevare dal database le informazioni
      * di tutti gli
      * utenti registrati.
-     * @return users Ë la lista di tutti gli utenti registrati
+     * @return users √® la lista di tutti gli utenti registrati
      * nel database.
-     * @throws SQLException Ë l'eccezione che puÚ essere lanciata
+     * @throws SQLException √® l'eccezione che pu√≤ essere lanciata
      * durante l'esecuzione del metodo.
      */
     public synchronized Collection<Utente> getAll() throws SQLException {
@@ -191,12 +191,12 @@ public class UtenteDB {
                 }
             } finally {
                 // .releaseConnection(connection);
-                /*la successiva riga Ë da cancellare quando sara‡
+                /*la successiva riga √® da cancellare quando sara√†
                 implementata la classe per la connessione*/
                 connection = null;
             }
         }
-        /*la successiva riga Ë da cancellare
+        /*la successiva riga √® da cancellare
         quando saranno implementate le classi utenti*/
         users = new ArrayList<Utente>();
         return users;
@@ -205,11 +205,11 @@ public class UtenteDB {
     /**
      * Questo metodo consente di eliminare dal database un utente dato il suo
      * indirizzo email.
-     * @param email Ë l'indirizzo email dell'utente che deve essere
+     * @param email √® l'indirizzo email dell'utente che deve essere
      * eliminato dal database.
-     * @throws SQLException Ë l'eccezione che puÚ essere lanciata
+     * @throws SQLException √® l'eccezione che pu√≤ essere lanciata
      * durante l'esecuzione del metodo.
-     * @return res vale 0 se la cancellazione non Ë stata effettuata,
+     * @return res vale 0 se la cancellazione non √® stata effettuata,
      * altrimenti un intero maggiore di 0.
      */
     public synchronized int delete(final String email) throws SQLException {
@@ -235,12 +235,12 @@ public class UtenteDB {
                 }
             } finally {
                 // .releaseConnection(connection);
-                /*la successiva riga Ë da cancellare quando sara‡
+                /*la successiva riga √® da cancellare quando sara√†
                 implementata la classe per la connessione*/
                 connection = null;
             }
         }
-        /*la successiva riga Ë da cancellare quando sara‡
+        /*la successiva riga √® da cancellare quando sara√†
         implementata la classe per la connessione*/
         res = 1;
         return (res);

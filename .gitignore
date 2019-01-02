@@ -183,4 +183,5 @@ buildNumber.properties
 src/main/view/META-INF/MANIFEST.MF
 src/main/view/WEB-INF/classes/
 src/main/view/WEB-INF/lib/
+.DS_Store
 .checkstyle
