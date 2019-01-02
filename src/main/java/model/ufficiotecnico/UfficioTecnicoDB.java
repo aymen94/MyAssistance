@@ -11,39 +11,46 @@ import java.sql.SQLException;
 import java.util.Collection;
 import java.sql.Connection;
 
+// TODO: Auto-generated Javadoc
 /**
- * Questa classe permette la gestione dei dati persistenti relativi agli uffici tecnici.
+ * Questa classe permette la gestione dei dati persistenti relativi agli uffici
+ * tecnici.
  */
 
 public class UfficioTecnicoDB {
 
+    /** The Constant TABLE_NAME. */
     private static final String TABLE_NAME = "ufficio_tecnico";
 
     /**
      * Questo metodo effettua l'inserimento di un ufficio tecnico nel database.
+     *
      * @param uff è l'oggetto di tipo UfficioTecnico che deve essere inserito
-     * all'interno del database.
-     * @throws SQLException è l'eccezione che può essere lanciata
-     * durante l'esecuzione del metodo.
-     * @return res  vale 0 se l'inserimento non è stato effettuato,
-     * altrimenti un intero maggiore di 0.
+     *            all'interno del database.
+     * @return res vale 0 se l'inserimento non è stato effettuato, altrimenti un
+     *         intero maggiore di 0.
+     * @throws SQLException è l'eccezione che può essere lanciata durante
+     *                      l'esecuzione del metodo.
      */
 
-    public synchronized int insert(final UfficioTecnico uff) throws SQLException {
+    public synchronized int insert(final UfficioTecnico uff)
+            throws SQLException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         int res;
 
-        String insertSQL = "INSERT INTO " + UfficioTecnicoDB.TABLE_NAME + " (id,nome,tel,email,ubicazione) " + "VALUES (?, ?, ?, ?, ?)";
+        String insertSQL = "INSERT INTO " + UfficioTecnicoDB.TABLE_NAME
+                + " (id,nome,tel,email,ubicazione) " + "VALUES (?, ?, ?, ?, ?)";
 
         try {
             // connection = OTTIENI CONNESSIONE
+            int i = 1;
             preparedStatement = connection.prepareStatement(insertSQL);
-            preparedStatement.setInt(1, uff.getId());
-            preparedStatement.setString(2, uff.getNome());
-            preparedStatement.setString(3, uff.getTel());
-            preparedStatement.setString(4, uff.getEmail());
-            preparedStatement.setString(5, uff.getUbicazione());
+            preparedStatement.setInt(i++, uff.getId());
+            preparedStatement.setString(i++, uff.getNome());
+            preparedStatement.setString(i++, uff.getTel());
+            preparedStatement.setString(i++, uff.getEmail());
+            preparedStatement.setString(i++, uff.getUbicazione());
 
             res = preparedStatement.executeUpdate();
 
@@ -63,16 +70,16 @@ public class UfficioTecnicoDB {
     }
 
     /**
-     * Questo metodo consente di prelevare dal database le informazioni
-     * di tutti gli
-     * uffici tecnici registrati.
-     * @return users è la lista di tutti gli utenti registrati
-     * nel database.
-     * @throws SQLException è l'eccezione che può essere lanciata
-     * durante l'esecuzione del metodo.
+     * Questo metodo consente di prelevare dal database le informazioni di tutti
+     * gli uffici tecnici registrati.
+     *
+     * @return users è la lista di tutti gli utenti registrati nel database.
+     * @throws SQLException è l'eccezione che può essere lanciata durante
+     *                      l'esecuzione del metodo.
      */
 
-    public synchronized Collection<UfficioTecnico> getAll() throws SQLException {
+    public synchronized Collection<UfficioTecnico> getAll()
+            throws SQLException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
 

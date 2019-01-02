@@ -1,4 +1,4 @@
-package myassistance;
+package model.utente;
 
 import model.utente.UtenteDB;
 import model.utente.Utente;

@@ -5,23 +5,29 @@ Date: 23/12/2018
 */
 package model.utente;
 
-import java.util.Date;
+import java.sql.Date;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class Gestore.
+ */
 public class Gestore extends Utente {
     /**
-     * Costruttore Utente
-     * @param id identificatore
-     * @param userName username utente
-     * @param password parolasegreta per identificazione
-     * @param email email utente
-     * @param nome nome utente
-     * @param cognome congome utente
+     * Costruttore Utente.
+     *
+     * @param id              identificatore
+     * @param userName        username utente
+     * @param password        parolasegreta per identificazione
+     * @param email           email utente
+     * @param nome            nome utente
+     * @param cognome         congome utente
      * @param dataSospensione data di sospensione
-     * @param isGestore parametro per determinare il tipo di utente
      */
-    public Gestore(Integer id,String userName,String password, String email, String nome, String cognome, Date dataSospensione, Boolean isGestore) {
-        super(id, userName, password, email, nome, cognome, dataSospensione, isGestore);
+    public Gestore(final Integer id, final String userName,
+            final String password, final String email, final String nome,
+            final String cognome, final Date dataSospensione) {
+        super(id, userName, password, email, nome, cognome, dataSospensione,
+                true);
     }
-
 
 }

@@ -11,6 +11,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedList;
+
+import control.Database;
+
 import java.sql.Connection;
 
 /**
@@ -25,12 +28,13 @@ public class UtenteDB {
 
     /**
      * Questo metodo effettua l'inserimento di un utente nel database.
-     * @param u è l'oggetto di tipo Utente che deve essere inserito
-     * all'interno del database.
-     * @throws SQLException è l'eccezione che può essere lanciata
-     * durante l'esecuzione del metodo.
-     * @return res è vale 0 se l'inserimento non è stato effettuato,
-     * altrimenti un intero maggiore di 0.
+     *
+     * @param u è l'oggetto di tipo Utente che deve essere inserito all'interno
+     *          del database.
+     * @throws SQLException è l'eccezione che può essere lanciata durante
+     *                      l'esecuzione del metodo.
+     * @return res è vale 0 se l'inserimento non è stato effettuato, altrimenti
+     *         un intero maggiore di 0.
      */
     public synchronized int insert(final Utente u) throws SQLException {
         Connection connection = null;
@@ -43,21 +47,22 @@ public class UtenteDB {
                 + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);";
 
         try {
-            // connection = OTTIENI CONNESSIONE
+            connection = Database.getConnection();
             preparedStatement = connection.prepareStatement(insertSQL);
-            preparedStatement.setInt(1, u.getId());
-            preparedStatement.setString(2, u.getUserName());
-            preparedStatement.setString(3, u.getPassword());
-            preparedStatement.setString(4, u.getEmail());
-            preparedStatement.setString(5, u.getNome());
-            preparedStatement.setString(6, u.getCognome());
-            preparedStatement.setString(7, u.getSesso());
-            //preparedStatement.setDate(8, u.getDataSospensione());
+            int i = 1;
+            preparedStatement.setInt(i++, u.getId());
+            preparedStatement.setString(i++, u.getUserName());
+            preparedStatement.setString(i++, u.getPassword());
+            preparedStatement.setString(i++, u.getEmail());
+            preparedStatement.setString(i++, u.getNome());
+            preparedStatement.setString(i++, u.getCognome());
+            preparedStatement.setString(i++, u.getSesso());
+            preparedStatement.setDate(i++, u.getDataSospensione());
 
             if (u instanceof Gestore) {
-                preparedStatement.setBoolean(9, u.getIsGestore());
+                preparedStatement.setBoolean(i++, u.getIsGestore());
             } else {
-                preparedStatement.setBoolean(9, false);
+                preparedStatement.setBoolean(i++, false);
             }
 
             res = preparedStatement.executeUpdate();
@@ -69,13 +74,9 @@ public class UtenteDB {
                     preparedStatement.close();
                 }
             } finally {
-                // .releaseConnection(connection);
-                /*la successiva riga è da cancellare quando saraà
-                implementata la classe per la connessione*/
-                connection = null;
+                Database.freeConnection(connection);
             }
-            /*la successiva riga è da cancellare quando saraà
-            implementata la classe per la connessione*/
+
             res = 1;
         }
 
@@ -83,15 +84,15 @@ public class UtenteDB {
     }
 
     /**
-     * Questo metodo permette di prelevare
-     * dal database le informazioni
-     * relative ad un utente dato il suo indirizzo email.
-     * @param email è l'indirizzo email dell'utente di cui
-     * si vuole ottenere le informazioni.
-     * @return user è l'utente il cui indirizzo email
-     * corrisponde a quello fornito in input al metodo.
-     * @throws SQLException è l'eccezione che può essere
-     * lanciata durante l'esecuzione del metodo.
+     * Questo metodo permette di prelevare dal database le informazioni relative
+     * ad un utente dato il suo indirizzo email.
+     *
+     * @param email è l'indirizzo email dell'utente di cui si vuole ottenere le
+     *              informazioni.
+     * @return user è l'utente il cui indirizzo email corrisponde a quello
+     *         fornito in input al metodo.
+     * @throws SQLException è l'eccezione che può essere lanciata durante
+     *                      l'esecuzione del metodo.
      */
     public synchronized Utente getByEmail(final String email)
             throws SQLException {
@@ -120,9 +121,8 @@ public class UtenteDB {
                 user.setEmail(rs.getString("email"));
                 user.setNome(rs.getString("nome"));
                 user.setCognome(rs.getString("cognome"));
-                user.setSesso(
-                        rs.getString("sesso"));
-                //user.setDataSospensione(rs.getDate("data_sospensione"));
+                user.setSesso(rs.getString("sesso"));
+                // user.setDataSospensione(rs.getDate("data_sospensione"));
                 user.setIsGestore(rs.getBoolean("is_gestore"));
             }
 
@@ -132,26 +132,29 @@ public class UtenteDB {
                     preparedStatement.close();
                 }
             } finally {
-                //.releaseConnection(connection);
-                /*la successiva riga è da cancellare quando saraà
-                implementata la classe per la connessione*/
+                // .releaseConnection(connection);
+                /*
+                 * la successiva riga è da cancellare quando saraà implementata
+                 * la classe per la connessione
+                 */
                 connection = null;
             }
         }
-        /*la successiva riga è da cancellare
-        quando saranno implementate le classi utenti*/
+        /*
+         * la successiva riga è da cancellare quando saranno implementate le
+         * classi utenti
+         */
         user = new Utente();
         return user;
     }
 
     /**
-     * Questo metodo consente di prelevare dal database le informazioni
-     * di tutti gli
-     * utenti registrati.
-     * @return users è la lista di tutti gli utenti registrati
-     * nel database.
-     * @throws SQLException è l'eccezione che può essere lanciata
-     * durante l'esecuzione del metodo.
+     * Questo metodo consente di prelevare dal database le informazioni di tutti
+     * gli utenti registrati.
+     *
+     * @return users è la lista di tutti gli utenti registrati nel database.
+     * @throws SQLException è l'eccezione che può essere lanciata durante
+     *                      l'esecuzione del metodo.
      */
     public synchronized Collection<Utente> getAll() throws SQLException {
         Connection connection = null;
@@ -178,7 +181,7 @@ public class UtenteDB {
                 u.setNome(rs.getString("nome"));
                 u.setCognome(rs.getString("cognome"));
                 u.setSesso(rs.getString("sesso"));
-                //u.setDataSospensione(rs.getDate("data_sospensione"));
+                // u.setDataSospensione(rs.getDate("data_sospensione"));
                 u.setIsGestore(rs.getBoolean("is_gestore"));
 
                 users.add(u);
@@ -191,13 +194,17 @@ public class UtenteDB {
                 }
             } finally {
                 // .releaseConnection(connection);
-                /*la successiva riga è da cancellare quando saraà
-                implementata la classe per la connessione*/
+                /*
+                 * la successiva riga è da cancellare quando saraà implementata
+                 * la classe per la connessione
+                 */
                 connection = null;
             }
         }
-        /*la successiva riga è da cancellare
-        quando saranno implementate le classi utenti*/
+        /*
+         * la successiva riga è da cancellare quando saranno implementate le
+         * classi utenti
+         */
         users = new ArrayList<Utente>();
         return users;
     }
@@ -205,12 +212,13 @@ public class UtenteDB {
     /**
      * Questo metodo consente di eliminare dal database un utente dato il suo
      * indirizzo email.
-     * @param email è l'indirizzo email dell'utente che deve essere
-     * eliminato dal database.
-     * @throws SQLException è l'eccezione che può essere lanciata
-     * durante l'esecuzione del metodo.
-     * @return res vale 0 se la cancellazione non è stata effettuata,
-     * altrimenti un intero maggiore di 0.
+     *
+     * @param email è l'indirizzo email dell'utente che deve essere eliminato
+     *              dal database.
+     * @throws SQLException è l'eccezione che può essere lanciata durante
+     *                      l'esecuzione del metodo.
+     * @return res vale 0 se la cancellazione non è stata effettuata, altrimenti
+     *         un intero maggiore di 0.
      */
     public synchronized int delete(final String email) throws SQLException {
         Connection connection = null;
@@ -235,13 +243,17 @@ public class UtenteDB {
                 }
             } finally {
                 // .releaseConnection(connection);
-                /*la successiva riga è da cancellare quando saraà
-                implementata la classe per la connessione*/
+                /*
+                 * la successiva riga è da cancellare quando saraà implementata
+                 * la classe per la connessione
+                 */
                 connection = null;
             }
         }
-        /*la successiva riga è da cancellare quando saraà
-        implementata la classe per la connessione*/
+        /*
+         * la successiva riga è da cancellare quando saraà implementata la
+         * classe per la connessione
+         */
         res = 1;
         return (res);
     }

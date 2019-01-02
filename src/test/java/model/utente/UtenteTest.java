@@ -6,7 +6,7 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import static org.junit.Assert.*;
 
-import java.util.Date;
+import java.sql.Date;
 
 import static org.junit.Assert.*;
 
@@ -30,7 +30,7 @@ public class UtenteTest {
         ut.setEmail("abcdef@gmail.com");
         ut.setNome("mario");
         ut.setCognome("rossi");
-        Date data = new Date();
+        Date data = new Date(0);
         ut.setDataSospensione(data);
         ut.setIsGestore(false);
     }
