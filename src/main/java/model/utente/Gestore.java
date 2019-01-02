@@ -30,4 +30,6 @@ public class Gestore extends Utente {
                 true);
     }
 
+    public Gestore(){ }
+
 }

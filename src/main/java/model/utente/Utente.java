@@ -40,7 +40,7 @@ public abstract class Utente {
     /**
      * Costruttore Utente.
      *
-     * @param id              identificatore
+     * @param d               identificatore
      * @param userName        username utente
      * @param password        parolasegreta per identificazione
      * @param email           email utente
@@ -50,11 +50,11 @@ public abstract class Utente {
      * @param isGestore       parametro per determinare il tipo di utente
      */
 
-    public Utente(final Integer id, final String userName,
+    public Utente(final Integer d, final String userName,
             final String password, String email, final String nome,
             final String cognome, final Date dataSospensione,
             final Boolean isGestore) {
-        this.id = id;
+        this.id = d;
         this.userName = userName;
         this.password = password;
         this.email = email;
@@ -230,9 +230,9 @@ public abstract class Utente {
     }
 
     /**
-     * Gets the sesso.
+     * Ottieni il sesso dell'utente.
      *
-     * @return the sesso
+     * @return  sesso
      */
     public String getSesso() {
         // TODO Auto-generated method stub
@@ -240,9 +240,9 @@ public abstract class Utente {
     }
 
     /**
-     * Sets the sesso.
+     * Impsti  sesso dell'utente.
      *
-     * @param string the new sesso
+     * @param string  sesso
      */
     public void setSesso(final String string) {
         // TODO Auto-generated method stub
