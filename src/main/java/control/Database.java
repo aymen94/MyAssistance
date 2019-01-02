@@ -36,7 +36,7 @@ public class Database implements ServletContextListener {
     public final void contextInitialized(final ServletContextEvent sce) {
         System.out.println("### run ###");
         try {
-            String database = "jdbc:mysql://localhost:3306/VISIONARIO?"
+            String database = "jdbc:mysql://localhost:3306/my_assistance?"
                     + "autoReconnect=true&amp;allowMultiQueries=true&amp;"
                     + "useSSL=false&amp;serverTimezone=Europe/Rome\"";
             pool = new JDBCConnectionPool("com.mysql.jdbc.Driver", database,
