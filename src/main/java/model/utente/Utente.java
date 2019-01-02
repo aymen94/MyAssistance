@@ -5,8 +5,6 @@ Date: 23/12/2018
 */
 package model.utente;
 
-import java.sql.Date;
-
 // TODO: Auto-generated Javadoc
 /**
  * The Class Utente.
@@ -34,32 +32,6 @@ public abstract class Utente {
 
     /** is gestore. */
     private Boolean isGestore;
-
-    /**
-     * Costruttore Utente.
-     *
-     * @param id               identificatore
-     * @param userName        username utente
-     * @param password       parolasegreta per identificazione
-     * @param email           email utente
-     * @param nome            nome utente
-     * @param cognome         congome utente
-     * @param sesso           sesso utente
-     * @param isGestore       tipo di utente
-     */
-
-    public Utente(final Integer id, final String userName,
-            final String password, String email, final String nome,
-            final String cognome,final String sesso, final Boolean isGestore) {
-
-        this.id = id;
-        this.userName = userName;
-        this.password = password;
-        this.email = email;
-        this.nome = nome;
-        this.cognome = cognome;
-        this.isGestore = isGestore;
-    }
 
     /**
      * Costruttore vuoto.
@@ -206,6 +178,23 @@ public abstract class Utente {
      */
     public void setSesso(final String string) {
         // TODO Auto-generated method stub
+    }
 
+    /**
+     * Ottieni il sesso dell'utente.
+     *
+     * @return  gestore
+     */
+    public Boolean idGestore(){
+        return isGestore;
+    }
+
+    /**
+     * Impsti  sesso dell'utente.
+     *
+     * @param string  gestore
+     */
+    public void setIsGestore(Boolean idGestore){
+        this.isGestore = isGestore;
     }
 }

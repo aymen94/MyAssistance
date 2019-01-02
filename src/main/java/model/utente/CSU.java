@@ -16,24 +16,6 @@ public class CSU extends Utente {
 
     private Date dataSospensione;
 
-
-    /**
-     * Costruttore Utente.
-     *
-     * @param id        identificatore
-     * @param userName  username utente
-     * @param password  parolasegreta per identificazione
-     * @param email     email utente
-     * @param nome      nome utente
-     * @param cognome   congome utente
-     * @param sesso     sesso utente
-     * @param isGestore tipo di utente
-     */
-    public CSU(Integer id, String userName, String password, String email, String nome, String cognome, String sesso, Boolean isGestore, Date dataSospensione) {
-        super(id, userName, password, email, nome, cognome, sesso, isGestore);
-        this.dataSospensione = dataSospensione;
-    }
-
     /**
      * Instantiates a new csu.
      */

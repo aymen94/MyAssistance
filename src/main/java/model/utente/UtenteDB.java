@@ -69,13 +69,7 @@ public class UtenteDB {
             preparedStatement.setString(i++, u.getNome());
             preparedStatement.setString(i++, u.getCognome());
             preparedStatement.setString(i++, u.getSesso());
-            preparedStatement.setDate(i++, u.getDataSospensione());
 
-            if (u instanceof Gestore) {
-                preparedStatement.setBoolean(i++, u.getIsGestore());
-            } else {
-                preparedStatement.setBoolean(i++, false);
-            }
 
             res = preparedStatement.executeUpdate();
 
@@ -132,8 +126,7 @@ public class UtenteDB {
                 user.setNome(rs.getString("nome"));
                 user.setCognome(rs.getString("cognome"));
                 user.setSesso(rs.getString("sesso"));
-                // user.setDataSospensione(rs.getDate("data_sospensione"));
-                user.setIsGestore(rs.getBoolean("is_gestore"));
+
             }
 
         } finally {
@@ -195,7 +188,7 @@ public class UtenteDB {
                 user.setCognome(rs.getString("cognome"));
                 user.setSesso(rs.getString("sesso"));
                 // u.setDataSospensione(rs.getDate("data_sospensione"));
-                user.setIsGestore(rs.getBoolean("is_gestore"));
+                user.setIsGestore(rs.getBoolean("id"));
 
                 users.add(user);
             }
