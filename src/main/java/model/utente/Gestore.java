@@ -7,7 +7,7 @@ package model.utente;
 
 import java.sql.Date;
 
-// TODO: Auto-generated Javadoc
+
 /**
  * The Class Gestore.
  */
@@ -28,6 +28,12 @@ public class Gestore extends Utente {
             final String cognome, final Date dataSospensione) {
         super(id, userName, password, email, nome, cognome, dataSospensione,
                 true);
+    }
+
+    /**
+     * Instantiates a new gestore.
+     */
+    public Gestore() {
     }
 
 }
