@@ -9,6 +9,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
 import control.Database;
 import model.ufficiotecnico.UfficioTecnico;
 import model.utente.CSU;
@@ -17,7 +20,7 @@ import model.utente.CSU;
 /**
  * The Class SegnalazioneDB.
  */
-public class SegnalazioneDB {
+public final class SegnalazioneDB {
 
     /**
      * The Constant TABLE_NAME.
@@ -53,6 +56,11 @@ public class SegnalazioneDB {
      */
     private static final String SELECT_BY_ID = "SELECT * FROM " + TABLE_NAME
             + " WHERE cod = ?";
+
+    /**
+     * The Constant SELECT_ALL.
+     */
+    private static final String SELECT_ALL = " SELECT * FROM " + TABLE_NAME;
 
     /**
      * This is an utility class. So no constructor should be used.
@@ -130,18 +138,23 @@ public class SegnalazioneDB {
         }
     }
 
-    // public static List<Segnalazione> getByAutore() {
-    // Connection connection = null;
-    // PreparedStatement preparedStatement = null;
-    // try {
-    // connection = Database.getConnection();
-    // preparedStatement = connection.prepareStatement(SELECT_BY_AUTHOR);
-    // } catch (final SQLException e) {
-    // e.printStackTrace();
-    // return null;
-    // }
-    // return null;
-    // }
+    /**
+     * Gets the by autore.
+     *
+     * @return the by autore
+     */
+    public static List<Segnalazione> getByAutore() {
+        return genericGet(SELECT_BY_AUTHOR);
+    }
+
+    /**
+     * Gets the all.
+     *
+     * @return the all
+     */
+    public static List<Segnalazione> getAll() {
+        return genericGet(SELECT_ALL);
+    }
 
     /**
      * Gets the by id.
@@ -149,42 +162,64 @@ public class SegnalazioneDB {
      * @return the by id
      */
     public static Segnalazione getById() {
+        Segnalazione segnalazione = genericGet(SELECT_BY_ID).get(0);
+        if (segnalazione == null) {
+            segnalazione = new Segnalazione();
+        }
+        return segnalazione;
+    }
+
+    /**
+     * Generic get.
+     *
+     * @param query the query
+     * @return the list
+     */
+    private static List<Segnalazione> genericGet(final String query) {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
-        final Segnalazione segnalazione = new Segnalazione();
+        List<Segnalazione> segnalazioneList = new ArrayList<Segnalazione>();
+
         try {
             connection = Database.getConnection();
-            preparedStatement = connection.prepareStatement(SELECT_BY_ID);
-            final ResultSet result = preparedStatement.executeQuery();
-            segnalazione.setCod(result.getInt("cod"));
+            preparedStatement = connection.prepareStatement(query);
+            ResultSet result = preparedStatement.executeQuery();
+            while (result.next()) {
+                Segnalazione segnalazione = new Segnalazione();
+                segnalazione.setCod(result.getInt("cod"));
 
-            segnalazione
-                    .setDataAssegnazione(result.getDate("data_assegnazione"));
-            segnalazione.setDataRifiuto(result.getDate("data_rifiuto"));
-            segnalazione.setDataRisoluzione(result.getDate("data_risoluzione"));
-            segnalazione
-                    .setDataSegnalazione(result.getDate("data_segnalazione"));
-            segnalazione.setDescrizione(result.getString("descrizione"));
-            segnalazione.setMotivazioneRifiuto(
-                    result.getString("motivazione_rifiuto"));
-            segnalazione.setStato(result.getShort("stato"));
+                segnalazione.setDataAssegnazione(
+                        result.getDate("data_assegnazione"));
+                segnalazione.setDataRifiuto(result.getDate("data_rifiuto"));
+                segnalazione
+                        .setDataRisoluzione(result.getDate("data_risoluzione"));
+                segnalazione.setDataSegnalazione(
+                        result.getDate("data_segnalazione"));
+                segnalazione.setDescrizione(result.getString("descrizione"));
+                segnalazione.setMotivazioneRifiuto(
+                        result.getString("motivazione_rifiuto"));
+                segnalazione.setStato(result.getShort("stato"));
 
-            // HACK: Use a fake author until UtenteDB.getById() is implemented
-            segnalazione.setAutore(new CSU());
+                // HACK: Use a fake author until UtenteDB.getById() is
+                // implemented
+                segnalazione.setAutore(new CSU());
 
-            // HACK: Use a fake Tecnico until UfficioTecnicoDB.getById() is
-            // implemented
-            segnalazione.setTecnico(new UfficioTecnico());
+                // HACK: Use a fake Tecnico until UfficioTecnicoDB.getById() is
+                // implemented
+                segnalazione.setTecnico(new UfficioTecnico());
 
-            // HACK: Use a fake Tipologia until TipologiaDB.getById() is
-            // implemented
-            segnalazione.setTipologia(new Tipologia());
+                // HACK: Use a fake Tipologia until TipologiaDB.getById() is
+                // implemented
+                segnalazione.setTipologia(new Tipologia());
 
-            segnalazione.setTitolo(result.getString("titolo"));
-            return segnalazione;
+                segnalazione.setTitolo(result.getString("titolo"));
+                segnalazioneList.add(segnalazione);
+            }
+            return segnalazioneList;
+
         } catch (final SQLException e) {
             e.printStackTrace();
-            return segnalazione;
+            return segnalazioneList;
         } finally {
             Database.freeConnection(connection);
         }
