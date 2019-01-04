@@ -1,14 +1,15 @@
-INSERT INTO my_assistance.utente (username, `password`, email, nome, cognome, sesso)
-VALUES ('a.naghmouchi', 'abcd1234', 'a.naghmouchi@test.it', 'aymen', 'naghmouchi', 1),
-       ('a.pauciello', 'abcd1234', 'a.pauciello3@test.it', 'alfonso', 'pauciello', 1),
-       ('a.mennillo', 'abcd1234', 'a.mennillo1@test.it', 'andrea', 'mennillo', 1),
-       ('g.albanese', 'abcd1234', 'g.albanese11@test.it', 'gaetano', 'albanese', 1),
-       ('p.dauria', 'abcd1234', 'a.dauria@test.it', 'pio', 'd auria ', 1);
+INSERT INTO my_assistance.utente (username, pass, email, nome, cognome, sesso, is_gestore)
+VALUES ('a.naghmouchi', 'abcd1234', 'a.naghmouchi@test.it', 'aymen', 'naghmouchi', 1, 0),
+       ('a.pauciello', 'abcd1234', 'a.pauciello3@test.it', 'alfonso', 'pauciello', 1, 0),
+       ('a.mennillo', 'abcd1234', 'a.mennillo1@test.it', 'andrea', 'mennillo', 1, 0),
+       ('g.albanese', 'abcd1234', 'g.albanese11@test.it', 'gaetano', 'albanese', 1, 0),
+       ('p.dauria', 'abcd1234', 'a.dauria@test.it', 'pio', 'd auria ', 1,
+        0);
 
-INSERT INTO my_assistance.ufficio_tecnico (nome, tel, email, ubriacazione)
-VALUES (' Ifix ', ' 1112223334 ', ' assistenza@ifix.it ', ' Via della Biblioteca, 84084 Fisciano SA '),
-       (' MR.ripara ', ' 1112223334 ', ' assistenza@mrripara.it ', ' Via della mensa, 84084 Fisciano SA '),
-       (' Aggiustiamo sedie ', ' 1112223334 ', ' assistenza@sedieee.it ', ' Via delle sedie, 84084 Fisciano SA ');
+INSERT INTO my_assistance.ufficio_tecnico (nome, tel, email, ubicazione)
+VALUES (' Ifix ', ' 1112223334', ' assistenza@ifix.it ', ' Via della Biblioteca, 84084 Fisciano SA '),
+       (' MR.ripara ', ' 1112223334', ' assistenza@mrripara.it ', ' Via della mensa, 84084 Fisciano SA '),
+       (' Aggiustiamo sedie ', ' 1112223334', ' assistenza@sedieee.it ', ' Via delle sedie, 84084 Fisciano SA ');
 
 INSERT INTO my_assistance.tipologia (nome, priorita)
 VALUES ('Rottura', 10),
@@ -18,7 +19,9 @@ VALUES ('Rottura', 10),
        ('Strumento Inadeguato', 2);
 
 INSERT INTO my_assistance.segnalazione (titolo, descrizione, stato, data_segnalazione, data_rifiuto, data_assegnazione,
-                                        data_risoluzione, motivazione_rifiuto, tipologia, autore, tecnico)
+                                        data_risoluzione,
+                                        motivazione_rifiuto, tipologia, autore,
+                                        tecnico)
 VALUES ('Lorem ipsum',
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lectus urna duis convallis convallis tellus. Vitae proin sagittis nisl rhoncus mattis rhoncus. Platea dictumst vestibulum rhoncus est pellentesque elit ullamcorper. Quisque sagittis purus sit amet volutpat consequat mauris nunc congue.',
         0, '2018-10-06', NULL, NULL, NULL, NULL, 2, NULL, 1),
