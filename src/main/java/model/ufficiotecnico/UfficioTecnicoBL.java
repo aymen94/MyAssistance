@@ -8,5 +8,6 @@ package model.ufficiotecnico;
 /**
  * The Class UfficioTecnicoBL.
  */
-public class UfficioTecnicoBL {
+public final class UfficioTecnicoBL {
+
 }

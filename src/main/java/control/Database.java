@@ -29,8 +29,7 @@ public class Database implements ServletContextListener {
      * Inizializza un JDBCConnectionPool all'avvio del container.
      *
      * @see
-     * javax.servlet.ServletContextListener#contextInitialized(javax.servlet.
-     * ServletContextEvent)
+     * // javax.servlet.ServletContextListener#contextInitialized(javax.servlet.ServletContextEvent)
      */
     @Override
     public final void contextInitialized(final ServletContextEvent sce) {
