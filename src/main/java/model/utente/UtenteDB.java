@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedList;
 
-import control.Database;
+import pool.Database;
 
 import java.sql.Connection;
 

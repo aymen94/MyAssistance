@@ -12,10 +12,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import control.Database;
 import model.ufficiotecnico.UfficioTecnico;
 import model.ufficiotecnico.UfficioTecnicoDB;
 import model.utente.CSU;
+import pool.Database;
 
 // TODO: Auto-generated Javadoc
 /**

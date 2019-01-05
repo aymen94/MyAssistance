@@ -5,13 +5,14 @@ Date: 23/12/2018
 */
 package model.ufficiotecnico;
 
-import control.Database;
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import pool.Database;
+
 import java.sql.Connection;
 
 // TODO: Auto-generated Javadoc

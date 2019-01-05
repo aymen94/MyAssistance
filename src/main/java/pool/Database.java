@@ -1,4 +1,4 @@
-package control;
+package pool;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -7,8 +7,6 @@ import javax.naming.NamingException;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
-
-import pool.JDBCConnectionPool;
 
 // TODO: Auto-generated Javadoc
 /**
