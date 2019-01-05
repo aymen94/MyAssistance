@@ -113,9 +113,6 @@ public final class UfficioTecnicoDB {
             }
 
         } finally {
-            if (rs != null) {
-                rs.close();
-            }
             if (preparedStatement != null) {
                 preparedStatement.close();
             }
@@ -159,9 +156,6 @@ public final class UfficioTecnicoDB {
             }
 
         } finally {
-            if (rs != null) {
-                rs.close();
-            }
             if (preparedStatement != null) {
                 preparedStatement.close();
             }
