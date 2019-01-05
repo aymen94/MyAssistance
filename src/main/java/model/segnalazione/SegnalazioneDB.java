@@ -142,8 +142,8 @@ public final class SegnalazioneDB {
      *
      * @return the by autore
      */
-    public static List<Segnalazione> getByAutore() {
-        return genericGet(SELECT_BY_AUTHOR);
+    public static List<Segnalazione> getByAutore(int aAutorId) {
+        return genericGet(SELECT_BY_AUTHOR, aAutorId);
     }
 
     /**
@@ -152,7 +152,7 @@ public final class SegnalazioneDB {
      * @return the all
      */
     public static List<Segnalazione> getAll() {
-        return genericGet(SELECT_ALL);
+        return genericGet(SELECT_ALL, -1);
     }
 
     /**
@@ -160,8 +160,8 @@ public final class SegnalazioneDB {
      *
      * @return the by id
      */
-    public static Segnalazione getById() {
-        Segnalazione segnalazione = genericGet(SELECT_BY_ID).get(0);
+    public static Segnalazione getByCod(int aCod) {
+        Segnalazione segnalazione = genericGet(SELECT_BY_ID, aCod).get(0);
         if (segnalazione == null) {
             segnalazione = new Segnalazione();
         }
@@ -171,17 +171,22 @@ public final class SegnalazioneDB {
     /**
      * Generic get.
      *
-     * @param query the query
+     * @param aQuery     the query
+     * @param aParameter
      * @return the list
      */
-    private static List<Segnalazione> genericGet(final String query) {
+    private static List<Segnalazione> genericGet(final String aQuery,
+            int aParameter) {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         List<Segnalazione> segnalazioneList = new ArrayList<Segnalazione>();
 
         try {
             connection = Database.getConnection();
-            preparedStatement = connection.prepareStatement(query);
+            preparedStatement = connection.prepareStatement(aQuery);
+            if (aParameter > 0) {
+                preparedStatement.setInt(0, aParameter);
+            }
             ResultSet result = preparedStatement.executeQuery();
             while (result.next()) {
                 Segnalazione segnalazione = new Segnalazione();
@@ -207,9 +212,8 @@ public final class SegnalazioneDB {
                 // implemented
                 segnalazione.setTecnico(new UfficioTecnico());
 
-                // HACK: Use a fake Tipologia until TipologiaDB.getById() is
-                // implemented
-                segnalazione.setTipologia(new Tipologia());
+                segnalazione.setTipologia(
+                        TipologiaDB.getById(result.getInt("tipologia")));
 
                 segnalazione.setTitolo(result.getString("titolo"));
                 segnalazioneList.add(segnalazione);
@@ -221,7 +225,7 @@ public final class SegnalazioneDB {
             return segnalazioneList;
         } finally {
             freeResources(preparedStatement, connection);
-}
+        }
     }
 
     /**
