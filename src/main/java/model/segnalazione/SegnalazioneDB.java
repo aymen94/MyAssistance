@@ -12,7 +12,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.ufficiotecnico.UfficioTecnicoDB;
+import model.ufficiotecnico.UfficioTecnico;
 import model.utente.CSU;
 import pool.Database;
 
@@ -213,8 +213,9 @@ public final class SegnalazioneDB {
                 // implemented
                 segnalazione.setAutore(new CSU());
 
-                segnalazione.setTecnico(
-                        UfficioTecnicoDB.getById(result.getInt("tecnico")));
+                // HACK: Use a fake Tecnico until UfficioTecnicoDB.getById() is
+                // implemented
+                segnalazione.setTecnico(new UfficioTecnico());
 
                 segnalazione.setTipologia(
                         TipologiaDB.getById(result.getInt("tipologia")));
