@@ -79,7 +79,7 @@ public final class TipologiaDB {
      * @return the all
      */
     public static List<Tipologia> getAll() {
-        return genericGet(SELECT_ALL);
+        return genericGet(SELECT_ALL, -1);
     }
 
     /**
@@ -87,8 +87,8 @@ public final class TipologiaDB {
      *
      * @return the by id
      */
-    public static Tipologia getById() {
-        Tipologia tipologia = genericGet(SELECT_BY_ID).get(0);
+    public static Tipologia getById(final int aId) {
+        Tipologia tipologia = genericGet(SELECT_BY_ID, aId).get(0);
         if (tipologia == null) {
             tipologia = new Tipologia();
         }
@@ -98,18 +98,22 @@ public final class TipologiaDB {
     /**
      * Generic get.
      *
-     * @param query the query
+     * @param aQuery the query
      * @return the list
      */
-    private static List<Tipologia> genericGet(final String query) {
+    private static List<Tipologia> genericGet(final String aQuery,
+            final int aParameter) {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet result = null;
         List<Tipologia> tipologiaList = new ArrayList<Tipologia>();
-
         try {
             connection = Database.getConnection();
-            preparedStatement = connection.prepareStatement(query);
+            preparedStatement = connection.prepareStatement(aQuery);
+            if (aParameter > 0) {
+                preparedStatement.setInt(0, aParameter);
+            }
+
             result = preparedStatement.executeQuery();
             while (result.next()) {
                 Tipologia tipologia = new Tipologia();
