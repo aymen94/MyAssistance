@@ -26,9 +26,13 @@ public final class SegnalazioneBL {
     /**
      * Effettua segnalazione.
      *
+     * @param aTitolo      the titolo
+     * @param aDescrizione the descrizione
+     * @param aTipologia   the tipologia
+     * @param aAutore      the autore
      * @return true, if successful
      */
-    public static boolean effettuaSegnalazione() {
+    public static boolean effettuaSegnalazione(String aTitolo, String aDescrizione, Tipologia aTipologia, Utente aAutore) {
         return false;
 
     }
