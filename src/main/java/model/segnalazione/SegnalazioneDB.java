@@ -32,9 +32,9 @@ public final class SegnalazioneDB {
      */
     private static final String INSERT_SEGNALAZIONE = "INSERT INTO "
             + TABLE_NAME
-            + " (cod,titolo,descrizione,stato,data_segnalazione,data_rifiuto,"
+            + " (titolo,descrizione,stato,data_segnalazione,data_rifiuto,"
             + "data_assegnazione,data_risoluzione,motivazione_rifiuto,"
-            + "tipologia, autore, tecnico) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+            + "tipologia, autore, tecnico) VALUES (?,?,?,?,?,?,?,?,?,?)";
 
     /**
      * The Constant UPDATE_SEGNALAZIONE.
@@ -83,7 +83,6 @@ public final class SegnalazioneDB {
             preparedStatement = connection
                     .prepareStatement(INSERT_SEGNALAZIONE);
             int i = 1;
-            preparedStatement.setInt(i++, aSegnalazione.getCod());
             preparedStatement.setString(i++, aSegnalazione.getTitolo());
             preparedStatement.setString(i++, aSegnalazione.getDescrizione());
             preparedStatement.setShort(i++, aSegnalazione.getStato());
