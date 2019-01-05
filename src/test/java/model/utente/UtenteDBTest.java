@@ -20,7 +20,7 @@ public class UtenteDBTest {
     private UtenteDB udb;
 
     public UtenteDBTest() {
-        udb = new UtenteDB();
+
     }
 
     @BeforeClass
@@ -41,7 +41,8 @@ public class UtenteDBTest {
 
     /**
      * Test di insert della classe UtenteDB.
-     * @throws SQLException
+     * @throws SQLException eccezzioni in casi di mancato inserimento query
+     *
      */
     @Test
     public void testInsert() throws SQLException {
@@ -55,7 +56,7 @@ public class UtenteDBTest {
 
     /**
      * Test di getByEmail della classe UtenteDB.
-     * @throws SQLException
+     * @throws SQLException eccezione in mancato ottenimento query
      */
     @Test
     public void testGetByEmail() throws SQLException {
@@ -67,7 +68,7 @@ public class UtenteDBTest {
 
     /**
      * Test di getAll della classe UtenteDB.
-     * @throws SQLException
+     * @throws SQLException eccezione in mancato ottenimento utenti
      */
     @Test
     public void testGetAll() throws SQLException {
@@ -79,7 +80,7 @@ public class UtenteDBTest {
 
     /**
      * Test di delete della classe UtenteDB.
-     * @throws SQLException
+     * @throws SQLException eccezione in mancata eliminzaione query
      */
     @Test
     public void testDelete() throws SQLException {

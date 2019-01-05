@@ -13,27 +13,33 @@ import java.sql.Date;
  */
 public class CSU extends Utente {
 
-    /**
-     * Costruttore Utente.
-     *
-     * @param id              identificatore
-     * @param userName        username utente
-     * @param password        parolasegreta per identificazione
-     * @param email           email utente
-     * @param nome            nome utente
-     * @param cognome         congome utente
-     * @param dataSospensione data di sospensione
-     */
-    public CSU(final Integer id, final String userName, final String password,
-            final String email, final String nome, final String cognome,
-            final Date dataSospensione) {
-        super(id, userName, password, email, nome, cognome, dataSospensione,
-                false);
-    }
+
+    private Date dataSospensione;
 
     /**
      * Instantiates a new csu.
      */
-    public CSU() {
+    public CSU( ) {
+
     }
+
+    /**
+     * Ottieni la data sospensione.
+     *
+     * @return dataSospensione ottieni la data di sospensione dell'utente.
+     */
+    public Date getDataSospensione() {
+
+        return dataSospensione;
+    }
+
+    /**
+     * Imposta la data sospensione.
+     *
+     * @param dataSospensione imposta la data di sospensione dell'utente.
+     */
+    public void setDataSospensione(Date dataSospensione) {
+        this.dataSospensione = dataSospensione;
+    }
+
 }

@@ -5,11 +5,14 @@ Date: 23/12/2018
 */
 package model.ufficiotecnico;
 
+import control.Database;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Collection;
 import java.sql.Connection;
+
 
 // TODO: Auto-generated Javadoc
 /**
@@ -17,7 +20,7 @@ import java.sql.Connection;
  * tecnici.
  */
 
-public class UfficioTecnicoDB {
+public  class UfficioTecnicoDB {
 
     /** The Constant TABLE_NAME. */
     private static final String TABLE_NAME = "ufficio_tecnico";
@@ -118,4 +121,43 @@ public class UfficioTecnicoDB {
         }
         return uffici;
     }
+
+
+    /**
+     * This method deletes a user from the database given
+     * his email address.
+     * @param aId is the email address
+     * @throws SQLException is the exception that can be thrown
+     * during the execution.
+     * @return res is 0 if the delete operation is not made,
+     *         otherwise an integer greater than 0.
+     */
+    public synchronized int deleteById(final Integer aId) throws SQLException {
+        Connection connection = null;
+        PreparedStatement s = null;
+        int res = 0;
+
+        String deleteSQL = "DELETE FROM " + UfficioTecnicoDB.TABLE_NAME
+                + " WHERE id = ?;";
+
+        try {
+            connection = Database.getConnection();
+            s = connection.prepareStatement(deleteSQL);
+            s.setInt(1, aId);
+
+            res = s.executeUpdate(deleteSQL);
+
+            connection.commit();
+        } finally {
+            try {
+                if (s != null) {
+                    s.close();
+                }
+            } finally {
+                Database.freeConnection(connection);
+            }
+        }
+        return (res);
+    }
+
 }

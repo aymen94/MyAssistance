@@ -25,6 +25,18 @@ public class UtenteDB {
      * contenente i dati da gestire.
      */
     private static final String TABLE_NAME = "utente";
+    //  istanza della classe
+    private static Utente user;
+
+
+
+    /**
+     * Il costruttore della classe e' dichiarato privato, per evitare
+     * l'istanziazione di oggetti della classe.
+     */
+    private UtenteDB(){}
+
+
 
     /**
      * Questo metodo effettua l'inserimento di un utente nel database.
@@ -57,13 +69,7 @@ public class UtenteDB {
             preparedStatement.setString(i++, u.getNome());
             preparedStatement.setString(i++, u.getCognome());
             preparedStatement.setString(i++, u.getSesso());
-            preparedStatement.setDate(i++, u.getDataSospensione());
 
-            if (u instanceof Gestore) {
-                preparedStatement.setBoolean(i++, u.getIsGestore());
-            } else {
-                preparedStatement.setBoolean(i++, false);
-            }
 
             res = preparedStatement.executeUpdate();
 
@@ -99,7 +105,6 @@ public class UtenteDB {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
 
-        Utente user = new Utente();
         user = null;
 
         String selectSQL;
@@ -114,7 +119,6 @@ public class UtenteDB {
             ResultSet rs = preparedStatement.executeQuery();
 
             while (rs.next()) {
-
                 user.setId(rs.getInt("Id"));
                 user.setUserName(rs.getString("username"));
                 user.setPassword(rs.getString("pass"));
@@ -122,8 +126,7 @@ public class UtenteDB {
                 user.setNome(rs.getString("nome"));
                 user.setCognome(rs.getString("cognome"));
                 user.setSesso(rs.getString("sesso"));
-                // user.setDataSospensione(rs.getDate("data_sospensione"));
-                user.setIsGestore(rs.getBoolean("is_gestore"));
+
             }
 
         } finally {
@@ -144,8 +147,11 @@ public class UtenteDB {
          * la successiva riga è da cancellare quando saranno implementate le
          * classi utenti
          */
-        user = new Utente();
+
         return user;
+    }
+
+    private void setId(int id) {
     }
 
     /**
@@ -172,19 +178,19 @@ public class UtenteDB {
             ResultSet rs = preparedStatement.executeQuery();
 
             while (rs.next()) {
-                Utente u = new Utente();
 
-                u.setId(rs.getInt("Id"));
-                u.setUserName(rs.getString("username"));
-                u.setPassword(rs.getString("pass"));
-                u.setEmail(rs.getString("email"));
-                u.setNome(rs.getString("nome"));
-                u.setCognome(rs.getString("cognome"));
-                u.setSesso(rs.getString("sesso"));
+
+                user.setId(rs.getInt("Id"));
+                user.setUserName(rs.getString("username"));
+                user.setPassword(rs.getString("pass"));
+                user.setEmail(rs.getString("email"));
+                user.setNome(rs.getString("nome"));
+                user.setCognome(rs.getString("cognome"));
+                user.setSesso(rs.getString("sesso"));
                 // u.setDataSospensione(rs.getDate("data_sospensione"));
-                u.setIsGestore(rs.getBoolean("is_gestore"));
+                user.setIsGestore(rs.getBoolean("id"));
 
-                users.add(u);
+                users.add(user);
             }
 
         } finally {

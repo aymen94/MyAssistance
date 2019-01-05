@@ -14,6 +14,12 @@ public class UfficioTecnicoDBTest {
 
     @Before
     public void setUp() {
+        UfficioTecnico uff = new UfficioTecnico();
+        uff.setId(1);
+        uff.setNome("ufficio guasti");
+        uff.setTel("1234567890");
+        uff.setEmail("xxx@gmail.com");
+        uff.setUbicazione("Caserta");
     }
 
     @After
@@ -21,7 +27,9 @@ public class UfficioTecnicoDBTest {
     }
 
     @Test
-    public void insert() {
+    public void insert() throws Exception {
+        System.out.println("insert");
+        setUp();
     }
 
     @Test

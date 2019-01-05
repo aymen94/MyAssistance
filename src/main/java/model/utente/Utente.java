@@ -5,64 +5,33 @@ Date: 23/12/2018
 */
 package model.utente;
 
-import java.sql.Date;
-
 // TODO: Auto-generated Javadoc
 /**
  * The Class Utente.
  */
 public abstract class Utente {
 
-    /** The id. */
+    /** l' id. */
     private Integer id;
 
-    /** The user name. */
+    /** lo user name. */
     private String userName;
 
-    /** The password. */
+    /** la password. */
     private String password;
 
-    /** The email. */
+    /** la email. */
     private String email;
 
-    /** The nome. */
+    /** il nome. */
     private String nome;
 
-    /** The cognome. */
+    /** il cognome. */
     private String cognome;
 
-    /** The data sospensione. */
-    private Date dataSospensione;
 
-    /** The is gestore. */
+    /** is gestore. */
     private Boolean isGestore;
-
-    /**
-     * Costruttore Utente.
-     *
-     * @param id              identificatore
-     * @param userName        username utente
-     * @param password        parolasegreta per identificazione
-     * @param email           email utente
-     * @param nome            nome utente
-     * @param cognome         congome utente
-     * @param dataSospensione data di sospensione
-     * @param isGestore       parametro per determinare il tipo di utente
-     */
-
-    public Utente(final Integer id, final String userName,
-            final String password, String email, final String nome,
-            final String cognome, final Date dataSospensione,
-            final Boolean isGestore) {
-        this.id = id;
-        this.userName = userName;
-        this.password = password;
-        this.email = email;
-        this.nome = nome;
-        this.cognome = cognome;
-        this.dataSospensione = dataSospensione;
-        this.isGestore = isGestore;
-    }
 
     /**
      * Costruttore vuoto.
@@ -89,7 +58,7 @@ public abstract class Utente {
     }
 
     /**
-     * Gets the user name.
+     * Ottieni l' username.
      *
      * @return username Ottieni l'username dell'utente.
      */
@@ -98,7 +67,7 @@ public abstract class Utente {
     }
 
     /**
-     * Sets the user name.
+     * imposta l'username.
      *
      * @param userName imposta il valore di username.
      */
@@ -107,7 +76,7 @@ public abstract class Utente {
     }
 
     /**
-     * Gets the password.
+     * Ottieni the password.
      *
      * @return password ottieni la passoword dell'utente.
      */
@@ -116,7 +85,7 @@ public abstract class Utente {
     }
 
     /**
-     * Sets the password.
+     * Imposta la password.
      *
      * @param password imposta la password dell'utente.
      */
@@ -125,7 +94,7 @@ public abstract class Utente {
     }
 
     /**
-     * Gets the email.
+     * Ottieni le email.
      *
      * @return email ottieni l'email dell'utente.
      */
@@ -134,7 +103,7 @@ public abstract class Utente {
     }
 
     /**
-     * Sets the email.
+     * Imposta la email.
      *
      * @param email imposta l'emaio dell'utente.
      */
@@ -143,7 +112,7 @@ public abstract class Utente {
     }
 
     /**
-     * Gets the nome.
+     * Ottieni il nome.
      *
      * @return nome ottieni il nome dell'utente.
      */
@@ -152,7 +121,7 @@ public abstract class Utente {
     }
 
     /**
-     * Sets the nome.
+     * Imposta il nome.
      *
      * @param nome imposta il nome dell'utente.
      */
@@ -161,7 +130,7 @@ public abstract class Utente {
     }
 
     /**
-     * Gets the cognome.
+     * Ottieni il cognome.
      *
      * @return cognome ottieni il cognome dell'utente.
      */
@@ -170,7 +139,7 @@ public abstract class Utente {
     }
 
     /**
-     * Sets the cognome.
+     * Imposta il cognome.
      *
      * @param cognome imposta il cognome dell'utente.
      */
@@ -178,42 +147,6 @@ public abstract class Utente {
         this.cognome = cognome;
     }
 
-    /**
-     * Gets the data sospensione.
-     *
-     * @return dataSospensione ottieni la data di sospensione dell'utente.
-     */
-    public Date getDataSospensione() {
-        return dataSospensione;
-    }
-
-    /**
-     * Sets the data sospensione.
-     *
-     * @param dataSospensione imposta la data di sospensione dell'utente.
-     */
-    public void setDataSospensione(Date dataSospensione) {
-        this.dataSospensione = dataSospensione;
-    }
-
-    /**
-     * Gets the checks if is gestore.
-     *
-     * @return isGestore ritorna la tipologia dell'utente, se è 'true' allore è
-     *         gestore, altrimenti e CSU.
-     */
-    public Boolean getIsGestore() {
-        return isGestore;
-    }
-
-    /**
-     * Sets the checks if is gestore.
-     *
-     * @param isGestore imposta il ruolo dell'utente.
-     */
-    public void setIsGestore(Boolean isGestore) {
-        this.isGestore = isGestore;
-    }
 
     /**
      * ritorna tutti i valori istanziati.
@@ -225,14 +158,13 @@ public abstract class Utente {
         return "Utente {" + "id = " + id + ", userName = '" + userName + '\''
                 + ", password = " + password + ", email = '" + email + '\''
                 + ", nome = '" + nome + '\'' + ", cognome = '" + cognome + '\''
-                + ", dataSospensione = " + dataSospensione + ", isGestore = "
-                + isGestore + '}';
+                + "}";
     }
 
     /**
-     * Gets the sesso.
+     * Ottieni il sesso dell'utente.
      *
-     * @return the sesso
+     * @return  sesso
      */
     public String getSesso() {
         // TODO Auto-generated method stub
@@ -240,12 +172,29 @@ public abstract class Utente {
     }
 
     /**
-     * Sets the sesso.
+     * Impsti  sesso dell'utente.
      *
-     * @param string the new sesso
+     * @param string  sesso
      */
     public void setSesso(final String string) {
         // TODO Auto-generated method stub
+    }
 
+    /**
+     * Ottieni il sesso dell'utente.
+     *
+     * @return  gestore
+     */
+    public Boolean idGestore(){
+        return isGestore;
+    }
+
+    /**
+     * Impsti  sesso dell'utente.
+     *
+     * @param string  gestore
+     */
+    public void setIsGestore(Boolean idGestore){
+        this.isGestore = isGestore;
     }
 }
