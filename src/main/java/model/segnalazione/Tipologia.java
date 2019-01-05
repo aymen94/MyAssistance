@@ -1,4 +1,4 @@
-package model.tipologia;
+package model.segnalazione;
 
 // TODO: Auto-generated Javadoc
 /**
