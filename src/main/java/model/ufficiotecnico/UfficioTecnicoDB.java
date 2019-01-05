@@ -10,9 +10,9 @@ import control.Database;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Collection;
+import java.util.ArrayList;
+import java.util.List;
 import java.sql.Connection;
-
 
 // TODO: Auto-generated Javadoc
 /**
@@ -20,10 +20,18 @@ import java.sql.Connection;
  * tecnici.
  */
 
-public  class UfficioTecnicoDB {
+public final class UfficioTecnicoDB {
 
     /** The Constant TABLE_NAME. */
     private static final String TABLE_NAME = "ufficio_tecnico";
+
+    /**
+     * This is an utility class. So no constructor should be used.
+     */
+    private UfficioTecnicoDB() {
+
+    }
+
 
     /**
      * Questo metodo effettua l'inserimento di un ufficio tecnico nel database.
@@ -36,7 +44,7 @@ public  class UfficioTecnicoDB {
      *                      l'esecuzione del metodo.
      */
 
-    public synchronized int insert(final UfficioTecnico uff)
+    public static synchronized int insert(final UfficioTecnico uff)
             throws SQLException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -46,7 +54,7 @@ public  class UfficioTecnicoDB {
                 + " (id,nome,tel,email,ubicazione) " + "VALUES (?, ?, ?, ?, ?)";
 
         try {
-            // connection = OTTIENI CONNESSIONE
+            connection = Database.getConnection();
             int i = 1;
             preparedStatement = connection.prepareStatement(insertSQL);
             preparedStatement.setInt(i++, uff.getId());
@@ -60,13 +68,11 @@ public  class UfficioTecnicoDB {
             connection.commit();
             res++;
         } finally {
-            try {
-                if (preparedStatement != null) {
-                    preparedStatement.close();
-                }
-            } finally {
-                // .releaseConnection(connection);
-                connection = null;
+            if (preparedStatement != null) {
+                preparedStatement.close();
+            }
+            if (connection != null) {
+                Database.freeConnection(connection);
             }
         }
         return (res);
@@ -81,21 +87,21 @@ public  class UfficioTecnicoDB {
      *                      l'esecuzione del metodo.
      */
 
-    public synchronized Collection<UfficioTecnico> getAll()
+    public static synchronized List<UfficioTecnico> getAll()
             throws SQLException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
-
-        Collection<UfficioTecnico> uffici;
-        uffici = null;
+        ResultSet rs = null;
+        List<UfficioTecnico> uffici;
 
         String selectSQL = "SELECT * FROM " + UfficioTecnicoDB.TABLE_NAME;
 
         try {
-            // connection = OTTIENI CONNESSIONE
+            connection = Database.getConnection();
             preparedStatement = connection.prepareStatement(selectSQL);
 
-            ResultSet rs = preparedStatement.executeQuery();
+            rs = preparedStatement.executeQuery();
+            uffici = new ArrayList<UfficioTecnico>();
 
             while (rs.next()) {
                 UfficioTecnico uff = new UfficioTecnico();
@@ -105,34 +111,80 @@ public  class UfficioTecnicoDB {
                 uff.setTel(rs.getString("tel"));
                 uff.setEmail(rs.getString("email"));
                 uff.setUbicazione(rs.getString("ubicazione"));
-
                 uffici.add(uff);
             }
 
         } finally {
-            try {
-                if (preparedStatement != null) {
-                    preparedStatement.close();
-                }
-            } finally {
-                // .releaseConnection(connection);
-                connection = null;
+            if (rs != null) {
+                rs.close();
+            }
+            if (preparedStatement != null) {
+                preparedStatement.close();
+            }
+            if (connection != null) {
+                Database.freeConnection(connection);
             }
         }
         return uffici;
     }
 
+    /**
+     * Gets the by id.
+     *
+     * @param aId the id
+     * @return the by id
+     * @throws SQLException the SQL exception
+     */
+    public static synchronized UfficioTecnico getById(int aId)
+            throws SQLException {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet rs = null;
+        UfficioTecnico uff = null;
+
+        String selectSQL = "SELECT * FROM " + UfficioTecnicoDB.TABLE_NAME
+                + " WHERE id=? ";
+
+        try {
+            connection = Database.getConnection();
+            preparedStatement = connection.prepareStatement(selectSQL);
+            preparedStatement.setInt(0, aId);
+            rs = preparedStatement.executeQuery();
+
+            if (rs.next()) {
+                uff = new UfficioTecnico();
+                uff.setId(rs.getInt("Id"));
+                uff.setNome(rs.getString("nome"));
+                uff.setTel(rs.getString("tel"));
+                uff.setEmail(rs.getString("email"));
+                uff.setUbicazione(rs.getString("ubicazione"));
+            }
+
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (preparedStatement != null) {
+                preparedStatement.close();
+            }
+            if (connection != null) {
+                Database.freeConnection(connection);
+            }
+        }
+        return uff;
+    }
 
     /**
-     * This method deletes a user from the database given
-     * his email address.
+     * This method deletes a user from the database given his email address.
+     *
      * @param aId is the email address
-     * @throws SQLException is the exception that can be thrown
-     * during the execution.
-     * @return res is 0 if the delete operation is not made,
-     *         otherwise an integer greater than 0.
+     * @throws SQLException is the exception that can be thrown during the
+     *                      execution.
+     * @return res is 0 if the delete operation is not made, otherwise an
+     *         integer greater than 0.
      */
-    public synchronized int deleteById(final Integer aId) throws SQLException {
+    public static synchronized int deleteById(final Integer aId)
+            throws SQLException {
         Connection connection = null;
         PreparedStatement s = null;
         int res = 0;
