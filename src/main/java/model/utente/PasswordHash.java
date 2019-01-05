@@ -1,4 +1,4 @@
-package security;
+package model.utente;
 
 import java.security.SecureRandom;
 import javax.crypto.spec.PBEKeySpec;
