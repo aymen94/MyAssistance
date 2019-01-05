@@ -14,14 +14,21 @@ import model.utente.Utente;
 /**
  * The Class SegnalazioneBL.
  */
-public class SegnalazioneBL {
+public final class SegnalazioneBL {
+
+    /**
+     * This is an utility class. So no constructor should be used.
+     */
+    private SegnalazioneBL() {
+
+    }
 
     /**
      * Effettua segnalazione.
      *
      * @return true, if successful
      */
-    public boolean effettuaSegnalazione() {
+    public static boolean effettuaSegnalazione() {
         return false;
 
     }
@@ -32,7 +39,7 @@ public class SegnalazioneBL {
      * @param aUtente the utente
      * @return the list
      */
-    public List<Segnalazione> ottieniSegnalazioniEffettuate(
+    public static List<Segnalazione> ottieniSegnalazioniEffettuate(
             final Utente aUtente) {
         return null;
 
@@ -47,8 +54,9 @@ public class SegnalazioneBL {
      * @param atipologia   the atipologia
      * @return true, if successful
      */
-    public boolean modificaSegnalazione(final int aCod, final String atitolo,
-            final String adescrizione, final Tipologia atipologia) {
+    public static boolean modificaSegnalazione(final int aCod,
+            final String atitolo, final String adescrizione,
+            final Tipologia atipologia) {
         return true;
 
     }
@@ -59,7 +67,7 @@ public class SegnalazioneBL {
      * @param aCod the cod
      * @return true, if successful
      */
-    public boolean eliminaSegnalazione(final int aCod) {
+    public static boolean eliminaSegnalazione(final int aCod) {
         return false;
 
     }
@@ -71,7 +79,7 @@ public class SegnalazioneBL {
      * @param aTecnico the tecnico
      * @return true, if successful
      */
-    public boolean inoltraSegnalazione(final int aCod,
+    public static boolean inoltraSegnalazione(final int aCod,
             final UfficioTecnico aTecnico) {
         return false;
     }
@@ -81,7 +89,7 @@ public class SegnalazioneBL {
      *
      * @return the list
      */
-    public List<Segnalazione> ottieniSegnalazioniRicevute() {
+    public static List<Segnalazione> ottieniSegnalazioniRicevute() {
         return null;
 
     }
@@ -93,7 +101,7 @@ public class SegnalazioneBL {
      * @param aMotivazioneRifiuto the motivazione rifiuto
      * @return true, if successful
      */
-    public boolean rifiutaSegnalazione(final int aCod,
+    public static boolean rifiutaSegnalazione(final int aCod,
             final String aMotivazioneRifiuto) {
         return false;
 
@@ -105,7 +113,7 @@ public class SegnalazioneBL {
      * @param aCod the cod
      * @return true, if successful
      */
-    public boolean segnaComeRisolta(final int aCod) {
+    public static boolean segnaComeRisolta(final int aCod) {
         return false;
 
     }
