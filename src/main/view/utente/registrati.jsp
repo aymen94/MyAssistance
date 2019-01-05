@@ -24,11 +24,11 @@
 		<div class="page">
 			<%@include file="../include/header.jsp" %>
 			<div class="content">
-				<%@include file="../include/nav-left.jsp" %>
+				<%@include file="../include/nav-left-csu.jsp" %>
 				<div>
 					<h3>Registrazione Utente</h3>
 					<br>
-					<form novalidate onsubmit="return utilies.validate(this)">
+					<form novalidate onsubmit="return utilities.validate(this)" method="post">
 						<div class="form-group">
 							<label for="field-username">Username</label>
 							<input type="text" class="form-control" name="field-username" id="field-username" aria-describedby="field-password-username" placeholder="mario.rossi" pattern="^\S{1,20}$">
