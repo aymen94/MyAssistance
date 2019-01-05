@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * The Class UtenteBL.
  */
-public class UtenteBL {
+public final class UtenteBL {
 
     /**
      * This is an utility class. So no constructor should be used.

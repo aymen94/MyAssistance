@@ -128,7 +128,7 @@ public class Segnalazione {
     /**
      * @param aDescrizione the descrizione to set
      */
-    public void setDescrizione(String aDescrizione) {
+    public void setDescrizione(final String aDescrizione) {
         descrizione = aDescrizione;
     }
 
@@ -196,7 +196,7 @@ public class Segnalazione {
     /**
      * @param aDataAssegnazione the dataAssegnazione to set
      */
-    public void setDataAssegnazione(Date aDataAssegnazione) {
+    public void setDataAssegnazione(final Date aDataAssegnazione) {
         dataAssegnazione = aDataAssegnazione;
     }
 

@@ -12,7 +12,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.ufficiotecnico.UfficioTecnico;
 import model.ufficiotecnico.UfficioTecnicoDB;
 import model.utente.CSU;
 import pool.Database;
@@ -141,9 +140,10 @@ public final class SegnalazioneDB {
     /**
      * Gets the by autore.
      *
+     * @param aAutorId the autor id
      * @return the by autore
      */
-    public static List<Segnalazione> getByAutore(int aAutorId) {
+    public static List<Segnalazione> getByAutore(final int aAutorId) {
         return genericGet(SELECT_BY_AUTHOR, aAutorId);
     }
 
@@ -159,9 +159,10 @@ public final class SegnalazioneDB {
     /**
      * Gets the by id.
      *
+     * @param aCod the cod
      * @return the by id
      */
-    public static Segnalazione getByCod(int aCod) {
+    public static Segnalazione getByCod(final int aCod) {
         Segnalazione segnalazione = genericGet(SELECT_BY_ID, aCod).get(0);
         if (segnalazione == null) {
             segnalazione = new Segnalazione();
@@ -173,14 +174,15 @@ public final class SegnalazioneDB {
      * Generic get.
      *
      * @param aQuery     the query
-     * @param aParameter
+     * @param aParameter the parameter
      * @return the list
      */
     private static List<Segnalazione> genericGet(final String aQuery,
-            int aParameter) {
+            final int aParameter) {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
-        List<Segnalazione> segnalazioneList = new ArrayList<Segnalazione>();
+        final List<Segnalazione> segnalazioneList =
+                new ArrayList<Segnalazione>();
 
         try {
             connection = Database.getConnection();
@@ -188,9 +190,9 @@ public final class SegnalazioneDB {
             if (aParameter > 0) {
                 preparedStatement.setInt(0, aParameter);
             }
-            ResultSet result = preparedStatement.executeQuery();
+            final ResultSet result = preparedStatement.executeQuery();
             while (result.next()) {
-                Segnalazione segnalazione = new Segnalazione();
+                final Segnalazione segnalazione = new Segnalazione();
                 segnalazione.setCod(result.getInt("cod"));
 
                 segnalazione.setDataAssegnazione(
@@ -240,7 +242,7 @@ public final class SegnalazioneDB {
             if (aStm != null) {
                 aStm.close();
             }
-        } catch (SQLException e) {
+        } catch (final SQLException e) {
             e.printStackTrace();
         } finally {
             if (aConn != null) {

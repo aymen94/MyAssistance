@@ -27,24 +27,6 @@ public class UfficioTecnico {
     private String ubicazione;
 
     /**
-     * Costrutto firmato.
-     *
-     * @param id         the id
-     * @param nome       the nome
-     * @param tel        the tel
-     * @param email      the email
-     * @param ubicazione the ubicazione
-     */
-    public UfficioTecnico(final Integer id, final String nome, final String tel,
-            final String email, final String ubicazione) {
-        this.id = id;
-        this.nome = nome;
-        this.tel = tel;
-        this.email = email;
-        this.ubicazione = ubicazione;
-    }
-
-    /**
      * Costrutto vuoto.
      */
     public UfficioTecnico() {
@@ -62,10 +44,10 @@ public class UfficioTecnico {
     /**
      * Sets the id.
      *
-     * @param id setta identificatore dell'ufficio tecnico
+     * @param aId setta identificatore dell'ufficio tecnico
      */
-    public void setId(final Integer id) {
-        this.id = id;
+    public void setId(final Integer aId) {
+        this.id = aId;
     }
 
     /**
@@ -80,10 +62,10 @@ public class UfficioTecnico {
     /**
      * Sets the nome.
      *
-     * @param nome setta il nome dell'uffico tecnico
+     * @param aNome setta il nome dell'uffico tecnico
      */
-    public void setNome(final String nome) {
-        this.nome = nome;
+    public void setNome(final String aNome) {
+        this.nome = aNome;
     }
 
     /**
@@ -98,10 +80,10 @@ public class UfficioTecnico {
     /**
      * Sets the tel.
      *
-     * @param tel setta il numero dell'uffico tecnico
+     * @param aTel setta il numero dell'uffico tecnico
      */
-    public void setTel(final String tel) {
-        this.tel = tel;
+    public void setTel(final String aTel) {
+        this.tel = aTel;
     }
 
     /**
@@ -116,10 +98,10 @@ public class UfficioTecnico {
     /**
      * Sets the email.
      *
-     * @param email setta l'email dell'uffico tecnico
+     * @param aEmail setta l'email dell'uffico tecnico
      */
-    public void setEmail(final String email) {
-        this.email = email;
+    public void setEmail(final String aEmail) {
+        this.email = aEmail;
     }
 
     /**
@@ -134,10 +116,10 @@ public class UfficioTecnico {
     /**
      * Sets the ubicazione.
      *
-     * @param ubicazione setta l'ubicazione dell'uffico tecnico
+     * @param aUbicazione setta l'ubicazione dell'uffico tecnico
      */
-    public void setUbicazione(final String ubicazione) {
-        this.ubicazione = ubicazione;
+    public void setUbicazione(final String aUbicazione) {
+        this.ubicazione = aUbicazione;
     }
 
     /**

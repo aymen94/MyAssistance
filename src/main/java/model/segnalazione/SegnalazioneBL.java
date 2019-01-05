@@ -32,7 +32,9 @@ public final class SegnalazioneBL {
      * @param aAutore      the autore
      * @return true, if successful
      */
-    public static boolean effettuaSegnalazione(String aTitolo, String aDescrizione, Tipologia aTipologia, Utente aAutore) {
+    public static boolean effettuaSegnalazione(final String aTitolo,
+            final String aDescrizione, final Tipologia aTipologia,
+            final Utente aAutore) {
         return false;
 
     }

@@ -85,6 +85,7 @@ public final class TipologiaDB {
     /**
      * Gets the by id.
      *
+     * @param aId the id
      * @return the by id
      */
     public static Tipologia getById(final int aId) {
@@ -98,7 +99,8 @@ public final class TipologiaDB {
     /**
      * Generic get.
      *
-     * @param aQuery the query
+     * @param aQuery     the query
+     * @param aParameter the parameter
      * @return the list
      */
     private static List<Tipologia> genericGet(final String aQuery,
