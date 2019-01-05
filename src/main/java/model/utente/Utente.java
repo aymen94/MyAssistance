@@ -1,9 +1,251 @@
 /*
 Project: MyAssistance
-Author: Aymen
+Author: Gaetano
 Date: 23/12/2018
 */
 package model.utente;
 
+import java.sql.Date;
+
+// TODO: Auto-generated Javadoc
+/**
+ * The Class Utente.
+ */
 public abstract class Utente {
+
+    /** The id. */
+    private Integer id;
+
+    /** The user name. */
+    private String userName;
+
+    /** The password. */
+    private String password;
+
+    /** The email. */
+    private String email;
+
+    /** The nome. */
+    private String nome;
+
+    /** The cognome. */
+    private String cognome;
+
+    /** The data sospensione. */
+    private Date dataSospensione;
+
+    /** The is gestore. */
+    private Boolean isGestore;
+
+    /**
+     * Costruttore Utente.
+     *
+     * @param id              identificatore
+     * @param userName        username utente
+     * @param password        parolasegreta per identificazione
+     * @param email           email utente
+     * @param nome            nome utente
+     * @param cognome         congome utente
+     * @param dataSospensione data di sospensione
+     * @param isGestore       parametro per determinare il tipo di utente
+     */
+
+    public Utente(final Integer id, final String userName,
+            final String password, String email, final String nome,
+            final String cognome, final Date dataSospensione,
+            final Boolean isGestore) {
+        this.id = id;
+        this.userName = userName;
+        this.password = password;
+        this.email = email;
+        this.nome = nome;
+        this.cognome = cognome;
+        this.dataSospensione = dataSospensione;
+        this.isGestore = isGestore;
+    }
+
+    /**
+     * Costruttore vuoto.
+     */
+    public Utente() {
+    }
+
+    /**
+     * Gets the id.
+     *
+     * @return id ottienti l'identificatore dell'utente.
+     */
+    public Integer getId() {
+        return id;
+    }
+
+    /**
+     * Sets the id.
+     *
+     * @param id imposta il valore id dell'utente.
+     */
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    /**
+     * Gets the user name.
+     *
+     * @return username Ottieni l'username dell'utente.
+     */
+    public String getUserName() {
+        return userName;
+    }
+
+    /**
+     * Sets the user name.
+     *
+     * @param userName imposta il valore di username.
+     */
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    /**
+     * Gets the password.
+     *
+     * @return password ottieni la passoword dell'utente.
+     */
+    public String getPassword() {
+        return password;
+    }
+
+    /**
+     * Sets the password.
+     *
+     * @param password imposta la password dell'utente.
+     */
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    /**
+     * Gets the email.
+     *
+     * @return email ottieni l'email dell'utente.
+     */
+    public String getEmail() {
+        return email;
+    }
+
+    /**
+     * Sets the email.
+     *
+     * @param email imposta l'emaio dell'utente.
+     */
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    /**
+     * Gets the nome.
+     *
+     * @return nome ottieni il nome dell'utente.
+     */
+    public String getNome() {
+        return nome;
+    }
+
+    /**
+     * Sets the nome.
+     *
+     * @param nome imposta il nome dell'utente.
+     */
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    /**
+     * Gets the cognome.
+     *
+     * @return cognome ottieni il cognome dell'utente.
+     */
+    public String getCognome() {
+        return cognome;
+    }
+
+    /**
+     * Sets the cognome.
+     *
+     * @param cognome imposta il cognome dell'utente.
+     */
+    public void setCognome(String cognome) {
+        this.cognome = cognome;
+    }
+
+    /**
+     * Gets the data sospensione.
+     *
+     * @return dataSospensione ottieni la data di sospensione dell'utente.
+     */
+    public Date getDataSospensione() {
+        return dataSospensione;
+    }
+
+    /**
+     * Sets the data sospensione.
+     *
+     * @param dataSospensione imposta la data di sospensione dell'utente.
+     */
+    public void setDataSospensione(Date dataSospensione) {
+        this.dataSospensione = dataSospensione;
+    }
+
+    /**
+     * Gets the checks if is gestore.
+     *
+     * @return isGestore ritorna la tipologia dell'utente, se è 'true' allore è
+     *         gestore, altrimenti e CSU.
+     */
+    public Boolean getIsGestore() {
+        return isGestore;
+    }
+
+    /**
+     * Sets the checks if is gestore.
+     *
+     * @param isGestore imposta il ruolo dell'utente.
+     */
+    public void setIsGestore(Boolean isGestore) {
+        this.isGestore = isGestore;
+    }
+
+    /**
+     * ritorna tutti i valori istanziati.
+     *
+     * @return toString Utente
+     */
+    @Override
+    public String toString() {
+        return "Utente {" + "id = " + id + ", userName = '" + userName + '\''
+                + ", password = " + password + ", email = '" + email + '\''
+                + ", nome = '" + nome + '\'' + ", cognome = '" + cognome + '\''
+                + ", dataSospensione = " + dataSospensione + ", isGestore = "
+                + isGestore + '}';
+    }
+
+    /**
+     * Gets the sesso.
+     *
+     * @return the sesso
+     */
+    public String getSesso() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    /**
+     * Sets the sesso.
+     *
+     * @param string the new sesso
+     */
+    public void setSesso(final String string) {
+        // TODO Auto-generated method stub
+
+    }
 }

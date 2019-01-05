@@ -1,0 +1,149 @@
+/* Main page layout */
+
+.page {
+	display: flex;
+	flex-direction: column;
+	height: 100vh
+}
+.page .container {
+	flex: 1
+}
+
+/* Header background, colors and layout */
+
+.header {
+	position: relative;
+	z-index: 1;
+	background-color: #F90;
+	background-image: url(../images/logo.png);
+	background-position: 16px center;
+	background-repeat: no-repeat;
+	background-size: auto 80%;
+	padding: 32px 16px 32px 112px;
+	box-sizing: border-box;
+	box-shadow: 0 0 16px rgba(0, 0, 0, 0.5);
+	font-size: 24px;
+	color: white
+}
+.header {
+	display: flex;
+	flex-direction: row
+}
+.header > div:first-child {
+	flex: 1
+}
+.header > div:last-child {
+	color: black
+}
+
+/* Main page content layout */
+
+.content {
+	display: flex;
+	height: 100%;
+	overflow-y: auto
+}
+
+/* Left-most and right-most columns share the same style */
+
+.content > div:nth-child(1),
+.content > div:nth-child(3) {
+	background-color: #f7f7f7;
+	width: 320px;
+	box-shadow: 0 8px 16px -8px rgba(0, 0, 0, 0.5)
+}
+.content > div:nth-child(2) {
+	flex: 1;
+	padding: 24px 32px;
+	box-sizing: border-box
+}
+.content h4 {
+	margin-top: 16px;
+	text-align: center;
+	padding: 8px
+}
+.content > div:nth-child(1) .btn {
+	position: relative;
+	background-color: white;
+	width: 100%;
+	padding-top: 16px;
+	padding-bottom: 16px;
+	border-color: #e0e0e0;
+	border-style: solid;
+	border-width: 1px 0 0 0
+}
+.content > div:nth-child(1) .btn:last-child {
+	border-width: 1px 0 1px 0
+}
+
+/* Right arrow animation for page links in the left-most column */
+
+.content > div:nth-child(1) .btn:after {
+	transition: transform 0.25s ease-out, opacity 0.25s ease-out;
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background-image: url(../images/right-arrow.png);
+	background-position: 16px center;
+	background-repeat: no-repeat;
+	background-size: auto 50%;
+	transform: translateX(-32px);
+	opacity: 0;
+	content: ''
+}
+.content > div:nth-child(1) .btn:hover:after {
+	transform: translateX(0px);
+	opacity: 1
+}
+
+/* Footer with informations */
+
+.footer {
+	background-color: #222;
+	color: #e0e0e0;
+	font-size: 14px
+}
+.footer > div {
+	margin: 0 auto;
+	padding: 12px 0;
+	display: flex;
+	flex-direction: row;
+	max-width: 1024px
+}
+.footer > div > div:first-child {
+	flex: 1
+}
+.user {
+	margin: 32px auto;
+	width: 80%
+}
+
+.alert-list {
+	border: 1px solid #e0e0e0;
+	border-radius: 8px;
+	cursor: pointer
+}
+.alert-list > li {
+	transition: background-color 0.25s linear;
+	padding: 16px
+}
+.alert-list > li:hover {
+	background-color: #e0e0e0
+}
+.alert-list > li:not(:first-child) {
+	border-color: #e0e0e0;
+	border-style: solid;
+	border-width: 1px 0 0 0
+}
+.alert-image {
+	height: 64px
+}
+.alert-list .options {
+	display: flex;
+	flex-direction: column
+}
+.alert-list .options > button {
+	border-radius: 0
+}
