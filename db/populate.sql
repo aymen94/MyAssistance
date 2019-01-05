@@ -1,10 +1,10 @@
-INSERT INTO my_assistance.utente (username, pass, email, nome, cognome, sesso, is_gestore)
-VALUES ('a.naghmouchi', 'abcd1234', 'a.naghmouchi@test.it', 'aymen', 'naghmouchi', 1, 0),
-       ('a.pauciello', 'abcd1234', 'a.pauciello3@test.it', 'alfonso', 'pauciello', 1, 0),
-       ('a.mennillo', 'abcd1234', 'a.mennillo1@test.it', 'andrea', 'mennillo', 1, 0),
-       ('g.albanese', 'abcd1234', 'g.albanese11@test.it', 'gaetano', 'albanese', 1, 0),
+INSERT INTO my_assistance.utente (username, pass, email, nome, cognome, sesso, is_gestore, data_di_nascita)
+VALUES ('a.naghmouchi', 'abcd1234', 'a.naghmouchi@test.it', 'aymen', 'naghmouchi', 1, 0,'1996-03-12'),
+       ('a.pauciello', 'abcd1234', 'a.pauciello3@test.it', 'alfonso', 'pauciello', 1, 0,'1994-04-12'),
+       ('a.mennillo', 'abcd1234', 'a.mennillo1@test.it', 'andrea', 'mennillo', 1, 0, '2000-12-05'),
+       ('g.albanese', 'abcd1234', 'g.albanese11@test.it', 'gaetano', 'albanese', 1, 0, '1990-12-01'),
        ('p.dauria', 'abcd1234', 'a.dauria@test.it', 'pio', 'd auria ', 1,
-        0);
+        0, '1999-04-21');
 
 INSERT INTO my_assistance.ufficio_tecnico (nome, tel, email, ubicazione)
 VALUES (' Ifix ', ' 1112223334', ' assistenza@ifix.it ', ' Via della Biblioteca, 84084 Fisciano SA '),
