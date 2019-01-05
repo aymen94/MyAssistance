@@ -98,7 +98,7 @@ public final class SegnalazioneDB {
             e.printStackTrace();
             return false;
         } finally {
-            Database.freeConnection(connection);
+            freeResources(preparedStatement, connection);
         }
 
     }
@@ -133,7 +133,7 @@ public final class SegnalazioneDB {
             e.printStackTrace();
             return false;
         } finally {
-            Database.freeConnection(connection);
+            freeResources(preparedStatement, connection);
         }
     }
 
@@ -220,8 +220,28 @@ public final class SegnalazioneDB {
             e.printStackTrace();
             return segnalazioneList;
         } finally {
-            Database.freeConnection(connection);
-        }
+            freeResources(preparedStatement, connection);
+}
     }
 
+    /**
+     * Free resources.
+     *
+     * @param aStm  the stm
+     * @param aConn the conn
+     */
+    private static void freeResources(final PreparedStatement aStm,
+            final Connection aConn) {
+        try {
+            if (aStm != null) {
+                aStm.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (aConn != null) {
+                Database.freeConnection(aConn);
+            }
+        }
+    }
 }
