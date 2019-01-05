@@ -9,10 +9,4 @@ package model.ufficiotecnico;
  * The Class UfficioTecnicoBL.
  */
 public class UfficioTecnicoBL {
-
-    public boolean memorizzaUfficioTecnico(String nome, String tel,
-            String ubicazione) {
-        return false;
-
-    }
 }
