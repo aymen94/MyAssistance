@@ -5,7 +5,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <div class="header">
-	<div>Universit‡ Degli Studi Di Salerno</div>
+	<div>Universit√† Degli Studi Di Salerno</div>
 	<div>
 		<a href="Accedi" class="btn btn-light">Accedi</a>
 		<a href="Registrati" class="btn btn-light">Registrati</a>

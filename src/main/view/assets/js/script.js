@@ -1,6 +1,6 @@
 /* Forms namespace */
 
-var utilies =
+var utilities =
 {
 		/**
 		 * Validate a form element by checking all of its fields.
@@ -16,7 +16,7 @@ var utilies =
 			var errorDialog = document.getElementById("error-dialog");
 			
 			// Get all input fields with pattern
-			var d = form.querySelectorAll("input[pattern]");
+			var d = form.querySelectorAll("input[pattern], textarea[pattern]");
 			
 			// Validate them
 			for (var i = 0; i < d.length; ++i)
@@ -26,7 +26,7 @@ var utilies =
 					if (errorDialog !== null)
 					{
 						var label = form.querySelector('label[for="' + d[i].getAttribute("id") + '"]');
-						this.showDialog(errorDialog, "Errore Registrazione", "Il campo " + label.innerHTML + " non è stato compilato in modo corretto.");
+						this.showDialog(errorDialog, "Errore Registrazione", "Il campo " + label.innerHTML + " non ? stato compilato in modo corretto.");
 					}
 					return false;
 				}
@@ -69,7 +69,6 @@ var utilies =
 					return false;
 				}
 			}
-			return false;
 			
 			// Form is valid
 			return true;
@@ -99,5 +98,56 @@ var utilies =
 			
 			// Show modal dialog
 			$('#' + dialog.getAttribute("id")).modal('show');
-	}
+		}
+};
+
+/* Segnalazioni namespace */
+
+var segnalazioni =
+{
+		/**
+		 * This method shows a bootstrap modal dialog, containing the form elements to be
+		 * added to the dialog's form, in order to send the report.
+		 * 
+		 * @param dialog the dialog element's id, which must already exist in the DOM.
+		 * @param id the report id.
+		 * 
+		 */
+		inoltra: function(dialogId, id)
+		{
+			// Show dialog to the browser
+			var form = document.getElementById("inoltra-segnalazione");
+			form.querySelector("input").value = id;
+			utilities.showDialog(document.getElementById(dialogId), "Inoltra Segnalazione", form.outerHTML);
+		},
+		
+		/**
+		 * This method shows a bootstrap modal dialog, containing the form elements to be
+		 * added to the dialog's form, in order to refuse the report.
+		 * 
+		 * @param dialog the dialog element's id, which must already exist in the DOM.
+		 * @param id the report id.
+		 */
+		rifiuta: function(dialogId, id)
+		{
+			// Show dialog to the browser
+			var form = document.getElementById("rifiuta-segnalazione");
+			form.querySelector("input").value = id;
+			utilities.showDialog(document.getElementById(dialogId), "Rifiuta Segnalazione", form.outerHTML);		
+		},
+		
+		/**
+		 * This method shows a bootstrap modal dialog, containing the form elements to be
+		 * added to the dialog's form, in order to mark report as solved.
+		 * 
+		 * @param dialog the dialog element's id, which must already exist in the DOM.
+		 * @param id the report id.
+		 */
+		segnaRisolta: function(dialogId, id)
+		{
+			// Show dialog to the browser
+			var form = document.getElementById("segna-risolta");
+			form.querySelector("input").value = id;
+			utilities.showDialog(document.getElementById(dialogId), "Segna Come Risolta", form.outerHTML);			
+		}
 };
