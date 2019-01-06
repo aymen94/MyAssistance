@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- *
+ * Servlet per index generica.
  */
 public class IndexServlet extends HttpServlet {
     /**
