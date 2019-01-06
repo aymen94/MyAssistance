@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Collection;
 import java.sql.Connection;
+import java.util.List;
 
 
 // TODO: Auto-generated Javadoc
@@ -24,24 +25,19 @@ public  class UfficioTecnicoDB {
 
     /** The Constant TABLE_NAME. */
     private static final String TABLE_NAME = "ufficio_tecnico";
-
     /**
-     * Questo metodo effettua l'inserimento di un ufficio tecnico nel database.
+     * This method inserts a technical office in the database.
      *
-     * @param uff è l'oggetto di tipo UfficioTecnico che deve essere inserito
-     *            all'interno del database.
-     * @return res vale 0 se l'inserimento non è stato effettuato, altrimenti un
-     *         intero maggiore di 0.
-     * @throws SQLException è l'eccezione che può essere lanciata durante
-     *                      l'esecuzione del metodo.
+     * @param uff it is the Technical Office object that must be inserted in the database.
+     *
+     * @return res boolean variable, if it's true the insert is done, Otherwise it doesn't .
+     * @throws SQLException this exception that can be launched during the execution of the method.
      */
 
-    public synchronized int insert(final UfficioTecnico uff)
-            throws SQLException {
+    public synchronized Boolean insert(final UfficioTecnico uff) throws SQLException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
-        int res;
-
+        int res = 0;
         String insertSQL = "INSERT INTO " + UfficioTecnicoDB.TABLE_NAME
                 + " (id,nome,tel,email,ubicazione) " + "VALUES (?, ?, ?, ?, ?)";
 
@@ -54,41 +50,35 @@ public  class UfficioTecnicoDB {
             preparedStatement.setString(i++, uff.getTel());
             preparedStatement.setString(i++, uff.getEmail());
             preparedStatement.setString(i++, uff.getUbicazione());
-
             res = preparedStatement.executeUpdate();
 
             connection.commit();
-            res++;
         } finally {
             try {
                 if (preparedStatement != null) {
                     preparedStatement.close();
                 }
             } finally {
-                // .releaseConnection(connection);
-                connection = null;
+                Database.freeConnection(connection);
             }
         }
-        return (res);
+        return (res != 0);
     }
 
     /**
-     * Questo metodo consente di prelevare dal database le informazioni di tutti
-     * gli uffici tecnici registrati.
+     * this method allows everyone to get information from the database
+     * registered technical offices.
      *
-     * @return users è la lista di tutti gli utenti registrati nel database.
-     * @throws SQLException è l'eccezione che può essere lanciata durante
-     *                      l'esecuzione del metodo.
+     * @return uffici List of UfficioTecnico.
+     * @throws SQLException it is the exception that can be launched during the execution of the method.
      */
 
-    public synchronized Collection<UfficioTecnico> getAll()
+    public synchronized List<UfficioTecnico> getAll()
             throws SQLException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
-
-        Collection<UfficioTecnico> uffici;
+        List<UfficioTecnico> uffici;
         uffici = null;
-
         String selectSQL = "SELECT * FROM " + UfficioTecnicoDB.TABLE_NAME;
 
         try {
@@ -115,8 +105,7 @@ public  class UfficioTecnicoDB {
                     preparedStatement.close();
                 }
             } finally {
-                // .releaseConnection(connection);
-                connection = null;
+                Database.freeConnection(connection);
             }
         }
         return uffici;
@@ -126,27 +115,23 @@ public  class UfficioTecnicoDB {
     /**
      * This method deletes a user from the database given
      * his email address.
-     * @param aId is the email address
+     * @param aId id the id of UfficioTecnico.
      * @throws SQLException is the exception that can be thrown
      * during the execution.
-     * @return res is 0 if the delete operation is not made,
-     *         otherwise an integer greater than 0.
+     * @return returns true if a technical office has been canceled, otherwise false.
      */
-    public synchronized int deleteById(final Integer aId) throws SQLException {
+    public synchronized Boolean deleteById(final Integer aId) throws SQLException {
         Connection connection = null;
         PreparedStatement s = null;
         int res = 0;
 
         String deleteSQL = "DELETE FROM " + UfficioTecnicoDB.TABLE_NAME
                 + " WHERE id = ?;";
-
         try {
             connection = Database.getConnection();
             s = connection.prepareStatement(deleteSQL);
             s.setInt(1, aId);
-
             res = s.executeUpdate(deleteSQL);
-
             connection.commit();
         } finally {
             try {
@@ -157,7 +142,6 @@ public  class UfficioTecnicoDB {
                 Database.freeConnection(connection);
             }
         }
-        return (res);
+        return (res != 0);
     }
-
 }
