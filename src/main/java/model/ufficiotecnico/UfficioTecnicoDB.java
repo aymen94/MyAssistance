@@ -1,13 +1,16 @@
 package model.ufficiotecnico;
 
-import control.Database;
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Connection;
+import java.util.ArrayList;
 import java.util.List;
 
+import pool.Database;
+
+import java.sql.Connection;
+
+// TODO: Auto-generated Javadoc
 /**
  * Questa classe permette la gestione dei dati persistenti relativi agli uffici
  * tecnici.
@@ -32,9 +35,9 @@ public final class UfficioTecnicoDB {
      * The Constant INSERT_UFFICIO_TECNICO.
      */
 
-    private static final String INSERT_UFFICIO_TECNICO =
-            "INSERT INTO " + TABLE_NAME + " (id,nome,tel,email,ubicazione) "
-                    + "VALUES (?, ?, ?, ?, ?)";
+    private static final String INSERT_UFFICIO_TECNICO = "INSERT INTO "
+            + TABLE_NAME + " (id,nome,tel,email,ubicazione) "
+            + "VALUES (?, ?, ?, ?, ?)";
 
     /**
      * The Constant SELECT_ALL.
@@ -44,25 +47,25 @@ public final class UfficioTecnicoDB {
     /**
      * The Constant DELETE_BY_ID.
      */
-    private static final String DELETE_BY_ID =
-            "SELECT * FROM " + TABLE_NAME + "WHERE id = ?";
+    private static final String DELETE_BY_ID = "SELECT * FROM " + TABLE_NAME
+            + "WHERE id = ?";
 
     /**
      * This method inserts a technical office in the database.
      *
-     * @param uff it is the Technical Office object that must be
-     *            inserted in the database.
-     * @return res boolean variable, if it's true the insert is
-     * done, Otherwise it doesn't .
-     * @throws SQLException this exception that can be launched
-     * during the execution of the method.
+     * @param uff it is the Technical Office object that must be inserted in the
+     *            database.
+     * @return res boolean variable, if it's true the insert is done, Otherwise
+     *         it doesn't .
+     * @throws SQLException this exception that can be launched during the
+     *                      execution of the method.
      */
 
-    public static synchronized Boolean insert(final UfficioTecnico uff)
+    public static synchronized int insert(final UfficioTecnico uff)
             throws SQLException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
-        int res;
+        int res = 0;
 
         try {
             connection = Database.getConnection();
@@ -77,6 +80,7 @@ public final class UfficioTecnicoDB {
             res = preparedStatement.executeUpdate();
 
             connection.commit();
+            res++;
         } finally {
             try {
                 if (preparedStatement != null) {
@@ -86,7 +90,7 @@ public final class UfficioTecnicoDB {
                 Database.freeConnection(connection);
             }
         }
-        return (res != 0);
+        return (res);
     }
 
     /**
@@ -94,8 +98,8 @@ public final class UfficioTecnicoDB {
      * registered technical offices.
      *
      * @return uffici List of UfficioTecnico.
-     * @throws SQLException it is the exception that can be launched
-     * during the execution of the method.
+     * @throws SQLException it is the exception that can be launched during the
+     *                      execution of the method.
      */
 
     public static synchronized List<UfficioTecnico> getAll()
@@ -110,7 +114,7 @@ public final class UfficioTecnicoDB {
             preparedStatement = connection.prepareStatement(SELECT_ALL);
 
             ResultSet rs = preparedStatement.executeQuery();
-
+            uffici = new ArrayList<UfficioTecnico>();
             while (rs.next()) {
                 UfficioTecnico uff = new UfficioTecnico();
 
@@ -136,26 +140,27 @@ public final class UfficioTecnicoDB {
     }
 
     /**
-     * This method deletes a user from the database given
-     * his email address.
+     * This method deletes a user from the database given his email address.
      *
      * @param aId id the id of UfficioTecnico.
-     * @return returns true if a technical office has been canceled,
-     * otherwise false.
-     * @throws SQLException is the exception that can be thrown
-     *                      during the execution.
+     * @return returns true if a technical office has been canceled, otherwise
+     *         false.
+     * @throws SQLException is the exception that can be thrown during the
+     *                      execution.
      */
-    public static synchronized Boolean deleteById(final Integer aId)
+    public static synchronized int deleteById(final Integer aId)
             throws SQLException {
         Connection connection = null;
         PreparedStatement s = null;
-        int res;
+        int res = 0;
 
         try {
             connection = Database.getConnection();
             s = connection.prepareStatement(DELETE_BY_ID);
             s.setInt(1, aId);
+
             res = s.executeUpdate(DELETE_BY_ID);
+
             connection.commit();
         } finally {
             try {
@@ -166,6 +171,6 @@ public final class UfficioTecnicoDB {
                 Database.freeConnection(connection);
             }
         }
-        return (res != 0);
+        return (res);
     }
 }

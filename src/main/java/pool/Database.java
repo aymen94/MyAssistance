@@ -1,4 +1,4 @@
-package control;
+package pool;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -7,8 +7,6 @@ import javax.naming.NamingException;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
-
-import pool.JDBCConnectionPool;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -28,12 +26,19 @@ public class Database implements ServletContextListener {
     /**
      * Inizializza un JDBCConnectionPool all'avvio del container.
      *
-     * @see
-     * // javax.servlet.ServletContextListener#contextInitialized(javax.servlet.ServletContextEvent)
+     * @see javax.servlet.ServletContextListener#contextInitialized(
+     * javax.servlet.ServletContextEvent)
      */
     @Override
     public final void contextInitialized(final ServletContextEvent sce) {
         System.out.println("### run ###");
+        initializePool();
+    }
+
+    /**
+     * Initialize pool.
+     */
+    public static synchronized void initializePool() {
         try {
             String database = "jdbc:mysql://localhost:3306/my_assistance?"
                     + "autoReconnect=true&amp;allowMultiQueries=true&amp;"
@@ -42,13 +47,14 @@ public class Database implements ServletContextListener {
                     "root", "root");
 
             if (pool == null) {
-                String message = "Could not find our Database";
+                String message = "Could not find Database";
                 System.err.println("### " + message);
                 throw new Exception(message);
+            } else {
+                String message = "Estabilished connection with database";
+                System.out.println("### " + message);
+
             }
-        } catch (NamingException e) {
-            String message = "Si è verificato un errore";
-            System.err.println("### " + message);
         } catch (Exception e) {
             System.err.println("### " + e.getMessage());
         }
@@ -62,7 +68,15 @@ public class Database implements ServletContextListener {
      */
     @Override
     public final void contextDestroyed(final ServletContextEvent sce) {
+        destroyPool();
+    }
+
+    /**
+     * Destroy pool.
+     */
+    public static synchronized void destroyPool() {
         pool.destroyUnlocked();
+        pool = null;
     }
 
     /**

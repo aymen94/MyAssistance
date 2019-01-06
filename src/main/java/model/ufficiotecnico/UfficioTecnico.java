@@ -31,25 +31,6 @@ public class UfficioTecnico {
     private String ubicazione;
 
     /**
-     * Construct signed.
-     *
-     * @param aid         the id
-     * @param anome       the nome
-     * @param atel        the tel
-     * @param aemail      the email
-     * @param aubicazione the ubicazione
-     */
-
-    public UfficioTecnico(final Integer aid, final String anome,
-            final String atel, final String aemail, final String aubicazione) {
-        this.id = aid;
-        this.nome = anome;
-        this.tel = atel;
-        this.email = aemail;
-        this.ubicazione = aubicazione;
-    }
-
-    /**
      * Costrutto vuoto.
      */
     public UfficioTecnico() {
@@ -67,16 +48,16 @@ public class UfficioTecnico {
     /**
      * Sets the id.
      *
-     * @param aid set identificatore  of UfficioTecnico
+     * @param aId setta identificatore dell'ufficio tecnico
      */
-    public void setId(final Integer aid) {
-        this.id = aid;
+    public void setId(final Integer aId) {
+        this.id = aId;
     }
 
     /**
      * Gets the nome.
      *
-     * @return nome getthe the name of UfficioTecnico
+     * @return nome get the name of UfficioTecnico
      */
     public String getNome() {
         return nome;
@@ -85,10 +66,10 @@ public class UfficioTecnico {
     /**
      * Sets the nome.
      *
-     * @param anome set nome of UfficioTecnico
+     * @param aNome set nome of UfficioTecnico
      */
-    public void setNome(final String anome) {
-        this.nome = anome;
+    public void setNome(final String aNome) {
+        this.nome = aNome;
     }
 
     /**
@@ -103,10 +84,10 @@ public class UfficioTecnico {
     /**
      * Sets the tel.
      *
-     * @param atel set numero of UfficioTecnico
+     * @param aTel set numero of UfficioTecnico
      */
-    public void setTel(final String atel) {
-        this.tel = atel;
+    public void setTel(final String aTel) {
+        this.tel = aTel;
     }
 
     /**
@@ -121,10 +102,10 @@ public class UfficioTecnico {
     /**
      * Sets the email.
      *
-     * @param aemail zet email of UfficioTecnico
+     * @param aEmail set email of UfficioTecnico
      */
-    public void setEmail(final String aemail) {
-        this.email = aemail;
+    public void setEmail(final String aEmail) {
+        this.email = aEmail;
     }
 
     /**
@@ -139,10 +120,10 @@ public class UfficioTecnico {
     /**
      * Sets the ubicazione.
      *
-     * @param aubicazione set ubicazione of UfficioTecnico
+     * @param aUbicazione set ubicazione of UfficioTecnico
      */
-    public void setUbicazione(final String aubicazione) {
-        this.ubicazione = aubicazione;
+    public void setUbicazione(final String aUbicazione) {
+        this.ubicazione = aUbicazione;
     }
 
     /**
