@@ -10,13 +10,13 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, shrink-to-fit=no">
 		<title>Pagina Principale - MyAssistance</title>
-		
+
 		<!-- Bootstrap -->
 		<link rel="stylesheet" href="assets/css/bootstrap.min.css">
 		<script src="assets/js/jquery-3.3.1.min.js"></script>
 		<script src="assets/js/bootstrap.min.js"></script>
 		<!-- End -->
-		
+
 		<link rel="stylesheet" href="assets/css/style.css">
 		<script src="assets/js/script.js"></script>
 	</head>

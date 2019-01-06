@@ -9,16 +9,17 @@ CREATE TABLE my_assistance.utente
   nome             VARCHAR(50)        NOT NULL,
   cognome          VARCHAR(50)        NOT NULL,
   sesso            TINYINT            NOT NULL, -- 0 = Altro, 1 = Maschio, 2 = Femmina
+  data_di_nascita  DATE               NOT NULL,
   data_sospensione DATE,
   is_gestore       BOOLEAN DEFAULT FALSE
 );
 
 CREATE TABLE my_assistance.ufficio_tecnico
 (
-  id           INT PRIMARY KEY AUTO_INCREMENT,
-  nome         VARCHAR(50) UNIQUE NOT NULL,
-  tel          CHAR(15),
-  email        VARCHAR(55) UNIQUE NOT NULL,
+  id         INT PRIMARY KEY AUTO_INCREMENT,
+  nome       VARCHAR(50) UNIQUE NOT NULL,
+  tel        CHAR(15),
+  email      VARCHAR(55)        NOT NULL,
   ubicazione VARCHAR(50)
 );
 
