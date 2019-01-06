@@ -15,11 +15,12 @@ public class UfficioTecnicoBL {
      *
      * @param nome       the nome
      * @param tel        the tel
+     * @param email      the email
      * @param ubicazione the ubicazione
      * @return true, if successful
      */
-    public boolean memorizzaUfficioTecnico(final String nome, final String tel,
-            final String ubicazione) {
+    public boolean insertUfficioTecnico(final String nome, final String tel,
+            final String email, final String ubicazione) {
         return false;
     }
 }

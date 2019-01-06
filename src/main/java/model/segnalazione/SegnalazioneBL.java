@@ -32,7 +32,7 @@ public final class SegnalazioneBL {
      * @param aAutore      the autore
      * @return true, if successful
      */
-    public static boolean effettuaSegnalazione(final String aTitolo,
+    public static boolean insertSegnalazione(final String aTitolo,
             final String aDescrizione, final Tipologia aTipologia,
             final Utente aAutore) {
         return false;
@@ -45,7 +45,7 @@ public final class SegnalazioneBL {
      * @param aUtente the utente
      * @return the list
      */
-    public static List<Segnalazione> ottieniSegnalazioniEffettuate(
+    public static List<Segnalazione> getSegnalazioniEffettuate(
             final Utente aUtente) {
         return null;
 
@@ -60,7 +60,7 @@ public final class SegnalazioneBL {
      * @param atipologia   the atipologia
      * @return true, if successful
      */
-    public static boolean modificaSegnalazione(final int aCod,
+    public static boolean updateSegnalazione(final int aCod,
             final String atitolo, final String adescrizione,
             final Tipologia atipologia) {
         return true;
@@ -73,7 +73,7 @@ public final class SegnalazioneBL {
      * @param aCod the cod
      * @return true, if successful
      */
-    public static boolean eliminaSegnalazione(final int aCod) {
+    public static boolean deleteSegnalazione(final int aCod) {
         return false;
 
     }
@@ -95,7 +95,7 @@ public final class SegnalazioneBL {
      *
      * @return the list
      */
-    public static List<Segnalazione> ottieniSegnalazioniRicevute() {
+    public static List<Segnalazione> getSegnalazioniRicevute() {
         return null;
 
     }
@@ -119,7 +119,7 @@ public final class SegnalazioneBL {
      * @param aCod the cod
      * @return true, if successful
      */
-    public static boolean segnaComeRisolta(final int aCod) {
+    public static boolean segnaRisolta(final int aCod) {
         return false;
 
     }
