@@ -67,7 +67,7 @@ public final class UfficioTecnicoDB {
             preparedStatement.setString(i++, uff.getNome());
             preparedStatement.setString(i++, uff.getTel());
             preparedStatement.setString(i++, uff.getEmail());
-            preparedStatement.setString(i++, uff.getUbicazione());
+            preparedStatement.setString(i, uff.getUbicazione());
             res = preparedStatement.executeUpdate();
 
             connection.commit();
@@ -141,7 +141,6 @@ public final class UfficioTecnicoDB {
         Connection connection = null;
         PreparedStatement s = null;
         int res;
-
 
         try {
             connection = Database.getConnection();
