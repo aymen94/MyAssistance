@@ -33,11 +33,20 @@ public abstract class Utente {
     /** is gestore. */
     private Boolean isGestore;
 
+    /** il sesso. */
+    private int sesso;
+
+    public void setSesso(int aSesso) {
+        sesso = aSesso;
+    }
+
     /**
      * Costruttore vuoto.
      */
     public Utente() {
     }
+
+    public abstract Boolean isGestore();
 
     /**
      * Gets the id.
@@ -178,23 +187,5 @@ public abstract class Utente {
      */
     public void setSesso(final String string) {
         // TODO Auto-generated method stub
-    }
-
-    /**
-     * Ottieni il sesso dell'utente.
-     *
-     * @return  gestore
-     */
-    public Boolean idGestore(){
-        return isGestore;
-    }
-
-    /**
-     * Impsti  sesso dell'utente.
-     *
-     * @param string  gestore
-     */
-    public void setIsGestore(Boolean idGestore){
-        this.isGestore = isGestore;
     }
 }

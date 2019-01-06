@@ -14,16 +14,12 @@ import java.sql.Date;
  */
 public class Gestore extends Utente {
     /**
-     * Costruttore Gestore vuoto
-     */
-    public Gestore(){ }
-
-
-
-    /**
      * Instantiates a new gestore.
      */
     public Gestore() {
     }
 
+    public Boolean isGestore() {
+        return true;
+    }
 }
