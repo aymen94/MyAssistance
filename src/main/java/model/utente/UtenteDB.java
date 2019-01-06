@@ -75,8 +75,6 @@ public class UtenteDB {
             } finally {
                 Database.freeConnection(connection);
             }
-
-            res = 1;
         }
 
         return (res);
