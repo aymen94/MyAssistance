@@ -20,10 +20,31 @@ import java.util.List;
  * tecnici.
  */
 
-public  class UfficioTecnicoDB {
+public final class UfficioTecnicoDB {
 
-    /** The Constant TABLE_NAME. */
+    /**
+     *  The Constant TABLE_NAME.
+     */
     private static final String TABLE_NAME = "ufficio_tecnico";
+
+    /**
+     *  The Constant INSERT_UFFICIO_TECNICO.
+     */
+    private static final  String INSERT_UFFICIO_TECNICO = "INSERT INTO " + TABLE_NAME
+                + " (id,nome,tel,email,ubicazione) " + "VALUES (?, ?, ?, ?, ?)";
+
+    /**
+     *  The Constant SELECT_ALL.
+     */
+    private static final  String SELECT_ALL = "SELECT * FROM " + TABLE_NAME;
+
+
+    /**
+     *  The Constant DELETE_BY_ID.
+     */
+    private static final  String DELETE_BY_ID = "SELECT * FROM " + TABLE_NAME + "WHERE id = ?";
+
+
     /**
      * This method inserts a technical office in the database.
      *
@@ -33,17 +54,14 @@ public  class UfficioTecnicoDB {
      * @throws SQLException this exception that can be launched during the execution of the method.
      */
 
-    public synchronized Boolean insert(final UfficioTecnico uff) throws SQLException {
+    public static synchronized Boolean insert(final UfficioTecnico uff) throws SQLException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         int res = 0;
-        String insertSQL = "INSERT INTO " + UfficioTecnicoDB.TABLE_NAME
-                + " (id,nome,tel,email,ubicazione) " + "VALUES (?, ?, ?, ?, ?)";
-
         try {
-            // connection = OTTIENI CONNESSIONE
+            connection = Database.getConnection();
+            preparedStatement = connection.prepareStatement(INSERT_UFFICIO_TECNICO);
             int i = 1;
-            preparedStatement = connection.prepareStatement(insertSQL);
             preparedStatement.setInt(i++, uff.getId());
             preparedStatement.setString(i++, uff.getNome());
             preparedStatement.setString(i++, uff.getTel());
@@ -72,17 +90,16 @@ public  class UfficioTecnicoDB {
      * @throws SQLException it is the exception that can be launched during the execution of the method.
      */
 
-    public synchronized List<UfficioTecnico> getAll()
+    public static synchronized List<UfficioTecnico> getAll()
             throws SQLException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         List<UfficioTecnico> uffici;
         uffici = null;
-        String selectSQL = "SELECT * FROM " + UfficioTecnicoDB.TABLE_NAME;
 
         try {
-            // connection = OTTIENI CONNESSIONE
-            preparedStatement = connection.prepareStatement(selectSQL);
+            connection = Database.getConnection();
+            preparedStatement = connection.prepareStatement(SELECT_ALL);
 
             ResultSet rs = preparedStatement.executeQuery();
 
@@ -119,18 +136,17 @@ public  class UfficioTecnicoDB {
      * during the execution.
      * @return returns true if a technical office has been canceled, otherwise false.
      */
-    public synchronized Boolean deleteById(final Integer aId) throws SQLException {
+    public static synchronized Boolean deleteById(final Integer aId) throws SQLException {
         Connection connection = null;
         PreparedStatement s = null;
-        int res = 0;
+        int res;
 
-        String deleteSQL = "DELETE FROM " + UfficioTecnicoDB.TABLE_NAME
-                + " WHERE id = ?;";
+
         try {
             connection = Database.getConnection();
-            s = connection.prepareStatement(deleteSQL);
+            s = connection.prepareStatement(DELETE_BY_ID);
             s.setInt(1, aId);
-            res = s.executeUpdate(deleteSQL);
+            res = s.executeUpdate(DELETE_BY_ID);
             connection.commit();
         } finally {
             try {
