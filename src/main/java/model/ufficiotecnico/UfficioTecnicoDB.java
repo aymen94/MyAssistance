@@ -58,6 +58,7 @@ public final class UfficioTecnicoDB {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         int res;
+
         try {
             connection = Database.getConnection();
             preparedStatement = connection.prepareStatement(INSERT_UFFICIO_TECNICO);
