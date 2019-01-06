@@ -10,4 +10,9 @@ package model.ufficiotecnico;
  */
 public final class UfficioTecnicoBL {
 
+    /**
+     * This is an utility class. So no constructor should be used.
+     */
+    private UfficioTecnicoBL() { }
+
 }
