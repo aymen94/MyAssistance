@@ -92,7 +92,7 @@ public final class UfficioTecnicoDB {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet rs = null;
-        List<UfficioTecnico> uffici = new ArrayList<UfficioTecnico>();
+        List<UfficioTecnico> uffici;
 
         String selectSQL = "SELECT * FROM " + UfficioTecnicoDB.TABLE_NAME;
 
@@ -101,6 +101,7 @@ public final class UfficioTecnicoDB {
             preparedStatement = connection.prepareStatement(selectSQL);
 
             rs = preparedStatement.executeQuery();
+            uffici = new ArrayList<UfficioTecnico>();
 
             while (rs.next()) {
                 UfficioTecnico uff = new UfficioTecnico();
@@ -131,7 +132,7 @@ public final class UfficioTecnicoDB {
      * @return the by id
      * @throws SQLException the SQL exception
      */
-    public static synchronized UfficioTecnico getById(final int aId)
+    public static synchronized UfficioTecnico getById(int aId)
             throws SQLException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -163,9 +164,6 @@ public final class UfficioTecnicoDB {
             if (connection != null) {
                 Database.freeConnection(connection);
             }
-        }
-        if (uff == null) {
-            return new UfficioTecnico();
         }
         return uff;
     }
