@@ -2,6 +2,8 @@ package model.utente;
 
 import model.utente.UtenteDB;
 import model.utente.Utente;
+import model.utente.CSU;
+import model.utente.Gestore;
 import java.io.IOException;
 import java.sql.Date;
 import java.sql.SQLException;
@@ -61,7 +63,7 @@ public class UtenteDBTest {
     public void testGetByEmail() throws SQLException {
         System.out.println("getByEmail");
 
-        Utente u = udb.getByEmail("xxx@yy.it");
+        Utente u = udb.getByEmail("a.dauria@test.it");
         assertNotNull(u);
     }
 
