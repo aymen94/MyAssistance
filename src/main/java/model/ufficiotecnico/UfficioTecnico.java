@@ -1,47 +1,52 @@
-/*
-Project: MyAssistance
-Author: Aymen
-Date: 23/12/2018
-*/
 package model.ufficiotecnico;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class UfficioTecnico.
  */
 public class UfficioTecnico {
 
-    /** The id. */
+    /**
+     * The id.
+     */
     private Integer id;
 
-    /** The nome. */
+    /**
+     * The nome.
+     */
     private String nome;
 
-    /** The tel. */
+    /**
+     * The tel.
+     */
     private String tel;
 
-    /** The email. */
+    /**
+     * The email.
+     */
     private String email;
 
-    /** The ubicazione. */
+    /**
+     * The ubicazione.
+     */
     private String ubicazione;
 
     /**
-     * Costrutto firmato.
+     * Construct signed.
      *
-     * @param id         the id
-     * @param nome       the nome
-     * @param tel        the tel
-     * @param email      the email
-     * @param ubicazione the ubicazione
+     * @param aid         the id
+     * @param anome       the nome
+     * @param atel        the tel
+     * @param aemail      the email
+     * @param aubicazione the ubicazione
      */
-    public UfficioTecnico(final Integer id, final String nome, final String tel,
-            final String email, final String ubicazione) {
-        this.id = id;
-        this.nome = nome;
-        this.tel = tel;
-        this.email = email;
-        this.ubicazione = ubicazione;
+
+    public UfficioTecnico(final Integer aid, final String anome,
+            final String atel, final String aemail, final String aubicazione) {
+        this.id = aid;
+        this.nome = anome;
+        this.tel = atel;
+        this.email = aemail;
+        this.ubicazione = aubicazione;
     }
 
     /**
@@ -53,7 +58,7 @@ public class UfficioTecnico {
     /**
      * Gets the id.
      *
-     * @return ottieni l'id dell'ufficio tecnico
+     * @return id get the id of UfficioTecnico
      */
     public Integer getId() {
         return id;
@@ -62,16 +67,16 @@ public class UfficioTecnico {
     /**
      * Sets the id.
      *
-     * @param id setta identificatore dell'ufficio tecnico
+     * @param aid set identificatore  of UfficioTecnico
      */
-    public void setId(final Integer id) {
-        this.id = id;
+    public void setId(final Integer aid) {
+        this.id = aid;
     }
 
     /**
      * Gets the nome.
      *
-     * @return nome ottieni il nome dell'uffico tecnico
+     * @return nome getthe the name of UfficioTecnico
      */
     public String getNome() {
         return nome;
@@ -80,16 +85,16 @@ public class UfficioTecnico {
     /**
      * Sets the nome.
      *
-     * @param nome setta il nome dell'uffico tecnico
+     * @param anome set nome of UfficioTecnico
      */
-    public void setNome(final String nome) {
-        this.nome = nome;
+    public void setNome(final String anome) {
+        this.nome = anome;
     }
 
     /**
      * Gets the tel.
      *
-     * @return ottieni il telefono dell'uffico tecnico
+     * @return get telefono of UfficioTecnico
      */
     public String getTel() {
         return tel;
@@ -98,16 +103,16 @@ public class UfficioTecnico {
     /**
      * Sets the tel.
      *
-     * @param tel setta il numero dell'uffico tecnico
+     * @param atel set numero of UfficioTecnico
      */
-    public void setTel(final String tel) {
-        this.tel = tel;
+    public void setTel(final String atel) {
+        this.tel = atel;
     }
 
     /**
      * Gets the email.
      *
-     * @return ottieni l'email dell'uffico tecnico
+     * @return get emailof UfficioTecnico
      */
     public String getEmail() {
         return email;
@@ -116,16 +121,16 @@ public class UfficioTecnico {
     /**
      * Sets the email.
      *
-     * @param email setta l'email dell'uffico tecnico
+     * @param aemail zet email of UfficioTecnico
      */
-    public void setEmail(final String email) {
-        this.email = email;
+    public void setEmail(final String aemail) {
+        this.email = aemail;
     }
 
     /**
      * Gets the ubicazione.
      *
-     * @return ottieni l'ubicazione dell'uffico tecnico
+     * @return get ubicazione dell'uffico tecnico
      */
     public String getUbicazione() {
         return ubicazione;
@@ -134,19 +139,18 @@ public class UfficioTecnico {
     /**
      * Sets the ubicazione.
      *
-     * @param ubicazione setta l'ubicazione dell'uffico tecnico
+     * @param aubicazione set ubicazione of UfficioTecnico
      */
-    public void setUbicazione(final String ubicazione) {
-        this.ubicazione = ubicazione;
+    public void setUbicazione(final String aubicazione) {
+        this.ubicazione = aubicazione;
     }
 
     /**
      * To string.
      *
-     * @return ritorna la rappreenzatione della classe
+     * @return return rappresentation of class
      */
-    @Override
-    public String toString() {
+    @Override public String toString() {
         return "UfficioTecnico{" + "id=" + id + ", nome='" + nome + '\''
                 + ", tel='" + tel + '\'' + ", email='" + email + '\''
                 + ", ubicazione='" + ubicazione + '\'' + '}';

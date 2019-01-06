@@ -1,96 +1,113 @@
-/*
-Project: MyAssistance
-Author: Aymen
-Date: 23/12/2018
-*/
 package model.ufficiotecnico;
+
+import control.Database;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Collection;
 import java.sql.Connection;
+import java.util.List;
 
-// TODO: Auto-generated Javadoc
 /**
  * Questa classe permette la gestione dei dati persistenti relativi agli uffici
  * tecnici.
  */
 
-public class UfficioTecnicoDB {
+public final class UfficioTecnicoDB {
 
-    /** The Constant TABLE_NAME. */
+    /**
+     * Empty construct.
+     */
+    private UfficioTecnicoDB() {
+
+    }
+
+    /**
+     * The Constant TABLE_NAME.
+     */
+
     private static final String TABLE_NAME = "ufficio_tecnico";
 
     /**
-     * Questo metodo effettua l'inserimento di un ufficio tecnico nel database.
-     *
-     * @param uff è l'oggetto di tipo UfficioTecnico che deve essere inserito
-     *            all'interno del database.
-     * @return res vale 0 se l'inserimento non è stato effettuato, altrimenti un
-     *         intero maggiore di 0.
-     * @throws SQLException è l'eccezione che può essere lanciata durante
-     *                      l'esecuzione del metodo.
+     * The Constant INSERT_UFFICIO_TECNICO.
      */
 
-    public synchronized int insert(final UfficioTecnico uff)
+    private static final String INSERT_UFFICIO_TECNICO =
+            "INSERT INTO " + TABLE_NAME + " (id,nome,tel,email,ubicazione) "
+                    + "VALUES (?, ?, ?, ?, ?)";
+
+    /**
+     * The Constant SELECT_ALL.
+     */
+    private static final String SELECT_ALL = "SELECT * FROM " + TABLE_NAME;
+
+    /**
+     * The Constant DELETE_BY_ID.
+     */
+    private static final String DELETE_BY_ID =
+            "SELECT * FROM " + TABLE_NAME + "WHERE id = ?";
+
+    /**
+     * This method inserts a technical office in the database.
+     *
+     * @param uff it is the Technical Office object that must be
+     *            inserted in the database.
+     * @return res boolean variable, if it's true the insert is
+     * done, Otherwise it doesn't .
+     * @throws SQLException this exception that can be launched
+     * during the execution of the method.
+     */
+
+    public static synchronized Boolean insert(final UfficioTecnico uff)
             throws SQLException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         int res;
 
-        String insertSQL = "INSERT INTO " + UfficioTecnicoDB.TABLE_NAME
-                + " (id,nome,tel,email,ubicazione) " + "VALUES (?, ?, ?, ?, ?)";
-
         try {
-            // connection = OTTIENI CONNESSIONE
+            connection = Database.getConnection();
+            preparedStatement = connection
+                    .prepareStatement(INSERT_UFFICIO_TECNICO);
             int i = 1;
-            preparedStatement = connection.prepareStatement(insertSQL);
-            preparedStatement.setInt(i++, uff.getId());
+            preparedStatement.setInt(i, uff.getId());
             preparedStatement.setString(i++, uff.getNome());
             preparedStatement.setString(i++, uff.getTel());
             preparedStatement.setString(i++, uff.getEmail());
-            preparedStatement.setString(i++, uff.getUbicazione());
-
+            preparedStatement.setString(i, uff.getUbicazione());
             res = preparedStatement.executeUpdate();
 
             connection.commit();
-            res++;
         } finally {
             try {
                 if (preparedStatement != null) {
                     preparedStatement.close();
                 }
             } finally {
-                // .releaseConnection(connection);
-                connection = null;
+                Database.freeConnection(connection);
             }
         }
-        return (res);
+        return (res != 0);
     }
 
     /**
-     * Questo metodo consente di prelevare dal database le informazioni di tutti
-     * gli uffici tecnici registrati.
+     * this method allows everyone to get information from the database
+     * registered technical offices.
      *
-     * @return users è la lista di tutti gli utenti registrati nel database.
-     * @throws SQLException è l'eccezione che può essere lanciata durante
-     *                      l'esecuzione del metodo.
+     * @return uffici List of UfficioTecnico.
+     * @throws SQLException it is the exception that can be launched
+     * during the execution of the method.
      */
 
-    public synchronized Collection<UfficioTecnico> getAll()
+    public static synchronized List<UfficioTecnico> getAll()
             throws SQLException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
-
-        Collection<UfficioTecnico> uffici;
+        List<UfficioTecnico> uffici;
         uffici = null;
 
-        String selectSQL = "SELECT * FROM " + UfficioTecnicoDB.TABLE_NAME;
-
         try {
-            // connection = OTTIENI CONNESSIONE
-            preparedStatement = connection.prepareStatement(selectSQL);
+            connection = Database.getConnection();
+            preparedStatement = connection.prepareStatement(SELECT_ALL);
 
             ResultSet rs = preparedStatement.executeQuery();
 
@@ -112,10 +129,43 @@ public class UfficioTecnicoDB {
                     preparedStatement.close();
                 }
             } finally {
-                // .releaseConnection(connection);
-                connection = null;
+                Database.freeConnection(connection);
             }
         }
         return uffici;
+    }
+
+    /**
+     * This method deletes a user from the database given
+     * his email address.
+     *
+     * @param aId id the id of UfficioTecnico.
+     * @return returns true if a technical office has been canceled,
+     * otherwise false.
+     * @throws SQLException is the exception that can be thrown
+     *                      during the execution.
+     */
+    public static synchronized Boolean deleteById(final Integer aId)
+            throws SQLException {
+        Connection connection = null;
+        PreparedStatement s = null;
+        int res;
+
+        try {
+            connection = Database.getConnection();
+            s = connection.prepareStatement(DELETE_BY_ID);
+            s.setInt(1, aId);
+            res = s.executeUpdate(DELETE_BY_ID);
+            connection.commit();
+        } finally {
+            try {
+                if (s != null) {
+                    s.close();
+                }
+            } finally {
+                Database.freeConnection(connection);
+            }
+        }
+        return (res != 0);
     }
 }

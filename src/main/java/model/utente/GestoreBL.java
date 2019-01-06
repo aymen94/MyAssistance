@@ -9,4 +9,5 @@ package model.utente;
  * The Class GestoreBL.
  */
 public class GestoreBL {
+
 }

@@ -31,7 +31,6 @@ public class UtenteTest {
         ut.setNome("mario");
         ut.setCognome("rossi");
         Date data = new Date(0);
-        ut.setDataSospensione(data);
         ut.setIsGestore(false);
     }
 
