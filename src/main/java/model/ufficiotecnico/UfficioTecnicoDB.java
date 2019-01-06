@@ -57,12 +57,12 @@ public final class UfficioTecnicoDB {
     public static synchronized Boolean insert(final UfficioTecnico uff) throws SQLException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
-        int res = 0;
+        int res;
         try {
             connection = Database.getConnection();
             preparedStatement = connection.prepareStatement(INSERT_UFFICIO_TECNICO);
             int i = 1;
-            preparedStatement.setInt(i++, uff.getId());
+            preparedStatement.setInt(i, uff.getId());
             preparedStatement.setString(i++, uff.getNome());
             preparedStatement.setString(i++, uff.getTel());
             preparedStatement.setString(i++, uff.getEmail());
