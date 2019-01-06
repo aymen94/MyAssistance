@@ -16,10 +16,10 @@ CREATE TABLE my_assistance.utente
 
 CREATE TABLE my_assistance.ufficio_tecnico
 (
-  id           INT PRIMARY KEY AUTO_INCREMENT,
-  nome         VARCHAR(50) UNIQUE NOT NULL,
-  tel          CHAR(15),
-  email        VARCHAR(55) UNIQUE NOT NULL,
+  id         INT PRIMARY KEY AUTO_INCREMENT,
+  nome       VARCHAR(50) UNIQUE NOT NULL,
+  tel        CHAR(15),
+  email      VARCHAR(55)        NOT NULL,
   ubicazione VARCHAR(50)
 );
 
