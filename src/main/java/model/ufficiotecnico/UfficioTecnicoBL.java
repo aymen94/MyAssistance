@@ -15,7 +15,6 @@ public final class UfficioTecnicoBL {
      */
     private UfficioTecnicoBL() { }
 
-}
 
     /**
      * Memorizza ufficio tecnico.
