@@ -33,6 +33,7 @@ public final class UfficioTecnicoDB {
 
     }
 
+
     /**
      * Questo metodo effettua l'inserimento di un ufficio tecnico nel database.
      *
@@ -201,11 +202,11 @@ public final class UfficioTecnicoDB {
 
             connection.commit();
         } finally {
-
-            if (s != null) {
-                s.close();
-            }
-            if (connection != null) {
+            try {
+                if (s != null) {
+                    s.close();
+                }
+            } finally {
                 Database.freeConnection(connection);
             }
         }
