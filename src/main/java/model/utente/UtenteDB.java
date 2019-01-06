@@ -35,7 +35,7 @@ public class UtenteDB {
      * @return res is 0 if the insert operation is not made,
      *         otherwise an integer greater than 0.
      */
-    public synchronized int insert(final Utente aUtente) throws SQLException {
+    public int insert(final Utente aUtente) throws SQLException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         int res = 0;
@@ -88,7 +88,7 @@ public class UtenteDB {
      * @throws SQLException is the exception that can be thrown
      * during the execution.
      */
-    public synchronized Utente getByEmail(final String aEmail)
+    public Utente getByEmail(final String aEmail)
             throws SQLException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -146,7 +146,7 @@ public class UtenteDB {
      * @throws SQLException is the exception that can be thrown
      * during the execution.
      */
-    public synchronized Collection<Utente> getAll() throws SQLException {
+    public Collection<Utente> getAll() throws SQLException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
 
@@ -209,7 +209,7 @@ public class UtenteDB {
      * @return res is 0 if the delete operation is not made,
      *         otherwise an integer greater than 0.
      */
-    public synchronized int delete(final String aEmail) throws SQLException {
+    public int delete(final String aEmail) throws SQLException {
         Connection connection = null;
         PreparedStatement s = null;
         int res = 0;
