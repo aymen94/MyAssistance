@@ -165,11 +165,11 @@ public final class SegnalazioneDB {
      * @throws SQLException the SQL exception
      */
     public static Segnalazione getByCod(final int aCod) throws SQLException {
-        Segnalazione segnalazione = genericGet(SELECT_BY_ID, aCod).get(0);
-        if (segnalazione == null) {
-            segnalazione = new Segnalazione();
+        List<Segnalazione> segnalazioneList = genericGet(SELECT_BY_ID, aCod);
+        if (segnalazioneList != null) {
+            return segnalazioneList.get(0);
         }
-        return segnalazione;
+        return null;
     }
 
     /**
@@ -184,7 +184,8 @@ public final class SegnalazioneDB {
             final int aParameter) throws SQLException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
-        final List<Segnalazione> segnalazioneList = new ArrayList<Segnalazione>();
+        final List<Segnalazione> segnalazioneList =
+                new ArrayList<Segnalazione>();
 
         try {
             connection = Database.getConnection();
@@ -223,7 +224,11 @@ public final class SegnalazioneDB {
                 segnalazione.setTitolo(result.getString("titolo"));
                 segnalazioneList.add(segnalazione);
             }
-            return segnalazioneList;
+            if (segnalazioneList.size() > 0) {
+                return segnalazioneList;
+            } else {
+                return null;
+            }
         } finally {
             freeResources(preparedStatement, connection);
         }
