@@ -74,8 +74,10 @@ public final class SegnalazioneDB {
      *
      * @param aSegnalazione the segnalazione
      * @return true, if successful
+     * @throws SQLException the SQL exception
      */
-    public static boolean insert(final Segnalazione aSegnalazione) {
+    public static boolean insert(final Segnalazione aSegnalazione)
+            throws SQLException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         try {
@@ -94,9 +96,6 @@ public final class SegnalazioneDB {
             preparedStatement.setInt(i++, aSegnalazione.getAutore().getId());
             preparedStatement.setInt(i++, aSegnalazione.getTecnico().getId());
             return preparedStatement.executeUpdate() > 0;
-        } catch (final SQLException e) {
-            e.printStackTrace();
-            return false;
         } finally {
             freeResources(preparedStatement, connection);
         }
@@ -108,8 +107,10 @@ public final class SegnalazioneDB {
      *
      * @param aSegnalazione the segnalazione
      * @return true, if successful
+     * @throws SQLException the SQL exception
      */
-    public static boolean update(final Segnalazione aSegnalazione) {
+    public static boolean update(final Segnalazione aSegnalazione)
+            throws SQLException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         try {
@@ -129,9 +130,6 @@ public final class SegnalazioneDB {
             preparedStatement.setInt(i++, aSegnalazione.getTecnico().getId());
             preparedStatement.setInt(i++, aSegnalazione.getCod());
             return preparedStatement.executeUpdate() > 0;
-        } catch (final SQLException e) {
-            e.printStackTrace();
-            return false;
         } finally {
             freeResources(preparedStatement, connection);
         }
@@ -142,8 +140,10 @@ public final class SegnalazioneDB {
      *
      * @param aAutorId the autor id
      * @return the by autore
+     * @throws SQLException the SQL exception
      */
-    public static List<Segnalazione> getByAutore(final int aAutorId) {
+    public static List<Segnalazione> getByAutore(final int aAutorId)
+            throws SQLException {
         return genericGet(SELECT_BY_AUTHOR, aAutorId);
     }
 
@@ -151,8 +151,9 @@ public final class SegnalazioneDB {
      * Gets the all.
      *
      * @return the all
+     * @throws SQLException the SQL exception
      */
-    public static List<Segnalazione> getAll() {
+    public static List<Segnalazione> getAll() throws SQLException {
         return genericGet(SELECT_ALL, -1);
     }
 
@@ -161,8 +162,9 @@ public final class SegnalazioneDB {
      *
      * @param aCod the cod
      * @return the by id
+     * @throws SQLException the SQL exception
      */
-    public static Segnalazione getByCod(final int aCod) {
+    public static Segnalazione getByCod(final int aCod) throws SQLException {
         Segnalazione segnalazione = genericGet(SELECT_BY_ID, aCod).get(0);
         if (segnalazione == null) {
             segnalazione = new Segnalazione();
@@ -176,13 +178,13 @@ public final class SegnalazioneDB {
      * @param aQuery     the query
      * @param aParameter the parameter
      * @return the list
+     * @throws SQLException the SQL exception
      */
     private static List<Segnalazione> genericGet(final String aQuery,
-            final int aParameter) {
+            final int aParameter) throws SQLException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
-        final List<Segnalazione> segnalazioneList =
-                new ArrayList<Segnalazione>();
+        final List<Segnalazione> segnalazioneList = new ArrayList<Segnalazione>();
 
         try {
             connection = Database.getConnection();
@@ -221,10 +223,6 @@ public final class SegnalazioneDB {
                 segnalazioneList.add(segnalazione);
             }
             return segnalazioneList;
-
-        } catch (final SQLException e) {
-            e.printStackTrace();
-            return segnalazioneList;
         } finally {
             freeResources(preparedStatement, connection);
         }
@@ -235,15 +233,14 @@ public final class SegnalazioneDB {
      *
      * @param aStm  the stm
      * @param aConn the conn
+     * @throws SQLException the SQL exception
      */
     private static void freeResources(final PreparedStatement aStm,
-            final Connection aConn) {
+            final Connection aConn) throws SQLException {
         try {
             if (aStm != null) {
                 aStm.close();
             }
-        } catch (final SQLException e) {
-            e.printStackTrace();
         } finally {
             if (aConn != null) {
                 Database.freeConnection(aConn);
