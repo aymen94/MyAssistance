@@ -42,4 +42,8 @@ public class CSU extends Utente {
         this.dataSospensione = dataSospensione;
     }
 
+    public Boolean isGestore() {
+        return false;
+    }
+
 }
