@@ -28,13 +28,13 @@ public final class SegnalazioneBL {
      *
      * @param aTitolo      the titolo
      * @param aDescrizione the descrizione
-     * @param aTipologia   the tipologia
-     * @param aAutore      the autore
+     * @param aIdTipologia the tipologia
+     * @param aIdAutore      the autore
      * @return true, if successful
      */
     public static boolean insertSegnalazione(final String aTitolo,
-            final String aDescrizione, final Tipologia aTipologia,
-            final Utente aAutore) {
+            final String aDescrizione, final int aIdTipologia,
+            final int aIdAutore) {
         return false;
 
     }
@@ -86,7 +86,7 @@ public final class SegnalazioneBL {
      * @return true, if successful
      */
     public static boolean inoltraSegnalazione(final int aCod,
-            final UfficioTecnico aTecnico) {
+            final int aIdTecnico) {
         return false;
     }
 
