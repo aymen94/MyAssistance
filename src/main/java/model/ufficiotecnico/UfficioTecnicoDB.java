@@ -51,6 +51,12 @@ public final class UfficioTecnicoDB {
             + "WHERE id = ?";
 
     /**
+     * The Constant GET_BY_ID.
+     */
+    private static final String GET_BY_ID = "SELECT * FROM" + TABLE_NAME
+            + "WHERE id = ?";
+
+    /**
      * This method inserts a technical office in the database.
      *
      * @param uff it is the Technical Office object that must be inserted in the
@@ -93,8 +99,10 @@ public final class UfficioTecnicoDB {
         return (res);
     }
 
+
+
     /**
-     * this method allows everyone to get information from the database
+     * This method allows everyone to get information from the database
      * registered technical offices.
      *
      * @return uffici List of UfficioTecnico.
@@ -152,7 +160,7 @@ public final class UfficioTecnicoDB {
             throws SQLException {
         Connection connection = null;
         PreparedStatement s = null;
-        int res = 0;
+        int res;
 
         try {
             connection = Database.getConnection();
@@ -172,5 +180,54 @@ public final class UfficioTecnicoDB {
             }
         }
         return (res);
+    }
+
+
+
+
+    /**
+     * This method select the UfficioTecnico by a id from the database given all dates of UfficioTecnico.
+     *
+     * @param aId id the id of UfficioTecnico.
+     * @return uffici a  type list of  UfficioTecnico.
+     * @throws SQLException is the exception that can be thrown during the
+     *                      execution.
+     */
+    public static synchronized List<UfficioTecnico> getById(final Integer aId) throws SQLException {
+
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        List<UfficioTecnico> uffici;
+        uffici = null;
+
+        try {
+            connection = Database.getConnection();
+            preparedStatement.setInt(1,aId);
+            preparedStatement = connection.prepareStatement(GET_BY_ID);
+
+            ResultSet rs = preparedStatement.executeQuery();
+            uffici = new ArrayList<UfficioTecnico>();
+            while (rs.next()) {
+                UfficioTecnico uff = new UfficioTecnico();
+
+                uff.setId(rs.getInt("Id"));
+                uff.setNome(rs.getString("nome"));
+                uff.setTel(rs.getString("tel"));
+                uff.setEmail(rs.getString("email"));
+                uff.setUbicazione(rs.getString("ubicazione"));
+
+                uffici.add(uff);
+            }
+
+        } finally {
+            try {
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                }
+            } finally {
+                Database.freeConnection(connection);
+            }
+        }
+        return uffici;
     }
 }
