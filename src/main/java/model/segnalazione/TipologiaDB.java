@@ -16,7 +16,7 @@ import pool.Database;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class SegnalazioneDB.
+ * The Class TipologiaDB.
  */
 public final class TipologiaDB {
 
@@ -26,7 +26,7 @@ public final class TipologiaDB {
     private static final String TABLE_NAME = "tipologia";
 
     /**
-     * The Constant INSERT_SEGNALAZIONE.
+     * The Constant INSERT_TIPOLOGIA.
      */
     private static final String INSERT_TIPOLOGIA = "INSERT INTO " + TABLE_NAME
             + " (nome,priorita) VALUES (?,?)";
@@ -53,10 +53,10 @@ public final class TipologiaDB {
      * Insert.
      *
      * @param aTipologia the tipologia
-     * @return true, if successful
+     * @return the int
      * @throws SQLException the SQL exception
      */
-    public static boolean insert(final Tipologia aTipologia)
+    public static int insert(final Tipologia aTipologia)
             throws SQLException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -66,7 +66,7 @@ public final class TipologiaDB {
             int i = 1;
             preparedStatement.setString(i++, aTipologia.getNome());
             preparedStatement.setShort(i++, aTipologia.getPriorita());
-            return preparedStatement.executeUpdate() > 0;
+            return preparedStatement.executeUpdate();
         } finally {
             freeResources(preparedStatement, connection);
         }

@@ -73,10 +73,10 @@ public final class SegnalazioneDB {
      * Insert.
      *
      * @param aSegnalazione the segnalazione
-     * @return true, if successful
+     * @return the int
      * @throws SQLException the SQL exception
      */
-    public static boolean insert(final Segnalazione aSegnalazione)
+    public static int insert(final Segnalazione aSegnalazione)
             throws SQLException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -95,7 +95,7 @@ public final class SegnalazioneDB {
             preparedStatement.setInt(i++, aSegnalazione.getTipologia().getId());
             preparedStatement.setInt(i++, aSegnalazione.getAutore().getId());
             preparedStatement.setInt(i++, aSegnalazione.getTecnico().getId());
-            return preparedStatement.executeUpdate() > 0;
+            return preparedStatement.executeUpdate();
         } finally {
             freeResources(preparedStatement, connection);
         }
@@ -106,10 +106,10 @@ public final class SegnalazioneDB {
      * Update.
      *
      * @param aSegnalazione the segnalazione
-     * @return true, if successful
+     * @return the int
      * @throws SQLException the SQL exception
      */
-    public static boolean update(final Segnalazione aSegnalazione)
+    public static int update(final Segnalazione aSegnalazione)
             throws SQLException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -129,7 +129,7 @@ public final class SegnalazioneDB {
             preparedStatement.setInt(i++, aSegnalazione.getAutore().getId());
             preparedStatement.setInt(i++, aSegnalazione.getTecnico().getId());
             preparedStatement.setInt(i++, aSegnalazione.getCod());
-            return preparedStatement.executeUpdate() > 0;
+            return preparedStatement.executeUpdate();
         } finally {
             freeResources(preparedStatement, connection);
         }
@@ -158,10 +158,10 @@ public final class SegnalazioneDB {
     }
 
     /**
-     * Gets the by id.
+     * Gets the by cod.
      *
      * @param aCod the cod
-     * @return the by id
+     * @return the by cod
      * @throws SQLException the SQL exception
      */
     public static Segnalazione getByCod(final int aCod) throws SQLException {
