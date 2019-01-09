@@ -14,6 +14,7 @@ import java.util.List;
 
 import model.ufficiotecnico.UfficioTecnico;
 import model.utente.CSU;
+import model.utente.Utente;
 import pool.Database;
 
 // TODO: Auto-generated Javadoc
@@ -218,7 +219,9 @@ public final class SegnalazioneDB {
 
                 // HACK: Use a fake author until UtenteDB.getById() is
                 // implemented
-                segnalazione.setAutore(new CSU());
+                Utente autore = new CSU();
+                autore.setId(1);
+                segnalazione.setAutore(autore);
 
                 // HACK: Use a fake Tecnico until UfficioTecnicoDB.getById() is
                 // implemented
