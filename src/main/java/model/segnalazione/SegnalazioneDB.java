@@ -197,7 +197,7 @@ public final class SegnalazioneDB {
             connection = Database.getConnection();
             preparedStatement = connection.prepareStatement(aQuery);
             if (aParameter > 0) {
-                preparedStatement.setInt(0, aParameter);
+                preparedStatement.setInt(1, aParameter);
             }
             final ResultSet result = preparedStatement.executeQuery();
             while (result.next()) {
