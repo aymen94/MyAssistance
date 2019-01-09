@@ -29,7 +29,7 @@ public final class SegnalazioneBL {
      * @param aTitolo      the titolo
      * @param aDescrizione the descrizione
      * @param aIdTipologia the tipologia
-     * @param aIdAutore      the autore
+     * @param aIdAutore    the autore
      * @return true, if successful
      */
     public static boolean insertSegnalazione(final String aTitolo,
@@ -57,13 +57,12 @@ public final class SegnalazioneBL {
      * @param aCod         the cod
      * @param atitolo      the atitolo
      * @param adescrizione the adescrizione
-     * @param atipologia   the atipologia
+     * @param aIdTipologia the atipologia
      * @return true, if successful
      */
-    public static boolean updateSegnalazione(final int aCod,
-            final String atitolo, final String adescrizione,
-            final Tipologia atipologia) {
-        return true;
+    public static boolean updateSegnalazione(final String atitolo,
+            final String adescrizione, final int aIdTipologia, final int aCod) {
+        return false;
 
     }
 
@@ -81,8 +80,8 @@ public final class SegnalazioneBL {
     /**
      * Inoltra segnalazione.
      *
-     * @param aCod     the cod
-     * @param aTecnico the tecnico
+     * @param aCod       the cod
+     * @param aIdTecnico the tecnico
      * @return true, if successful
      */
     public static boolean inoltraSegnalazione(final int aCod,
