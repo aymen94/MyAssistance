@@ -99,9 +99,11 @@ public final class SegnalazioneDB {
             preparedStatement.setDate(i++, aSegnalazione.getDataRifiuto());
             preparedStatement.setDate(i++, aSegnalazione.getDataAssegnazione());
             preparedStatement.setDate(i++, aSegnalazione.getDataRisoluzione());
+            preparedStatement.setString(i++,
+                    aSegnalazione.getMotivazioneRifiuto());
             preparedStatement.setInt(i++, aSegnalazione.getTipologia().getId());
             preparedStatement.setInt(i++, aSegnalazione.getAutore().getId());
-            preparedStatement.setInt(i++, aSegnalazione.getTecnico().getId());
+            preparedStatement.setInt(i, aSegnalazione.getTecnico().getId());
             return preparedStatement.executeUpdate();
         } finally {
             freeResources(preparedStatement, connection);
@@ -132,10 +134,12 @@ public final class SegnalazioneDB {
             preparedStatement.setDate(i++, aSegnalazione.getDataRifiuto());
             preparedStatement.setDate(i++, aSegnalazione.getDataAssegnazione());
             preparedStatement.setDate(i++, aSegnalazione.getDataRisoluzione());
+            preparedStatement.setString(i++,
+                    aSegnalazione.getMotivazioneRifiuto());
             preparedStatement.setInt(i++, aSegnalazione.getTipologia().getId());
             preparedStatement.setInt(i++, aSegnalazione.getAutore().getId());
             preparedStatement.setInt(i++, aSegnalazione.getTecnico().getId());
-            preparedStatement.setInt(i++, aSegnalazione.getCod());
+            preparedStatement.setInt(i, aSegnalazione.getCod());
             return preparedStatement.executeUpdate();
         } finally {
             freeResources(preparedStatement, connection);
