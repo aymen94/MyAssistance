@@ -225,7 +225,9 @@ public final class SegnalazioneDB {
 
                 // HACK: Use a fake Tecnico until UfficioTecnicoDB.getById() is
                 // implemented
-                segnalazione.setTecnico(new UfficioTecnico());
+                UfficioTecnico tecnico = new UfficioTecnico();
+                tecnico.setId(1);
+                segnalazione.setTecnico(tecnico);
 
                 segnalazione.setTipologia(
                         TipologiaDB.getById(result.getInt("tipologia")));
