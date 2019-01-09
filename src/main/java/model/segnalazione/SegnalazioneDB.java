@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -103,7 +104,11 @@ public final class SegnalazioneDB {
                     aSegnalazione.getMotivazioneRifiuto());
             preparedStatement.setInt(i++, aSegnalazione.getTipologia().getId());
             preparedStatement.setInt(i++, aSegnalazione.getAutore().getId());
-            preparedStatement.setInt(i, aSegnalazione.getTecnico().getId());
+            if (aSegnalazione.getTecnico() != null) {
+                preparedStatement.setInt(i, aSegnalazione.getTecnico().getId());
+            } else {
+                preparedStatement.setNull(i, Types.INTEGER);
+            }
             return preparedStatement.executeUpdate();
         } finally {
             freeResources(preparedStatement, connection);
@@ -138,7 +143,12 @@ public final class SegnalazioneDB {
                     aSegnalazione.getMotivazioneRifiuto());
             preparedStatement.setInt(i++, aSegnalazione.getTipologia().getId());
             preparedStatement.setInt(i++, aSegnalazione.getAutore().getId());
-            preparedStatement.setInt(i++, aSegnalazione.getTecnico().getId());
+            if (aSegnalazione.getTecnico() != null) {
+                preparedStatement.setInt(i++,
+                        aSegnalazione.getTecnico().getId());
+            } else {
+                preparedStatement.setNull(i++, Types.INTEGER);
+            }
             preparedStatement.setInt(i, aSegnalazione.getCod());
             return preparedStatement.executeUpdate();
         } finally {
@@ -229,9 +239,11 @@ public final class SegnalazioneDB {
 
                 // HACK: Use a fake Tecnico until UfficioTecnicoDB.getById() is
                 // implemented
-                UfficioTecnico tecnico = new UfficioTecnico();
-                tecnico.setId(1);
-                segnalazione.setTecnico(tecnico);
+                if (result.getInt("tecnico") != 0) {
+                    UfficioTecnico tecnico = new UfficioTecnico();
+                    tecnico.setId(1);
+                    segnalazione.setTecnico(tecnico);
+                }
 
                 segnalazione.setTipologia(
                         TipologiaDB.getById(result.getInt("tipologia")));
