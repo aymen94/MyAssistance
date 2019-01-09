@@ -63,6 +63,12 @@ public final class SegnalazioneDB {
     private static final String SELECT_ALL = " SELECT * FROM " + TABLE_NAME;
 
     /**
+     * The Constant DELETE_BY_ID.
+     */
+    private static final String DELETE_BY_ID = "DELETE FROM " + TABLE_NAME
+            + " WHERE id=?";
+
+    /**
      * This is an utility class. So no constructor should be used.
      */
     private SegnalazioneDB() {
@@ -232,6 +238,30 @@ public final class SegnalazioneDB {
         } finally {
             freeResources(preparedStatement, connection);
         }
+    }
+
+    /**
+     * Delete by id.
+     *
+     * @param aId the id
+     * @return the int
+     * @throws SQLException the SQL exception
+     */
+    public static int deleteById(final int aId) throws SQLException {
+        Connection connection = null;
+        PreparedStatement s = null;
+        int res = 0;
+
+        try {
+            connection = Database.getConnection();
+            s = connection.prepareStatement(DELETE_BY_ID);
+            s.setInt(1, aId);
+
+            res = s.executeUpdate(DELETE_BY_ID);
+        } finally {
+            freeResources(s, connection);
+        }
+        return (res);
     }
 
     /**
