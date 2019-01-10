@@ -36,7 +36,7 @@ public final class SegnalazioneDB {
             + TABLE_NAME
             + " (titolo,descrizione,stato,data_segnalazione,data_rifiuto,"
             + "data_assegnazione,data_risoluzione,motivazione_rifiuto,"
-            + "tipologia, autore, tecnico) VALUES (?,?,?,?,?,?,?,?,?,?)";
+            + "tipologia, autore, tecnico) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 
     /**
      * The Constant UPDATE_SEGNALAZIONE.
