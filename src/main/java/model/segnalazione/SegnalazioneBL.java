@@ -8,9 +8,7 @@ package model.segnalazione;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
-
 import model.utente.Utente;
-import model.utente.UtenteDB;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -24,39 +22,43 @@ public final class SegnalazioneBL {
     private static final int MAX_TITLE_LENGTH = 50;
 
     /**
-     * This is an utility class. So no constructor should be used.
+     * The segnalazione DB.
      */
-    private SegnalazioneBL() {
+    private SegnalazioneDB segnalazioneDB;
 
+    /**
+     * Instantiates a new segnalazione BL.
+     *
+     * @param aSegnalazioneDB the segnalazione DB
+     */
+    public SegnalazioneBL(SegnalazioneDB aSegnalazioneDB) {
+        segnalazioneDB = aSegnalazioneDB;
     }
 
     /**
      * Effettua segnalazione.
      *
-     * @param aTitolo      the titolo
-     * @param aDescrizione the descrizione
-     * @param aIdTipologia the tipologia
-     * @param aIdAutore    the autore
+     * @param segnalazione the segnalazione
      * @return true, if successful
      */
-    public static boolean insertSegnalazione(final String aTitolo,
-            final String aDescrizione, final int aIdTipologia,
-            final int aIdAutore) {
+    public boolean insertSegnalazione(final Segnalazione segnalazione) {
         try {
-            final Tipologia aTipologia = TipologiaDB.getById(aIdTipologia);
-            final Utente aAutore = UtenteDB.getById(aIdAutore);
-            if (aTitolo.length() > 0 && aTitolo.length() <= MAX_TITLE_LENGTH
-                    && aDescrizione.length() > 0 && aTipologia != null
-                    && aAutore != null) {
-                final Segnalazione aSegnalazione = new Segnalazione();
-                aSegnalazione.setTitolo(aTitolo);
-                aSegnalazione.setDescrizione(aDescrizione);
-                aSegnalazione.setTipologia(aTipologia);
-                aSegnalazione.setAutore(aAutore);
+
+            if (segnalazione.getTitolo().length() > 0
+                    && segnalazione.getTitolo().length() <= MAX_TITLE_LENGTH
+                    && segnalazione.getDescrizione().length() > 0
+                    && segnalazione.getAutore() != null
+                    && segnalazione.getTipologia() != null) {
+                final Segnalazione aSegnalazione = segnalazioneDB
+                        .getByCod(segnalazione.getCod());
+                aSegnalazione.setTitolo(segnalazione.getTitolo());
+                aSegnalazione.setDescrizione(segnalazione.getDescrizione());
+                aSegnalazione.setTipologia(segnalazione.getTipologia());
+                aSegnalazione.setAutore(segnalazione.getAutore());
                 // Set the current date
                 aSegnalazione.setDataSegnalazione(
                         java.sql.Date.valueOf(LocalDate.now()));
-                return SegnalazioneDB.insert(aSegnalazione) > 0;
+                return segnalazioneDB.insert(aSegnalazione) > 0;
             }
         } catch (final SQLException e) {
             e.printStackTrace();
@@ -79,26 +81,24 @@ public final class SegnalazioneBL {
     /**
      * Modifica segnalazione.
      *
-     * @param aCod         the cod
-     * @param aTitolo      the titolo
-     * @param aDescrizione the descrizione
-     * @param aIdTipologia the tipologia
+     * @param segnalazione the segnalazione
      * @return true, if successful
      */
-    public static boolean updateSegnalazione(final String aTitolo,
-            final String aDescrizione, final int aIdTipologia, final int aCod) {
+    public boolean updateSegnalazione(final Segnalazione segnalazione) {
         try {
-            final Tipologia aTipologia = TipologiaDB.getById(aIdTipologia);
-            final Segnalazione aSegnalazione = SegnalazioneDB.getByCod(aCod);
 
-            if (aTitolo.length() > 0 && aTitolo.length() <= MAX_TITLE_LENGTH
-                    && aDescrizione.length() > 0 && aTipologia != null
-                    && aSegnalazione != null
-                    && aSegnalazione.getStato() == Segnalazione.STATO_APERTO) {
-                aSegnalazione.setTitolo(aTitolo);
-                aSegnalazione.setDescrizione(aDescrizione);
-                aSegnalazione.setTipologia(aTipologia);
-                return SegnalazioneDB.update(aSegnalazione) > 0;
+            if (segnalazione.getTitolo().length() > 0
+                    && segnalazione.getTitolo().length() <= MAX_TITLE_LENGTH
+                    && segnalazione.getDescrizione().length() > 0
+                    && segnalazione.getTipologia() != null
+                    && segnalazione.getStato() == Segnalazione.STATO_APERTO) {
+
+                final Segnalazione aSegnalazione = segnalazioneDB
+                        .getByCod(segnalazione.getCod());
+                aSegnalazione.setTitolo(segnalazione.getTitolo());
+                aSegnalazione.setDescrizione(segnalazione.getDescrizione());
+                aSegnalazione.setTipologia(segnalazione.getTipologia());
+                return segnalazioneDB.update(aSegnalazione) > 0;
             }
 
         } catch (final SQLException e) {
@@ -114,7 +114,7 @@ public final class SegnalazioneBL {
      * @param aCod the cod
      * @return true, if successful
      */
-    public static boolean deleteSegnalazione(final int aCod) {
+    public boolean deleteSegnalazione(final int aCod) {
         return false;
 
     }
@@ -126,8 +126,7 @@ public final class SegnalazioneBL {
      * @param aIdTecnico the tecnico
      * @return true, if successful
      */
-    public static boolean inoltraSegnalazione(final int aCod,
-            final int aIdTecnico) {
+    public boolean inoltraSegnalazione(final int aCod, final int aIdTecnico) {
         return false;
     }
 
@@ -136,7 +135,7 @@ public final class SegnalazioneBL {
      *
      * @return the list
      */
-    public static List<Segnalazione> getSegnalazioniRicevute() {
+    public List<Segnalazione> getSegnalazioniRicevute() {
         return null;
 
     }
@@ -148,17 +147,17 @@ public final class SegnalazioneBL {
      * @param aMotivazioneRifiuto the motivazione rifiuto
      * @return true, if successful
      */
-    public static boolean rifiutaSegnalazione(final int aCod,
+    public boolean rifiutaSegnalazione(final int aCod,
             final String aMotivazioneRifiuto) {
 
         try {
-            final Segnalazione aSegnalazione = SegnalazioneDB.getByCod(aCod);
+            final Segnalazione aSegnalazione = segnalazioneDB.getByCod(aCod);
             if (aSegnalazione != null
                     && aSegnalazione.getStato() == Segnalazione.STATO_APERTO
                     && aMotivazioneRifiuto.length() > 0) {
                 aSegnalazione.setStato(Segnalazione.STATO_RIFIUTATO);
                 aSegnalazione.setMotivazioneRifiuto(aMotivazioneRifiuto);
-                return SegnalazioneDB.update(aSegnalazione) > 0;
+                return segnalazioneDB.update(aSegnalazione) > 0;
             }
 
         } catch (final SQLException e) {
@@ -174,7 +173,7 @@ public final class SegnalazioneBL {
      * @param aCod the cod
      * @return true, if successful
      */
-    public static boolean segnaRisolta(final int aCod) {
+    public boolean segnaRisolta(final int aCod) {
         return false;
 
     }
