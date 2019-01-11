@@ -11,9 +11,23 @@ package model.ufficiotecnico;
 public final class UfficioTecnicoBL {
 
     /**
-     * This is an utility class. So no constructor should be used.
+     * varialbe db.
      */
-    private UfficioTecnicoBL() { }
+    private UfficioTecnicoDB datab;
+    /**
+     * This is an utility class.
+     * @param database this instance make database method to query.
+     */
+    private UfficioTecnicoBL(final UfficioTecnicoDB database) {
+       this.datab = database;
+    }
+    /**
+     * This is an utility class.
+     * without a parameter.
+     */
+    private UfficioTecnicoBL() {
+       new UfficioTecnicoDB();
+    }
 
 
     /**
@@ -25,8 +39,8 @@ public final class UfficioTecnicoBL {
      * @param ubicazione the ubicazione
      * @return true, if successful
      */
-    public static boolean insertUfficioTecnico(final String nome, final String tel,
-            final String email, final String ubicazione) {
+    public static boolean insertUfficioTecnico(final String nome,
+            final String tel, final String email, final String ubicazione) {
         return false;
     }
 }

@@ -10,10 +10,9 @@ import pool.Database;
 
 import java.sql.Connection;
 
-// TODO: Auto-generated Javadoc
 /**
- * Questa classe permette la gestione dei dati persistenti relativi agli uffici
- * tecnici.
+ * This class allows the management of persistent data relating to offices
+ *  technicians
  */
 
 public final class UfficioTecnicoDB {
@@ -21,7 +20,7 @@ public final class UfficioTecnicoDB {
     /**
      * Empty construct.
      */
-    private UfficioTecnicoDB() {
+    public UfficioTecnicoDB() {
 
     }
 
@@ -67,7 +66,7 @@ public final class UfficioTecnicoDB {
      *                      execution of the method.
      */
 
-    public static synchronized int insert(final UfficioTecnico uff)
+    public synchronized int insert(final UfficioTecnico uff)
             throws SQLException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -110,7 +109,7 @@ public final class UfficioTecnicoDB {
      *                      execution of the method.
      */
 
-    public static synchronized List<UfficioTecnico> getAll()
+    public synchronized List<UfficioTecnico> getAll()
             throws SQLException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -156,7 +155,7 @@ public final class UfficioTecnicoDB {
      * @throws SQLException is the exception that can be thrown during the
      *                      execution.
      */
-    public static synchronized int deleteById(final Integer aId)
+    public synchronized int deleteById(final Integer aId)
             throws SQLException {
         Connection connection = null;
         PreparedStatement s = null;
@@ -193,7 +192,7 @@ public final class UfficioTecnicoDB {
      * @throws SQLException is the exception that can be thrown during the
      *                      execution.
      */
-    public static synchronized List<UfficioTecnico> getById(final Integer aId) throws SQLException {
+    public synchronized List<UfficioTecnico> getById(final Integer aId) throws SQLException {
 
         Connection connection = null;
         PreparedStatement preparedStatement = null;
