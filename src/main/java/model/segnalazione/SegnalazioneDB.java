@@ -18,11 +18,15 @@ import model.utente.CSU;
 import model.utente.Utente;
 import pool.Database;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class SegnalazioneDB.
  */
 public final class SegnalazioneDB {
+
+    /**
+     * The variable connection, to maintain connection with the DBMS.
+     */
+    private Connection connection;
 
     /**
      * The Constant TABLE_NAME.
@@ -32,8 +36,8 @@ public final class SegnalazioneDB {
     /**
      * The Constant INSERT_SEGNALAZIONE.
      */
-    private static final String INSERT_SEGNALAZIONE = "INSERT INTO "
-            + TABLE_NAME
+    private static final String INSERT_SEGNALAZIONE =
+        "INSERT INTO " + TABLE_NAME
             + " (titolo,descrizione,stato,data_segnalazione,data_rifiuto,"
             + "data_assegnazione,data_risoluzione,motivazione_rifiuto,"
             + "tipologia, autore, tecnico) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
@@ -41,8 +45,8 @@ public final class SegnalazioneDB {
     /**
      * The Constant UPDATE_SEGNALAZIONE.
      */
-    private static final String UPDATE_SEGNALAZIONE = "UPDATE " + TABLE_NAME
-            + " SET titolo = ?, descrizione = ?, stato = ?,"
+    private static final String UPDATE_SEGNALAZIONE =
+        "UPDATE " + TABLE_NAME + " SET titolo = ?, descrizione = ?, stato = ?,"
             + " data_segnalazione = ?, data_rifiuto = ?, data_assegnazione = ?,"
             + " data_risoluzione = ?, motivazione_rifiuto = ?, "
             + "tipologia = ?,  autore = ?,  tecnico= ? " + " WHERE cod = ?";
@@ -50,14 +54,14 @@ public final class SegnalazioneDB {
     /**
      * The Constant SELECT_BY_AUTHOR.
      */
-    private static final String SELECT_BY_AUTHOR = " SELECT * FROM "
-            + TABLE_NAME + " WHERE autore = ?";
+    private static final String SELECT_BY_AUTHOR =
+        " SELECT * FROM " + TABLE_NAME + " WHERE autore = ?";
 
     /**
      * The Constant SELECT_BY_ID.
      */
-    private static final String SELECT_BY_ID = "SELECT * FROM " + TABLE_NAME
-            + " WHERE cod = ?";
+    private static final String SELECT_BY_ID =
+        "SELECT * FROM " + TABLE_NAME + " WHERE cod = ?";
 
     /**
      * The Constant SELECT_ALL.
@@ -67,14 +71,17 @@ public final class SegnalazioneDB {
     /**
      * The Constant DELETE_BY_ID.
      */
-    private static final String DELETE_BY_ID = "DELETE FROM " + TABLE_NAME
-            + " WHERE id=?";
+    private static final String DELETE_BY_ID =
+        "DELETE FROM " + TABLE_NAME + " WHERE id=?";
 
     /**
-     * This is an utility class. So no constructor should be used.
+     * Instantiate variable connection.
+     * @param aConnection the Connection
+     * @throws SQLException the SQL exception
      */
-    private SegnalazioneDB() {
-
+    public SegnalazioneDB(final Connection aConnection) throws SQLException {
+        connection = aConnection;
+        connection.setAutoCommit(false);
     }
 
     /**
@@ -84,14 +91,11 @@ public final class SegnalazioneDB {
      * @return the int
      * @throws SQLException the SQL exception
      */
-    public static int insert(final Segnalazione aSegnalazione)
-            throws SQLException {
-        Connection connection = null;
+    public int insert(final Segnalazione aSegnalazione) throws SQLException {
         PreparedStatement preparedStatement = null;
         try {
-            connection = Database.getConnection();
             preparedStatement = connection
-                    .prepareStatement(INSERT_SEGNALAZIONE);
+                .prepareStatement(INSERT_SEGNALAZIONE);
             int i = 1;
             preparedStatement.setString(i++, aSegnalazione.getTitolo());
             preparedStatement.setString(i++, aSegnalazione.getDescrizione());
@@ -100,8 +104,8 @@ public final class SegnalazioneDB {
             preparedStatement.setDate(i++, aSegnalazione.getDataRifiuto());
             preparedStatement.setDate(i++, aSegnalazione.getDataAssegnazione());
             preparedStatement.setDate(i++, aSegnalazione.getDataRisoluzione());
-            preparedStatement.setString(i++,
-                    aSegnalazione.getMotivazioneRifiuto());
+            preparedStatement
+                .setString(i++, aSegnalazione.getMotivazioneRifiuto());
             preparedStatement.setInt(i++, aSegnalazione.getTipologia().getId());
             preparedStatement.setInt(i++, aSegnalazione.getAutore().getId());
             if (aSegnalazione.getTecnico() != null) {
@@ -111,7 +115,7 @@ public final class SegnalazioneDB {
             }
             return preparedStatement.executeUpdate();
         } finally {
-            freeResources(preparedStatement, connection);
+            freeResources(preparedStatement);
         }
 
     }
@@ -123,14 +127,12 @@ public final class SegnalazioneDB {
      * @return the int
      * @throws SQLException the SQL exception
      */
-    public static int update(final Segnalazione aSegnalazione)
-            throws SQLException {
-        Connection connection = null;
+    public int update(final Segnalazione aSegnalazione) throws SQLException {
         PreparedStatement preparedStatement = null;
         try {
             connection = Database.getConnection();
             preparedStatement = connection
-                    .prepareStatement(UPDATE_SEGNALAZIONE);
+                .prepareStatement(UPDATE_SEGNALAZIONE);
             int i = 1;
             preparedStatement.setString(i++, aSegnalazione.getTitolo());
             preparedStatement.setString(i++, aSegnalazione.getDescrizione());
@@ -139,20 +141,20 @@ public final class SegnalazioneDB {
             preparedStatement.setDate(i++, aSegnalazione.getDataRifiuto());
             preparedStatement.setDate(i++, aSegnalazione.getDataAssegnazione());
             preparedStatement.setDate(i++, aSegnalazione.getDataRisoluzione());
-            preparedStatement.setString(i++,
-                    aSegnalazione.getMotivazioneRifiuto());
+            preparedStatement
+                .setString(i++, aSegnalazione.getMotivazioneRifiuto());
             preparedStatement.setInt(i++, aSegnalazione.getTipologia().getId());
             preparedStatement.setInt(i++, aSegnalazione.getAutore().getId());
             if (aSegnalazione.getTecnico() != null) {
-                preparedStatement.setInt(i++,
-                        aSegnalazione.getTecnico().getId());
+                preparedStatement
+                    .setInt(i++, aSegnalazione.getTecnico().getId());
             } else {
                 preparedStatement.setNull(i++, Types.INTEGER);
             }
             preparedStatement.setInt(i, aSegnalazione.getCod());
             return preparedStatement.executeUpdate();
         } finally {
-            freeResources(preparedStatement, connection);
+            freeResources(preparedStatement);
         }
     }
 
@@ -163,8 +165,8 @@ public final class SegnalazioneDB {
      * @return the by autore
      * @throws SQLException the SQL exception
      */
-    public static List<Segnalazione> getByAutore(final int aAutorId)
-            throws SQLException {
+    public List<Segnalazione> getByAutore(final int aAutorId)
+        throws SQLException {
         return genericGet(SELECT_BY_AUTHOR, aAutorId);
     }
 
@@ -174,7 +176,7 @@ public final class SegnalazioneDB {
      * @return the all
      * @throws SQLException the SQL exception
      */
-    public static List<Segnalazione> getAll() throws SQLException {
+    public List<Segnalazione> getAll() throws SQLException {
         return genericGet(SELECT_ALL, -1);
     }
 
@@ -185,7 +187,7 @@ public final class SegnalazioneDB {
      * @return the by cod
      * @throws SQLException the SQL exception
      */
-    public static Segnalazione getByCod(final int aCod) throws SQLException {
+    public Segnalazione getByCod(final int aCod) throws SQLException {
         List<Segnalazione> segnalazioneList = genericGet(SELECT_BY_ID, aCod);
         if (segnalazioneList != null) {
             return segnalazioneList.get(0);
@@ -201,15 +203,12 @@ public final class SegnalazioneDB {
      * @return the list
      * @throws SQLException the SQL exception
      */
-    private static List<Segnalazione> genericGet(final String aQuery,
-            final int aParameter) throws SQLException {
-        Connection connection = null;
+    private List<Segnalazione> genericGet(final String aQuery,
+        final int aParameter) throws SQLException {
         PreparedStatement preparedStatement = null;
-        final List<Segnalazione> segnalazioneList =
-                new ArrayList<Segnalazione>();
+        final List<Segnalazione> segnalazioneList = new ArrayList<>();
 
         try {
-            connection = Database.getConnection();
             preparedStatement = connection.prepareStatement(aQuery);
             if (aParameter > 0) {
                 preparedStatement.setInt(1, aParameter);
@@ -219,16 +218,16 @@ public final class SegnalazioneDB {
                 final Segnalazione segnalazione = new Segnalazione();
                 segnalazione.setCod(result.getInt("cod"));
 
-                segnalazione.setDataAssegnazione(
-                        result.getDate("data_assegnazione"));
+                segnalazione
+                    .setDataAssegnazione(result.getDate("data_assegnazione"));
                 segnalazione.setDataRifiuto(result.getDate("data_rifiuto"));
                 segnalazione
-                        .setDataRisoluzione(result.getDate("data_risoluzione"));
-                segnalazione.setDataSegnalazione(
-                        result.getDate("data_segnalazione"));
+                    .setDataRisoluzione(result.getDate("data_risoluzione"));
+                segnalazione
+                    .setDataSegnalazione(result.getDate("data_segnalazione"));
                 segnalazione.setDescrizione(result.getString("descrizione"));
-                segnalazione.setMotivazioneRifiuto(
-                        result.getString("motivazione_rifiuto"));
+                segnalazione.setMotivazioneRifiuto(result
+                    .getString("motivazione_rifiuto"));
                 segnalazione.setStato(result.getShort("stato"));
 
                 // HACK: Use a fake author until UtenteDB.getById() is
@@ -245,8 +244,8 @@ public final class SegnalazioneDB {
                     segnalazione.setTecnico(tecnico);
                 }
 
-                segnalazione.setTipologia(
-                        TipologiaDB.getById(result.getInt("tipologia")));
+                segnalazione.setTipologia(TipologiaDB
+                    .getById(result.getInt("tipologia")));
 
                 segnalazione.setTitolo(result.getString("titolo"));
                 segnalazioneList.add(segnalazione);
@@ -257,7 +256,7 @@ public final class SegnalazioneDB {
                 return null;
             }
         } finally {
-            freeResources(preparedStatement, connection);
+            freeResources(preparedStatement);
         }
     }
 
@@ -268,19 +267,17 @@ public final class SegnalazioneDB {
      * @return the int
      * @throws SQLException the SQL exception
      */
-    public static int deleteById(final int aId) throws SQLException {
-        Connection connection = null;
-        PreparedStatement s = null;
+    public int deleteById(final int aId) throws SQLException {
+        PreparedStatement preparedStatements = null;
         int res = 0;
-
         try {
             connection = Database.getConnection();
-            s = connection.prepareStatement(DELETE_BY_ID);
-            s.setInt(1, aId);
+            preparedStatements = connection.prepareStatement(DELETE_BY_ID);
+            preparedStatements.setInt(1, aId);
 
-            res = s.executeUpdate(DELETE_BY_ID);
+            res = preparedStatements.executeUpdate(DELETE_BY_ID);
         } finally {
-            freeResources(s, connection);
+            freeResources(preparedStatements);
         }
         return (res);
     }
@@ -288,20 +285,13 @@ public final class SegnalazioneDB {
     /**
      * Free resources.
      *
-     * @param aStm  the stm
-     * @param aConn the conn
+     * @param aStm the stm
      * @throws SQLException the SQL exception
      */
-    private static void freeResources(final PreparedStatement aStm,
-            final Connection aConn) throws SQLException {
-        try {
-            if (aStm != null) {
-                aStm.close();
-            }
-        } finally {
-            if (aConn != null) {
-                Database.freeConnection(aConn);
-            }
+    private void freeResources(final PreparedStatement aStm)
+        throws SQLException {
+        if (aStm != null) {
+            aStm.close();
         }
     }
 }
