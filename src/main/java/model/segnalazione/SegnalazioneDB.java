@@ -24,11 +24,6 @@ import pool.Database;
 public final class SegnalazioneDB {
 
     /**
-     * The variable connection, to maintain connection with the DBMS.
-     */
-    private Connection connection;
-
-    /**
      * The Constant TABLE_NAME.
      */
     private static final String TABLE_NAME = "segnalazione";
@@ -75,16 +70,6 @@ public final class SegnalazioneDB {
         "DELETE FROM " + TABLE_NAME + " WHERE id=?";
 
     /**
-     * Instantiate variable connection.
-     * @param aConnection the Connection
-     * @throws SQLException the SQL exception
-     */
-    public SegnalazioneDB(final Connection aConnection) throws SQLException {
-        connection = aConnection;
-        connection.setAutoCommit(false);
-    }
-
-    /**
      * Insert.
      *
      * @param aSegnalazione the segnalazione
@@ -92,8 +77,10 @@ public final class SegnalazioneDB {
      * @throws SQLException the SQL exception
      */
     public int insert(final Segnalazione aSegnalazione) throws SQLException {
+        Connection connection = null;
         PreparedStatement preparedStatement = null;
         try {
+            connection = Database.getConnection();
             preparedStatement = connection
                 .prepareStatement(INSERT_SEGNALAZIONE);
             int i = 1;
@@ -115,7 +102,7 @@ public final class SegnalazioneDB {
             }
             return preparedStatement.executeUpdate();
         } finally {
-            freeResources(preparedStatement);
+            freeResources(preparedStatement, connection);
         }
 
     }
@@ -128,6 +115,7 @@ public final class SegnalazioneDB {
      * @throws SQLException the SQL exception
      */
     public int update(final Segnalazione aSegnalazione) throws SQLException {
+        Connection connection = null;
         PreparedStatement preparedStatement = null;
         try {
             connection = Database.getConnection();
@@ -154,7 +142,7 @@ public final class SegnalazioneDB {
             preparedStatement.setInt(i, aSegnalazione.getCod());
             return preparedStatement.executeUpdate();
         } finally {
-            freeResources(preparedStatement);
+            freeResources(preparedStatement, connection);
         }
     }
 
@@ -205,6 +193,7 @@ public final class SegnalazioneDB {
      */
     private List<Segnalazione> genericGet(final String aQuery,
         final int aParameter) throws SQLException {
+        Connection connection = null;
         PreparedStatement preparedStatement = null;
         final List<Segnalazione> segnalazioneList = new ArrayList<>();
 
@@ -256,7 +245,7 @@ public final class SegnalazioneDB {
                 return null;
             }
         } finally {
-            freeResources(preparedStatement);
+            freeResources(preparedStatement, connection);
         }
     }
 
@@ -268,30 +257,33 @@ public final class SegnalazioneDB {
      * @throws SQLException the SQL exception
      */
     public int deleteById(final int aId) throws SQLException {
-        PreparedStatement preparedStatements = null;
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
         int res = 0;
         try {
             connection = Database.getConnection();
-            preparedStatements = connection.prepareStatement(DELETE_BY_ID);
-            preparedStatements.setInt(1, aId);
+            preparedStatement = connection.prepareStatement(DELETE_BY_ID);
+            preparedStatement.setInt(1, aId);
 
-            res = preparedStatements.executeUpdate(DELETE_BY_ID);
+            res = preparedStatement.executeUpdate(DELETE_BY_ID);
         } finally {
-            freeResources(preparedStatements);
+            freeResources(preparedStatement, connection);
         }
         return (res);
     }
 
     /**
      * Free resources.
-     *
+     * @param con The Connection
      * @param aStm the stm
      * @throws SQLException the SQL exception
      */
-    private void freeResources(final PreparedStatement aStm)
-        throws SQLException {
+    private void freeResources(final PreparedStatement aStm,
+        final Connection con) throws SQLException {
         if (aStm != null) {
             aStm.close();
         }
+        con.close();
     }
+
 }
