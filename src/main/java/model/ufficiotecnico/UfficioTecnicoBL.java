@@ -105,7 +105,7 @@ public final class UfficioTecnicoBL {
      * @return true, if successful
      * @throws SQLException error sql.
      */
-    public boolean ottieniUfficio(final Integer aId) throws SQLException {
+    public boolean ottieniUfficio(final Integer aId){
         UfficioTecnico byId = null;
         try {
             if (aId != null && aId > 0) {
