@@ -9,18 +9,24 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.ufficiotecnico.UfficioTecnicoDB;
+import model.ufficiotecnico.UfficioTecnico;
 import model.utente.CSU;
+import model.utente.Utente;
 import pool.Database;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class SegnalazioneDB.
  */
 public final class SegnalazioneDB {
+
+    /**
+     * The variable connection, to maintain connection with the DBMS.
+     */
+    private Connection connection;
 
     /**
      * The Constant TABLE_NAME.
@@ -30,17 +36,17 @@ public final class SegnalazioneDB {
     /**
      * The Constant INSERT_SEGNALAZIONE.
      */
-    private static final String INSERT_SEGNALAZIONE = "INSERT INTO "
-            + TABLE_NAME
+    private static final String INSERT_SEGNALAZIONE =
+        "INSERT INTO " + TABLE_NAME
             + " (titolo,descrizione,stato,data_segnalazione,data_rifiuto,"
             + "data_assegnazione,data_risoluzione,motivazione_rifiuto,"
-            + "tipologia, autore, tecnico) VALUES (?,?,?,?,?,?,?,?,?,?)";
+            + "tipologia, autore, tecnico) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 
     /**
      * The Constant UPDATE_SEGNALAZIONE.
      */
-    private static final String UPDATE_SEGNALAZIONE = "UPDATE " + TABLE_NAME
-            + " SET titolo = ?, descrizione = ?, stato = ?,"
+    private static final String UPDATE_SEGNALAZIONE =
+        "UPDATE " + TABLE_NAME + " SET titolo = ?, descrizione = ?, stato = ?,"
             + " data_segnalazione = ?, data_rifiuto = ?, data_assegnazione = ?,"
             + " data_risoluzione = ?, motivazione_rifiuto = ?, "
             + "tipologia = ?,  autore = ?,  tecnico= ? " + " WHERE cod = ?";
@@ -48,14 +54,14 @@ public final class SegnalazioneDB {
     /**
      * The Constant SELECT_BY_AUTHOR.
      */
-    private static final String SELECT_BY_AUTHOR = " SELECT * FROM "
-            + TABLE_NAME + " WHERE autore = ?";
+    private static final String SELECT_BY_AUTHOR =
+        " SELECT * FROM " + TABLE_NAME + " WHERE autore = ?";
 
     /**
      * The Constant SELECT_BY_ID.
      */
-    private static final String SELECT_BY_ID = "SELECT * FROM " + TABLE_NAME
-            + " WHERE cod = ?";
+    private static final String SELECT_BY_ID =
+        "SELECT * FROM " + TABLE_NAME + " WHERE cod = ?";
 
     /**
      * The Constant SELECT_ALL.
@@ -63,25 +69,33 @@ public final class SegnalazioneDB {
     private static final String SELECT_ALL = " SELECT * FROM " + TABLE_NAME;
 
     /**
-     * This is an utility class. So no constructor should be used.
+     * The Constant DELETE_BY_ID.
      */
-    private SegnalazioneDB() {
+    private static final String DELETE_BY_ID =
+        "DELETE FROM " + TABLE_NAME + " WHERE id=?";
 
+    /**
+     * Instantiate variable connection.
+     * @param aConnection the Connection
+     * @throws SQLException the SQL exception
+     */
+    public SegnalazioneDB(final Connection aConnection) throws SQLException {
+        connection = aConnection;
+        connection.setAutoCommit(false);
     }
 
     /**
      * Insert.
      *
      * @param aSegnalazione the segnalazione
-     * @return true, if successful
+     * @return the int
+     * @throws SQLException the SQL exception
      */
-    public static boolean insert(final Segnalazione aSegnalazione) {
-        Connection connection = null;
+    public int insert(final Segnalazione aSegnalazione) throws SQLException {
         PreparedStatement preparedStatement = null;
         try {
-            connection = Database.getConnection();
             preparedStatement = connection
-                    .prepareStatement(INSERT_SEGNALAZIONE);
+                .prepareStatement(INSERT_SEGNALAZIONE);
             int i = 1;
             preparedStatement.setString(i++, aSegnalazione.getTitolo());
             preparedStatement.setString(i++, aSegnalazione.getDescrizione());
@@ -90,15 +104,18 @@ public final class SegnalazioneDB {
             preparedStatement.setDate(i++, aSegnalazione.getDataRifiuto());
             preparedStatement.setDate(i++, aSegnalazione.getDataAssegnazione());
             preparedStatement.setDate(i++, aSegnalazione.getDataRisoluzione());
+            preparedStatement
+                .setString(i++, aSegnalazione.getMotivazioneRifiuto());
             preparedStatement.setInt(i++, aSegnalazione.getTipologia().getId());
             preparedStatement.setInt(i++, aSegnalazione.getAutore().getId());
-            preparedStatement.setInt(i++, aSegnalazione.getTecnico().getId());
-            return preparedStatement.executeUpdate() > 0;
-        } catch (final SQLException e) {
-            e.printStackTrace();
-            return false;
+            if (aSegnalazione.getTecnico() != null) {
+                preparedStatement.setInt(i, aSegnalazione.getTecnico().getId());
+            } else {
+                preparedStatement.setNull(i, Types.INTEGER);
+            }
+            return preparedStatement.executeUpdate();
         } finally {
-            freeResources(preparedStatement, connection);
+            freeResources(preparedStatement);
         }
 
     }
@@ -107,15 +124,15 @@ public final class SegnalazioneDB {
      * Update.
      *
      * @param aSegnalazione the segnalazione
-     * @return true, if successful
+     * @return the int
+     * @throws SQLException the SQL exception
      */
-    public static boolean update(final Segnalazione aSegnalazione) {
-        Connection connection = null;
+    public int update(final Segnalazione aSegnalazione) throws SQLException {
         PreparedStatement preparedStatement = null;
         try {
             connection = Database.getConnection();
             preparedStatement = connection
-                    .prepareStatement(UPDATE_SEGNALAZIONE);
+                .prepareStatement(UPDATE_SEGNALAZIONE);
             int i = 1;
             preparedStatement.setString(i++, aSegnalazione.getTitolo());
             preparedStatement.setString(i++, aSegnalazione.getDescrizione());
@@ -124,16 +141,20 @@ public final class SegnalazioneDB {
             preparedStatement.setDate(i++, aSegnalazione.getDataRifiuto());
             preparedStatement.setDate(i++, aSegnalazione.getDataAssegnazione());
             preparedStatement.setDate(i++, aSegnalazione.getDataRisoluzione());
+            preparedStatement
+                .setString(i++, aSegnalazione.getMotivazioneRifiuto());
             preparedStatement.setInt(i++, aSegnalazione.getTipologia().getId());
             preparedStatement.setInt(i++, aSegnalazione.getAutore().getId());
-            preparedStatement.setInt(i++, aSegnalazione.getTecnico().getId());
-            preparedStatement.setInt(i++, aSegnalazione.getCod());
-            return preparedStatement.executeUpdate() > 0;
-        } catch (final SQLException e) {
-            e.printStackTrace();
-            return false;
+            if (aSegnalazione.getTecnico() != null) {
+                preparedStatement
+                    .setInt(i++, aSegnalazione.getTecnico().getId());
+            } else {
+                preparedStatement.setNull(i++, Types.INTEGER);
+            }
+            preparedStatement.setInt(i, aSegnalazione.getCod());
+            return preparedStatement.executeUpdate();
         } finally {
-            freeResources(preparedStatement, connection);
+            freeResources(preparedStatement);
         }
     }
 
@@ -142,8 +163,10 @@ public final class SegnalazioneDB {
      *
      * @param aAutorId the autor id
      * @return the by autore
+     * @throws SQLException the SQL exception
      */
-    public static List<Segnalazione> getByAutore(final int aAutorId) {
+    public List<Segnalazione> getByAutore(final int aAutorId)
+        throws SQLException {
         return genericGet(SELECT_BY_AUTHOR, aAutorId);
     }
 
@@ -151,23 +174,25 @@ public final class SegnalazioneDB {
      * Gets the all.
      *
      * @return the all
+     * @throws SQLException the SQL exception
      */
-    public static List<Segnalazione> getAll() {
+    public List<Segnalazione> getAll() throws SQLException {
         return genericGet(SELECT_ALL, -1);
     }
 
     /**
-     * Gets the by id.
+     * Gets the by cod.
      *
      * @param aCod the cod
-     * @return the by id
+     * @return the by cod
+     * @throws SQLException the SQL exception
      */
-    public static Segnalazione getByCod(final int aCod) {
-        Segnalazione segnalazione = genericGet(SELECT_BY_ID, aCod).get(0);
-        if (segnalazione == null) {
-            segnalazione = new Segnalazione();
+    public Segnalazione getByCod(final int aCod) throws SQLException {
+        List<Segnalazione> segnalazioneList = genericGet(SELECT_BY_ID, aCod);
+        if (segnalazioneList != null) {
+            return segnalazioneList.get(0);
         }
-        return segnalazione;
+        return null;
     }
 
     /**
@@ -176,78 +201,97 @@ public final class SegnalazioneDB {
      * @param aQuery     the query
      * @param aParameter the parameter
      * @return the list
+     * @throws SQLException the SQL exception
      */
-    private static List<Segnalazione> genericGet(final String aQuery,
-            final int aParameter) {
-        Connection connection = null;
+    private List<Segnalazione> genericGet(final String aQuery,
+        final int aParameter) throws SQLException {
         PreparedStatement preparedStatement = null;
-        final List<Segnalazione> segnalazioneList =
-                new ArrayList<Segnalazione>();
+        final List<Segnalazione> segnalazioneList = new ArrayList<>();
 
         try {
-            connection = Database.getConnection();
             preparedStatement = connection.prepareStatement(aQuery);
             if (aParameter > 0) {
-                preparedStatement.setInt(0, aParameter);
+                preparedStatement.setInt(1, aParameter);
             }
             final ResultSet result = preparedStatement.executeQuery();
             while (result.next()) {
                 final Segnalazione segnalazione = new Segnalazione();
                 segnalazione.setCod(result.getInt("cod"));
 
-                segnalazione.setDataAssegnazione(
-                        result.getDate("data_assegnazione"));
+                segnalazione
+                    .setDataAssegnazione(result.getDate("data_assegnazione"));
                 segnalazione.setDataRifiuto(result.getDate("data_rifiuto"));
                 segnalazione
-                        .setDataRisoluzione(result.getDate("data_risoluzione"));
-                segnalazione.setDataSegnalazione(
-                        result.getDate("data_segnalazione"));
+                    .setDataRisoluzione(result.getDate("data_risoluzione"));
+                segnalazione
+                    .setDataSegnalazione(result.getDate("data_segnalazione"));
                 segnalazione.setDescrizione(result.getString("descrizione"));
-                segnalazione.setMotivazioneRifiuto(
-                        result.getString("motivazione_rifiuto"));
+                segnalazione.setMotivazioneRifiuto(result
+                    .getString("motivazione_rifiuto"));
                 segnalazione.setStato(result.getShort("stato"));
 
                 // HACK: Use a fake author until UtenteDB.getById() is
                 // implemented
-                segnalazione.setAutore(new CSU());
+                Utente autore = new CSU();
+                autore.setId(1);
+                segnalazione.setAutore(autore);
 
-                segnalazione.setTecnico(
-                        UfficioTecnicoDB.getById(result.getInt("tecnico")));
+                // HACK: Use a fake Tecnico until UfficioTecnicoDB.getById() is
+                // implemented
+                if (result.getInt("tecnico") != 0) {
+                    UfficioTecnico tecnico = new UfficioTecnico();
+                    tecnico.setId(1);
+                    segnalazione.setTecnico(tecnico);
+                }
 
-                segnalazione.setTipologia(
-                        TipologiaDB.getById(result.getInt("tipologia")));
+                segnalazione.setTipologia(TipologiaDB
+                    .getById(result.getInt("tipologia")));
 
                 segnalazione.setTitolo(result.getString("titolo"));
                 segnalazioneList.add(segnalazione);
             }
-            return segnalazioneList;
-
-        } catch (final SQLException e) {
-            e.printStackTrace();
-            return segnalazioneList;
+            if (segnalazioneList.size() > 0) {
+                return segnalazioneList;
+            } else {
+                return null;
+            }
         } finally {
-            freeResources(preparedStatement, connection);
+            freeResources(preparedStatement);
         }
+    }
+
+    /**
+     * Delete by id.
+     *
+     * @param aId the id
+     * @return the int
+     * @throws SQLException the SQL exception
+     */
+    public int deleteById(final int aId) throws SQLException {
+        PreparedStatement preparedStatements = null;
+        int res = 0;
+        try {
+            connection = Database.getConnection();
+            preparedStatements = connection.prepareStatement(DELETE_BY_ID);
+            preparedStatements.setInt(1, aId);
+
+            res = preparedStatements.executeUpdate(DELETE_BY_ID);
+        } finally {
+            freeResources(preparedStatements);
+        }
+        return (res);
     }
 
     /**
      * Free resources.
      *
-     * @param aStm  the stm
-     * @param aConn the conn
+     * @param aStm the stm
+     * @throws SQLException the SQL exception
      */
-    private static void freeResources(final PreparedStatement aStm,
-            final Connection aConn) {
-        try {
-            if (aStm != null) {
-                aStm.close();
-            }
-        } catch (final SQLException e) {
-            e.printStackTrace();
-        } finally {
-            if (aConn != null) {
-                Database.freeConnection(aConn);
-            }
+    private void freeResources(final PreparedStatement aStm)
+        throws SQLException {
+        if (aStm != null) {
+            aStm.close();
         }
     }
 }

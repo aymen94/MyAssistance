@@ -7,18 +7,10 @@ package model.utente;
 
 import java.util.List;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class UtenteBL.
  */
 public final class UtenteBL {
-
-    /**
-     * This is an utility class. So no constructor should be used.
-     */
-    private UtenteBL() {
-
-    }
 
     /**
      * Effettua registrazione.
@@ -31,9 +23,9 @@ public final class UtenteBL {
      * @param aDataDiNascita the data di nascita
      * @return true, if successful
      */
-    public static boolean effettuaRegistrazione(final String aUserName,
-            final String aPassword, final String aEmail, final String aNome,
-            final String aCognome, final String aDataDiNascita) {
+    public boolean effettuaRegistrazione(final String aUserName,
+        final String aPassword, final String aEmail, final String aNome,
+        final String aCognome, final String aDataDiNascita) {
 
         return false;
     }
@@ -44,10 +36,9 @@ public final class UtenteBL {
      * @param aCSU the CSU
      * @return true, if successful
      */
-    public static boolean sospendiUtente(final CSU aCSU) {
+    public boolean sospendiUtente(final CSU aCSU) {
         return false;
     }
-
 
     /**
      * Autenticazione CSU.
@@ -56,8 +47,7 @@ public final class UtenteBL {
      * @param aPass     the pass
      * @return the csu
      */
-    public static CSU autenticazioneCSU(final String aUserName,
-            final String aPass) {
+    public CSU autenticazioneCSU(final String aUserName, final String aPass) {
         return null;
     }
 
@@ -68,8 +58,8 @@ public final class UtenteBL {
      * @param aPass     the pass
      * @return the gestore
      */
-    public static Gestore autenticazioneGestore(final String aUserName,
-            final String aPass) {
+    public Gestore autenticazioneGestore(final String aUserName,
+        final String aPass) {
         return null;
     }
 
@@ -78,7 +68,7 @@ public final class UtenteBL {
      *
      * @return the utenti registrati
      */
-    public static List<Utente> getUtentiRegistrati() {
+    public List<Utente> getUtentiRegistrati() {
         return null;
 
     }
