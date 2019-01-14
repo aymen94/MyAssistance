@@ -28,7 +28,7 @@ public final class UtenteDB {
     /**
      * Default constructor.
      */
-    private UtenteDB() {
+    public UtenteDB() {
 
     }
 
