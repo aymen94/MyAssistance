@@ -42,7 +42,7 @@ public final class UtenteDB {
      * @return res is 0 if the insert operation is not made,
      *         otherwise an integer greater than 0.
      */
-    public static int insert(final Utente aUtente) throws SQLException {
+    public int insert(final Utente aUtente) throws SQLException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         int res = 0;
@@ -104,7 +104,7 @@ public final class UtenteDB {
      * @throws SQLException is the exception that can be thrown
      * during the execution.
      */
-    public static Utente getById(final int aId)
+    public Utente getById(final int aId)
             throws SQLException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -167,7 +167,7 @@ public final class UtenteDB {
      * @throws SQLException is the exception that can be thrown
      * during the execution.
      */
-    public static Utente getByEmail(final String aEmail)
+    public Utente getByEmail(final String aEmail)
             throws SQLException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -229,7 +229,7 @@ public final class UtenteDB {
      * @throws SQLException is the exception that can be thrown
      * during the execution.
      */
-    public static List<Utente> getAll() throws SQLException {
+    public List<Utente> getAll() throws SQLException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
 
@@ -296,7 +296,7 @@ public final class UtenteDB {
      * @return res is 0 if the delete operation is not made,
      *         otherwise an integer greater than 0.
      */
-    public static int delete(final String aEmail) throws SQLException {
+    public int delete(final String aEmail) throws SQLException {
         Connection connection = null;
         PreparedStatement s = null;
         int res = 0;
@@ -333,7 +333,7 @@ public final class UtenteDB {
      * @return res is 0 if the update operation is not made,
      *         otherwise an integer greater than 0.
      */
-    public static int update(final Utente aUtente) throws SQLException {
+    public int update(final Utente aUtente) throws SQLException {
         Connection connection = null;
         PreparedStatement s = null;
         int res = 0;
