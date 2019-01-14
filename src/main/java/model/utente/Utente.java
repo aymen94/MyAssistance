@@ -188,4 +188,49 @@ public abstract class Utente {
     public void setSesso(final String string) {
         // TODO Auto-generated method stub
     }
+
+    @Override public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
+
+        Utente utente = (Utente) o;
+
+        if (sesso != utente.sesso)
+            return false;
+        if (id != null ? !id.equals(utente.id) : utente.id != null)
+            return false;
+        if (userName != null ?
+            !userName.equals(utente.userName) :
+            utente.userName != null)
+            return false;
+        if (password != null ?
+            !password.equals(utente.password) :
+            utente.password != null)
+            return false;
+        if (email != null ? !email.equals(utente.email) : utente.email != null)
+            return false;
+        if (nome != null ? !nome.equals(utente.nome) : utente.nome != null)
+            return false;
+        if (cognome != null ?
+            !cognome.equals(utente.cognome) :
+            utente.cognome != null)
+            return false;
+        return isGestore != null ?
+            isGestore.equals(utente.isGestore) :
+            utente.isGestore == null;
+    }
+
+    @Override public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (userName != null ? userName.hashCode() : 0);
+        result = 31 * result + (password != null ? password.hashCode() : 0);
+        result = 31 * result + (email != null ? email.hashCode() : 0);
+        result = 31 * result + (nome != null ? nome.hashCode() : 0);
+        result = 31 * result + (cognome != null ? cognome.hashCode() : 0);
+        result = 31 * result + (isGestore != null ? isGestore.hashCode() : 0);
+        result = 31 * result + sesso;
+        return result;
+    }
 }
