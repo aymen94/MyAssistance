@@ -5,40 +5,58 @@ Date: 23/12/2018
 */
 package model.utente;
 
-// TODO: Auto-generated Javadoc
+import java.sql.Date;
+import java.util.Objects;
+
 /**
  * The Class Utente.
  */
 public abstract class Utente {
 
-    /** l' id. */
+    /**
+     * l' id.
+     */
     private Integer id;
 
-    /** lo user name. */
+    /**
+     * lo user name.
+     */
     private String userName;
 
-    /** la password. */
+    /**
+     * la password.
+     */
     private String password;
 
-    /** la email. */
+    /**
+     * la email.
+     */
     private String email;
 
-    /** il nome. */
+    /**
+     * il nome.
+     */
     private String nome;
 
-    /** il cognome. */
+    /**
+     * il cognome.
+     */
     private String cognome;
 
-
-    /** is gestore. */
+    /**
+     * is gestore.
+     */
     private Boolean isGestore;
 
-    /** il sesso. */
+    /**
+     * il sesso.
+     */
     private int sesso;
 
-    public void setSesso(int aSesso) {
-        sesso = aSesso;
-    }
+    /**
+     * Data di nascità.
+     */
+    private Date dataDiNascita;
 
     /**
      * Costruttore vuoto.
@@ -46,6 +64,11 @@ public abstract class Utente {
     public Utente() {
     }
 
+    /**
+     * Effetuare Ovveride.
+     *
+     * @return Boolean
+     */
     public abstract Boolean isGestore();
 
     /**
@@ -60,10 +83,10 @@ public abstract class Utente {
     /**
      * Sets the id.
      *
-     * @param id imposta il valore id dell'utente.
+     * @param aId imposta il valore id dell'utente.
      */
-    public void setId(Integer id) {
-        this.id = id;
+    public void setId(final int aId) {
+        id = aId;
     }
 
     /**
@@ -78,10 +101,10 @@ public abstract class Utente {
     /**
      * imposta l'username.
      *
-     * @param userName imposta il valore di username.
+     * @param aUserName imposta il valore di username.
      */
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUserName(final String aUserName) {
+        userName = aUserName;
     }
 
     /**
@@ -96,10 +119,10 @@ public abstract class Utente {
     /**
      * Imposta la password.
      *
-     * @param password imposta la password dell'utente.
+     * @param aPassword imposta la password dell'utente.
      */
-    public void setPassword(String password) {
-        this.password = password;
+    public void setPassword(final String aPassword) {
+        password = aPassword;
     }
 
     /**
@@ -114,10 +137,10 @@ public abstract class Utente {
     /**
      * Imposta la email.
      *
-     * @param email imposta l'emaio dell'utente.
+     * @param aEmail imposta l'emaio dell'utente.
      */
-    public void setEmail(String email) {
-        this.email = email;
+    public void setEmail(final String aEmail) {
+        email = aEmail;
     }
 
     /**
@@ -132,10 +155,10 @@ public abstract class Utente {
     /**
      * Imposta il nome.
      *
-     * @param nome imposta il nome dell'utente.
+     * @param aNome imposta il nome dell'utente.
      */
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setNome(final String aNome) {
+        this.nome = aNome;
     }
 
     /**
@@ -150,87 +173,96 @@ public abstract class Utente {
     /**
      * Imposta il cognome.
      *
-     * @param cognome imposta il cognome dell'utente.
+     * @param aCognogme imposta il cognome dell'utente.
      */
-    public void setCognome(String cognome) {
-        this.cognome = cognome;
-    }
-
-
-    /**
-     * ritorna tutti i valori istanziati.
-     *
-     * @return toString Utente
-     */
-    @Override
-    public String toString() {
-        return "Utente {" + "id = " + id + ", userName = '" + userName + '\''
-                + ", password = " + password + ", email = '" + email + '\''
-                + ", nome = '" + nome + '\'' + ", cognome = '" + cognome + '\''
-                + "}";
+    public void setCognome(final String aCognogme) {
+        cognome = aCognogme;
     }
 
     /**
      * Ottieni il sesso dell'utente.
      *
-     * @return  sesso
+     * @return sesso
      */
-    public String getSesso() {
-        // TODO Auto-generated method stub
-        return null;
+    public int getSesso() {
+        return sesso;
     }
 
     /**
      * Impsti  sesso dell'utente.
      *
-     * @param string  sesso
+     * @param aSesso imposta il valore sesso dell'utente.
      */
-    public void setSesso(final String string) {
-        // TODO Auto-generated method stub
+    public void setSesso(final int aSesso) {
+        sesso = aSesso;
     }
 
-    @Override public boolean equals(Object o) {
-        if (this == o)
+    /**
+     * Ottieni la data di nascità dell'utente.
+     *
+     * @return Date
+     */
+    public Date getDataDiNascita() {
+        return dataDiNascita;
+    }
+
+    /**
+     * Impsti  la data di nascità dell'utente.
+     *
+     * @param aData imposta il valore sesso dell'utente.
+     */
+    public void setDataDiNascita(final Date aData) {
+        dataDiNascita = aData;
+    }
+
+    /**
+     * Confronta se due utenti sono identici.
+     *
+     * @return boolean
+     */
+    @Override public boolean equals(final Object o) {
+        if (this == o) {
             return true;
-        if (o == null || getClass() != o.getClass())
+        }
+        if (o == null || getClass() != o.getClass()) {
             return false;
-
+        }
         Utente utente = (Utente) o;
-
-        if (sesso != utente.sesso)
-            return false;
-        if (id != null ? !id.equals(utente.id) : utente.id != null)
-            return false;
-        if (userName != null ?
-            !userName.equals(utente.userName) :
-            utente.userName != null)
-            return false;
-        if (password != null ?
-            !password.equals(utente.password) :
-            utente.password != null)
-            return false;
-        if (email != null ? !email.equals(utente.email) : utente.email != null)
-            return false;
-        if (nome != null ? !nome.equals(utente.nome) : utente.nome != null)
-            return false;
-        if (cognome != null ?
-            !cognome.equals(utente.cognome) :
-            utente.cognome != null)
-            return false;
-        return isGestore != null ?
-            isGestore.equals(utente.isGestore) :
-            utente.isGestore == null;
+        return sesso == utente.sesso && Objects.equals(id, utente.id) && Objects
+            .equals(userName, utente.userName) && Objects
+            .equals(password, utente.password) && Objects
+            .equals(email, utente.email) && Objects.equals(nome, utente.nome)
+            && Objects.equals(cognome, utente.cognome) && Objects
+            .equals(isGestore, utente.isGestore);
     }
 
+    /**
+     * Genera un intero per la tabella hash.
+     *
+     * @return int Utente
+     */
     @Override public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (userName != null ? userName.hashCode() : 0);
-        result = 31 * result + (password != null ? password.hashCode() : 0);
-        result = 31 * result + (email != null ? email.hashCode() : 0);
-        result = 31 * result + (nome != null ? nome.hashCode() : 0);
-        result = 31 * result + (cognome != null ? cognome.hashCode() : 0);
-        result = 31 * result + (isGestore != null ? isGestore.hashCode() : 0);
-        result = 31 * result + sesso;
-        return result;
+        return Objects.hash(id,
+            userName,
+            password,
+            email,
+            nome,
+            cognome,
+            isGestore,
+            sesso);
     }
+
+    /**
+     * ritorna tutti i valori istanziati.
+     *
+     * @return String
+     */
+    @Override public String toString() {
+        return "Utente {" + "id = " + id + ", userName = '" + userName + '\''
+            + ", password = " + password + ", email = '" + email + '\''
+            + ", nome = '" + nome + '\'' + ", cognome = '" + cognome + '\''
+            + "}";
+    }
+
 }
+
