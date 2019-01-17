@@ -14,7 +14,6 @@ import java.util.List;
 
 import pool.Database;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class TipologiaDB.
  */
