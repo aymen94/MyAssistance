@@ -6,14 +6,16 @@
 package control.utente;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * Servlet index per gestore.
+ * Servlet for redirecting to the index of the manager.
  */
+@WebServlet("/gestore/")
 public class IndexGestoreServlet extends HttpServlet {
     /**
      *
