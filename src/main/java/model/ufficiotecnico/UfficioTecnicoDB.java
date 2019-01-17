@@ -10,10 +10,9 @@ import pool.Database;
 
 import java.sql.Connection;
 
-// TODO: Auto-generated Javadoc
 /**
- * Questa classe permette la gestione dei dati persistenti relativi agli uffici
- * tecnici.
+ * This class allows the management of persistent data relating to offices
+ *  technicians
  */
 
 public final class UfficioTecnicoDB {
