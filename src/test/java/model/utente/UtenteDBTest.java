@@ -4,15 +4,11 @@ import org.junit.*;
 import pool.Database;
 
 import java.io.IOException;
-import java.sql.Date;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Objects;
 import java.util.logging.FileHandler;
 import java.util.logging.Logger;
-
-import static org.junit.Assert.*;
 
 public class UtenteDBTest {
     private static FileHandler fileHandler = null;
@@ -26,7 +22,9 @@ public class UtenteDBTest {
     @BeforeClass public static void setUpClass()
         throws IOException, SQLException {
         Database.initializePool();
-        Database.getConnection().prepareStatement("ALTER TABLE my_assistance.utente AUTO_INCREMENT = 1").executeUpdate();
+        Database.getConnection().prepareStatement(
+            "ALTER TABLE my_assistance.utente AUTO_INCREMENT = 1")
+            .executeUpdate();
         fileHandler = new FileHandler(UtenteDB.class.getName());
         logger = Logger.getLogger(UtenteDBTest.class.getName());
         logger.addHandler(fileHandler);
