@@ -1,3 +1,4 @@
+/*
 package model.utente;
 
 import model.utente.UtenteDB;
@@ -55,11 +56,13 @@ public class UtenteBLTest {
         udb.delete("m.rossi12@studenti.unisa.it");
     }
 
-    /**
+    */
+/**
      * Test di insert della classe UtenteDB.
      * @throws SQLException eccezzioni in casi di mancato inserimento query
      *
-     */
+     *//*
+
     @Test
     public void testAutenticazioneCSU1() {
         CSU utente=UtenteBL.autenticazioneCSU("", "");
@@ -148,10 +151,12 @@ public class UtenteBLTest {
     }
 
 
-    /**
+    */
+/**
      * Test di getByEmail della classe UtenteDB.
      * @throws SQLException eccezione in mancato ottenimento query
-     */
+     *//*
+
     @Test
     public void testGetByEmail() throws SQLException {
         System.out.println("getByEmail");
@@ -160,10 +165,12 @@ public class UtenteBLTest {
         assertNotNull(u);
     }
 
-    /**
+    */
+/**
      * Test di getAll della classe UtenteDB.
      * @throws SQLException eccezione in mancato ottenimento utenti
-     */
+     *//*
+
     @Test
     public void testGetAll() throws SQLException {
         System.out.println("getAll");
@@ -172,10 +179,12 @@ public class UtenteBLTest {
         assertNotNull(users);
     }
 
-    /**
+    */
+/**
      * Test di delete della classe UtenteDB.
      * @throws SQLException eccezione in mancata eliminzaione query
-     */
+     *//*
+
     @Test
     public void testDelete() throws SQLException {
         System.out.println("delete");
@@ -183,4 +192,4 @@ public class UtenteBLTest {
         int result = udb.delete("xxx@yy.it");
         assertTrue(result > 0);
     }
-}
+}*/

@@ -21,7 +21,7 @@ public final class UfficioTecnicoDB {
     /**
      * Empty construct.
      */
-    private UfficioTecnicoDB() {
+    public UfficioTecnicoDB() {
 
     }
 
@@ -36,8 +36,8 @@ public final class UfficioTecnicoDB {
      */
 
     private static final String INSERT_UFFICIO_TECNICO = "INSERT INTO "
-            + TABLE_NAME + " (id,nome,tel,email,ubicazione) "
-            + "VALUES (?, ?, ?, ?, ?)";
+            + TABLE_NAME + " (nome,tel,email,ubicazione) "
+            + "VALUES ( ?, ?, ?, ?)";
 
     /**
      * The Constant SELECT_ALL.
@@ -47,14 +47,14 @@ public final class UfficioTecnicoDB {
     /**
      * The Constant DELETE_BY_ID.
      */
-    private static final String DELETE_BY_ID = "SELECT * FROM " + TABLE_NAME
-            + "WHERE id = ?";
+    private static final String DELETE_BY_ID = "DELETE FROM " + TABLE_NAME
+            + " WHERE id = ?";
 
     /**
      * The Constant GET_BY_ID.
      */
-    private static final String GET_BY_ID = "SELECT * FROM" + TABLE_NAME
-            + "WHERE id = ?";
+    private static final String GET_BY_ID = "SELECT * FROM " + TABLE_NAME
+            + " WHERE id = ?";
 
     /**
      * This method inserts a technical office in the database.
@@ -67,7 +67,7 @@ public final class UfficioTecnicoDB {
      *                      execution of the method.
      */
 
-    public static synchronized int insert(final UfficioTecnico uff)
+    public synchronized int insert(final UfficioTecnico uff)
             throws SQLException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -78,14 +78,12 @@ public final class UfficioTecnicoDB {
             preparedStatement = connection
                     .prepareStatement(INSERT_UFFICIO_TECNICO);
             int i = 1;
-            preparedStatement.setInt(i, uff.getId());
             preparedStatement.setString(i++, uff.getNome());
             preparedStatement.setString(i++, uff.getTel());
             preparedStatement.setString(i++, uff.getEmail());
             preparedStatement.setString(i, uff.getUbicazione());
             res = preparedStatement.executeUpdate();
 
-            connection.commit();
             res++;
         } finally {
             try {
@@ -110,7 +108,7 @@ public final class UfficioTecnicoDB {
      *                      execution of the method.
      */
 
-    public static synchronized List<UfficioTecnico> getAll()
+    public List<UfficioTecnico> getAll()
             throws SQLException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -156,7 +154,7 @@ public final class UfficioTecnicoDB {
      * @throws SQLException is the exception that can be thrown during the
      *                      execution.
      */
-    public static synchronized int deleteById(final Integer aId)
+    public int deleteById(final Integer aId)
             throws SQLException {
         Connection connection = null;
         PreparedStatement s = null;
@@ -167,9 +165,8 @@ public final class UfficioTecnicoDB {
             s = connection.prepareStatement(DELETE_BY_ID);
             s.setInt(1, aId);
 
-            res = s.executeUpdate(DELETE_BY_ID);
+            res = s.executeUpdate();
 
-            connection.commit();
         } finally {
             try {
                 if (s != null) {
@@ -193,22 +190,22 @@ public final class UfficioTecnicoDB {
      * @throws SQLException is the exception that can be thrown during the
      *                      execution.
      */
-    public static synchronized List<UfficioTecnico> getById(final Integer aId) throws SQLException {
+    public UfficioTecnico getById(final Integer aId) throws SQLException {
 
         Connection connection = null;
         PreparedStatement preparedStatement = null;
-        List<UfficioTecnico> uffici;
-        uffici = null;
+        UfficioTecnico uff = new UfficioTecnico();
 
         try {
             connection = Database.getConnection();
-            preparedStatement.setInt(1,aId);
+
             preparedStatement = connection.prepareStatement(GET_BY_ID);
+            preparedStatement.setInt(1,aId);
 
             ResultSet rs = preparedStatement.executeQuery();
-            uffici = new ArrayList<UfficioTecnico>();
+
+
             while (rs.next()) {
-                UfficioTecnico uff = new UfficioTecnico();
 
                 uff.setId(rs.getInt("Id"));
                 uff.setNome(rs.getString("nome"));
@@ -216,7 +213,6 @@ public final class UfficioTecnicoDB {
                 uff.setEmail(rs.getString("email"));
                 uff.setUbicazione(rs.getString("ubicazione"));
 
-                uffici.add(uff);
             }
 
         } finally {
@@ -228,6 +224,6 @@ public final class UfficioTecnicoDB {
                 Database.freeConnection(connection);
             }
         }
-        return uffici;
+        return uff;
     }
 }
