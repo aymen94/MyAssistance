@@ -81,4 +81,13 @@ public class Tipologia {
         priorita = aPriorita;
     }
 
+    /* (non-Javadoc)
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        return "Tipologia [nome=" + nome + ", id=" + id + ", priorita="
+                + priorita + "]";
+    }
+
 }
