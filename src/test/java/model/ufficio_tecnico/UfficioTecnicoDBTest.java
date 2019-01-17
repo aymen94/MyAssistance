@@ -28,7 +28,7 @@ public class UfficioTecnicoDBTest {
         Database.getConnection().prepareStatement(
                 "ALTER TABLE my_assistance.ufficio_tecnico AUTO_INCREMENT = 1")
                 .executeUpdate();
-        fileHandler = new FileHandler(UfficioTecnicoDB.class.getName());
+        fileHandler = new FileHandler("result_test\\"+UfficioTecnicoDB.class.getName());
         logger = Logger.getLogger(UfficioTecnicoDBTest.class.getName());
         logger.addHandler(fileHandler);
         logger.config("logger loaded");
