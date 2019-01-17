@@ -49,16 +49,15 @@ public final class SegnalazioneBL {
                     && segnalazione.getDescrizione().length() > 0
                     && segnalazione.getAutore() != null
                     && segnalazione.getTipologia() != null) {
-                final Segnalazione aSegnalazione = segnalazioneDB
-                        .getByCod(segnalazione.getCod());
-                aSegnalazione.setTitolo(segnalazione.getTitolo());
-                aSegnalazione.setDescrizione(segnalazione.getDescrizione());
-                aSegnalazione.setTipologia(segnalazione.getTipologia());
-                aSegnalazione.setAutore(segnalazione.getAutore());
+
+                segnalazione.setTitolo(segnalazione.getTitolo());
+                segnalazione.setDescrizione(segnalazione.getDescrizione());
+                segnalazione.setTipologia(segnalazione.getTipologia());
+                segnalazione.setAutore(segnalazione.getAutore());
                 // Set the current date
-                aSegnalazione.setDataSegnalazione(
+                segnalazione.setDataSegnalazione(
                         java.sql.Date.valueOf(LocalDate.now()));
-                return segnalazioneDB.insert(aSegnalazione) > 0;
+                return segnalazioneDB.insert(segnalazione) > 0;
             }
         } catch (final SQLException e) {
             e.printStackTrace();
@@ -95,6 +94,9 @@ public final class SegnalazioneBL {
 
                 final Segnalazione aSegnalazione = segnalazioneDB
                         .getByCod(segnalazione.getCod());
+                if (aSegnalazione == null) {
+                    return false;
+                }
                 aSegnalazione.setTitolo(segnalazione.getTitolo());
                 aSegnalazione.setDescrizione(segnalazione.getDescrizione());
                 aSegnalazione.setTipologia(segnalazione.getTipologia());
