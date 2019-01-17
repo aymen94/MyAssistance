@@ -1,6 +1,5 @@
 package model.segnalazione;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class Tipologia.
  */
