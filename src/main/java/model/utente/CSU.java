@@ -5,21 +5,22 @@ Date: 23/12/2018
 */
 package model.utente;
 
-import java.sql.Date;
+import java.time.LocalDate;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class CSU.
  */
 public class CSU extends Utente {
 
-
-    private Date dataSospensione;
+    /**
+     * LocalDate dataSospensione.
+     */
+    private LocalDate dataSospensione;
 
     /**
      * Instantiates a new csu.
      */
-    public CSU( ) {
+    public CSU() {
 
     }
 
@@ -28,7 +29,7 @@ public class CSU extends Utente {
      *
      * @return dataSospensione ottieni la data di sospensione dell'utente.
      */
-    public Date getDataSospensione() {
+    public LocalDate getDataSospensione() {
 
         return dataSospensione;
     }
@@ -36,12 +37,15 @@ public class CSU extends Utente {
     /**
      * Imposta la data sospensione.
      *
-     * @param dataSospensione imposta la data di sospensione dell'utente.
+     * @param aDataSospensione imposta la data di sospensione dell'utente.
      */
-    public void setDataSospensione(Date dataSospensione) {
-        this.dataSospensione = dataSospensione;
+    public void setDataSospensione(final LocalDate aDataSospensione) {
+        dataSospensione = aDataSospensione;
     }
 
+    /**
+     * @return false because is CSU.
+     */
     public Boolean isGestore() {
         return false;
     }
