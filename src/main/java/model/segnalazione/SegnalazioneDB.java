@@ -21,7 +21,7 @@ import pool.Database;
 /**
  * The Class SegnalazioneDB.
  */
-public final class SegnalazioneDB {
+public class SegnalazioneDB {
 
     /**
      * The Constant TABLE_NAME.
