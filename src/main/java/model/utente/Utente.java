@@ -5,39 +5,72 @@ Date: 23/12/2018
 */
 package model.utente;
 
-// TODO: Auto-generated Javadoc
+import java.sql.Date;
+import java.time.LocalDate;
+import java.util.Objects;
+
 /**
  * The Class Utente.
  */
 public abstract class Utente {
 
-    /** l' id. */
+    /**
+     * l' id.
+     */
     private Integer id;
 
-    /** lo user name. */
+    /**
+     * lo user name.
+     */
     private String userName;
 
-    /** la password. */
+    /**
+     * la password.
+     */
     private String password;
 
-    /** la email. */
+    /**
+     * la email.
+     */
     private String email;
 
-    /** il nome. */
+    /**
+     * il nome.
+     */
     private String nome;
 
-    /** il cognome. */
+    /**
+     * il cognome.
+     */
     private String cognome;
 
-
-    /** is gestore. */
+    /**
+     * is gestore.
+     */
     private Boolean isGestore;
+
+    /**
+     * il sesso.
+     */
+    private int sesso;
+
+    /**
+     * Data di nascità.
+     */
+    private LocalDate dataDiNascita;
 
     /**
      * Costruttore vuoto.
      */
     public Utente() {
     }
+
+    /**
+     * Effetuare Ovveride.
+     *
+     * @return Boolean
+     */
+    public abstract Boolean isGestore();
 
     /**
      * Gets the id.
@@ -51,10 +84,10 @@ public abstract class Utente {
     /**
      * Sets the id.
      *
-     * @param id imposta il valore id dell'utente.
+     * @param aId imposta il valore id dell'utente.
      */
-    public void setId(Integer id) {
-        this.id = id;
+    public void setId(final int aId) {
+        id = aId;
     }
 
     /**
@@ -69,10 +102,10 @@ public abstract class Utente {
     /**
      * imposta l'username.
      *
-     * @param userName imposta il valore di username.
+     * @param aUserName imposta il valore di username.
      */
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUserName(final String aUserName) {
+        userName = aUserName;
     }
 
     /**
@@ -87,10 +120,10 @@ public abstract class Utente {
     /**
      * Imposta la password.
      *
-     * @param password imposta la password dell'utente.
+     * @param aPassword imposta la password dell'utente.
      */
-    public void setPassword(String password) {
-        this.password = password;
+    public void setPassword(final String aPassword) {
+        password = aPassword;
     }
 
     /**
@@ -105,10 +138,10 @@ public abstract class Utente {
     /**
      * Imposta la email.
      *
-     * @param email imposta l'emaio dell'utente.
+     * @param aEmail imposta l'emaio dell'utente.
      */
-    public void setEmail(String email) {
-        this.email = email;
+    public void setEmail(final String aEmail) {
+        email = aEmail;
     }
 
     /**
@@ -123,10 +156,10 @@ public abstract class Utente {
     /**
      * Imposta il nome.
      *
-     * @param nome imposta il nome dell'utente.
+     * @param aNome imposta il nome dell'utente.
      */
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setNome(final String aNome) {
+        this.nome = aNome;
     }
 
     /**
@@ -141,60 +174,96 @@ public abstract class Utente {
     /**
      * Imposta il cognome.
      *
-     * @param cognome imposta il cognome dell'utente.
+     * @param aCognogme imposta il cognome dell'utente.
      */
-    public void setCognome(String cognome) {
-        this.cognome = cognome;
+    public void setCognome(final String aCognogme) {
+        cognome = aCognogme;
     }
 
+    /**
+     * Ottieni il sesso dell'utente.
+     *
+     * @return sesso
+     */
+    public int getSesso() {
+        return sesso;
+    }
+
+    /**
+     * Impsti  sesso dell'utente.
+     *
+     * @param aSesso imposta il valore sesso dell'utente.
+     */
+    public void setSesso(final int aSesso) {
+        sesso = aSesso;
+    }
+
+    /**
+     * Ottieni la data di nascità dell'utente.
+     *
+     * @return Date
+     */
+    public LocalDate getDataDiNascita() {
+        return dataDiNascita;
+    }
+
+    /**
+     * Impsti  la data di nascità dell'utente.
+     *
+     * @param aData imposta il valore sesso dell'utente.
+     */
+    public void setDataDiNascita(final LocalDate aData) {
+        dataDiNascita = aData;
+    }
+
+    /**
+     * Confronta se due utenti sono identici.
+     *
+     * @return boolean
+     */
+    @Override public boolean equals(final Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Utente utente = (Utente) o;
+        return sesso == utente.sesso && Objects.equals(id, utente.id) && Objects
+            .equals(userName, utente.userName) && Objects
+            .equals(password, utente.password) && Objects
+            .equals(email, utente.email) && Objects.equals(nome, utente.nome)
+            && Objects.equals(cognome, utente.cognome) && Objects
+            .equals(isGestore, utente.isGestore);
+    }
+
+    /**
+     * Genera un intero per la tabella hash.
+     *
+     * @return int Utente
+     */
+    @Override public int hashCode() {
+        return Objects.hash(id,
+            userName,
+            password,
+            email,
+            nome,
+            cognome,
+            isGestore,
+            sesso);
+    }
 
     /**
      * ritorna tutti i valori istanziati.
      *
-     * @return toString Utente
+     * @return String
      */
-    @Override
-    public String toString() {
+    @Override public String toString() {
         return "Utente {" + "id = " + id + ", userName = '" + userName + '\''
-                + ", password = " + password + ", email = '" + email + '\''
-                + ", nome = '" + nome + '\'' + ", cognome = '" + cognome + '\''
-                + "}";
+            + ", password = " + password + ", email = '" + email + '\''
+            + ", nome = '" + nome + '\'' + ", cognome = '" + cognome + '\''
+            + "}";
     }
 
-    /**
-     * Ottieni il sesso dell'utente.
-     *
-     * @return  sesso
-     */
-    public String getSesso() {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    /**
-     * Impsti  sesso dell'utente.
-     *
-     * @param string  sesso
-     */
-    public void setSesso(final String string) {
-        // TODO Auto-generated method stub
-    }
-
-    /**
-     * Ottieni il sesso dell'utente.
-     *
-     * @return  gestore
-     */
-    public Boolean idGestore(){
-        return isGestore;
-    }
-
-    /**
-     * Impsti  sesso dell'utente.
-     *
-     * @param string  gestore
-     */
-    public void setIsGestore(Boolean idGestore){
-        this.isGestore = isGestore;
-    }
 }
+

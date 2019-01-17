@@ -2,6 +2,7 @@ package pool;
 
 import java.util.Enumeration;
 import java.util.Hashtable;
+import java.util.Set;
 
 // TODO: Auto-generated Javadoc
 /** Object Pool Design Pattern
@@ -58,9 +59,15 @@ public abstract class ObjectPool<T> {
      * Destroy unlocked.
      */
     public synchronized void destroyUnlocked() {
-        for (T t : unlock.keySet()) {
-            unlock.remove(t);
-            destroy(t);
+        T t;
+        if (unlock.size() > 0) {
+            Enumeration<T> e = unlock.keys();
+            while (e.hasMoreElements()) {
+                t = e.nextElement();
+                unlock.remove(t);
+                destroy(t);
+                t = null;
+            }
         }
 
         // Could be very dangerous

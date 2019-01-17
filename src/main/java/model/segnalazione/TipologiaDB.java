@@ -14,9 +14,8 @@ import java.util.List;
 
 import pool.Database;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class SegnalazioneDB.
+ * The Class TipologiaDB.
  */
 public final class TipologiaDB {
 
@@ -26,7 +25,7 @@ public final class TipologiaDB {
     private static final String TABLE_NAME = "tipologia";
 
     /**
-     * The Constant INSERT_SEGNALAZIONE.
+     * The Constant INSERT_TIPOLOGIA.
      */
     private static final String INSERT_TIPOLOGIA = "INSERT INTO " + TABLE_NAME
             + " (nome,priorita) VALUES (?,?)";
@@ -43,6 +42,12 @@ public final class TipologiaDB {
     private static final String SELECT_ALL = " SELECT * FROM " + TABLE_NAME;
 
     /**
+     * The Constant DELETE_BY_ID.
+     */
+    private static final String DELETE_BY_ID = "DELETE FROM " + TABLE_NAME
+            + " WHERE id = ?";
+
+    /**
      * This is an utility class. So no constructor should be used.
      */
     private TipologiaDB() {
@@ -53,9 +58,11 @@ public final class TipologiaDB {
      * Insert.
      *
      * @param aTipologia the tipologia
-     * @return true, if successful
+     * @return the int
+     * @throws SQLException the SQL exception
      */
-    public static boolean insert(final Tipologia aTipologia) {
+    public static int insert(final Tipologia aTipologia)
+            throws SQLException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         try {
@@ -64,10 +71,7 @@ public final class TipologiaDB {
             int i = 1;
             preparedStatement.setString(i++, aTipologia.getNome());
             preparedStatement.setShort(i++, aTipologia.getPriorita());
-            return preparedStatement.executeUpdate() > 0;
-        } catch (final SQLException e) {
-            e.printStackTrace();
-            return false;
+            return preparedStatement.executeUpdate();
         } finally {
             freeResources(preparedStatement, connection);
         }
@@ -77,8 +81,9 @@ public final class TipologiaDB {
      * Gets the all.
      *
      * @return the all
+     * @throws SQLException the SQL exception
      */
-    public static List<Tipologia> getAll() {
+    public static List<Tipologia> getAll() throws SQLException {
         return genericGet(SELECT_ALL, -1);
     }
 
@@ -87,13 +92,14 @@ public final class TipologiaDB {
      *
      * @param aId the id
      * @return the by id
+     * @throws SQLException the SQL exception
      */
-    public static Tipologia getById(final int aId) {
-        Tipologia tipologia = genericGet(SELECT_BY_ID, aId).get(0);
-        if (tipologia == null) {
-            tipologia = new Tipologia();
+    public static Tipologia getById(final int aId) throws SQLException {
+        List<Tipologia> tipologiaList = genericGet(SELECT_BY_ID, aId);
+        if (tipologiaList != null) {
+            return tipologiaList.get(0);
         }
-        return tipologia;
+        return null;
     }
 
     /**
@@ -102,9 +108,10 @@ public final class TipologiaDB {
      * @param aQuery     the query
      * @param aParameter the parameter
      * @return the list
+     * @throws SQLException the SQL exception
      */
     private static List<Tipologia> genericGet(final String aQuery,
-            final int aParameter) {
+            final int aParameter) throws SQLException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet result = null;
@@ -113,7 +120,7 @@ public final class TipologiaDB {
             connection = Database.getConnection();
             preparedStatement = connection.prepareStatement(aQuery);
             if (aParameter > 0) {
-                preparedStatement.setInt(0, aParameter);
+                preparedStatement.setInt(1, aParameter);
             }
 
             result = preparedStatement.executeQuery();
@@ -124,11 +131,11 @@ public final class TipologiaDB {
                 tipologia.setPriorita(result.getShort("priorita"));
                 tipologiaList.add(tipologia);
             }
-            return tipologiaList;
-
-        } catch (final SQLException e) {
-            e.printStackTrace();
-            return tipologiaList;
+            if (tipologiaList.size() > 0) {
+                return tipologiaList;
+            } else {
+                return null;
+            }
         } finally {
             freeResources(preparedStatement, connection);
         }
@@ -139,19 +146,43 @@ public final class TipologiaDB {
      *
      * @param aStm  the stm
      * @param aConn the conn
+     * @throws SQLException the SQL exception
      */
     private static void freeResources(final PreparedStatement aStm,
-            final Connection aConn) {
+            final Connection aConn) throws SQLException {
         try {
             if (aStm != null) {
                 aStm.close();
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
         } finally {
             if (aConn != null) {
                 Database.freeConnection(aConn);
             }
         }
+    }
+
+    /**
+     * Delete by id.
+     *
+     * @param aId the id
+     * @return the int
+     * @throws SQLException the SQL exception
+     */
+    public static  int deleteById(final int aId)
+            throws SQLException {
+        Connection connection = null;
+        PreparedStatement s = null;
+        int res = 0;
+
+        try {
+            connection = Database.getConnection();
+            s = connection.prepareStatement(DELETE_BY_ID);
+            s.setInt(1, aId);
+
+            res = s.executeUpdate(DELETE_BY_ID);
+        } finally {
+            freeResources(s, connection);
+        }
+        return (res);
     }
 }
