@@ -185,3 +185,4 @@ src/main/view/WEB-INF/classes/
 src/main/view/WEB-INF/lib/
 .DS_Store
 .checkstyle
+result_test
