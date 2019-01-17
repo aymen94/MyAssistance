@@ -8,9 +8,11 @@ package model.segnalazione;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
+
+import model.ufficiotecnico.UfficioTecnico;
 import model.utente.Utente;
 
-// TODO: Auto-generated Javadoc
+// TODO Auto-generated Javadoc
 /**
  * The Class SegnalazioneBL.
  */
@@ -129,6 +131,22 @@ public final class SegnalazioneBL {
      * @return true, if successful
      */
     public boolean inoltraSegnalazione(final int aCod, final int aIdTecnico) {
+        Segnalazione aSegnalazione;
+        try {
+            aSegnalazione = segnalazioneDB.getByCod(aCod);
+            if (aSegnalazione != null
+                    && aSegnalazione.getStato() == Segnalazione.STATO_APERTO) {
+                UfficioTecnico tecnico = new UfficioTecnico();
+                tecnico.setId(aIdTecnico);
+                aSegnalazione.setTecnico(tecnico);
+                aSegnalazione.setDataAssegnazione(
+                        java.sql.Date.valueOf(LocalDate.now()));
+                return segnalazioneDB.update(aSegnalazione) > 0;
+            }
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
         return false;
     }
 
