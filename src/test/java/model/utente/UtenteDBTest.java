@@ -25,7 +25,7 @@ public class UtenteDBTest {
         Database.getConnection().prepareStatement(
             "ALTER TABLE my_assistance.utente AUTO_INCREMENT = 1")
             .executeUpdate();
-        fileHandler = new FileHandler(UtenteDB.class.getName());
+        fileHandler = new FileHandler("result_test\\"+UtenteDB.class.getName());
         logger = Logger.getLogger(UtenteDBTest.class.getName());
         logger.addHandler(fileHandler);
         logger.config("logger loaded");
