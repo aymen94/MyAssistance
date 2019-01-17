@@ -6,6 +6,7 @@ Date: 23/12/2018
 package model.utente;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.Objects;
 
 /**
@@ -56,7 +57,7 @@ public abstract class Utente {
     /**
      * Data di nascità.
      */
-    private Date dataDiNascita;
+    private LocalDate dataDiNascita;
 
     /**
      * Costruttore vuoto.
@@ -202,7 +203,7 @@ public abstract class Utente {
      *
      * @return Date
      */
-    public Date getDataDiNascita() {
+    public LocalDate getDataDiNascita() {
         return dataDiNascita;
     }
 
@@ -211,7 +212,7 @@ public abstract class Utente {
      *
      * @param aData imposta il valore sesso dell'utente.
      */
-    public void setDataDiNascita(final Date aData) {
+    public void setDataDiNascita(final LocalDate aData) {
         dataDiNascita = aData;
     }
 
