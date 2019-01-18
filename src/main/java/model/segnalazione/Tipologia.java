@@ -1,6 +1,5 @@
 package model.segnalazione;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class Tipologia.
  */
@@ -79,6 +78,15 @@ public class Tipologia {
      */
     public void setPriorita(final short aPriorita) {
         priorita = aPriorita;
+    }
+
+    /* (non-Javadoc)
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        return "Tipologia [nome=" + nome + ", id=" + id + ", priorita="
+                + priorita + "]";
     }
 
 }

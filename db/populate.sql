@@ -18,9 +18,6 @@ VALUES ('Rottura', 10),
        ('Strumento Inadeguato', 2);
 
 INSERT INTO my_assistance.segnalazione (titolo, descrizione, stato, data_segnalazione, data_rifiuto, data_assegnazione,
-                                        data_risoluzione,
-                                        motivazione_rifiuto, tipologia, autore,
-                                        tecnico)
                                         data_risoluzione, motivazione_rifiuto, tipologia, autore, tecnico)
 VALUES ('Lorem ipsum',
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lectus urna duis convallis convallis tellus. Vitae proin sagittis nisl rhoncus mattis rhoncus. Platea dictumst vestibulum rhoncus est pellentesque elit ullamcorper. Quisque sagittis purus sit amet volutpat consequat mauris nunc congue.',

@@ -77,6 +77,26 @@ public class Segnalazione {
     private UfficioTecnico tecnico;
 
     /**
+     * The Constant STATO_APERTO.
+     */
+    public static final short STATO_APERTO = 0;
+
+    /**
+     * The Constant STATO_RIFIUTATO.
+     */
+    public static final short STATO_RIFIUTATO = -1;
+
+    /**
+     * The Constant STATO_ASSEGNATO.
+     */
+    public static final short STATO_ASSEGNATO = 1;
+
+    /**
+     * The Constant STATO_RISOLTA.
+     */
+    public static final short STATO_RISOLTA = 2;
+
+    /**
      * Instantiates a new segnalazione.
      */
     public Segnalazione() {

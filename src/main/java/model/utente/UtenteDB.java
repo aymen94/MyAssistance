@@ -5,15 +5,15 @@ Date: 30/12/2018
 */
 package model.utente;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.LinkedList;
+import java.sql.ResultSet;
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.util.ArrayList;
 import java.util.List;
 
 import pool.Database;
-
-import java.sql.Connection;
 
 /**
  * This class manages stored data about Users into the database.
@@ -26,9 +26,54 @@ public final class UtenteDB {
     private static final String TABLE_NAME = "utente";
 
     /**
+     * This private attribute is a string that contains
+     * the query insert user by id.
+     */
+    private static final String INSERT = "INSERT INTO " + UtenteDB.TABLE_NAME
+        + " (username,pass,email,nome,cognome,"
+        + "sesso,data_di_nascita,data_sospensione,is_gestore) "
+        + "VALUES (?, ?, ?, ?, ?, ?, ?,? ,?);";
+
+    /**
+     * This private attribute is a string that contains
+     * the query get user by id.
+     */
+    private static final String GET_BY_ID =
+        "SELECT * FROM " + UtenteDB.TABLE_NAME + " WHERE id = ?";
+
+    /**
+     * This private attribute is a string that contains
+     * the query get user by email.
+     */
+    private static final String GET_BY_EMAIL =
+        "SELECT * FROM " + UtenteDB.TABLE_NAME + " WHERE email = ?";
+
+    /**
+     * This private attribute is a string that contains
+     * the query get all user.
+     */
+    private static final String GET_ALL =
+        "SELECT * FROM " + UtenteDB.TABLE_NAME;
+
+    /**
+     * This private attribute is a string that contains
+     * the query to delete user by email.
+     */
+    private static final String DELETE =
+        "DELETE FROM " + UtenteDB.TABLE_NAME + " WHERE email =?;";
+
+    /**
+     * This private attribute is a string that contains
+     * the query to update data user by email.
+     */
+    private static final String UPDATE =
+        "UPDATE " + UtenteDB.TABLE_NAME + " SET data_sospensione = ?"
+            + " WHERE id = ?";
+
+    /**
      * Default constructor.
      */
-    private UtenteDB() {
+    public UtenteDB() {
 
     }
 
@@ -36,11 +81,11 @@ public final class UtenteDB {
      * This method inserts a user into the database.
      *
      * @param aUtente is the object of the Utente type that
-     * must be inserted into the database.
-     * @throws SQLException is the exception that can be thrown
-     * during the execution.
+     *                must be inserted into the database.
      * @return res is 0 if the insert operation is not made,
-     *         otherwise an integer greater than 0.
+     * otherwise an integer greater than 0.
+     * @throws SQLException is the exception that can be thrown
+     *                      during the execution.
      */
     public int insert(final Utente aUtente) throws SQLException {
         Connection connection = null;
@@ -48,11 +93,6 @@ public final class UtenteDB {
         int res = 0;
         Gestore g = null;
         CSU csu = null;
-
-        String insertSQL = "INSERT INTO " + UtenteDB.TABLE_NAME
-                + " (id,username,pass,email,nome,cognome,"
-                + "sesso,data_sospensione,is_gestore) "
-                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);";
 
         if (aUtente instanceof Gestore) {
             g = (Gestore) aUtente;
@@ -62,27 +102,33 @@ public final class UtenteDB {
 
         try {
             connection = Database.getConnection();
-            preparedStatement = connection.prepareStatement(insertSQL);
+            preparedStatement = connection.prepareStatement(INSERT);
             int i = 1;
-            preparedStatement.setInt(i++, aUtente.getId());
             preparedStatement.setString(i++, aUtente.getUserName());
             preparedStatement.setString(i++, aUtente.getPassword());
             preparedStatement.setString(i++, aUtente.getEmail());
             preparedStatement.setString(i++, aUtente.getNome());
             preparedStatement.setString(i++, aUtente.getCognome());
-            preparedStatement.setString(i++, aUtente.getSesso());
+            preparedStatement.setInt(i++, aUtente.getSesso());
+            preparedStatement
+                .setDate(i++, Date.valueOf(aUtente.getDataDiNascita()));
 
             if (aUtente instanceof Gestore) {
                 preparedStatement.setDate(i++, null);
-                preparedStatement.setBoolean(i++, g.isGestore());
+                preparedStatement.setBoolean(i, g.isGestore());
             } else {
-                preparedStatement.setDate(i++, csu.getDataSospensione());
-                preparedStatement.setBoolean(i++, false);
+                if (csu.getDataSospensione() != null) {
+                    preparedStatement
+                        .setDate(i++, Date.valueOf(csu.getDataSospensione()));
+                } else {
+                    preparedStatement.setDate(i++, null);
+                }
+
+                preparedStatement.setBoolean(i, false);
             }
 
             res = preparedStatement.executeUpdate();
 
-            connection.commit();
         } finally {
             try {
                 if (preparedStatement != null) {
@@ -99,32 +145,27 @@ public final class UtenteDB {
     /**
      * This method fetches information about a user
      * given his id.
+     *
      * @param aId is the id of the user.
      * @return user is the user whose id is of.
      * @throws SQLException is the exception that can be thrown
-     * during the execution.
+     *                      during the execution.
      */
-    public Utente getById(final int aId)
-            throws SQLException {
+    public Utente getById(final int aId) throws SQLException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         CSU csu = null;
-
         Utente user = null;
 
-        String selectSQL;
-
-        selectSQL = "SELECT * FROM " + UtenteDB.TABLE_NAME + " WHERE id = ?";
         try {
             connection = Database.getConnection();
-            preparedStatement = connection.prepareStatement(selectSQL);
+            preparedStatement = connection.prepareStatement(GET_BY_ID);
 
             preparedStatement.setInt(1, aId);
 
             ResultSet rs = preparedStatement.executeQuery();
 
             while (rs.next()) {
-
                 boolean b = rs.getBoolean("is_gestore");
                 if (b) {
                     user = new Gestore();
@@ -132,16 +173,20 @@ public final class UtenteDB {
                     user = new CSU();
                 }
 
-                user.setId(rs.getInt("Id"));
+                user.setId(rs.getInt("id"));
                 user.setUserName(rs.getString("username"));
                 user.setPassword(rs.getString("pass"));
                 user.setEmail(rs.getString("email"));
                 user.setNome(rs.getString("nome"));
                 user.setCognome(rs.getString("cognome"));
-                user.setSesso(rs.getString("sesso"));
+                user.setDataDiNascita(rs.getDate("data_di_nascita")
+                    .toLocalDate());
+                user.setSesso(rs.getInt("sesso"));
                 if (!b) {
                     csu = (CSU) user;
-                    csu.setDataSospensione(rs.getDate("data_sospensione"));
+                    Date tmp = rs.getDate("data_sospensione");
+                    if (tmp != null)
+                        csu.setDataSospensione(tmp.toLocalDate());
                     user = csu;
                 }
             }
@@ -162,25 +207,22 @@ public final class UtenteDB {
     /**
      * This method fetches information about a user
      * given his email address.
+     *
      * @param aEmail is the email address of the user.
      * @return user is the user whose the email address is of.
      * @throws SQLException is the exception that can be thrown
-     * during the execution.
+     *                      during the execution.
      */
-    public Utente getByEmail(final String aEmail)
-            throws SQLException {
+    public Utente getByEmail(final String aEmail) throws SQLException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         CSU csu = null;
 
         Utente user = null;
 
-        String selectSQL;
-
-        selectSQL = "SELECT * FROM " + UtenteDB.TABLE_NAME + " WHERE email = ?";
         try {
             connection = Database.getConnection();
-            preparedStatement = connection.prepareStatement(selectSQL);
+            preparedStatement = connection.prepareStatement(GET_BY_EMAIL);
 
             preparedStatement.setString(1, aEmail);
 
@@ -201,10 +243,14 @@ public final class UtenteDB {
                 user.setEmail(rs.getString("email"));
                 user.setNome(rs.getString("nome"));
                 user.setCognome(rs.getString("cognome"));
-                user.setSesso(rs.getString("sesso"));
+                user.setDataDiNascita(rs.getDate("data_di_nascita")
+                    .toLocalDate());
+                user.setSesso(rs.getInt("sesso"));
                 if (!b) {
                     csu = (CSU) user;
-                    csu.setDataSospensione(rs.getDate("data_sospensione"));
+                    Date tmp = rs.getDate("data_sospensione");
+                    if (tmp != null)
+                        csu.setDataSospensione(tmp.toLocalDate());
                     user = csu;
                 }
             }
@@ -225,24 +271,23 @@ public final class UtenteDB {
     /**
      * This method fetches information about all the users stored into
      * the database.
+     *
      * @return users is a set of all the users.
      * @throws SQLException is the exception that can be thrown
-     * during the execution.
+     *                      during the execution.
      */
     public List<Utente> getAll() throws SQLException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
 
-        List<Utente> users = new LinkedList<Utente>();
+        List<Utente> users = new ArrayList<>();
 
         CSU csu = null;
         Utente u = null;
 
-        String selectSQL = "SELECT * FROM " + UtenteDB.TABLE_NAME;
-
         try {
             connection = Database.getConnection();
-            preparedStatement = connection.prepareStatement(selectSQL);
+            preparedStatement = connection.prepareStatement(GET_ALL);
 
             ResultSet rs = preparedStatement.executeQuery();
 
@@ -261,10 +306,13 @@ public final class UtenteDB {
                 u.setEmail(rs.getString("email"));
                 u.setNome(rs.getString("nome"));
                 u.setCognome(rs.getString("cognome"));
-                u.setSesso(rs.getString("sesso"));
+                u.setDataDiNascita(rs.getDate("data_di_nascita").toLocalDate());
+                u.setSesso(rs.getInt("sesso"));
                 if (!b) {
                     csu = (CSU) u;
-                    csu.setDataSospensione(rs.getDate("data_sospensione"));
+                    Date tmp = rs.getDate("data_sospensione");
+                    if (tmp != null)
+                        csu.setDataSospensione(tmp.toLocalDate());
                     u = csu;
                 }
 
@@ -280,38 +328,31 @@ public final class UtenteDB {
                 Database.freeConnection(connection);
             }
         }
-        if (users.size() > 0) {
-            return users;
-        } else {
-            return (null);
-        }
+        return users;
     }
 
     /**
      * This method deletes a user from the database given
      * his email address.
+     *
      * @param aEmail is the email address
-     * @throws SQLException is the exception that can be thrown
-     * during the execution.
      * @return res is 0 if the delete operation is not made,
-     *         otherwise an integer greater than 0.
+     * otherwise an integer greater than 0.
+     * @throws SQLException is the exception that can be thrown
+     *                      during the execution.
      */
     public int delete(final String aEmail) throws SQLException {
         Connection connection = null;
         PreparedStatement s = null;
         int res = 0;
 
-        String deleteSQL = "DELETE FROM " + UtenteDB.TABLE_NAME
-                + " WHERE email = ?;";
-
         try {
             connection = Database.getConnection();
-            s = connection.prepareStatement(deleteSQL);
+            s = connection.prepareStatement(DELETE);
             s.setString(1, aEmail);
 
-            res = s.executeUpdate(deleteSQL);
+            res = s.executeUpdate();
 
-            connection.commit();
         } finally {
             try {
                 if (s != null) {
@@ -326,40 +367,35 @@ public final class UtenteDB {
 
     /**
      * This method updates information about a given user.
+     *
      * @param aUtente is the object containing updated information
-     * about the user.
-     * @throws SQLException is the exception that can be thrown
-     * during the execution.
+     *                about the user.
      * @return res is 0 if the update operation is not made,
-     *         otherwise an integer greater than 0.
+     * otherwise an integer greater than 0.
+     * @throws SQLException is the exception that can be thrown
+     *                      during the execution.
      */
     public int update(final Utente aUtente) throws SQLException {
         Connection connection = null;
-        PreparedStatement s = null;
+        PreparedStatement preparedStatement = null;
+        CSU csu = (CSU) aUtente;
         int res = 0;
 
-        String updateSQL = "UPDATE " + UtenteDB.TABLE_NAME
-                + " SET data_sospensione = ?"
-                + " WHERE id = " + aUtente.getId() + ";";
         try {
             connection = Database.getConnection();
-            s = connection.prepareStatement(updateSQL);
-            int i = 1;
-            if (aUtente instanceof CSU) {
-                s.setDate(i, ((CSU) aUtente).getDataSospensione());
-            }
-            res = s.executeUpdate(updateSQL);
-
-            connection.commit();
+            preparedStatement = connection.prepareStatement(UPDATE);
+            preparedStatement.setDate(1, Date.valueOf(csu.getDataSospensione()));
+            preparedStatement.setInt(2,csu.getId());
+            res = preparedStatement.executeUpdate();
+        } finally {
+            try {
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                }
             } finally {
-                try {
-                    if (s != null) {
-                        s.close();
-                    }
-                } finally {
-                        Database.freeConnection(connection);
-                  }
-              }
+                Database.freeConnection(connection);
+            }
+        }
         return (res);
     }
 }
