@@ -12,7 +12,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.segnalazione.Segnalazione;
 import model.segnalazione.SegnalazioneBL;
+import model.segnalazione.SegnalazioneDB;
 import model.segnalazione.Tipologia;
 import model.utente.Utente;
 
@@ -43,14 +45,20 @@ public class EffettuaSegnalazioneServlet extends HttpServlet {
             final HttpServletResponse resp)
             throws ServletException, IOException {
 
-        SegnalazioneBL sbl = new SegnalazioneBL();
-        boolean res;
+        SegnalazioneDB sdb = new SegnalazioneDB();
+        SegnalazioneBL sbl = new SegnalazioneBL(sdb);
+
         Tipologia tipologia = new Tipologia();
         tipologia.setId(Integer.parseInt(req.getParameter("field-type")));
-        res = sbl.insertSegnalazione(
-                req.getParameter("field-title"),
-                req.getParameter("field-descr"),
-                tipologia, (Utente) req.getSession().getAttribute("utente"));
+
+        Segnalazione segnalazione  = new Segnalazione();
+        segnalazione.setTitolo(req.getParameter("field-title"));
+        segnalazione.setDescrizione(req.getParameter("field-descr"));
+        segnalazione.setTipologia(tipologia);
+        segnalazione.setAutore(
+                (Utente) req.getSession().getAttribute("utente"));
+
+        boolean res = sbl.insertSegnalazione(segnalazione);
 
         //TODO in caso di errore nell'inserimento della segnalazione effettuare
         //una redirect ad error.jsp con messaggio di errore
