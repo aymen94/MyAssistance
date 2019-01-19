@@ -25,8 +25,8 @@ var utilities =
 				{
 					if (errorDialog !== null)
 					{
-						var label = form.querySelector('label[for="' + d[i].getAttribute("id") + '"]');
-						this.showDialog(errorDialog, "Errore Registrazione", "Il campo " + label.innerHTML + " non ? stato compilato in modo corretto.");
+						var label = form.querySelector('label[for="' + d[i].getAttribute("id") + '"]') || d[i].parentNode.querySelector(".input-group-text");
+						this.showDialog(errorDialog, "Errore Registrazione", "Il campo " + (label !== null ? label.innerHTML + " ": "") + "non è stato compilato in modo corretto.");
 					}
 					return false;
 				}
@@ -149,5 +149,25 @@ var segnalazioni =
 			var form = document.getElementById("segna-risolta");
 			form.querySelector("input").value = id;
 			utilities.showDialog(document.getElementById(dialogId), "Segna Come Risolta", form.outerHTML);			
+		}
+};
+
+/* Ufficio Tecnico */
+
+var ufficioTecnico =
+{
+		/**
+		 * This method shows a bootstrap modal dialog, containing the form elements to be
+		 * added to the dialog's form, in order to delete the support office.
+		 * 
+		 * @param dialog the dialog element's id, which must already exist in the DOM.
+		 * @param id the report id.
+		 */
+		elimina: function(dialogId, id)
+		{
+			// Show dialog to the browser
+			var form = document.getElementById("elimina-ufficio");
+			form.querySelector("input").value = id;
+			utilities.showDialog(document.getElementById(dialogId), "Elimina Ufficio", form.outerHTML);		
 		}
 };
