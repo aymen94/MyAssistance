@@ -23,7 +23,7 @@ import java.io.IOException;
 @WebServlet("")
 public class IndexServlet extends HttpServlet {
     /**
-     * Method doGet.
+     * doGet method.
      */
     @Override protected void doGet(final HttpServletRequest req,
             final HttpServletResponse resp)
@@ -46,7 +46,7 @@ public class IndexServlet extends HttpServlet {
         }
     }
     /**
-     * Method doPost.
+     * doPost method.
      */
     @Override protected void doPost(final HttpServletRequest req,
             final HttpServletResponse resp)
