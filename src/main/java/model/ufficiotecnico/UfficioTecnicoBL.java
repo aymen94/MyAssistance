@@ -36,8 +36,8 @@ public final class UfficioTecnicoBL {
     /**
      * This is an utility class. So no constructor should be used.
      */
-    private UfficioTecnicoBL() {
-        UfficioTecnicoDB data = new UfficioTecnicoDB();
+    public UfficioTecnicoBL() {
+        this.database = new UfficioTecnicoDB();
     }
 
     /**
@@ -45,7 +45,7 @@ public final class UfficioTecnicoBL {
      *
      * @param db it's database
      */
-    private UfficioTecnicoBL(final UfficioTecnicoDB db) {
+    public UfficioTecnicoBL(final UfficioTecnicoDB db) {
         this.database = db;
     }
 
