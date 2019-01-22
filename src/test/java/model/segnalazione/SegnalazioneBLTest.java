@@ -376,9 +376,11 @@ public class SegnalazioneBLTest {
 
     /**
      * Test inoltra segnalazione 3.
+     *
+     * @throws SQLException the SQL exception
      */
     @Test
-    public void testInoltraSegnalazione3() {
+    public void testInoltraSegnalazione3() throws SQLException {
         final int aCod = SEGNALAZIONE_APERTA;
         final int aIdTecnico = TECNICO_ESISTENTE;
         final Boolean res = manager.inoltraSegnalazione(aCod, aIdTecnico);
