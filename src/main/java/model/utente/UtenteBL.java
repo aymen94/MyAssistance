@@ -5,6 +5,7 @@ Date: 23/12/2018
 */
 package model.utente;
 
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -22,10 +23,12 @@ public final class UtenteBL {
      * @param aCognome       the cognome
      * @param aDataDiNascita the data di nascita
      * @return true, if successful
+     * @throws SQLException the SQL exception
      */
     public boolean effettuaRegistrazione(final String aUserName,
-        final String aPassword, final String aEmail, final String aNome,
-        final String aCognome, final String aDataDiNascita) {
+            final String aPassword, final String aEmail, final String aNome,
+            final String aCognome, final String aDataDiNascita)
+            throws SQLException {
 
         return false;
     }
@@ -35,8 +38,9 @@ public final class UtenteBL {
      *
      * @param aCSU the CSU
      * @return true, if successful
+     * @throws SQLException the SQL exception
      */
-    public boolean sospendiUtente(final CSU aCSU) {
+    public boolean sospendiUtente(final CSU aCSU) throws SQLException {
         return false;
     }
 
@@ -46,8 +50,10 @@ public final class UtenteBL {
      * @param aUserName the user name
      * @param aPass     the pass
      * @return the csu
+     * @throws SQLException the SQL exception
      */
-    public CSU autenticazioneCSU(final String aUserName, final String aPass) {
+    public CSU autenticazioneCSU(final String aUserName, final String aPass)
+            throws SQLException {
         return null;
     }
 
@@ -57,9 +63,10 @@ public final class UtenteBL {
      * @param aUserName the user name
      * @param aPass     the pass
      * @return the gestore
+     * @throws SQLException the SQL exception
      */
     public Gestore autenticazioneGestore(final String aUserName,
-        final String aPass) {
+            final String aPass) throws SQLException {
         return null;
     }
 
@@ -67,8 +74,9 @@ public final class UtenteBL {
      * Gets the utenti registrati.
      *
      * @return the utenti registrati
+     * @throws SQLException the SQL exception
      */
-    public List<Utente> getUtentiRegistrati() {
+    public List<Utente> getUtentiRegistrati() throws SQLException {
         return null;
 
     }

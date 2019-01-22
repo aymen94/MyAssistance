@@ -12,7 +12,6 @@ import java.util.List;
 import model.ufficiotecnico.UfficioTecnico;
 import model.utente.Utente;
 
-// TODO Auto-generated Javadoc
 /**
  * The Class SegnalazioneBL.
  */
@@ -33,7 +32,7 @@ public final class SegnalazioneBL {
      *
      * @param aSegnalazioneDB the segnalazione DB
      */
-    public SegnalazioneBL(SegnalazioneDB aSegnalazioneDB) {
+    public SegnalazioneBL(final SegnalazioneDB aSegnalazioneDB) {
         segnalazioneDB = aSegnalazioneDB;
     }
 
@@ -129,23 +128,20 @@ public final class SegnalazioneBL {
      * @param aCod       the cod
      * @param aIdTecnico the tecnico
      * @return true, if successful
+     * @throws SQLException the SQL exception
      */
-    public boolean inoltraSegnalazione(final int aCod, final int aIdTecnico) {
+    public boolean inoltraSegnalazione(final int aCod, final int aIdTecnico)
+            throws SQLException {
         Segnalazione aSegnalazione;
-        try {
-            aSegnalazione = segnalazioneDB.getByCod(aCod);
-            if (aSegnalazione != null
-                    && aSegnalazione.getStato() == Segnalazione.STATO_APERTO) {
-                UfficioTecnico tecnico = new UfficioTecnico();
-                tecnico.setId(aIdTecnico);
-                aSegnalazione.setTecnico(tecnico);
-                aSegnalazione.setDataAssegnazione(
-                        java.sql.Date.valueOf(LocalDate.now()));
-                return segnalazioneDB.update(aSegnalazione) > 0;
-            }
-        } catch (SQLException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+        aSegnalazione = segnalazioneDB.getByCod(aCod);
+        if (aSegnalazione != null
+                && aSegnalazione.getStato() == Segnalazione.STATO_APERTO) {
+            UfficioTecnico tecnico = new UfficioTecnico();
+            tecnico.setId(aIdTecnico);
+            aSegnalazione.setTecnico(tecnico);
+            aSegnalazione.setDataAssegnazione(
+                    java.sql.Date.valueOf(LocalDate.now()));
+            return segnalazioneDB.update(aSegnalazione) > 0;
         }
         return false;
     }
@@ -155,7 +151,7 @@ public final class SegnalazioneBL {
      *
      * @return the list
      */
-    public List<Segnalazione> getSegnalazioniRicevute() {
+    public List<Segnalazione> getSegnalazioniRicevute() throws SQLException {
         return null;
 
     }
@@ -168,21 +164,15 @@ public final class SegnalazioneBL {
      * @return true, if successful
      */
     public boolean rifiutaSegnalazione(final int aCod,
-            final String aMotivazioneRifiuto) {
+            final String aMotivazioneRifiuto) throws SQLException {
 
-        try {
-            final Segnalazione aSegnalazione = segnalazioneDB.getByCod(aCod);
-            if (aSegnalazione != null
-                    && aSegnalazione.getStato() == Segnalazione.STATO_APERTO
-                    && aMotivazioneRifiuto.length() > 0) {
-                aSegnalazione.setStato(Segnalazione.STATO_RIFIUTATO);
-                aSegnalazione.setMotivazioneRifiuto(aMotivazioneRifiuto);
-                return segnalazioneDB.update(aSegnalazione) > 0;
-            }
-
-        } catch (final SQLException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+        final Segnalazione aSegnalazione = segnalazioneDB.getByCod(aCod);
+        if (aSegnalazione != null
+                && aSegnalazione.getStato() == Segnalazione.STATO_APERTO
+                && aMotivazioneRifiuto.length() > 0) {
+            aSegnalazione.setStato(Segnalazione.STATO_RIFIUTATO);
+            aSegnalazione.setMotivazioneRifiuto(aMotivazioneRifiuto);
+            return segnalazioneDB.update(aSegnalazione) > 0;
         }
         return false;
     }
@@ -193,7 +183,7 @@ public final class SegnalazioneBL {
      * @param aCod the cod
      * @return true, if successful
      */
-    public boolean segnaRisolta(final int aCod) {
+    public boolean segnaRisolta(final int aCod) throws SQLException {
         return false;
 
     }
