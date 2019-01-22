@@ -177,10 +177,7 @@ public class SegnalazioneDB {
      */
     public Segnalazione getByCod(final int aCod) throws SQLException {
         List<Segnalazione> segnalazioneList = genericGet(SELECT_BY_ID, aCod);
-        if (segnalazioneList != null) {
-            return segnalazioneList.get(0);
-        }
-        return null;
+        return segnalazioneList.get(0);
     }
 
     /**
@@ -240,11 +237,7 @@ public class SegnalazioneDB {
                 segnalazione.setTitolo(result.getString("titolo"));
                 segnalazioneList.add(segnalazione);
             }
-            if (segnalazioneList.size() > 0) {
                 return segnalazioneList;
-            } else {
-                return null;
-            }
         } finally {
             freeResources(preparedStatement, connection);
         }
