@@ -198,6 +198,7 @@ public class SegnalazioneDB {
         final List<Segnalazione> segnalazioneList = new ArrayList<>();
 
         try {
+            connection = Database.getConnection();
             preparedStatement = connection.prepareStatement(aQuery);
             if (aParameter > 0) {
                 preparedStatement.setInt(1, aParameter);
