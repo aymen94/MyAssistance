@@ -105,15 +105,13 @@ public final class UfficioTecnicoBL {
      * @return true, if successful
      * @throws SQLException error sql.
      */
-    public boolean ottieniUfficio(final Integer aId){
+    public boolean ottieniUfficio(final Integer aId) throws SQLException {
         UfficioTecnico byId = null;
-        try {
+
             if (aId != null && aId > 0) {
-                byId = (UfficioTecnico) database.getById(aId);
+                byId = database.getById(aId);
             }
-        } catch (final SQLException e) {
-            e.getStackTrace();
-        }
+
         return byId != null;
     }
 
@@ -137,4 +135,5 @@ public final class UfficioTecnicoBL {
         }
         return false;
     }
+
 }
