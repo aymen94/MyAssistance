@@ -137,6 +137,10 @@ public class UfficioTecnico {
                 + ", ubicazione='" + ubicazione + '\'' + '}';
     }
 
+    /**
+     * @param o
+     * @return
+     */
     @Override public boolean equals(Object o) {
         if (this == o)
             return true;
@@ -159,7 +163,7 @@ public class UfficioTecnico {
                 that.ubicazione == null;*/
 
         if (id != null && that.id != null) {
-            if (id.equals(that.id))
+            if (!id.equals(that.id))
                 return false;
 
         }

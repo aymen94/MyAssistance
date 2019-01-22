@@ -17,8 +17,7 @@ import java.util.logging.FileHandler;
 import java.util.logging.Logger;
 
 import static junit.framework.TestCase.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class UfficioTecnicoDBTest {
 
@@ -60,11 +59,14 @@ public class UfficioTecnicoDBTest {
 
     }
 
+    /*
 
+     */
     /**
      *
      * @throws SQLException the SQL exception
-     */
+     *//*
+
     @Test public void insert()  throws SQLException {
         UfficioTecnicoDB ufficioTecnicoDB = new UfficioTecnicoDB();
         UfficioTecnico test1 = new UfficioTecnico();
@@ -75,6 +77,10 @@ public class UfficioTecnicoDBTest {
         ufficioTecnicoDB.insert(test1);
         logger.info("method: insert, \noutput: " + test1);
     }
+
+*/
+
+
 
     /**
      *
@@ -89,15 +95,34 @@ public class UfficioTecnicoDBTest {
         else
             logger.info("method: getAll()==1 \noutput:\n " + list.size());
     }
-    /**
-     *
-     * @throws SQLException the SQL exception
-     */
 
-    @Test public void getById() throws SQLException {
+    @Test public void testGetById1() throws SQLException {
         UfficioTecnicoDB ufficioTecnicoTest = new UfficioTecnicoDB();
-        logger.info("method: getById(1) \noutput:" + ufficioTecnicoTest
-                .getById(1));
+        UfficioTecnico uff = ufficioTecnicoTest.getById(3);
+        logger.info("method: getById(1) \noutput:" + uff);
+        assertNull(uff);
+    }
+
+    @Test public void testGetById2() throws SQLException {
+
+        Connection conn = Database.getConnection();
+        conn.prepareStatement(
+                "INSERT INTO my_assistance.ufficio_tecnico (nome,tel,email,ubicazione)"
+                        + " VALUES ('PIO','1234567890','ABCD@GMAIL.COM','RIMINI')")
+                .executeUpdate();
+        Database.freeConnection(conn);
+        UfficioTecnico uff2 = new UfficioTecnico();
+        uff2.setId(1);
+        uff2.setNome("PIO");
+        uff2.setTel("1234567890");
+        uff2.setEmail("ABCD@GMAIL.COM");
+        uff2.setUbicazione("RIMINI");
+        UfficioTecnicoDB ufficioTecnicoTest = new UfficioTecnicoDB();
+        UfficioTecnico uff = ufficioTecnicoTest.getById(1);
+
+        logger.info(
+                "method: getById(1)\noutput :" + uff + " \noracolo:" + uff2);
+        assertEquals(uff, uff2);
     }
 
 
@@ -108,7 +133,7 @@ public class UfficioTecnicoDBTest {
                 .deleteById(1));
     }
 
-    @Test(expected = SQLException.class) public void InserimentoUfficioTecnicoTest1()
+    @Test(expected = SQLException.class) public void testInsert1()
             throws SQLException {
         UfficioTecnicoDB ufficioTecnicoTest = new UfficioTecnicoDB();
 
@@ -133,7 +158,7 @@ public class UfficioTecnicoDBTest {
 
     }
 
-    @Test(expected = SQLException.class) public void InserimentoUfficioTecnicoTest2()
+    @Test(expected = SQLException.class) public void testInsert2()
             throws SQLException {
         UfficioTecnicoDB ufficioTecnicoTest = new UfficioTecnicoDB();
         boolean res = false;
@@ -161,7 +186,7 @@ public class UfficioTecnicoDBTest {
      * @throws SQLException sql error
      */
 
-    @Test public void InserimentoUfficioTecnicoTest3() throws SQLException {
+    @Test public void testInsert3() throws SQLException {
         UfficioTecnicoDB ufficioTecnicoTest = new UfficioTecnicoDB();
         boolean res = false;
 
@@ -229,4 +254,5 @@ public class UfficioTecnicoDBTest {
     private <T> boolean listEqualsIgnoreOrder(List<T> list1, List<T> list2) {
         return new HashSet<>(list1).equals(new HashSet<>(list2));
     }
+
 }
