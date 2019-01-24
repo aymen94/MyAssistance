@@ -10,11 +10,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import model.ufficiotecnico.UfficioTecnico;
 import model.ufficiotecnico.UfficioTecnicoBL;
 import model.utente.Utente;
-
 import java.io.IOException;
 
 /**
@@ -22,7 +20,7 @@ import java.io.IOException;
  */
 public class InserisciUfficioTecnicoServlet extends HttpServlet {
     /**
-     *
+     * doGet method.
      */
     @Override protected void doGet(final HttpServletRequest req,
             final HttpServletResponse resp)
@@ -51,12 +49,21 @@ public class InserisciUfficioTecnicoServlet extends HttpServlet {
             ufficioTecnico.setEmail(email);
             ufficioTecnico.setUbicazione(ubicazione);
 
-            ubl.insertUfficioTecnico(nome, tel, email, ubicazione);
+            try {
+                ubl.insertUfficioTecnico(nome, tel, email, ubicazione);
+            } catch (Exception e) {
+                String msgError = "Si e' verificato un errore.";
+                req.setAttribute("msgError", msgError);
+                RequestDispatcher dispatcher =
+                        getServletContext().getRequestDispatcher(
+                                "/error.jsp");
+                dispatcher.forward(req, resp);
+            }
         }
     }
 
     /**
-     *
+     * doPost method.
      */
     @Override protected void doPost(final HttpServletRequest req,
             final HttpServletResponse resp)
