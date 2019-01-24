@@ -56,8 +56,7 @@ public final class SegnalazioneBL {
                 segnalazione.setTipologia(segnalazione.getTipologia());
                 segnalazione.setAutore(segnalazione.getAutore());
                 // Set the current date
-                segnalazione.setDataSegnalazione(
-                        java.sql.Date.valueOf(LocalDate.now()));
+                segnalazione.setDataSegnalazione(LocalDate.now());
                 return segnalazioneDB.insert(segnalazione) > 0;
             }
         } catch (final SQLException e) {
@@ -140,7 +139,7 @@ public final class SegnalazioneBL {
             tecnico.setId(aIdTecnico);
             aSegnalazione.setTecnico(tecnico);
             aSegnalazione.setDataAssegnazione(
-                    java.sql.Date.valueOf(LocalDate.now()));
+                    LocalDate.now());
             return segnalazioneDB.update(aSegnalazione) > 0;
         }
         return false;
@@ -150,6 +149,7 @@ public final class SegnalazioneBL {
      * Ottieni segnalazioni ricevute.
      *
      * @return the list
+     * @throws SQLException the SQL exception
      */
     public List<Segnalazione> getSegnalazioniRicevute() throws SQLException {
         return null;
@@ -162,6 +162,7 @@ public final class SegnalazioneBL {
      * @param aCod                the cod
      * @param aMotivazioneRifiuto the motivazione rifiuto
      * @return true, if successful
+     * @throws SQLException the SQL exception
      */
     public boolean rifiutaSegnalazione(final int aCod,
             final String aMotivazioneRifiuto) throws SQLException {
@@ -182,6 +183,7 @@ public final class SegnalazioneBL {
      *
      * @param aCod the cod
      * @return true, if successful
+     * @throws SQLException the SQL exception
      */
     public boolean segnaRisolta(final int aCod) throws SQLException {
         return false;

@@ -5,12 +5,11 @@ Date: 23/12/2018
 */
 package model.segnalazione;
 
-import java.sql.Date;
+import java.time.LocalDate;
 
 import model.ufficiotecnico.UfficioTecnico;
 import model.utente.Utente;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class Segnalazione.
  */
@@ -39,22 +38,22 @@ public class Segnalazione {
     /**
      * The data segnalazione.
      */
-    private Date dataSegnalazione;
+    private LocalDate dataSegnalazione;
 
     /**
      * The data rifiuto.
      */
-    private Date dataRifiuto;
+    private LocalDate dataRifiuto;
 
     /**
      * The data assegnazione.
      */
-    private Date dataAssegnazione;
+    private LocalDate dataAssegnazione;
 
     /**
      * The data risoluzione.
      */
-    private Date dataRisoluzione;
+    private LocalDate dataRisoluzione;
 
     /**
      * The motivazione rifiuto.
@@ -175,7 +174,7 @@ public class Segnalazione {
      *
      * @return the dataSegnalazione
      */
-    public Date getDataSegnalazione() {
+    public LocalDate getDataSegnalazione() {
         return dataSegnalazione;
     }
 
@@ -184,7 +183,7 @@ public class Segnalazione {
      *
      * @param aDataSegnalazione the dataSegnalazione to set
      */
-    public void setDataSegnalazione(final Date aDataSegnalazione) {
+    public void setDataSegnalazione(final LocalDate aDataSegnalazione) {
         dataSegnalazione = aDataSegnalazione;
     }
 
@@ -193,7 +192,7 @@ public class Segnalazione {
      *
      * @return the dataRifiuto
      */
-    public Date getDataRifiuto() {
+    public LocalDate getDataRifiuto() {
         return dataRifiuto;
     }
 
@@ -202,21 +201,21 @@ public class Segnalazione {
      *
      * @param aDataRifiuto the dataRifiuto to set
      */
-    public void setDataRifiuto(final Date aDataRifiuto) {
+    public void setDataRifiuto(final LocalDate aDataRifiuto) {
         dataRifiuto = aDataRifiuto;
     }
 
     /**
      * @return the dataAssegnazione
      */
-    public Date getDataAssegnazione() {
+    public LocalDate getDataAssegnazione() {
         return dataAssegnazione;
     }
 
     /**
      * @param aDataAssegnazione the dataAssegnazione to set
      */
-    public void setDataAssegnazione(final Date aDataAssegnazione) {
+    public void setDataAssegnazione(final LocalDate aDataAssegnazione) {
         dataAssegnazione = aDataAssegnazione;
     }
 
@@ -225,7 +224,7 @@ public class Segnalazione {
      *
      * @return the dataRisoluzione
      */
-    public Date getDataRisoluzione() {
+    public LocalDate getDataRisoluzione() {
         return dataRisoluzione;
     }
 
@@ -234,7 +233,7 @@ public class Segnalazione {
      *
      * @param aDataRisoluzione the dataRisoluzione to set
      */
-    public void setDataRisoluzione(final Date aDataRisoluzione) {
+    public void setDataRisoluzione(final LocalDate aDataRisoluzione) {
         dataRisoluzione = aDataRisoluzione;
     }
 

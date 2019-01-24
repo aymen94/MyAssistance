@@ -6,6 +6,7 @@ Date: 23/12/2018
 package model.segnalazione;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -87,10 +88,14 @@ public class SegnalazioneDB {
             preparedStatement.setString(i++, aSegnalazione.getTitolo());
             preparedStatement.setString(i++, aSegnalazione.getDescrizione());
             preparedStatement.setShort(i++, aSegnalazione.getStato());
-            preparedStatement.setDate(i++, aSegnalazione.getDataSegnalazione());
-            preparedStatement.setDate(i++, aSegnalazione.getDataRifiuto());
-            preparedStatement.setDate(i++, aSegnalazione.getDataAssegnazione());
-            preparedStatement.setDate(i++, aSegnalazione.getDataRisoluzione());
+            preparedStatement.setDate(i++,
+                    Date.valueOf(aSegnalazione.getDataSegnalazione()));
+            preparedStatement.setDate(i++,
+                    Date.valueOf(aSegnalazione.getDataRifiuto()));
+            preparedStatement.setDate(i++,
+                    Date.valueOf(aSegnalazione.getDataAssegnazione()));
+            preparedStatement.setDate(i++,
+                    Date.valueOf(aSegnalazione.getDataRisoluzione()));
             preparedStatement
                 .setString(i++, aSegnalazione.getMotivazioneRifiuto());
             preparedStatement.setInt(i++, aSegnalazione.getTipologia().getId());
@@ -125,10 +130,14 @@ public class SegnalazioneDB {
             preparedStatement.setString(i++, aSegnalazione.getTitolo());
             preparedStatement.setString(i++, aSegnalazione.getDescrizione());
             preparedStatement.setShort(i++, aSegnalazione.getStato());
-            preparedStatement.setDate(i++, aSegnalazione.getDataSegnalazione());
-            preparedStatement.setDate(i++, aSegnalazione.getDataRifiuto());
-            preparedStatement.setDate(i++, aSegnalazione.getDataAssegnazione());
-            preparedStatement.setDate(i++, aSegnalazione.getDataRisoluzione());
+            preparedStatement.setDate(i++,
+                    Date.valueOf(aSegnalazione.getDataSegnalazione()));
+            preparedStatement.setDate(i++,
+                    Date.valueOf(aSegnalazione.getDataRifiuto()));
+            preparedStatement.setDate(i++,
+                    Date.valueOf(aSegnalazione.getDataAssegnazione()));
+            preparedStatement.setDate(i++,
+                    Date.valueOf(aSegnalazione.getDataRisoluzione()));
             preparedStatement
                 .setString(i++, aSegnalazione.getMotivazioneRifiuto());
             preparedStatement.setInt(i++, aSegnalazione.getTipologia().getId());
@@ -205,16 +214,17 @@ public class SegnalazioneDB {
                 final Segnalazione segnalazione = new Segnalazione();
                 segnalazione.setCod(result.getInt("cod"));
 
-                segnalazione
-                    .setDataAssegnazione(result.getDate("data_assegnazione"));
-                segnalazione.setDataRifiuto(result.getDate("data_rifiuto"));
-                segnalazione
-                    .setDataRisoluzione(result.getDate("data_risoluzione"));
-                segnalazione
-                    .setDataSegnalazione(result.getDate("data_segnalazione"));
+                segnalazione.setDataAssegnazione(
+                        result.getDate("data_assegnazione").toLocalDate());
+                segnalazione.setDataRifiuto(
+                        result.getDate("data_rifiuto").toLocalDate());
+                segnalazione.setDataRisoluzione(
+                        result.getDate("data_risoluzione").toLocalDate());
+                segnalazione.setDataSegnalazione(
+                        result.getDate("data_segnalazione").toLocalDate());
                 segnalazione.setDescrizione(result.getString("descrizione"));
-                segnalazione.setMotivazioneRifiuto(result
-                    .getString("motivazione_rifiuto"));
+                segnalazione.setMotivazioneRifiuto(
+                        result.getString("motivazione_rifiuto"));
                 segnalazione.setStato(result.getShort("stato"));
 
                 // HACK: Use a fake author until UtenteDB.getById() is

@@ -5,7 +5,6 @@ Date: 23/12/2018
 */
 package model.utente;
 
-import java.sql.Date;
 import java.time.LocalDate;
 import java.util.Objects;
 
