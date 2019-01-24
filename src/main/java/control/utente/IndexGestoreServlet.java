@@ -20,7 +20,7 @@ public class IndexGestoreServlet extends HttpServlet {
     /**
      *
      */
-    @Override public void doGet(final HttpServletRequest req,
+    @Override protected void doGet(final HttpServletRequest req,
             final HttpServletResponse resp)
             throws ServletException, IOException {
         super.doGet(req, resp);
@@ -29,7 +29,7 @@ public class IndexGestoreServlet extends HttpServlet {
     /**
      *
      */
-    @Override public void doPost(final HttpServletRequest req,
+    @Override protected void doPost(final HttpServletRequest req,
             final HttpServletResponse resp)
             throws ServletException, IOException {
         super.doPost(req, resp);

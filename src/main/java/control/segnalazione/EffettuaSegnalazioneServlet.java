@@ -26,41 +26,70 @@ import java.io.IOException;
 @WebServlet("/utente/effettuaSegnalazione")
 public class EffettuaSegnalazioneServlet extends HttpServlet {
     /**
-     * Method doGet.
+     * doGet method.
      */
-    @Override public void doGet(final HttpServletRequest req,
+    @Override protected void doGet(final HttpServletRequest req,
             final HttpServletResponse resp)
             throws ServletException, IOException {
 
-        RequestDispatcher dispatcher =
-                getServletContext().getRequestDispatcher(
-                        "/utente/creaSegnalazione.jsp");
-        dispatcher.forward(req, resp);
+        Utente rUser;
+
+        rUser = (Utente) req.getSession().getAttribute("utente");
+
+        if (rUser == null) {
+            req.getSession().invalidate();
+            RequestDispatcher dispatcher =
+                    getServletContext().getRequestDispatcher(
+                            "/index.jsp");
+            dispatcher.forward(req, resp);
+        } else {
+            RequestDispatcher dispatcher =
+                    getServletContext().getRequestDispatcher(
+                            "/utente/creaSegnalazione.jsp");
+            dispatcher.forward(req, resp);
+        }
     }
 
     /**
-     * Method doPost.
+     * doPost method.
      */
-    @Override public void doPost(final HttpServletRequest req,
+    @Override protected void doPost(final HttpServletRequest req,
             final HttpServletResponse resp)
             throws ServletException, IOException {
 
-        SegnalazioneDB sdb = new SegnalazioneDB();
-        SegnalazioneBL sbl = new SegnalazioneBL(sdb);
+        Utente rUser;
 
-        Tipologia tipologia = new Tipologia();
-        tipologia.setId(Integer.parseInt(req.getParameter("field-type")));
+        rUser = (Utente) req.getSession().getAttribute("utente");
 
-        Segnalazione segnalazione  = new Segnalazione();
-        segnalazione.setTitolo(req.getParameter("field-title"));
-        segnalazione.setDescrizione(req.getParameter("field-descr"));
-        segnalazione.setTipologia(tipologia);
-        segnalazione.setAutore(
-                (Utente) req.getSession().getAttribute("utente"));
+        if (rUser == null) {
+            RequestDispatcher dispatcher =
+                    getServletContext().getRequestDispatcher(
+                            "/index.jsp");
+            dispatcher.forward(req, resp);
+        } else {
+            SegnalazioneDB sdb = new SegnalazioneDB();
+            SegnalazioneBL sbl = new SegnalazioneBL(sdb);
 
-        boolean res = sbl.insertSegnalazione(segnalazione);
+            Tipologia tipologia = new Tipologia();
+            tipologia.setId(Integer.parseInt(req.getParameter("field-type")));
 
-        //TODO in caso di errore nell'inserimento della segnalazione effettuare
-        //una redirect ad error.jsp con messaggio di errore
+            Segnalazione segnalazione  = new Segnalazione();
+            segnalazione.setTitolo(req.getParameter("field-title"));
+            segnalazione.setDescrizione(req.getParameter("field-descr"));
+            segnalazione.setTipologia(tipologia);
+            segnalazione.setAutore(
+                    (Utente) req.getSession().getAttribute("utente"));
+
+            try {
+                boolean res = sbl.insertSegnalazione(segnalazione);
+            } catch (Exception e) {
+                String msgError = "Si e' verificato un errore.";
+                req.setAttribute("msgError", msgError);
+                RequestDispatcher dispatcher =
+                        getServletContext().getRequestDispatcher(
+                                "/error.jsp");
+                dispatcher.forward(req, resp);
+                }
+            }
     }
 }
