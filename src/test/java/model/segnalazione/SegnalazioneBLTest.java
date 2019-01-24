@@ -9,6 +9,9 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.mockito.Mockito.when;
+
+import java.sql.SQLException;
+
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.any;
 import model.utente.CSU;
@@ -285,6 +288,9 @@ public class SegnalazioneBLTest {
     }
 
 
+   /**
+    * Test update segnalazione 4.
+    */
    @Test
    public void testUpdateSegnalazione4() {
        final String aTitolo = "Si è guastato il calorifero";
@@ -311,6 +317,9 @@ public class SegnalazioneBLTest {
        assertFalse(res);
    }
 
+   /**
+    * Test update segnalazione 5.
+    */
    @Test
    public void testUpdateSegnalazione5() {
        final String aTitolo = "Si è guastato il calorifero";
@@ -340,9 +349,11 @@ public class SegnalazioneBLTest {
 
     /**
      * Test inoltra segnalazione 1.
+     *
+     * @throws SQLException the SQL exception
      */
     @Test
-    public void testInoltraSegnalazione1() {
+    public void testInoltraSegnalazione1() throws SQLException {
         final int aCod = SEGNALAZIONE_NON_ESISTENTE;
         final int aIdTecnico = TECNICO_ESISTENTE;
 
@@ -352,9 +363,11 @@ public class SegnalazioneBLTest {
 
     /**
      * Test inoltra segnalazione 2.
+     *
+     * @throws SQLException the SQL exception
      */
     @Test
-    public void testInoltraSegnalazione2() {
+    public void testInoltraSegnalazione2() throws SQLException {
         final int aCod = SEGNALAZIONE_RISOLTA;
         final int aIdTecnico = TECNICO_ESISTENTE;
         final Boolean res = manager.inoltraSegnalazione(aCod, aIdTecnico);
@@ -363,9 +376,11 @@ public class SegnalazioneBLTest {
 
     /**
      * Test inoltra segnalazione 3.
+     *
+     * @throws SQLException the SQL exception
      */
     @Test
-    public void testInoltraSegnalazione3() {
+    public void testInoltraSegnalazione3() throws SQLException {
         final int aCod = SEGNALAZIONE_APERTA;
         final int aIdTecnico = TECNICO_ESISTENTE;
         final Boolean res = manager.inoltraSegnalazione(aCod, aIdTecnico);
@@ -374,9 +389,11 @@ public class SegnalazioneBLTest {
 
     /**
      * Test rifiuta segnalazione 1.
+     *
+     * @throws SQLException the SQL exception
      */
     @Test
-    public void testRifiutaSegnalazione1() {
+    public void testRifiutaSegnalazione1() throws SQLException {
         final int aCod = SEGNALAZIONE_NON_ESISTENTE;
         final String aMotivazioneRifiuto = "Ciao";
         final Boolean res = manager.rifiutaSegnalazione(aCod,
@@ -386,9 +403,11 @@ public class SegnalazioneBLTest {
 
     /**
      * Test rifiuta segnalazione 2.
+     *
+     * @throws SQLException the SQL exception
      */
     @Test
-    public void testRifiutaSegnalazione2() {
+    public void testRifiutaSegnalazione2() throws SQLException {
         final int aCod = SEGNALAZIONE_RISOLTA;
         final String aMotivazioneRifiuto = "Ciao";
         final Boolean res = manager.rifiutaSegnalazione(aCod,
@@ -398,9 +417,11 @@ public class SegnalazioneBLTest {
 
     /**
      * Test rifiuta segnalazione 3.
+     *
+     * @throws SQLException the SQL exception
      */
     @Test
-    public void testRifiutaSegnalazione3() {
+    public void testRifiutaSegnalazione3() throws SQLException {
         final int aCod = SEGNALAZIONE_APERTA;
         final String aMotivazioneRifiuto = "";
         final Boolean res = manager.rifiutaSegnalazione(aCod,
@@ -410,9 +431,11 @@ public class SegnalazioneBLTest {
 
     /**
      * Test rifiuta segnalazione 4.
+     *
+     * @throws SQLException the SQL exception
      */
     @Test
-    public void testRifiutaSegnalazione4() {
+    public void testRifiutaSegnalazione4() throws SQLException {
         final int aCod = SEGNALAZIONE_APERTA;
         final String aMotivazioneRifiuto = "Segnalazione duplicata";
         final Boolean res = manager.rifiutaSegnalazione(aCod,

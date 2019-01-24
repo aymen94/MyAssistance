@@ -193,7 +193,7 @@ public final class UfficioTecnicoDB {
 
         Connection connection = null;
         PreparedStatement preparedStatement = null;
-        UfficioTecnico uff = new UfficioTecnico();
+        UfficioTecnico uff = null;
 
         try {
             connection = Database.getConnection();
@@ -203,9 +203,8 @@ public final class UfficioTecnicoDB {
 
             ResultSet rs = preparedStatement.executeQuery();
 
-
-            while (rs.next()) {
-
+            if (rs.next()) {
+                uff = new UfficioTecnico();
                 uff.setId(rs.getInt("Id"));
                 uff.setNome(rs.getString("nome"));
                 uff.setTel(rs.getString("tel"));

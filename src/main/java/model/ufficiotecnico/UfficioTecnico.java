@@ -137,6 +137,10 @@ public class UfficioTecnico {
                 + ", ubicazione='" + ubicazione + '\'' + '}';
     }
 
+    /**
+     * @param o
+     * @return
+     */
     @Override public boolean equals(Object o) {
         if (this == o)
             return true;
@@ -145,7 +149,7 @@ public class UfficioTecnico {
 
         UfficioTecnico that = (UfficioTecnico) o;
 
-        if (id != null ? !id.equals(that.id) : that.id != null)
+        /*if (id != null ? !id.equals(that.id) : that.id != null)
             return false;
         if (nome != null ? !nome.equals(that.nome) : that.nome != null)
             return false;
@@ -153,17 +157,35 @@ public class UfficioTecnico {
             return false;
         if (email != null ? !email.equals(that.email) : that.email != null)
             return false;
+
+        return ubicazione != null ?
+                ubicazione.equals(that.ubicazione) :
+                that.ubicazione == null;*/
+
+        if (id != null && that.id != null) {
+            if (!id.equals(that.id))
+                return false;
+
+        }
+
+        if (nome != null ? !nome.equals(that.nome) : that.nome != null)
+            return false;
+        if (tel != null ? !tel.equals(that.tel) : that.tel != null)
+            return false;
+        if (email != null ? !email.equals(that.email) : that.email != null)
+            return false;
+
         return ubicazione != null ?
                 ubicazione.equals(that.ubicazione) :
                 that.ubicazione == null;
     }
 
     @Override public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (nome != null ? nome.hashCode() : 0);
+        int result = (nome != null ? nome.hashCode() : 0);
         result = 31 * result + (tel != null ? tel.hashCode() : 0);
         result = 31 * result + (email != null ? email.hashCode() : 0);
         result = 31 * result + (ubicazione != null ? ubicazione.hashCode() : 0);
         return result;
     }
+
 }

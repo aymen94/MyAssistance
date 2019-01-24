@@ -36,8 +36,8 @@ public final class UfficioTecnicoBL {
     /**
      * This is an utility class. So no constructor should be used.
      */
-    private UfficioTecnicoBL() {
-        UfficioTecnicoDB data = new UfficioTecnicoDB();
+    public UfficioTecnicoBL() {
+        this.database = new UfficioTecnicoDB();
     }
 
     /**
@@ -45,7 +45,7 @@ public final class UfficioTecnicoBL {
      *
      * @param db it's database
      */
-    private UfficioTecnicoBL(final UfficioTecnicoDB db) {
+    public UfficioTecnicoBL(final UfficioTecnicoDB db) {
         this.database = db;
     }
 
@@ -97,15 +97,13 @@ public final class UfficioTecnicoBL {
      * @param aId the id
      * @return true, if successful
      */
-    public boolean getUfficioTecnico(final Integer aId) {
+    public boolean ottieniUfficio(final Integer aId) throws SQLException {
         UfficioTecnico byId = null;
-        try {
+
             if (aId != null && aId > 0) {
-                byId = (UfficioTecnico) database.getById(aId);
+                byId = database.getById(aId);
             }
-        } catch (final SQLException e) {
-            e.getStackTrace();
-        }
+
         return byId != null;
     }
 
@@ -128,4 +126,5 @@ public final class UfficioTecnicoBL {
         }
         return false;
     }
+
 }
