@@ -5,10 +5,6 @@ Date: 23/12/2018
 */
 package model.utente;
 
-import java.security.BasicPermission;
-import java.sql.Date;
-
-
 /**
  * The Class Gestore.
  */
@@ -19,6 +15,10 @@ public class Gestore extends Utente {
     public Gestore() {
     }
 
+    /**
+     * @see model.utente.Utente#isGestore()
+     * @return always true
+     */
     public Boolean isGestore() {
         return true;
     }
