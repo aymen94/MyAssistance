@@ -107,7 +107,7 @@ public class SegnalazioneBLTest {
         segnalazioneAperta.setCod(SEGNALAZIONE_APERTA);
 
         segnalazioneRisolta = new Segnalazione();
-        segnalazioneRisolta.setStato(Segnalazione.STATO_RISOLTA);
+        segnalazioneRisolta.setStato(Segnalazione.STATO_RISOLTO);
         segnalazioneRisolta.setCod(SEGNALAZIONE_RISOLTA);
 
         when(segnalazioneDB.getByCod(SEGNALAZIONE_NON_ESISTENTE))
@@ -323,7 +323,7 @@ public class SegnalazioneBLTest {
        segnalazione.setTitolo(aTitolo);
        segnalazione.setDescrizione(aDescrizione);
        segnalazione.setCod(SEGNALAZIONE_RISOLTA);
-       segnalazione.setStato(Segnalazione.STATO_RISOLTA);
+       segnalazione.setStato(Segnalazione.STATO_RISOLTO);
 
 
 

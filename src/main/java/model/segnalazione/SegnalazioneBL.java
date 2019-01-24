@@ -181,7 +181,7 @@ public final class SegnalazioneBL {
         final Segnalazione aSegnalazione = segnalazioneDB.getByCod(aCod);
         if (aSegnalazione != null
                 && aSegnalazione.getStato() == Segnalazione.STATO_ASSEGNATO) {
-            aSegnalazione.setStato(Segnalazione.STATO_RISOLTA);
+            aSegnalazione.setStato(Segnalazione.STATO_RISOLTO);
             return segnalazioneDB.update(aSegnalazione) > 0;
         }
         return false;

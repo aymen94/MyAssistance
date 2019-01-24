@@ -91,9 +91,9 @@ public class Segnalazione {
     public static final short STATO_ASSEGNATO = 1;
 
     /**
-     * The Constant STATO_RISOLTA.
+     * The Constant STATO_RISOLTO.
      */
-    public static final short STATO_RISOLTA = 2;
+    public static final short STATO_RISOLTO = 2;
 
     /**
      * Instantiates a new segnalazione.
