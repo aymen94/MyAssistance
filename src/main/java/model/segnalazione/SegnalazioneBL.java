@@ -89,18 +89,17 @@ public final class SegnalazioneBL {
             if (segnalazione.getTitolo().length() > 0
                     && segnalazione.getTitolo().length() <= MAX_TITLE_LENGTH
                     && segnalazione.getDescrizione().length() > 0
-                    && segnalazione.getTipologia() != null
-                    && segnalazione.getStato() == Segnalazione.STATO_APERTO) {
+                    && segnalazione.getTipologia() != null) {
 
                 final Segnalazione aSegnalazione = segnalazioneDB
                         .getByCod(segnalazione.getCod());
-                if (aSegnalazione == null) {
-                    return false;
+                if (aSegnalazione != null && aSegnalazione
+                        .getStato() == Segnalazione.STATO_APERTO) {
+                    aSegnalazione.setTitolo(segnalazione.getTitolo());
+                    aSegnalazione.setDescrizione(segnalazione.getDescrizione());
+                    aSegnalazione.setTipologia(segnalazione.getTipologia());
+                    return segnalazioneDB.update(aSegnalazione) > 0;
                 }
-                aSegnalazione.setTitolo(segnalazione.getTitolo());
-                aSegnalazione.setDescrizione(segnalazione.getDescrizione());
-                aSegnalazione.setTipologia(segnalazione.getTipologia());
-                return segnalazioneDB.update(aSegnalazione) > 0;
             }
 
         } catch (final SQLException e) {
