@@ -133,9 +133,11 @@ public class SegnalazioneBLTest {
 
     /**
      * Test insert segnalazione 1.
+     *
+     * @throws SQLException the SQL exception
      */
     @Test
-    public void testInsertSegnalazione1() {
+    public void testInsertSegnalazione1() throws SQLException {
 
         final String aTitolo = "";
         final String aDescrizione = "Ciaooo";
@@ -158,9 +160,11 @@ public class SegnalazioneBLTest {
 
     /**
      * Test insert segnalazione 2.
+     *
+     * @throws SQLException the SQL exception
      */
     @Test
-    public void testInsertSegnalazione2() {
+    public void testInsertSegnalazione2() throws SQLException {
         final String aTitolo = "Si è guastato il calorifero";
         final String aDescrizione = "";
         final Tipologia tipologia = new Tipologia();
@@ -182,9 +186,11 @@ public class SegnalazioneBLTest {
 
     /**
      * Test insert segnalazione 3.
+     *
+     * @throws SQLException the SQL exception
      */
     @Test
-    public void testInsertSegnalazione3() {
+    public void testInsertSegnalazione3() throws SQLException {
         final String aTitolo = "Si è guastato il calorifero";
         final String aDescrizione = "Il calorifero vicino all’entrata dell’aula"
                 + " F8 emana aria fredda.";
@@ -207,9 +213,11 @@ public class SegnalazioneBLTest {
 
     /**
      * Test update segnalazione 1.
+     *
+     * @throws SQLException the SQL exception
      */
     @Test
-    public void testUpdateSegnalazione1() {
+    public void testUpdateSegnalazione1() throws SQLException {
         final String aTitolo = "";
         final String aDescrizione = "Ciaooo";
         final Tipologia tipologia = new Tipologia();
@@ -233,9 +241,11 @@ public class SegnalazioneBLTest {
 
     /**
      * Test update segnalazione 2.
+     *
+     * @throws SQLException the SQL exception
      */
     @Test
-    public void testUpdateSegnalazione2() {
+    public void testUpdateSegnalazione2() throws SQLException {
         final String aTitolo = "Si è guastato il calorifero";
         final String aDescrizione = "";
         final Tipologia tipologia = new Tipologia();
@@ -260,9 +270,11 @@ public class SegnalazioneBLTest {
 
     /**
      * Test update segnalazione 3.
+     *
+     * @throws SQLException the SQL exception
      */
     @Test
-    public void testUpdateSegnalazione3() {
+    public void testUpdateSegnalazione3() throws SQLException {
         final String aTitolo = "Si è guastato il calorifero";
         final String aDescrizione = "Il calorifero vicino all’entrata dell’aula"
                 + " F8 emana aria fredda.";
@@ -290,9 +302,11 @@ public class SegnalazioneBLTest {
 
    /**
     * Test update segnalazione 4.
+    *
+    * @throws SQLException the SQL exception
     */
    @Test
-   public void testUpdateSegnalazione4() {
+   public void testUpdateSegnalazione4() throws SQLException {
        final String aTitolo = "Si è guastato il calorifero";
        final String aDescrizione = "Il calorifero vicino all’entrata dell’aula"
                + " F8 emana aria fredda.";
@@ -319,9 +333,11 @@ public class SegnalazioneBLTest {
 
    /**
     * Test update segnalazione 5.
+    *
+    * @throws SQLException the SQL exception
     */
    @Test
-   public void testUpdateSegnalazione5() {
+   public void testUpdateSegnalazione5() throws SQLException {
        final String aTitolo = "Si è guastato il calorifero";
        final String aDescrizione = "Il calorifero vicino all’entrata dell’aula"
                + " F8 emana aria fredda.";
