@@ -3,4 +3,4 @@
  * @author TeamC
  *
  */
-package model.segnalazione;
+package model.utente;
