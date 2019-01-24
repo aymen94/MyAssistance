@@ -107,10 +107,16 @@ public final class SegnalazioneBL {
      *
      * @param aCod the cod
      * @return true, if successful
+     * @throws SQLException the SQL exception
      */
-    public boolean deleteSegnalazione(final int aCod) {
+    public boolean deleteSegnalazione(final int aCod) throws SQLException {
+        final Segnalazione aSegnalazione = segnalazioneDB
+                .getByCod(aCod);
+        if (aSegnalazione != null
+                && aSegnalazione.getStato() == Segnalazione.STATO_APERTO) {
+            return segnalazioneDB.deleteById(aCod) > 0;
+        }
         return false;
-
     }
 
     /**
