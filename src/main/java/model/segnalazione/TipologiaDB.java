@@ -96,10 +96,7 @@ public final class TipologiaDB {
      */
     public static Tipologia getById(final int aId) throws SQLException {
         List<Tipologia> tipologiaList = genericGet(SELECT_BY_ID, aId);
-        if (tipologiaList != null) {
             return tipologiaList.get(0);
-        }
-        return null;
     }
 
     /**
@@ -131,11 +128,8 @@ public final class TipologiaDB {
                 tipologia.setPriorita(result.getShort("priorita"));
                 tipologiaList.add(tipologia);
             }
-            if (tipologiaList.size() > 0) {
-                return tipologiaList;
-            } else {
-                return null;
-            }
+            return tipologiaList;
+
         } finally {
             freeResources(preparedStatement, connection);
         }
