@@ -185,8 +185,13 @@ public final class SegnalazioneBL {
      * @throws SQLException the SQL exception
      */
     public boolean segnaRisolta(final int aCod) throws SQLException {
+        final Segnalazione aSegnalazione = segnalazioneDB.getByCod(aCod);
+        if (aSegnalazione != null
+                && aSegnalazione.getStato() == Segnalazione.STATO_ASSEGNATO) {
+            aSegnalazione.setStato(Segnalazione.STATO_RISOLTA);
+            return segnalazioneDB.update(aSegnalazione) > 0;
+        }
         return false;
-
     }
 
 }
