@@ -7,6 +7,7 @@ package control.ufficio_tecnico;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,6 +19,7 @@ import java.io.IOException;
 /**
  * Servlet for inserting a technical office.
  */
+@WebServlet("/gestore/ufficioTecnico")
 public class InserisciUfficioTecnicoServlet extends HttpServlet {
     /**
      * doGet method.
@@ -33,7 +35,7 @@ public class InserisciUfficioTecnicoServlet extends HttpServlet {
             req.getSession().invalidate();
             RequestDispatcher dispatcher =
                     getServletContext().getRequestDispatcher(
-                            "/index.jsp");
+                            "/gestore/ufficioTecnico.jsp");
             dispatcher.forward(req, resp);
         } else {
             UfficioTecnicoBL ubl = new UfficioTecnicoBL();
