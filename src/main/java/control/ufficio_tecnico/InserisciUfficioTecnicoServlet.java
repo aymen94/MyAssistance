@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.ufficiotecnico.UfficioTecnico;
 import model.ufficiotecnico.UfficioTecnicoBL;
+import model.utente.Gestore;
 import model.utente.Utente;
 import java.io.IOException;
 
@@ -37,7 +38,7 @@ public class InserisciUfficioTecnicoServlet extends HttpServlet {
                     getServletContext().getRequestDispatcher(
                             "/gestore/ufficioTecnico.jsp");
             dispatcher.forward(req, resp);
-        } else {
+        } else if (rUser instanceof Gestore) {
             UfficioTecnicoBL ubl = new UfficioTecnicoBL();
 
             String nome = req.getParameter("field-name");
