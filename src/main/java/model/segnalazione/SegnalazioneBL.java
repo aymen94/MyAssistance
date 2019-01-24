@@ -41,26 +41,23 @@ public final class SegnalazioneBL {
      *
      * @param segnalazione the segnalazione
      * @return true, if successful
+     * @throws SQLException the SQL exception
      */
-    public boolean insertSegnalazione(final Segnalazione segnalazione) {
-        try {
+    public boolean insertSegnalazione(final Segnalazione segnalazione)
+            throws SQLException {
+        if (segnalazione.getTitolo().length() > 0
+                && segnalazione.getTitolo().length() <= MAX_TITLE_LENGTH
+                && segnalazione.getDescrizione().length() > 0
+                && segnalazione.getAutore() != null
+                && segnalazione.getTipologia() != null) {
 
-            if (segnalazione.getTitolo().length() > 0
-                    && segnalazione.getTitolo().length() <= MAX_TITLE_LENGTH
-                    && segnalazione.getDescrizione().length() > 0
-                    && segnalazione.getAutore() != null
-                    && segnalazione.getTipologia() != null) {
-
-                segnalazione.setTitolo(segnalazione.getTitolo());
-                segnalazione.setDescrizione(segnalazione.getDescrizione());
-                segnalazione.setTipologia(segnalazione.getTipologia());
-                segnalazione.setAutore(segnalazione.getAutore());
-                // Set the current date
-                segnalazione.setDataSegnalazione(LocalDate.now());
-                return segnalazioneDB.insert(segnalazione) > 0;
-            }
-        } catch (final SQLException e) {
-            e.printStackTrace();
+            segnalazione.setTitolo(segnalazione.getTitolo());
+            segnalazione.setDescrizione(segnalazione.getDescrizione());
+            segnalazione.setTipologia(segnalazione.getTipologia());
+            segnalazione.setAutore(segnalazione.getAutore());
+            // Set the current date
+            segnalazione.setDataSegnalazione(LocalDate.now());
+            return segnalazioneDB.insert(segnalazione) > 0;
         }
         return false;
     }
@@ -82,28 +79,24 @@ public final class SegnalazioneBL {
      *
      * @param segnalazione the segnalazione
      * @return true, if successful
+     * @throws SQLException the SQL exception
      */
-    public boolean updateSegnalazione(final Segnalazione segnalazione) {
-        try {
+    public boolean updateSegnalazione(final Segnalazione segnalazione)
+            throws SQLException {
+        if (segnalazione.getTitolo().length() > 0
+                && segnalazione.getTitolo().length() <= MAX_TITLE_LENGTH
+                && segnalazione.getDescrizione().length() > 0
+                && segnalazione.getTipologia() != null) {
 
-            if (segnalazione.getTitolo().length() > 0
-                    && segnalazione.getTitolo().length() <= MAX_TITLE_LENGTH
-                    && segnalazione.getDescrizione().length() > 0
-                    && segnalazione.getTipologia() != null) {
-
-                final Segnalazione aSegnalazione = segnalazioneDB
-                        .getByCod(segnalazione.getCod());
-                if (aSegnalazione != null && aSegnalazione
-                        .getStato() == Segnalazione.STATO_APERTO) {
-                    aSegnalazione.setTitolo(segnalazione.getTitolo());
-                    aSegnalazione.setDescrizione(segnalazione.getDescrizione());
-                    aSegnalazione.setTipologia(segnalazione.getTipologia());
-                    return segnalazioneDB.update(aSegnalazione) > 0;
-                }
+            final Segnalazione aSegnalazione = segnalazioneDB
+                    .getByCod(segnalazione.getCod());
+            if (aSegnalazione != null
+                    && aSegnalazione.getStato() == Segnalazione.STATO_APERTO) {
+                aSegnalazione.setTitolo(segnalazione.getTitolo());
+                aSegnalazione.setDescrizione(segnalazione.getDescrizione());
+                aSegnalazione.setTipologia(segnalazione.getTipologia());
+                return segnalazioneDB.update(aSegnalazione) > 0;
             }
-
-        } catch (final SQLException e) {
-            e.printStackTrace();
         }
         return false;
 
