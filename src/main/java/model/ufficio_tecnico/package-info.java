@@ -3,4 +3,4 @@
  * @author TeamC
  *
  */
-package model.ufficiotecnico;
+package model.ufficio_tecnico;
