@@ -25,14 +25,14 @@ public final class SegnalazioneBL {
     /**
      * The segnalazione DB.
      */
-    private final SegnalazioneDB segnalazioneDB;
+    private final SegnalazioneDBInterface segnalazioneDB;
 
     /**
      * Instantiates a new segnalazione BL.
      *
      * @param aSegnalazioneDB the segnalazione DB
      */
-    public SegnalazioneBL(final SegnalazioneDB aSegnalazioneDB) {
+    public SegnalazioneBL(final SegnalazioneDBInterface aSegnalazioneDB) {
         segnalazioneDB = aSegnalazioneDB;
     }
 

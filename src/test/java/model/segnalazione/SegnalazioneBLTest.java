@@ -21,12 +21,12 @@ import model.utente.Utente;
 /**
  * The Class SegnalazioneBLTest.
  */
-public class SegnalazioneBLTest {
+public final class SegnalazioneBLTest {
 
     /**
      * The segnalazione DB.
      */
-    private SegnalazioneDB segnalazioneDB;
+    private SegnalazioneDBInterface segnalazioneDB;
 
     /**
      * The manager.
@@ -102,7 +102,7 @@ public class SegnalazioneBLTest {
     @Before
     public void setUp() throws Exception {
 
-        segnalazioneDB = mock(SegnalazioneDB.class);
+        segnalazioneDB = mock(SegnalazioneDBInterface.class);
         segnalazioneAperta = new Segnalazione();
         segnalazioneAperta.setStato(Segnalazione.STATO_APERTO);
         segnalazioneAperta.setCod(SEGNALAZIONE_APERTA);

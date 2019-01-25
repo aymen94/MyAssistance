@@ -3,7 +3,7 @@ package model.segnalazione;
 /**
  * The Class Tipologia.
  */
-public class Tipologia {
+public final class Tipologia {
 
     /**
      * The nome.

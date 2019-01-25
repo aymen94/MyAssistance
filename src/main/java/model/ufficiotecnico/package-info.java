@@ -1,4 +1,4 @@
-// TODO: Migliorare javadoc
+// TODO Migliorare javadoc
 /**
  * @author TeamC
  *

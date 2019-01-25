@@ -22,7 +22,7 @@ import pool.Database;
 /**
  * The Class SegnalazioneDB.
  */
-public class SegnalazioneDB {
+public final class SegnalazioneDB implements SegnalazioneDBInterface {
 
     /**
      * The Constant TABLE_NAME.

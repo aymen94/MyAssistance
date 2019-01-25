@@ -13,7 +13,7 @@ import model.utente.Utente;
 /**
  * The Class Segnalazione.
  */
-public class Segnalazione {
+public final class Segnalazione {
 
     /**
      * The cod.
