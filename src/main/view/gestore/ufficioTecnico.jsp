@@ -29,7 +29,9 @@
 					<div class="alert-list accordion" id="accordion_parent_new">
 						<div class="card">
 							<div class="media-body">
-								<a href="#" data-toggle="collapse" data-target="#collapse_new"><h5 class="mt-0 mb-1">&#43; Aggiungi Nuovo Ufficio Tecnico</h5></a>
+								<h5 class="mt-0 mb-1">
+									<a href="#" data-toggle="collapse" data-target="#collapse_new">&#43; Aggiungi Nuovo Ufficio Tecnico</a>
+								</h5>
 								<form novalidate onsubmit="return utilities.validate(this)" method="post" id="collapse_new" class="collapse" data-parent="#accordion_parent_new">
 									<input type="hidden" name="field-id" value="-1">
 									<br>
@@ -71,88 +73,84 @@
 					<div class="alert-list accordion" id="accordion_parent">
 						<div class="card">
 							<div class="media-body">
-								<a href="#" data-toggle="collapse" data-target="#collapse_0"><h5 class="mt-0 mb-1">Ufficio Tecnico Di Salerno</h5></a>
-								<form novalidate onsubmit="return utilities.validate(this)" method="post" id="collapse_0" class="collapse" data-parent="#accordion_parent">
+								<h5 class="mt-0 mb-1">
+									<a href="#" data-toggle="collapse" data-target="#collapse_0">Ufficio Tecnico Di Salerno</a>
+								</h5>
+								<div id="collapse_0" class="collapse" data-parent="#accordion_parent">
 									<input type="hidden" name="field-id" value="1">
 									<br>
 									<div class="input-group mb-3">
 										<div class="input-group-prepend">
 											<span class="input-group-text">Nome</span>
 										</div>
-										<input type="text" name="field-name" class="form-control" placeholder="Inserire qui il nome dell'ufficio tecnico" pattern="^.{3,}$">
+										<input type="text" name="field-name" class="form-control" readonly>
 									</div>
 									<div class="input-group mb-3">
 										<div class="input-group-prepend">
 											<span class="input-group-text">Telefono</span>
 										</div>
-										<input type="text" name="field-tel" class="form-control" placeholder="Inserire qui il contatto telefonico dell'ufficio in questione" pattern="^\+{0,1}\d{3,}$">
+										<input type="text" name="field-tel" class="form-control" readonly>
 									</div>
 									<div class="input-group mb-3">
 										<div class="input-group-prepend">
 											<span class="input-group-text">Email</span>
 										</div>
-										<input type="text" name="field-email" class="form-control" placeholder="Inserire qui l'email dell'ufficio in questione" pattern="^[^@]{1,}@[^\.]{1,}(\.[^\.]{1,}){1,}$">
+										<input type="text" name="field-email" class="form-control" readonly>
 									</div>
 									<div class="input-group mb-3">
 										<div class="input-group-prepend">
 											<span class="input-group-text">Ubicazione</span>
 										</div>
-										<input type="text" name="field-location" class="form-control" placeholder="Inserire qui l'ubicazione dell'ufficio in questione" pattern="^.{3,}$">
+										<input type="text" name="field-location" class="form-control" readonly>
 									</div>
-									<div>
-										<button type="submit" class="btn btn-light">Applica Modifiche</button>
-										<button type="button" class="btn btn-danger" onclick="ufficioTecnico.elimina('submit-dialog')">Elimina</button>
-									</div>
-								</form>
+								</div>
 							</div>
 						</div>
 						<div class="card">
 							<div class="media-body">
-								<a href="#" data-toggle="collapse" data-target="#collapse_1"><h5 class="mt-0 mb-1">Ufficio Tecnico Di Avellino</h5></a>
-								<form novalidate onsubmit="return utilities.validate(this)" method="post" id="collapse_1" class="collapse" data-parent="#accordion_parent">
-									<input type="hidden" name="field-id" value="2">
+								<h5 class="mt-0 mb-1">
+									<a href="#" data-toggle="collapse" data-target="#collapse_1">Ufficio Tecnico Di Avellino</a>
+								</h5>
+								<div id="collapse_1" class="collapse" data-parent="#accordion_parent">
+									<input type="hidden" name="field-id" value="1">
 									<br>
 									<div class="input-group mb-3">
 										<div class="input-group-prepend">
 											<span class="input-group-text">Nome</span>
 										</div>
-										<input type="text" name="field-name" class="form-control" placeholder="Inserire qui il nome dell'ufficio tecnico" pattern="^.{3,}$">
+										<input type="text" name="field-name" class="form-control" readonly>
 									</div>
 									<div class="input-group mb-3">
 										<div class="input-group-prepend">
 											<span class="input-group-text">Telefono</span>
 										</div>
-										<input type="text" name="field-tel" class="form-control" placeholder="Inserire qui il contatto telefonico dell'ufficio in questione" pattern="^\+{0,1}\d{3,}$">
+										<input type="text" name="field-tel" class="form-control" readonly>
 									</div>
 									<div class="input-group mb-3">
 										<div class="input-group-prepend">
 											<span class="input-group-text">Email</span>
 										</div>
-										<input type="text" name="field-email" class="form-control" placeholder="Inserire qui l'email dell'ufficio in questione" pattern="^[^@]{1,}@[^\.]{1,}(\.[^\.]{1,}){1,}$">
+										<input type="text" name="field-email" class="form-control" readonly>
 									</div>
 									<div class="input-group mb-3">
 										<div class="input-group-prepend">
 											<span class="input-group-text">Ubicazione</span>
 										</div>
-										<input type="text" name="field-location" class="form-control" placeholder="Inserire qui l'ubicazione dell'ufficio in questione" pattern="^.{3,}$">
+										<input type="text" name="field-location" class="form-control" readonly>
 									</div>
-									<div>
-										<button type="submit" class="btn btn-light">Applica Modifiche</button>
-										<button type="button" class="btn btn-danger" onclick="ufficioTecnico.elimina('submit-dialog')">Elimina</button>
-									</div>
-								</form>
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 				<%@include file="../include/nav-right.jsp" %>
 			</div>
+			<%@include file="../include/footer.jsp" %>
 		</div>
-		<%@include file="../include/footer.jsp" %>
 		<%@include file="../include/error-dialog.jsp" %>
 		<%@include file="../include/submit-dialog.jsp" %>
 		<div style="display: none">
-			<div id="elimina-ufficio" method="post">
+			<div id="elimina-ufficio">
 				Sei sicuro di voler eliminare questo ufficio tecnico? Questa azione è irreversibile!
 				<input type="hidden" name="elimina-ufficio-id">
 			</div>

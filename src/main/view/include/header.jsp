@@ -3,11 +3,11 @@
   Author: Alfonso
   Date: 30/12/2018
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<div class="header">
-	<div>Universit‡ Degli Studi Di Salerno</div>
+<%@ page contentType="text/html;charset=UTF-8" language="java"%>
+<div class="header sticky-top">
+	<div>Universit√† Degli Studi Di Salerno</div>
 	<div>
-		<a href="Accedi" class="btn btn-light">Accedi</a>
-		<a href="Registrati" class="btn btn-light">Registrati</a>
+		<a href="./utente/accedi" class="btn btn-light">Accedi</a> 
+		<a href="./utente/registrati" class="btn btn-light">Registrati</a>
 	</div>
 </div>

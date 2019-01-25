@@ -84,8 +84,8 @@
 				</div>
 				<%@include file="../include/nav-right.jsp" %>
 			</div>
+			<%@include file="../include/footer.jsp" %>
 		</div>
-		<%@include file="../include/footer.jsp" %>
 		<%@include file="../include/error-dialog.jsp" %>
 	</body>
 </html>
