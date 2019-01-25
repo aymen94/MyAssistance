@@ -10,8 +10,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.ufficiotecnico.UfficioTecnico;
-import model.ufficiotecnico.UfficioTecnicoBL;
+import model.ufficio_tecnico.UfficioTecnico;
+import model.ufficio_tecnico.UfficioTecnicoBL;
 import model.utente.Utente;
 import java.io.IOException;
 

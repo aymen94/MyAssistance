@@ -14,7 +14,7 @@ import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.ufficiotecnico.UfficioTecnico;
+import model.ufficio_tecnico.UfficioTecnico;
 import model.utente.CSU;
 import model.utente.Utente;
 import pool.Database;

@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
 
-import model.ufficiotecnico.UfficioTecnico;
+import model.ufficio_tecnico.UfficioTecnico;
 import model.utente.Utente;
 
 /**

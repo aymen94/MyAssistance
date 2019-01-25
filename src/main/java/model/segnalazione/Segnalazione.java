@@ -7,7 +7,7 @@ package model.segnalazione;
 
 import java.time.LocalDate;
 
-import model.ufficiotecnico.UfficioTecnico;
+import model.ufficio_tecnico.UfficioTecnico;
 import model.utente.Utente;
 
 /**
