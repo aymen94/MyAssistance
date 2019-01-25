@@ -1,11 +1,12 @@
 language: java
 jdk:
   - oraclejdk8
-sudo: false # faster builds
 
 before_install:
   - mysql < db/schema.sql
   - mysql -e "USE mysql; UPDATE user SET password=PASSWORD('root') WHERE user='root'; FLUSH PRIVILEGES;"
+  - wget https://github.com/HandyMenny/coveralls-maven-plugin/releases/download/v4.4.0-CUSTOM/coveralls-maven-plugin-4.4.0-SNAPSHOT.jar
+  - mvn org.apache.maven.plugins:maven-install-plugin:3.0.0-M1:install-file  -Dfile=coveralls-maven-plugin-4.4.0-SNAPSHOT.jar
 script: mvn test
 
 after_success:
