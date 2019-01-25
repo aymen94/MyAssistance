@@ -1,4 +1,4 @@
-package model.ufficiotecnico;
+package model.ufficio_tecnico;
 
 /**
  * The Class UfficioTecnico.
@@ -138,54 +138,94 @@ public class UfficioTecnico {
     }
 
     /**
-     * @param o
-     * @return
+     * @param obj
+     * @return result of eguals
      */
-    @Override public boolean equals(Object o) {
-        if (this == o)
+    @Override public boolean equals(final Object obj) {
+        if (this == obj) {
             return true;
-        if (o == null || getClass() != o.getClass())
+        }
+        if (obj == null) {
             return false;
+        }
+        if (!(obj instanceof UfficioTecnico)) {
+            return false;
+        }
+        final UfficioTecnico other = (UfficioTecnico) obj;
 
-        UfficioTecnico that = (UfficioTecnico) o;
-
-        /*if (id != null ? !id.equals(that.id) : that.id != null)
-            return false;
-        if (nome != null ? !nome.equals(that.nome) : that.nome != null)
-            return false;
-        if (tel != null ? !tel.equals(that.tel) : that.tel != null)
-            return false;
-        if (email != null ? !email.equals(that.email) : that.email != null)
-            return false;
-
-        return ubicazione != null ?
-                ubicazione.equals(that.ubicazione) :
-                that.ubicazione == null;*/
-
-        if (id != null && that.id != null) {
-            if (!id.equals(that.id))
+        // if id or other.id is null do not compare
+        if (id != null && other.id != null) {
+            if (!id.equals(other.id)) {
                 return false;
-
+            }
         }
 
-        if (nome != null ? !nome.equals(that.nome) : that.nome != null)
+        if (email == null) {
+            if (other.email != null) {
+                return false;
+            }
+        } else if (!email.equals(other.email)) {
             return false;
-        if (tel != null ? !tel.equals(that.tel) : that.tel != null)
+        }
+        if (nome == null) {
+            if (other.nome != null) {
+                return false;
+            }
+        } else if (!nome.equals(other.nome)) {
             return false;
-        if (email != null ? !email.equals(that.email) : that.email != null)
+        }
+        if (tel == null) {
+            if (other.tel != null) {
+                return false;
+            }
+        } else if (!tel.equals(other.tel)) {
             return false;
-
-        return ubicazione != null ?
-                ubicazione.equals(that.ubicazione) :
-                that.ubicazione == null;
+        }
+        if (ubicazione == null) {
+            if (other.ubicazione != null) {
+                return false;
+            }
+        } else if (!ubicazione.equals(other.ubicazione)) {
+            return false;
+        }
+        return true;
     }
 
+
+    /**
+     *
+     * @return result
+     */
+
     @Override public int hashCode() {
-        int result = (nome != null ? nome.hashCode() : 0);
+
+         final int tr = 31;
+        /*int result = (nome != null ? nome.hashCode() : 0);
         result = 31 * result + (tel != null ? tel.hashCode() : 0);
         result = 31 * result + (email != null ? email.hashCode() : 0);
         result = 31 * result + (ubicazione != null ? ubicazione.hashCode() : 0);
-        return result;
+        return result;*/
+        int result = 0;
+
+        if (nome != null) {
+              result = tr * result + nome.hashCode();
+        }
+
+        if (tel != null) {
+              result = tr * result + tel.hashCode();
+            return result;
+        }
+
+        if (email != null) {
+              result = tr * result + email.hashCode();
+            return result;
+        }
+
+        if (ubicazione != null) {
+              result = tr * result + ubicazione.hashCode();
+            return result;
+        }
+        return 0;
     }
 
 }

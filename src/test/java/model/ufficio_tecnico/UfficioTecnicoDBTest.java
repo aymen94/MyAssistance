@@ -18,8 +18,6 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import model.ufficiotecnico.UfficioTecnico;
-import model.ufficiotecnico.UfficioTecnicoDB;
 import pool.Database;
 
 /**

@@ -1,4 +1,4 @@
-package model.ufficiotecnico;
+package model.ufficio_tecnico;
 
 import java.sql.SQLException;
 import java.util.List;

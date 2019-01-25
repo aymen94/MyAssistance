@@ -1,4 +1,4 @@
-package model.ufficiotecnico;
+package model.ufficio_tecnico;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -10,10 +10,10 @@ import pool.Database;
 
 import java.sql.Connection;
 
-/**
- * This class allows the management of persistent data relating to offices
- *  technicians
- */
+    /**
+     * This class allows the management of persistent data relating to offices.
+     *  technicians
+     */
 
 public final class UfficioTecnicoDB {
 
@@ -182,8 +182,8 @@ public final class UfficioTecnicoDB {
 
 
     /**
-     * This method select the UfficioTecnico by a id from the database given all dates of UfficioTecnico.
-     *
+     * This method select the UfficioTecnico by a id from the database given all
+     * dates of UfficioTecnico.
      * @param aId id the id of UfficioTecnico.
      * @return uffici a  type list of  UfficioTecnico.
      * @throws SQLException is the exception that can be thrown during the
@@ -199,7 +199,7 @@ public final class UfficioTecnicoDB {
             connection = Database.getConnection();
 
             preparedStatement = connection.prepareStatement(GET_BY_ID);
-            preparedStatement.setInt(1,aId);
+            preparedStatement.setInt(1, aId);
 
             ResultSet rs = preparedStatement.executeQuery();
 
