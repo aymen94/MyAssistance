@@ -18,7 +18,7 @@ public class Segnalazione {
     /**
      * The cod.
      */
-    private int cod;
+    private Integer cod;
 
     /**
      * The titolo.
@@ -307,6 +307,183 @@ public class Segnalazione {
      */
     public void setTecnico(final UfficioTecnico aTecnico) {
         tecnico = aTecnico;
+    }
+
+    /**
+     * Hash code.
+     *
+     * @return the hash
+     * @see java.lang.Object#hashCode()
+     */
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+
+        if (autore == null) {
+            result = prime * result + 0;
+        } else {
+            result = prime * result + autore.hashCode();
+        }
+
+        if ((dataAssegnazione == null)) {
+            result = prime * result + 0;
+        } else {
+            result = prime * result + dataAssegnazione.hashCode();
+        }
+
+        if (dataRifiuto == null) {
+            result = prime * result + 0;
+        } else {
+            result = prime * result + dataRifiuto.hashCode();
+        }
+
+        if (dataRisoluzione == null) {
+            result = prime * result + 0;
+        } else {
+            result = prime * result + dataRisoluzione.hashCode();
+        }
+
+        if (dataSegnalazione == null) {
+            result = prime * result + 0;
+        } else {
+            result = prime * result + dataSegnalazione.hashCode();
+        }
+
+        if (descrizione == null) {
+            result = prime * result + 0;
+        } else {
+            result = prime * result + descrizione.hashCode();
+        }
+
+        if (motivazioneRifiuto == null) {
+            result = prime * result + 0;
+        } else {
+            result = prime * result + motivazioneRifiuto.hashCode();
+        }
+
+        result = prime * result + stato;
+
+        if (tecnico == null) {
+            result = prime * result + 0;
+        } else {
+            result = prime * result + tecnico.hashCode();
+        }
+
+        if (tipologia == null) {
+            result = prime * result + 0;
+        } else {
+            result = prime * result + tipologia.hashCode();
+        }
+
+        if (titolo == null) {
+            result = prime * result + 0;
+        } else {
+            result = prime * result + titolo.hashCode();
+        }
+        return result;
+    }
+
+    /**
+     * Equals.
+     *
+     * @param obj the obj
+     * @return true, if successful
+     * @see java.lang.Object#equals(java.lang.Object)
+     */
+    @Override
+    public boolean equals(final Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (!(obj instanceof Segnalazione)) {
+            return false;
+        }
+        final Segnalazione other = (Segnalazione) obj;
+
+        // if cod or other.cod is null do not compare them
+        if (cod != null && other.cod != null) {
+            if (!cod.equals(other.cod)) {
+                return false;
+            }
+        }
+        if (autore == null) {
+            if (other.autore != null) {
+                return false;
+            }
+        } else if (!autore.equals(other.autore)) {
+            return false;
+        }
+        if (dataAssegnazione == null) {
+            if (other.dataAssegnazione != null) {
+                return false;
+            }
+        } else if (!dataAssegnazione.equals(other.dataAssegnazione)) {
+            return false;
+        }
+        if (dataRifiuto == null) {
+            if (other.dataRifiuto != null) {
+                return false;
+            }
+        } else if (!dataRifiuto.equals(other.dataRifiuto)) {
+            return false;
+        }
+        if (dataRisoluzione == null) {
+            if (other.dataRisoluzione != null) {
+                return false;
+            }
+        } else if (!dataRisoluzione.equals(other.dataRisoluzione)) {
+            return false;
+        }
+        if (dataSegnalazione == null) {
+            if (other.dataSegnalazione != null) {
+                return false;
+            }
+        } else if (!dataSegnalazione.equals(other.dataSegnalazione)) {
+            return false;
+        }
+        if (descrizione == null) {
+            if (other.descrizione != null) {
+                return false;
+            }
+        } else if (!descrizione.equals(other.descrizione)) {
+            return false;
+        }
+        if (motivazioneRifiuto == null) {
+            if (other.motivazioneRifiuto != null) {
+                return false;
+            }
+        } else if (!motivazioneRifiuto.equals(other.motivazioneRifiuto)) {
+            return false;
+        }
+        if (stato != other.stato) {
+            return false;
+        }
+        if (tecnico == null) {
+            if (other.tecnico != null) {
+                return false;
+            }
+        } else if (!tecnico.equals(other.tecnico)) {
+            return false;
+        }
+        if (tipologia == null) {
+            if (other.tipologia != null) {
+                return false;
+            }
+        } else if (!tipologia.equals(other.tipologia)) {
+            return false;
+        }
+        if (titolo == null) {
+            if (other.titolo != null) {
+                return false;
+            }
+        } else if (!titolo.equals(other.titolo)) {
+            return false;
+        }
+        return true;
     }
 
 }
