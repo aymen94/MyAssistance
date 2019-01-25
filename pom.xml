@@ -78,7 +78,7 @@
                     <phase>validate</phase>
                     <configuration>
                         <encoding>UTF-8</encoding>
-                        <consoleOutput>true</consoleOutput>
+                        <consoleOutput>false</consoleOutput>
                         <failOnViolation>false</failOnViolation>
                         <includeTestSourceDirectory>true</includeTestSourceDirectory>
                     </configuration>
