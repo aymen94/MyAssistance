@@ -5,6 +5,7 @@
 */
 package control.utente;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -23,7 +24,10 @@ public class IndexGestoreServlet extends HttpServlet {
     @Override protected void doGet(final HttpServletRequest req,
             final HttpServletResponse resp)
             throws ServletException, IOException {
-        super.doGet(req, resp);
+        RequestDispatcher dispatcher =
+                getServletContext().getRequestDispatcher(
+                        "/gestore/index.jsp");
+        dispatcher.forward(req, resp);
     }
 
     /**
@@ -32,6 +36,6 @@ public class IndexGestoreServlet extends HttpServlet {
     @Override protected void doPost(final HttpServletRequest req,
             final HttpServletResponse resp)
             throws ServletException, IOException {
-        super.doPost(req, resp);
+        doGet(req, resp);
     }
 }
