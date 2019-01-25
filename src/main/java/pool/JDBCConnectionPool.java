@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-// TODO: Auto-generated Javadoc
+// TODO Auto-generated Javadoc
 /**
  * The Class JDBCConnectionPool.
  */
