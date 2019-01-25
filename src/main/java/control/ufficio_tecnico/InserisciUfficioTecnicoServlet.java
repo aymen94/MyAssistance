@@ -21,7 +21,7 @@ import java.io.IOException;
  * Servlet for inserting a technical office.
  */
 @WebServlet("/gestore/ufficioTecnico")
-public class InserisciUfficioTecnicoServlet extends HttpServlet {
+public final class InserisciUfficioTecnicoServlet extends HttpServlet {
     /**
      * doGet method.
      */

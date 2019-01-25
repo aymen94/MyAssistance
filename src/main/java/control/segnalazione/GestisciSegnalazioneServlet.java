@@ -23,7 +23,7 @@ import java.io.IOException;
  * Servlet for handling a report.
  */
 @WebServlet("/gestore/segnalazioni")
-public class GestisciSegnalazioneServlet extends HttpServlet {
+public final class GestisciSegnalazioneServlet extends HttpServlet {
     /**
      * doGet method.
      */

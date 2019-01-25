@@ -14,7 +14,7 @@ import java.io.IOException;
 /**
  * Servlet per sospendere utente.
  */
-public class SospendiUtenteServlet extends HttpServlet {
+public final class SospendiUtenteServlet extends HttpServlet {
     /**
      *
      */

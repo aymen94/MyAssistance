@@ -16,7 +16,7 @@ import java.io.IOException;
  * Servlet for redirecting to the index of the user.
  */
 @WebServlet("/utente/")
-public class IndexUtenteServlet extends HttpServlet {
+public final class IndexUtenteServlet extends HttpServlet {
     /**
      *
      */
