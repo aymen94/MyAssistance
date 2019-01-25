@@ -3,7 +3,7 @@ package model.ufficio_tecnico;
 /**
  * The Class UfficioTecnico.
  */
-public class UfficioTecnico {
+public final class UfficioTecnico {
 
     /**
      * The id.
