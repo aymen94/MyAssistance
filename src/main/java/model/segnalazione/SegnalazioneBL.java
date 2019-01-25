@@ -25,7 +25,7 @@ public final class SegnalazioneBL {
     /**
      * The segnalazione DB.
      */
-    private SegnalazioneDB segnalazioneDB;
+    private final SegnalazioneDB segnalazioneDB;
 
     /**
      * Instantiates a new segnalazione BL.
@@ -67,11 +67,14 @@ public final class SegnalazioneBL {
      *
      * @param aUtente the utente
      * @return the list
+     * @throws SQLException the SQL exception
      */
-    public static List<Segnalazione> getSegnalazioniEffettuate(
-            final Utente aUtente) {
+    public List<Segnalazione> getSegnalazioniEffettuate(final Utente aUtente)
+            throws SQLException {
+        if (aUtente != null && aUtente.getId() != null) {
+            return segnalazioneDB.getByAutore(aUtente.getId());
+        }
         return null;
-
     }
 
     /**
@@ -110,8 +113,7 @@ public final class SegnalazioneBL {
      * @throws SQLException the SQL exception
      */
     public boolean deleteSegnalazione(final int aCod) throws SQLException {
-        final Segnalazione aSegnalazione = segnalazioneDB
-                .getByCod(aCod);
+        final Segnalazione aSegnalazione = segnalazioneDB.getByCod(aCod);
         if (aSegnalazione != null
                 && aSegnalazione.getStato() == Segnalazione.STATO_APERTO) {
             return segnalazioneDB.deleteById(aCod) > 0;
@@ -133,11 +135,10 @@ public final class SegnalazioneBL {
         aSegnalazione = segnalazioneDB.getByCod(aCod);
         if (aSegnalazione != null
                 && aSegnalazione.getStato() == Segnalazione.STATO_APERTO) {
-            UfficioTecnico tecnico = new UfficioTecnico();
+            final UfficioTecnico tecnico = new UfficioTecnico();
             tecnico.setId(aIdTecnico);
             aSegnalazione.setTecnico(tecnico);
-            aSegnalazione.setDataAssegnazione(
-                    LocalDate.now());
+            aSegnalazione.setDataAssegnazione(LocalDate.now());
             return segnalazioneDB.update(aSegnalazione) > 0;
         }
         return false;
@@ -150,7 +151,7 @@ public final class SegnalazioneBL {
      * @throws SQLException the SQL exception
      */
     public List<Segnalazione> getSegnalazioniRicevute() throws SQLException {
-        return null;
+        return segnalazioneDB.getAll();
 
     }
 

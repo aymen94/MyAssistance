@@ -1,16 +1,20 @@
 package model.segnalazione;
 
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
-
-import org.junit.Before;
-import org.junit.Test;
+import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import java.sql.SQLException;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.any;
+import org.junit.Before;
+import org.junit.Test;
+
 import model.utente.CSU;
 import model.utente.Utente;
 
@@ -80,6 +84,11 @@ public class SegnalazioneBLTest {
     private static final int TECNICO_ESISTENTE = 1;
 
     /**
+     * The lista segnalazioni.
+     */
+    private List<Segnalazione> listaSegnalazioni;
+
+    /**
      * Instantiates a new segnalazione BL test.
      */
     public SegnalazioneBLTest() {
@@ -106,6 +115,10 @@ public class SegnalazioneBLTest {
         segnalazioneAssegnata.setStato(Segnalazione.STATO_ASSEGNATO);
         segnalazioneAssegnata.setCod(SEGNALAZIONE_ASSEGNATA);
 
+        listaSegnalazioni = Arrays.asList(segnalazioneAperta,
+                segnalazioneAssegnata,
+                segnalazioneRisolta);
+
         when(segnalazioneDB.getByCod(SEGNALAZIONE_NON_ESISTENTE))
                 .thenReturn(null);
 
@@ -118,6 +131,8 @@ public class SegnalazioneBLTest {
         when(segnalazioneDB.insert(any(Segnalazione.class))).thenReturn(1);
         when(segnalazioneDB.update(any(Segnalazione.class))).thenReturn(1);
         when(segnalazioneDB.deleteById(any(Integer.class))).thenReturn(1);
+        when(segnalazioneDB.getByAutore(any(Integer.class)))
+                .thenReturn(listaSegnalazioni);
 
         manager = new SegnalazioneBL(segnalazioneDB);
 
@@ -139,7 +154,7 @@ public class SegnalazioneBLTest {
         final Utente autore = new CSU();
         autore.setId(UTENTE_ESISTENTE);
 
-        Segnalazione segnalazione = new Segnalazione();
+        final Segnalazione segnalazione = new Segnalazione();
         segnalazione.setAutore(autore);
         segnalazione.setDescrizione(aDescrizione);
         segnalazione.setTipologia(tipologia);
@@ -165,7 +180,7 @@ public class SegnalazioneBLTest {
         final Utente autore = new CSU();
         autore.setId(UTENTE_ESISTENTE);
 
-        Segnalazione segnalazione = new Segnalazione();
+        final Segnalazione segnalazione = new Segnalazione();
         segnalazione.setAutore(autore);
         segnalazione.setDescrizione(aDescrizione);
         segnalazione.setTipologia(tipologia);
@@ -192,7 +207,7 @@ public class SegnalazioneBLTest {
         final Utente autore = new CSU();
         autore.setId(UTENTE_ESISTENTE);
 
-        Segnalazione segnalazione = new Segnalazione();
+        final Segnalazione segnalazione = new Segnalazione();
         segnalazione.setAutore(autore);
         segnalazione.setDescrizione(aDescrizione);
         segnalazione.setTipologia(tipologia);
@@ -218,7 +233,7 @@ public class SegnalazioneBLTest {
         final Utente autore = new CSU();
         autore.setId(UTENTE_ESISTENTE);
 
-        Segnalazione segnalazione = new Segnalazione();
+        final Segnalazione segnalazione = new Segnalazione();
         segnalazione.setAutore(autore);
         segnalazione.setDescrizione(aDescrizione);
         segnalazione.setTipologia(tipologia);
@@ -246,7 +261,7 @@ public class SegnalazioneBLTest {
         final Utente autore = new CSU();
         autore.setId(UTENTE_ESISTENTE);
 
-        Segnalazione segnalazione = new Segnalazione();
+        final Segnalazione segnalazione = new Segnalazione();
         segnalazione.setAutore(autore);
         segnalazione.setDescrizione(aDescrizione);
         segnalazione.setTipologia(tipologia);
@@ -275,7 +290,7 @@ public class SegnalazioneBLTest {
         final Utente autore = new CSU();
         autore.setId(UTENTE_ESISTENTE);
 
-        Segnalazione segnalazione = new Segnalazione();
+        final Segnalazione segnalazione = new Segnalazione();
         segnalazione.setAutore(autore);
         segnalazione.setDescrizione(aDescrizione);
         segnalazione.setTipologia(tipologia);
@@ -304,7 +319,7 @@ public class SegnalazioneBLTest {
         final Utente autore = new CSU();
         autore.setId(UTENTE_ESISTENTE);
 
-        Segnalazione segnalazione = new Segnalazione();
+        final Segnalazione segnalazione = new Segnalazione();
         segnalazione.setAutore(autore);
         segnalazione.setDescrizione(aDescrizione);
         segnalazione.setTipologia(tipologia);
@@ -333,7 +348,7 @@ public class SegnalazioneBLTest {
         final Utente autore = new CSU();
         autore.setId(UTENTE_ESISTENTE);
 
-        Segnalazione segnalazione = new Segnalazione();
+        final Segnalazione segnalazione = new Segnalazione();
         segnalazione.setAutore(autore);
         segnalazione.setDescrizione(aDescrizione);
         segnalazione.setTipologia(tipologia);
@@ -512,6 +527,59 @@ public class SegnalazioneBLTest {
         final int aCod = SEGNALAZIONE_APERTA;
         final Boolean res = manager.deleteSegnalazione(aCod);
         assertTrue(res);
+    }
+
+    /**
+     * Test elimina segnalazione 3.
+     *
+     * @throws SQLException the SQL exception
+     */
+    @Test
+    public void testGetSegnalazioniEffettuate1() throws SQLException {
+        final Utente aUtente = null;
+        final List<Segnalazione> res = manager
+                .getSegnalazioniEffettuate(aUtente);
+        assertNull(res);
+    }
+
+    /**
+     * Test elimina segnalazione 3.
+     *
+     * @throws SQLException the SQL exception
+     */
+    @Test
+    public void testGetSegnalazioniEffettuate2() throws SQLException {
+        final Utente aUtente = new CSU();
+        final List<Segnalazione> res = manager
+                .getSegnalazioniEffettuate(aUtente);
+        assertNull(res);
+    }
+
+    /**
+     * Test elimina segnalazione 3.
+     *
+     * @throws SQLException the SQL exception
+     */
+    @Test
+    public void testGetSegnalazioniEffettuate3() throws SQLException {
+        final Utente aUtente = new CSU();
+        aUtente.setId(UTENTE_ESISTENTE);
+        final List<Segnalazione> res = manager
+                .getSegnalazioniEffettuate(aUtente);
+        assertTrue(listEqualsIgnoreOrder(res, listaSegnalazioni));
+    }
+
+    /**
+     * List equals ignore order.
+     *
+     * @param       <T> the generic type
+     * @param list1 the list 1
+     * @param list2 the list 2
+     * @return true, if successful
+     */
+    private <T> boolean listEqualsIgnoreOrder(final List<T> list1,
+            final List<T> list2) {
+        return new HashSet<>(list1).equals(new HashSet<>(list2));
     }
 
 }
