@@ -1,4 +1,4 @@
-# MyAssistance [![Build Status](https://travis-ci.com/aymen94/MyAssistance.svg?token=wySBgxnzay5d17jYnobS&branch=master)](https://travis-ci.com/aymen94/MyAssistance)
+# MyAssistance [![Build Status](https://travis-ci.com/aymen94/MyAssistance.svg?branch=master)](https://travis-ci.com/aymen94/MyAssistance) [![Coverage Status](https://coveralls.io/repos/github/aymen94/MyAssistance/badge.svg?branch=master)](https://coveralls.io/github/aymen94/MyAssistance?branch=master) [![codecov](https://codecov.io/gh/aymen94/myassistance/branch/master/graph/badge.svg)](https://codecov.io/gh/aymen94/myassistance)
 
 Progetto di ingegneria del software
 
