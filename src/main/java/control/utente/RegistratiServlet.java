@@ -17,7 +17,7 @@ import java.io.IOException;
  * Servlet per registrare utente(CSU).
  */
 @WebServlet("/utente/registrati")
-public class RegistratiServlet extends HttpServlet {
+public final class RegistratiServlet extends HttpServlet {
     /**
      *
      */

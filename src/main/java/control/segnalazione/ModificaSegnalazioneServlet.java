@@ -22,7 +22,7 @@ import java.io.IOException;
 /**
  * Servlet for updating a report.
  */
-public class ModificaSegnalazioneServlet extends HttpServlet {
+public final class ModificaSegnalazioneServlet extends HttpServlet {
     /**
      * doGet method.
      */

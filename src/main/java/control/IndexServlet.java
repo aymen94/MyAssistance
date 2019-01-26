@@ -21,7 +21,7 @@ import java.io.IOException;
  * Servlet for redirecting to various index.
  */
 @WebServlet("")
-public class IndexServlet extends HttpServlet {
+public final class IndexServlet extends HttpServlet {
     /**
      * doGet method.
      */

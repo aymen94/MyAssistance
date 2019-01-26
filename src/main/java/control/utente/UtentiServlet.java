@@ -17,7 +17,7 @@ import java.io.IOException;
  * Servlet per la lista utenti.
  */
 @WebServlet("/gestore/utenti")
-public class UtentiServlet extends HttpServlet {
+public final class UtentiServlet extends HttpServlet {
     /**
      *
      */
