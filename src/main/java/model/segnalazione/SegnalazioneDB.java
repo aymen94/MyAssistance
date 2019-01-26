@@ -6,6 +6,7 @@ Date: 23/12/2018
 package model.segnalazione;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,7 +14,7 @@ import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.ufficiotecnico.UfficioTecnico;
+import model.ufficio_tecnico.UfficioTecnico;
 import model.utente.CSU;
 import model.utente.Utente;
 import pool.Database;
@@ -21,7 +22,7 @@ import pool.Database;
 /**
  * The Class SegnalazioneDB.
  */
-public final class SegnalazioneDB {
+public final class SegnalazioneDB implements SegnalazioneDBInterface {
 
     /**
      * The Constant TABLE_NAME.
@@ -87,10 +88,14 @@ public final class SegnalazioneDB {
             preparedStatement.setString(i++, aSegnalazione.getTitolo());
             preparedStatement.setString(i++, aSegnalazione.getDescrizione());
             preparedStatement.setShort(i++, aSegnalazione.getStato());
-            preparedStatement.setDate(i++, aSegnalazione.getDataSegnalazione());
-            preparedStatement.setDate(i++, aSegnalazione.getDataRifiuto());
-            preparedStatement.setDate(i++, aSegnalazione.getDataAssegnazione());
-            preparedStatement.setDate(i++, aSegnalazione.getDataRisoluzione());
+            preparedStatement.setDate(i++,
+                    Date.valueOf(aSegnalazione.getDataSegnalazione()));
+            preparedStatement.setDate(i++,
+                    Date.valueOf(aSegnalazione.getDataRifiuto()));
+            preparedStatement.setDate(i++,
+                    Date.valueOf(aSegnalazione.getDataAssegnazione()));
+            preparedStatement.setDate(i++,
+                    Date.valueOf(aSegnalazione.getDataRisoluzione()));
             preparedStatement
                 .setString(i++, aSegnalazione.getMotivazioneRifiuto());
             preparedStatement.setInt(i++, aSegnalazione.getTipologia().getId());
@@ -125,10 +130,14 @@ public final class SegnalazioneDB {
             preparedStatement.setString(i++, aSegnalazione.getTitolo());
             preparedStatement.setString(i++, aSegnalazione.getDescrizione());
             preparedStatement.setShort(i++, aSegnalazione.getStato());
-            preparedStatement.setDate(i++, aSegnalazione.getDataSegnalazione());
-            preparedStatement.setDate(i++, aSegnalazione.getDataRifiuto());
-            preparedStatement.setDate(i++, aSegnalazione.getDataAssegnazione());
-            preparedStatement.setDate(i++, aSegnalazione.getDataRisoluzione());
+            preparedStatement.setDate(i++,
+                    Date.valueOf(aSegnalazione.getDataSegnalazione()));
+            preparedStatement.setDate(i++,
+                    Date.valueOf(aSegnalazione.getDataRifiuto()));
+            preparedStatement.setDate(i++,
+                    Date.valueOf(aSegnalazione.getDataAssegnazione()));
+            preparedStatement.setDate(i++,
+                    Date.valueOf(aSegnalazione.getDataRisoluzione()));
             preparedStatement
                 .setString(i++, aSegnalazione.getMotivazioneRifiuto());
             preparedStatement.setInt(i++, aSegnalazione.getTipologia().getId());
@@ -177,10 +186,7 @@ public final class SegnalazioneDB {
      */
     public Segnalazione getByCod(final int aCod) throws SQLException {
         List<Segnalazione> segnalazioneList = genericGet(SELECT_BY_ID, aCod);
-        if (segnalazioneList != null) {
-            return segnalazioneList.get(0);
-        }
-        return null;
+        return segnalazioneList.get(0);
     }
 
     /**
@@ -198,6 +204,7 @@ public final class SegnalazioneDB {
         final List<Segnalazione> segnalazioneList = new ArrayList<>();
 
         try {
+            connection = Database.getConnection();
             preparedStatement = connection.prepareStatement(aQuery);
             if (aParameter > 0) {
                 preparedStatement.setInt(1, aParameter);
@@ -207,16 +214,17 @@ public final class SegnalazioneDB {
                 final Segnalazione segnalazione = new Segnalazione();
                 segnalazione.setCod(result.getInt("cod"));
 
-                segnalazione
-                    .setDataAssegnazione(result.getDate("data_assegnazione"));
-                segnalazione.setDataRifiuto(result.getDate("data_rifiuto"));
-                segnalazione
-                    .setDataRisoluzione(result.getDate("data_risoluzione"));
-                segnalazione
-                    .setDataSegnalazione(result.getDate("data_segnalazione"));
+                segnalazione.setDataAssegnazione(
+                        result.getDate("data_assegnazione").toLocalDate());
+                segnalazione.setDataRifiuto(
+                        result.getDate("data_rifiuto").toLocalDate());
+                segnalazione.setDataRisoluzione(
+                        result.getDate("data_risoluzione").toLocalDate());
+                segnalazione.setDataSegnalazione(
+                        result.getDate("data_segnalazione").toLocalDate());
                 segnalazione.setDescrizione(result.getString("descrizione"));
-                segnalazione.setMotivazioneRifiuto(result
-                    .getString("motivazione_rifiuto"));
+                segnalazione.setMotivazioneRifiuto(
+                        result.getString("motivazione_rifiuto"));
                 segnalazione.setStato(result.getShort("stato"));
 
                 // HACK: Use a fake author until UtenteDB.getById() is
@@ -239,11 +247,7 @@ public final class SegnalazioneDB {
                 segnalazione.setTitolo(result.getString("titolo"));
                 segnalazioneList.add(segnalazione);
             }
-            if (segnalazioneList.size() > 0) {
                 return segnalazioneList;
-            } else {
-                return null;
-            }
         } finally {
             freeResources(preparedStatement, connection);
         }

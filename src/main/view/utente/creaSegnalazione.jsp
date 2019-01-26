@@ -4,7 +4,7 @@
   Date: 02/01/2019
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="utf-8" %>
-<!!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 	<head>
 		<meta charset="utf-8">
@@ -12,13 +12,13 @@
 		<title>Crea Segnalazione - MyAssistance</title>
 		
 		<!-- Bootstrap -->
-		<link rel="stylesheet" href="assets/css/bootstrap.min.css">
-		<script src="assets/js/jquery-3.3.1.min.js"></script>
-		<script src="assets/js/bootstrap.min.js"></script>
+		<link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+		<script src="../assets/js/jquery-3.3.1.min.js"></script>
+		<script src="../assets/js/bootstrap.min.js"></script>
 		<!-- End -->
 		
-		<link rel="stylesheet" href="assets/css/style.css">
-		<script src="assets/js/script.js"></script>
+		<link rel="stylesheet" href="../assets/css/style.css">
+		<script src="../assets/js/script.js"></script>
 	</head>
 	<body>
 		<div class="page">
@@ -36,12 +36,12 @@
 						</div>
 						<div class="form-group">
 							<label for="field-descr">Descrizione</label>
-							<textarea type="text" class="form-control" name="field-descr" id="field-descr" aria-describedby="field-descr-hint" placeholder="Descrivi qui dettagliatamente la segnalazione" pattern="^.{1,4096}$" maxlength="4096" style="min-height: 192px"></textarea>
+							<textarea class="form-control" name="field-descr" id="field-descr" aria-describedby="field-descr-hint" placeholder="Descrivi qui dettagliatamente la segnalazione" maxlength="4096" style="min-height: 192px"></textarea>
 							<small id="field-descr-hint" class="form-text text-muted">Descrivi qui, in modo dettagliato, la tua segnalazione.</small>
 						</div>
 						<div class="form-group">
 							<label for="field-type">Tipologia</label>
-							<select type="text" class="form-control" name="field-type" id="field-type" aria-describedby="field-type-username">
+							<select class="form-control" name="field-type" id="field-type" aria-describedby="field-type-username">
 								<option value="1">Rottura</option>
 								<option value="2">Guasto Occasionale</option>
 								<option value="3">Accessorio Mancante</option>
@@ -58,8 +58,8 @@
 				</div>
 				<%@include file="../include/nav-right.jsp" %>
 			</div>
+			<%@include file="../include/footer.jsp" %>
 		</div>
-		<%@include file="../include/footer.jsp" %>
 		<%@include file="../include/error-dialog.jsp" %>
 	</body>
 </html>

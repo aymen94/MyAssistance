@@ -7,6 +7,7 @@ package control.segnalazione;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,9 +21,10 @@ import model.utente.Utente;
 import java.io.IOException;
 
 /**
- * Servlet for updating a report.
+ * Servlet to make a reporting.
  */
-public class ModificaSegnalazioneServlet extends HttpServlet {
+@WebServlet("/utente/effettuaSegnalazione")
+public class EffettuaSegnalazioneServlet extends HttpServlet {
     /**
      * doGet method.
      */
@@ -36,6 +38,30 @@ public class ModificaSegnalazioneServlet extends HttpServlet {
 
         if (rUser == null) {
             req.getSession().invalidate();
+            RequestDispatcher dispatcher =
+                    getServletContext().getRequestDispatcher(
+                            "/index.jsp");
+            dispatcher.forward(req, resp);
+        } else {
+            RequestDispatcher dispatcher =
+                    getServletContext().getRequestDispatcher(
+                            "/utente/creaSegnalazione.jsp");
+            dispatcher.forward(req, resp);
+        }
+    }
+
+    /**
+     * doPost method.
+     */
+    @Override protected void doPost(final HttpServletRequest req,
+            final HttpServletResponse resp)
+            throws ServletException, IOException {
+
+        Utente rUser;
+
+        rUser = (Utente) req.getSession().getAttribute("utente");
+
+        if (rUser == null) {
             RequestDispatcher dispatcher =
                     getServletContext().getRequestDispatcher(
                             "/index.jsp");
@@ -55,7 +81,7 @@ public class ModificaSegnalazioneServlet extends HttpServlet {
                     (Utente) req.getSession().getAttribute("utente"));
 
             try {
-                boolean res = sbl.updateSegnalazione(segnalazione);
+                boolean res = sbl.insertSegnalazione(segnalazione);
             } catch (Exception e) {
                 String msgError = "Si e' verificato un errore.";
                 req.setAttribute("msgError", msgError);
@@ -63,16 +89,7 @@ public class ModificaSegnalazioneServlet extends HttpServlet {
                         getServletContext().getRequestDispatcher(
                                 "/error.jsp");
                 dispatcher.forward(req, resp);
+                }
             }
-        }
-    }
-
-    /**
-     * doPost method.
-     */
-    @Override protected void doPost(final HttpServletRequest req,
-            final HttpServletResponse resp)
-            throws ServletException, IOException {
-        doGet(req, resp);
     }
 }

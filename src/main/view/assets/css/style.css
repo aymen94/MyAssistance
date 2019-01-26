@@ -3,31 +3,27 @@
 .page {
 	display: flex;
 	flex-direction: column;
-	height: 100vh
-}
-.page .container {
-	flex: 1
+	min-height: 100vh
 }
 
 /* Header background, colors and layout */
 
 .header {
-	position: relative;
 	z-index: 1;
 	background-color: #F90;
 	background-image: url(../images/logo.png);
 	background-position: 16px center;
 	background-repeat: no-repeat;
 	background-size: auto 80%;
-	padding: 32px 16px 32px 112px;
-	box-sizing: border-box;
+	padding: 16px 16px 16px 112px;
 	box-shadow: 0 0 16px rgba(0, 0, 0, 0.5);
 	font-size: 24px;
 	color: white
 }
 .header {
 	display: flex;
-	flex-direction: row
+	flex-direction: row;
+    align-items: center
 }
 .header > div:first-child {
 	flex: 1
@@ -40,22 +36,22 @@
 
 .content {
 	display: flex;
+	flex: 1;
 	height: 100%;
 	overflow-y: auto
 }
 
 /* Left-most and right-most columns share the same style */
 
-.content > div:nth-child(1),
-.content > div:nth-child(3) {
+.content > div.side:nth-child(1),
+.content > div.side:nth-child(3) {
 	background-color: #f7f7f7;
-	width: 320px;
+	width: 256px;
 	box-shadow: 0 8px 16px -8px rgba(0, 0, 0, 0.5)
 }
-.content > div:nth-child(2) {
+.content > div:not(.side) {
 	flex: 1;
-	padding: 24px 32px;
-	box-sizing: border-box
+	padding: 24px 32px
 }
 .content h4 {
 	margin-top: 16px;
@@ -117,33 +113,59 @@
 }
 .user {
 	margin: 32px auto;
-	width: 80%
+	width: 80%;
+	max-width: 192px
 }
 
 .alert-list {
 	border: 1px solid #e0e0e0;
-	border-radius: 8px;
-	cursor: pointer
+	border-radius: 8px
 }
-.alert-list > li {
-	transition: background-color 0.25s linear;
+.alert-list > div {
+	display: flex;
+	align-center: center;
+	flex-direction: row;
 	padding: 16px
 }
-.alert-list > li:hover {
-	background-color: #e0e0e0
-}
-.alert-list > li:not(:first-child) {
+.alert-list > div:not(:first-child) {
 	border-color: #e0e0e0;
 	border-style: solid;
 	border-width: 1px 0 0 0
 }
+.alert-list > div textarea {
+	transition: box-shadow 0.25s linear;
+	margin: 8px 0 16px 0;
+    width: 100%;
+    min-height: 128px;
+    outline: none;
+    border: 1px solid #D0D0D0;
+    border-radius: 8px;
+	box-shadow: 0 0 0px rgba(0, 0, 0, 0.25)
+}
+.alert-list > div textarea:focus {
+	box-shadow: 0 0 16px rgba(0, 0, 0, 0.25)
+}
+.alert-list input[type=text] {
+	background-color: white
+}
 .alert-image {
-	height: 64px
+	height: 32px
 }
-.alert-list .options {
-	display: flex;
-	flex-direction: column
+.alert-buttons {
+	margin-top: 8px
 }
-.alert-list .options > button {
-	border-radius: 0
-}
+
+/* Responsive */
+
+@media only screen and (max-width : 979px) {
+	.content {
+		flex-direction: column
+	}
+	.content > div.side:nth-child(1),
+	.content > div.side:nth-child(3) {
+		width: 100%
+	}
+	.footer > div {
+		flex-direction: column;
+		padding: 12px 8px
+	}

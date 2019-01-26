@@ -185,8 +185,9 @@ public final class UtenteDB {
                 if (!b) {
                     csu = (CSU) user;
                     Date tmp = rs.getDate("data_sospensione");
-                    if (tmp != null)
+                    if (tmp != null) {
                         csu.setDataSospensione(tmp.toLocalDate());
+                    }
                     user = csu;
                 }
             }
@@ -249,8 +250,9 @@ public final class UtenteDB {
                 if (!b) {
                     csu = (CSU) user;
                     Date tmp = rs.getDate("data_sospensione");
-                    if (tmp != null)
+                    if (tmp != null) {
                         csu.setDataSospensione(tmp.toLocalDate());
+                    }
                     user = csu;
                 }
             }
@@ -311,8 +313,9 @@ public final class UtenteDB {
                 if (!b) {
                     csu = (CSU) u;
                     Date tmp = rs.getDate("data_sospensione");
-                    if (tmp != null)
+                    if (tmp != null) {
                         csu.setDataSospensione(tmp.toLocalDate());
+                    }
                     u = csu;
                 }
 
@@ -384,8 +387,9 @@ public final class UtenteDB {
         try {
             connection = Database.getConnection();
             preparedStatement = connection.prepareStatement(UPDATE);
-            preparedStatement.setDate(1, Date.valueOf(csu.getDataSospensione()));
-            preparedStatement.setInt(2,csu.getId());
+            preparedStatement.setDate(1,
+                    Date.valueOf(csu.getDataSospensione()));
+            preparedStatement.setInt(2, csu.getId());
             res = preparedStatement.executeUpdate();
         } finally {
             try {

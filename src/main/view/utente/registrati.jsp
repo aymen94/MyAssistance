@@ -4,7 +4,7 @@
   Date: 30/12/2018
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<!!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 	<head>
 		<meta charset="utf-8">
@@ -12,13 +12,13 @@
 		<title>Pagina Principale - MyAssistance</title>
 
 		<!-- Bootstrap -->
-		<link rel="stylesheet" href="assets/css/bootstrap.min.css">
-		<script src="assets/js/jquery-3.3.1.min.js"></script>
-		<script src="assets/js/bootstrap.min.js"></script>
+		<link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+		<script src="../assets/js/jquery-3.3.1.min.js"></script>
+		<script src="../assets/js/bootstrap.min.js"></script>
 		<!-- End -->
 
-		<link rel="stylesheet" href="assets/css/style.css">
-		<script src="assets/js/script.js"></script>
+		<link rel="stylesheet" href="../assets/css/style.css">
+		<script src="../assets/js/script.js"></script>
 	</head>
 	<body>
 		<div class="page">
@@ -59,6 +59,11 @@
 							<input type="text" class="form-control" name="field-surname" id="field-surname" aria-describedby="field-surname-username" placeholder="Rossi" pattern="^.{1,50}$">
 							<small id="field-surname-hint" class="form-text text-muted">Devi inserire il tuo cognome reale.</small>
 						</div>
+						<div class="form-group">
+							<label for="field-name">Data Di Nascita</label>
+							<input type="text" class="form-control" name="field-birthday" id="field-birthday" aria-describedby="field-birthday-username" placeholder="30/10/1980" pattern="^\d{2}\/\d{2}\/\d{4}$">
+							<small id="field-birthday-hint" class="form-text text-muted">Devi inserire la tua data di nascita.</small>
+						</div>
 						<div>
 							<label>Sesso</label>
 							<div class="form-check">
@@ -79,8 +84,8 @@
 				</div>
 				<%@include file="../include/nav-right.jsp" %>
 			</div>
+			<%@include file="../include/footer.jsp" %>
 		</div>
-		<%@include file="../include/footer.jsp" %>
 		<%@include file="../include/error-dialog.jsp" %>
 	</body>
 </html>

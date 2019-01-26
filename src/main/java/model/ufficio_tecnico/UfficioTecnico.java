@@ -1,9 +1,9 @@
-package model.ufficiotecnico;
+package model.ufficio_tecnico;
 
 /**
  * The Class UfficioTecnico.
  */
-public class UfficioTecnico {
+public final class UfficioTecnico {
 
     /**
      * The id.
@@ -136,4 +136,96 @@ public class UfficioTecnico {
                 + ", tel='" + tel + '\'' + ", email='" + email + '\''
                 + ", ubicazione='" + ubicazione + '\'' + '}';
     }
+
+    /**
+     * @param obj
+     * @return result of eguals
+     */
+    @Override public boolean equals(final Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (!(obj instanceof UfficioTecnico)) {
+            return false;
+        }
+        final UfficioTecnico other = (UfficioTecnico) obj;
+
+        // if id or other.id is null do not compare
+        if (id != null && other.id != null) {
+            if (!id.equals(other.id)) {
+                return false;
+            }
+        }
+
+        if (email == null) {
+            if (other.email != null) {
+                return false;
+            }
+        } else if (!email.equals(other.email)) {
+            return false;
+        }
+        if (nome == null) {
+            if (other.nome != null) {
+                return false;
+            }
+        } else if (!nome.equals(other.nome)) {
+            return false;
+        }
+        if (tel == null) {
+            if (other.tel != null) {
+                return false;
+            }
+        } else if (!tel.equals(other.tel)) {
+            return false;
+        }
+        if (ubicazione == null) {
+            if (other.ubicazione != null) {
+                return false;
+            }
+        } else if (!ubicazione.equals(other.ubicazione)) {
+            return false;
+        }
+        return true;
+    }
+
+
+    /**
+     *
+     * @return result
+     */
+
+    @Override public int hashCode() {
+
+         final int tr = 31;
+        /*int result = (nome != null ? nome.hashCode() : 0);
+        result = 31 * result + (tel != null ? tel.hashCode() : 0);
+        result = 31 * result + (email != null ? email.hashCode() : 0);
+        result = 31 * result + (ubicazione != null ? ubicazione.hashCode() : 0);
+        return result;*/
+        int result = 0;
+
+        if (nome != null) {
+              result = tr * result + nome.hashCode();
+        }
+
+        if (tel != null) {
+              result = tr * result + tel.hashCode();
+            return result;
+        }
+
+        if (email != null) {
+              result = tr * result + email.hashCode();
+            return result;
+        }
+
+        if (ubicazione != null) {
+              result = tr * result + ubicazione.hashCode();
+            return result;
+        }
+        return 0;
+    }
+
 }

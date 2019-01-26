@@ -5,7 +5,9 @@
 */
 package control.utente;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,22 +16,26 @@ import java.io.IOException;
 /**
  * Servlet per registrare utente(CSU).
  */
+@WebServlet("/utente/registrati")
 public class RegistratiServlet extends HttpServlet {
     /**
      *
      */
-    @Override public void doGet(final HttpServletRequest req,
+    @Override protected void doGet(final HttpServletRequest req,
             final HttpServletResponse resp)
             throws ServletException, IOException {
-        super.doGet(req, resp);
+        RequestDispatcher dispatcher =
+                getServletContext().getRequestDispatcher(
+                        "/utente/registrati.jsp");
+        dispatcher.forward(req, resp);
     }
 
     /**
      *
      */
-    @Override public void doPost(final HttpServletRequest req,
+    @Override protected void doPost(final HttpServletRequest req,
             final HttpServletResponse resp)
             throws ServletException, IOException {
-        super.doPost(req, resp);
+        doGet(req, resp);
     }
 }
