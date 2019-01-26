@@ -58,7 +58,7 @@ import pool.Database;
         test2.setSesso(0);
         test2.setDataDiNascita(LocalDate.of(2000, 1, 20));
         UtenteDB utenteDBTest = new UtenteDB();
-        final boolean result = utenteDBTest.insert(test2)==1? true : false;
+        final boolean result = utenteDBTest.insert(test2) == 1;
         assertTrue(result);
     }
 
