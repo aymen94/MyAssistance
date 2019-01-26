@@ -1,34 +1,27 @@
 package model.utente;
 
-import org.junit.*;
-import pool.Database;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+
+import org.junit.BeforeClass;
+import org.junit.AfterClass;
+import org.junit.Test;
 
 import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.logging.FileHandler;
-import java.util.logging.Logger;
 
-public class UtenteDBTest {
-    private static FileHandler fileHandler = null;
-    private static Logger logger = null;
+import pool.Database;
 
-    /**
-     * Sets the up class.
-     *
-     * @throws SQLException the SQL exception
-     */
+public final class UtenteDBTest {
+
     @BeforeClass public static void setUpClass()
         throws IOException, SQLException {
         Database.initializePool();
         Database.getConnection().prepareStatement(
             "ALTER TABLE my_assistance.utente AUTO_INCREMENT = 1")
             .executeUpdate();
-        fileHandler = new FileHandler("result_test\\"+UtenteDB.class.getName());
-        logger = Logger.getLogger(UtenteDBTest.class.getName());
-        logger.addHandler(fileHandler);
-        logger.config("logger loaded");
     }
 
     /**
@@ -37,8 +30,6 @@ public class UtenteDBTest {
     @AfterClass public static void tearDownClass() throws SQLException {
         UtenteDB utenteDBTest = new UtenteDB();
         utenteDBTest.delete("test@test.com");
-        logger
-            .info("clear db  \n output:" + utenteDBTest.delete("abc@abc.com"));
         Database.destroyPool();
 
     }
@@ -53,36 +44,40 @@ public class UtenteDBTest {
         test1.setSesso(1);
         test1.setDataDiNascita(LocalDate.of(1990, 10, 2));
         UtenteDB utenteDBTest = new UtenteDB();
-        utenteDBTest.insert(test1);
-        logger.info("create user \noutput: " + test1);
-
+        final int result = utenteDBTest.insert(test1);
+        assertEquals(1, result);
     }
 
     @Test public void getById() throws SQLException {
         UtenteDB utenteDBTest = new UtenteDB();
-        logger.info("param: 1 \noutput:" + utenteDBTest.getById(1));
+        Utente utente = utenteDBTest.getById(1);
+        final int result = utente.getId();
+        assertEquals(1, result);
     }
 
-    @Test public void getByEmail() throws SQLException {
+    @Test public void getById1() throws SQLException {
         UtenteDB utenteDBTest = new UtenteDB();
-        logger.info("param: test@test.com \n output:" + utenteDBTest
-            .getByEmail("test@test.com"));
+        Utente utente = utenteDBTest.getById(10);
+        assertNull(utente);
     }
 
     @Test public void getAll() throws SQLException {
         UtenteDB utenteDBTest = new UtenteDB();
         List<Utente> list = utenteDBTest.getAll();
-        if (list == null)
-            logger.info("1 \noutput:\n " + 0);
-        else
-            logger.info("1 \noutput:\n " + list.size());
+
+    }
+
+    @Test public void getByEmail() throws SQLException {
+        UtenteDB utenteDBTest = new UtenteDB();
+        Utente utente = utenteDBTest.getByEmail("test@test.com");
+        final String result = utente.getEmail();
+        assertEquals("test@test.com", result);
 
     }
 
     @Test public void update() throws SQLException {
         UtenteDB utenteDBTest = new UtenteDB();
         CSU test1 = (CSU) utenteDBTest.getById(1);
-        System.out.println(test1);
         test1.setDataSospensione(LocalDate.of(2019, 8, 2));
         utenteDBTest.update(test1);
     }
