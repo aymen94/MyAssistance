@@ -58,7 +58,7 @@ public abstract class ObjectPool<T> {
     /**
      * Destroy unlocked.
      */
-    public synchronized void destroyUnlocked() {
+    public final synchronized void destroyUnlocked() {
         T t;
         if (unlock.size() > 0) {
             final Enumeration<T> e = unlock.keys();
@@ -82,7 +82,7 @@ public abstract class ObjectPool<T> {
      *
      * @return the t
      */
-    public synchronized T takeOut() {
+    public final synchronized T takeOut() {
         final long now = System.currentTimeMillis();
         T t;
         if (unlock.size() > 0) {
@@ -110,7 +110,9 @@ public abstract class ObjectPool<T> {
         }
         // no objects available, create a new one
         t = create();
-        lock.put(t, now);
+        if (t != null) {
+            lock.put(t, now);
+        }
         return (t);
     }
 
@@ -119,7 +121,7 @@ public abstract class ObjectPool<T> {
      *
      * @param t the t
      */
-    public synchronized void takeIn(final T t) {
+    public final synchronized void takeIn(final T t) {
         lock.remove(t);
         unlock.put(t, System.currentTimeMillis());
     }
@@ -129,7 +131,7 @@ public abstract class ObjectPool<T> {
      *
      * @return the deadtime
      */
-    public long getDeadtime() {
+    public final long getDeadtime() {
         return deadTime;
     }
 
@@ -138,7 +140,7 @@ public abstract class ObjectPool<T> {
      *
      * @param deadtime the new deadtime
      */
-    public void setDeadtime(final long deadtime) {
+    public final void setDeadtime(final long deadtime) {
         this.deadTime = deadtime;
     }
 }
