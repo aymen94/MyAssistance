@@ -18,7 +18,7 @@ public final class Segnalazione {
     /**
      * The cod.
      */
-    private Integer cod;
+    private int cod;
 
     /**
      * The titolo.
@@ -404,9 +404,9 @@ public final class Segnalazione {
         }
         final Segnalazione other = (Segnalazione) obj;
 
-        // if cod or other.cod is null do not compare them
-        if (cod != null && other.cod != null) {
-            if (!cod.equals(other.cod)) {
+        // if cod or other.cod is 0 do not compare them
+        if (cod != 0 && other.cod != 0) {
+            if (cod != other.cod) {
                 return false;
             }
         }
