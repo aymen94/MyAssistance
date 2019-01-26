@@ -45,18 +45,8 @@ public final class SegnalazioneBL {
      */
     public boolean insertSegnalazione(final Segnalazione segnalazione)
             throws SQLException {
-        if (segnalazione.getTitolo() != null
-                && segnalazione.getTitolo().length() > 0
-                && segnalazione.getTitolo().length() <= MAX_TITLE_LENGTH
-                && segnalazione.getDescrizione() != null
-                && segnalazione.getDescrizione().length() > 0
-                && segnalazione.getAutore() != null
-                && segnalazione.getTipologia() != null) {
 
-            segnalazione.setTitolo(segnalazione.getTitolo());
-            segnalazione.setDescrizione(segnalazione.getDescrizione());
-            segnalazione.setTipologia(segnalazione.getTipologia());
-            segnalazione.setAutore(segnalazione.getAutore());
+        if (validateSegnalazione(segnalazione)) {
             // Set the current date
             segnalazione.setDataSegnalazione(LocalDate.now());
             return segnalazioneDB.insert(segnalazione) > 0;
@@ -88,17 +78,14 @@ public final class SegnalazioneBL {
      */
     public boolean updateSegnalazione(final Segnalazione segnalazione)
             throws SQLException {
-        if (segnalazione.getTitolo() != null
-                && segnalazione.getTitolo().length() > 0
-                && segnalazione.getTitolo().length() <= MAX_TITLE_LENGTH
-                && segnalazione.getDescrizione() != null
-                && segnalazione.getDescrizione().length() > 0
-                && segnalazione.getTipologia() != null) {
 
+        if (validateSegnalazione(segnalazione)) {
             final Segnalazione aSegnalazione = segnalazioneDB
                     .getByCod(segnalazione.getCod());
             if (aSegnalazione != null
-                    && aSegnalazione.getStato() == Segnalazione.STATO_APERTO) {
+                    && aSegnalazione.getStato() == Segnalazione.STATO_APERTO
+                    && segnalazione.getAutore().getId() == aSegnalazione
+                            .getAutore().getId()) {
                 aSegnalazione.setTitolo(segnalazione.getTitolo());
                 aSegnalazione.setDescrizione(segnalazione.getDescrizione());
                 aSegnalazione.setTipologia(segnalazione.getTipologia());
@@ -112,14 +99,18 @@ public final class SegnalazioneBL {
     /**
      * Elimina segnalazione.
      *
-     * @param aCod the cod
+     * @param aCod    the cod
+     * @param aUtente the utente
      * @return true, if successful
      * @throws SQLException the SQL exception
      */
-    public boolean deleteSegnalazione(final int aCod) throws SQLException {
+    public boolean deleteSegnalazione(final int aCod, final Utente aUtente)
+            throws SQLException {
         final Segnalazione aSegnalazione = segnalazioneDB.getByCod(aCod);
         if (aSegnalazione != null
-                && aSegnalazione.getStato() == Segnalazione.STATO_APERTO) {
+                && aSegnalazione.getStato() == Segnalazione.STATO_APERTO
+                && aSegnalazione.getAutore().getId() == aSegnalazione
+                        .getAutore().getId()) {
             return segnalazioneDB.deleteById(aCod) > 0;
         }
         return false;
@@ -199,4 +190,22 @@ public final class SegnalazioneBL {
         return false;
     }
 
+    /**
+     * Validate segnalazione.
+     *
+     * @param segnalazione the segnalazione
+     * @return true, if successful
+     */
+    private boolean validateSegnalazione(final Segnalazione segnalazione) {
+        if (segnalazione != null && segnalazione.getTitolo() != null
+                && segnalazione.getTitolo().length() > 0
+                && segnalazione.getTitolo().length() <= MAX_TITLE_LENGTH
+                && segnalazione.getDescrizione() != null
+                && segnalazione.getDescrizione().length() > 0
+                && segnalazione.getAutore() != null
+                && segnalazione.getTipologia() != null) {
+            return true;
+        }
+        return false;
+    }
 }

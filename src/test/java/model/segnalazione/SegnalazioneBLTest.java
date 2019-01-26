@@ -88,6 +88,8 @@ public final class SegnalazioneBLTest {
      */
     private List<Segnalazione> listaSegnalazioni;
 
+    private Utente utenteTest;
+
     /**
      * Instantiates a new segnalazione BL test.
      */
@@ -102,18 +104,23 @@ public final class SegnalazioneBLTest {
     @Before
     public void setUp() throws Exception {
 
+        utenteTest = new CSU();
+        utenteTest.setId(UTENTE_ESISTENTE);
         segnalazioneDB = mock(SegnalazioneDBInterface.class);
         segnalazioneAperta = new Segnalazione();
         segnalazioneAperta.setStato(Segnalazione.STATO_APERTO);
         segnalazioneAperta.setCod(SEGNALAZIONE_APERTA);
+        segnalazioneAperta.setAutore(utenteTest);
 
         segnalazioneRisolta = new Segnalazione();
         segnalazioneRisolta.setStato(Segnalazione.STATO_RISOLTO);
         segnalazioneRisolta.setCod(SEGNALAZIONE_RISOLTA);
+        segnalazioneRisolta.setAutore(utenteTest);
 
         segnalazioneAssegnata = new Segnalazione();
         segnalazioneAssegnata.setStato(Segnalazione.STATO_ASSEGNATO);
         segnalazioneAssegnata.setCod(SEGNALAZIONE_ASSEGNATA);
+        segnalazioneAssegnata.setAutore(utenteTest);
 
         listaSegnalazioni = Arrays.asList(segnalazioneAperta,
                 segnalazioneAssegnata,
@@ -150,8 +157,7 @@ public final class SegnalazioneBLTest {
         final Tipologia tipologia = new Tipologia();
         tipologia.setId(TIPOLOGIA_ESISTENTE);
 
-        final Utente autore = new CSU();
-        autore.setId(UTENTE_ESISTENTE);
+        final Utente autore = utenteTest;
 
         final Segnalazione segnalazione = new Segnalazione();
         segnalazione.setAutore(autore);
@@ -176,9 +182,7 @@ public final class SegnalazioneBLTest {
         final Tipologia tipologia = new Tipologia();
         tipologia.setId(TIPOLOGIA_ESISTENTE);
 
-        final Utente autore = new CSU();
-        autore.setId(UTENTE_ESISTENTE);
-
+        final Utente autore = utenteTest;
         final Segnalazione segnalazione = new Segnalazione();
         segnalazione.setAutore(autore);
         segnalazione.setDescrizione(aDescrizione);
@@ -202,8 +206,7 @@ public final class SegnalazioneBLTest {
         final Tipologia tipologia = new Tipologia();
         tipologia.setId(TIPOLOGIA_ESISTENTE);
 
-        final Utente autore = new CSU();
-        autore.setId(UTENTE_ESISTENTE);
+        final Utente autore = utenteTest;
 
         final Segnalazione segnalazione = new Segnalazione();
         segnalazione.setAutore(autore);
@@ -215,7 +218,6 @@ public final class SegnalazioneBLTest {
         final Boolean res = manager.insertSegnalazione(segnalazione);
         assertFalse(res);
     }
-
 
     /**
      * Test insert segnalazione 4.
@@ -229,8 +231,7 @@ public final class SegnalazioneBLTest {
         final Tipologia tipologia = new Tipologia();
         tipologia.setId(TIPOLOGIA_ESISTENTE);
 
-        final Utente autore = new CSU();
-        autore.setId(UTENTE_ESISTENTE);
+        final Utente autore = utenteTest;
 
         final Segnalazione segnalazione = new Segnalazione();
         segnalazione.setAutore(autore);
@@ -256,8 +257,7 @@ public final class SegnalazioneBLTest {
         final Tipologia tipologia = new Tipologia();
         tipologia.setId(TIPOLOGIA_ESISTENTE);
 
-        final Utente autore = new CSU();
-        autore.setId(UTENTE_ESISTENTE);
+        final Utente autore = utenteTest;
 
         final Segnalazione segnalazione = new Segnalazione();
         segnalazione.setAutore(autore);
@@ -282,8 +282,7 @@ public final class SegnalazioneBLTest {
         final Tipologia tipologia = new Tipologia();
         tipologia.setId(TIPOLOGIA_ESISTENTE);
 
-        final Utente autore = new CSU();
-        autore.setId(UTENTE_ESISTENTE);
+        final Utente autore = utenteTest;
 
         final Segnalazione segnalazione = new Segnalazione();
         segnalazione.setAutore(autore);
@@ -310,8 +309,7 @@ public final class SegnalazioneBLTest {
         final Tipologia tipologia = new Tipologia();
         tipologia.setId(TIPOLOGIA_ESISTENTE);
 
-        final Utente autore = new CSU();
-        autore.setId(UTENTE_ESISTENTE);
+        final Utente autore = utenteTest;
 
         final Segnalazione segnalazione = new Segnalazione();
         segnalazione.setAutore(autore);
@@ -338,8 +336,7 @@ public final class SegnalazioneBLTest {
         final Tipologia tipologia = new Tipologia();
         tipologia.setId(TIPOLOGIA_ESISTENTE);
 
-        final Utente autore = new CSU();
-        autore.setId(UTENTE_ESISTENTE);
+        final Utente autore = utenteTest;
 
         final Segnalazione segnalazione = new Segnalazione();
         segnalazione.setAutore(autore);
@@ -366,8 +363,7 @@ public final class SegnalazioneBLTest {
         final Tipologia tipologia = new Tipologia();
         tipologia.setId(TIPOLOGIA_ESISTENTE);
 
-        final Utente autore = new CSU();
-        autore.setId(UTENTE_ESISTENTE);
+        final Utente autore = utenteTest;
 
         final Segnalazione segnalazione = new Segnalazione();
         segnalazione.setAutore(autore);
@@ -395,8 +391,7 @@ public final class SegnalazioneBLTest {
         final Tipologia tipologia = new Tipologia();
         tipologia.setId(TIPOLOGIA_ESISTENTE);
 
-        final Utente autore = new CSU();
-        autore.setId(UTENTE_ESISTENTE);
+        final Utente autore = utenteTest;
 
         final Segnalazione segnalazione = new Segnalazione();
         segnalazione.setAutore(autore);
@@ -424,8 +419,7 @@ public final class SegnalazioneBLTest {
         final Tipologia tipologia = new Tipologia();
         tipologia.setId(TIPOLOGIA_ESISTENTE);
 
-        final Utente autore = new CSU();
-        autore.setId(UTENTE_ESISTENTE);
+        final Utente autore = utenteTest;
 
         final Segnalazione segnalazione = new Segnalazione();
         segnalazione.setAutore(autore);
@@ -453,8 +447,7 @@ public final class SegnalazioneBLTest {
         final Tipologia tipologia = new Tipologia();
         tipologia.setId(TIPOLOGIA_ESISTENTE);
 
-        final Utente autore = new CSU();
-        autore.setId(UTENTE_ESISTENTE);
+        final Utente autore = utenteTest;
 
         final Segnalazione segnalazione = new Segnalazione();
         segnalazione.setAutore(autore);
@@ -609,7 +602,8 @@ public final class SegnalazioneBLTest {
     @Test
     public void testDeleteSegnalazione1() throws SQLException {
         final int aCod = SEGNALAZIONE_NON_ESISTENTE;
-        final Boolean res = manager.deleteSegnalazione(aCod);
+        final Utente aUtente=utenteTest;
+        final Boolean res = manager.deleteSegnalazione(aCod,aUtente);
         assertFalse(res);
     }
 
@@ -621,7 +615,8 @@ public final class SegnalazioneBLTest {
     @Test
     public void testDeleteSegnalazione2() throws SQLException {
         final int aCod = SEGNALAZIONE_ASSEGNATA;
-        final Boolean res = manager.deleteSegnalazione(aCod);
+        final Utente aUtente=utenteTest;
+        final Boolean res = manager.deleteSegnalazione(aCod,aUtente);
         assertFalse(res);
     }
 
@@ -633,7 +628,8 @@ public final class SegnalazioneBLTest {
     @Test
     public void testDeleteSegnalazione3() throws SQLException {
         final int aCod = SEGNALAZIONE_APERTA;
-        final Boolean res = manager.deleteSegnalazione(aCod);
+        final Utente aUtente=utenteTest;
+        final Boolean res = manager.deleteSegnalazione(aCod,aUtente);
         assertTrue(res);
     }
 
@@ -670,8 +666,7 @@ public final class SegnalazioneBLTest {
      */
     @Test
     public void testGetSegnalazioniEffettuate3() throws SQLException {
-        final Utente aUtente = new CSU();
-        aUtente.setId(UTENTE_ESISTENTE);
+        final Utente aUtente = utenteTest;
         final List<Segnalazione> res = manager
                 .getSegnalazioniEffettuate(aUtente);
         assertTrue(listEqualsIgnoreOrder(res, listaSegnalazioni));
