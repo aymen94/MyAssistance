@@ -45,8 +45,10 @@ public final class SegnalazioneBL {
      */
     public boolean insertSegnalazione(final Segnalazione segnalazione)
             throws SQLException {
-        if (segnalazione.getTitolo().length() > 0
+        if (segnalazione.getTitolo() != null
+                && segnalazione.getTitolo().length() > 0
                 && segnalazione.getTitolo().length() <= MAX_TITLE_LENGTH
+                && segnalazione.getDescrizione() != null
                 && segnalazione.getDescrizione().length() > 0
                 && segnalazione.getAutore() != null
                 && segnalazione.getTipologia() != null) {
@@ -86,8 +88,10 @@ public final class SegnalazioneBL {
      */
     public boolean updateSegnalazione(final Segnalazione segnalazione)
             throws SQLException {
-        if (segnalazione.getTitolo().length() > 0
+        if (segnalazione.getTitolo() != null
+                && segnalazione.getTitolo().length() > 0
                 && segnalazione.getTitolo().length() <= MAX_TITLE_LENGTH
+                && segnalazione.getDescrizione() != null
                 && segnalazione.getDescrizione().length() > 0
                 && segnalazione.getTipologia() != null) {
 
@@ -169,6 +173,7 @@ public final class SegnalazioneBL {
         final Segnalazione aSegnalazione = segnalazioneDB.getByCod(aCod);
         if (aSegnalazione != null
                 && aSegnalazione.getStato() == Segnalazione.STATO_APERTO
+                && aMotivazioneRifiuto != null
                 && aMotivazioneRifiuto.length() > 0) {
             aSegnalazione.setStato(Segnalazione.STATO_RIFIUTATO);
             aSegnalazione.setMotivazioneRifiuto(aMotivazioneRifiuto);
