@@ -46,7 +46,7 @@ public class Database implements ServletContextListener {
             pool = new JDBCConnectionPool("com.mysql.jdbc.Driver", database,
                     "root", "root");
         } catch (final Exception e) {
-            System.err.println("### " + e.getMessage() + " ###");
+            throw new RuntimeException(e);
         }
         // try connection
         final Connection connection = getConnection();
@@ -101,13 +101,7 @@ public class Database implements ServletContextListener {
      */
     public static synchronized void freeConnection(
             final Connection connection) {
-        try {
-            pool.takeIn(connection);
-        } catch (final Exception e) {
-            System.err.println(
-                    "Threw an exception unlocking a database connection");
-            e.printStackTrace();
-        }
+        pool.takeIn(connection);
     }
 
 }
