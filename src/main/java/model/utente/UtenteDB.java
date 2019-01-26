@@ -130,13 +130,10 @@ public final class UtenteDB {
             res = preparedStatement.executeUpdate();
 
         } finally {
-            try {
-                if (preparedStatement != null) {
-                    preparedStatement.close();
-                }
-            } finally {
-                Database.freeConnection(connection);
+            if (preparedStatement != null) {
+                preparedStatement.close();
             }
+            Database.freeConnection(connection);
         }
 
         return (res);
@@ -172,7 +169,6 @@ public final class UtenteDB {
                 } else {
                     user = new CSU();
                 }
-
                 user.setId(rs.getInt("id"));
                 user.setUserName(rs.getString("username"));
                 user.setPassword(rs.getString("pass"));
@@ -191,15 +187,11 @@ public final class UtenteDB {
                     user = csu;
                 }
             }
-
         } finally {
-            try {
-                if (preparedStatement != null) {
-                    preparedStatement.close();
-                }
-            } finally {
-                Database.freeConnection(connection);
+            if (preparedStatement != null) {
+                preparedStatement.close();
             }
+            Database.freeConnection(connection);
         }
 
         return user;
@@ -258,13 +250,10 @@ public final class UtenteDB {
             }
 
         } finally {
-            try {
-                if (preparedStatement != null) {
-                    preparedStatement.close();
-                }
-            } finally {
-                Database.freeConnection(connection);
+            if (preparedStatement != null) {
+                preparedStatement.close();
             }
+            Database.freeConnection(connection);
         }
 
         return user;
@@ -323,14 +312,12 @@ public final class UtenteDB {
             }
 
         } finally {
-            try {
-                if (preparedStatement != null) {
-                    preparedStatement.close();
-                }
-            } finally {
-                Database.freeConnection(connection);
+            if (preparedStatement != null) {
+                preparedStatement.close();
             }
+            Database.freeConnection(connection);
         }
+
         return users;
     }
 
@@ -387,19 +374,18 @@ public final class UtenteDB {
         try {
             connection = Database.getConnection();
             preparedStatement = connection.prepareStatement(UPDATE);
-            preparedStatement.setDate(1,
-                    Date.valueOf(csu.getDataSospensione()));
+            preparedStatement
+                .setDate(1, Date.valueOf(csu.getDataSospensione()));
             preparedStatement.setInt(2, csu.getId());
             res = preparedStatement.executeUpdate();
+
         } finally {
-            try {
-                if (preparedStatement != null) {
-                    preparedStatement.close();
-                }
-            } finally {
-                Database.freeConnection(connection);
+            if (preparedStatement != null) {
+                preparedStatement.close();
             }
+            Database.freeConnection(connection);
         }
+
         return (res);
     }
 }
