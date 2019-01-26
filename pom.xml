@@ -80,7 +80,7 @@
 							<encoding>UTF-8</encoding>
 							<consoleOutput>false</consoleOutput>
 							<failOnViolation>false</failOnViolation>
-							<includeTestSourceDirectory>true</includeTestSourceDirectory>
+							<includeTestSourceDirectory>false</includeTestSourceDirectory>
 						</configuration>
 						<goals>
 							<goal>check</goal>
