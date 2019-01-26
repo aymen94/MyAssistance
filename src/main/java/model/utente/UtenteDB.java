@@ -89,16 +89,9 @@ public final class UtenteDB {
      */
     public int insert(final Utente aUtente) throws SQLException {
         Connection connection = null;
-        PreparedStatement preparedStatement = null;
-        int res = 0;
-        Gestore g = null;
-        CSU csu = null;
-
-        if (aUtente instanceof Gestore) {
-            g = (Gestore) aUtente;
-        } else {
-            csu = (CSU) aUtente;
-        }
+        PreparedStatement preparedStatement;
+        int res;
+        Utente utente = aUtente;
 
         try {
             connection = Database.getConnection();
@@ -115,27 +108,21 @@ public final class UtenteDB {
 
             if (aUtente instanceof Gestore) {
                 preparedStatement.setDate(i++, null);
-                preparedStatement.setBoolean(i, g.isGestore());
+                preparedStatement.setBoolean(i, utente.isGestore());
             } else {
-                if (csu.getDataSospensione() != null) {
-                    preparedStatement
-                        .setDate(i++, Date.valueOf(csu.getDataSospensione()));
+                if (((CSU) utente).getDataSospensione() != null) {
+                    preparedStatement.setDate(i++,
+                        Date.valueOf(((CSU) utente).getDataSospensione()));
                 } else {
                     preparedStatement.setDate(i++, null);
                 }
 
                 preparedStatement.setBoolean(i, false);
             }
-
             res = preparedStatement.executeUpdate();
-
         } finally {
-            if (preparedStatement != null) {
-                preparedStatement.close();
-            }
             Database.freeConnection(connection);
         }
-
         return (res);
     }
 
@@ -151,9 +138,7 @@ public final class UtenteDB {
     public Utente getById(final int aId) throws SQLException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
-        CSU csu = null;
         Utente user = null;
-
         try {
             connection = Database.getConnection();
             preparedStatement = connection.prepareStatement(GET_BY_ID);
@@ -179,18 +164,13 @@ public final class UtenteDB {
                     .toLocalDate());
                 user.setSesso(rs.getInt("sesso"));
                 if (!b) {
-                    csu = (CSU) user;
                     Date tmp = rs.getDate("data_sospensione");
                     if (tmp != null) {
-                        csu.setDataSospensione(tmp.toLocalDate());
+                        ((CSU) user).setDataSospensione(tmp.toLocalDate());
                     }
-                    user = csu;
                 }
             }
         } finally {
-            if (preparedStatement != null) {
-                preparedStatement.close();
-            }
             Database.freeConnection(connection);
         }
 
@@ -209,8 +189,6 @@ public final class UtenteDB {
     public Utente getByEmail(final String aEmail) throws SQLException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
-        CSU csu = null;
-
         Utente user = null;
 
         try {
@@ -222,7 +200,6 @@ public final class UtenteDB {
             ResultSet rs = preparedStatement.executeQuery();
 
             while (rs.next()) {
-
                 boolean b = rs.getBoolean("is_gestore");
                 if (b) {
                     user = new Gestore();
@@ -240,22 +217,15 @@ public final class UtenteDB {
                     .toLocalDate());
                 user.setSesso(rs.getInt("sesso"));
                 if (!b) {
-                    csu = (CSU) user;
                     Date tmp = rs.getDate("data_sospensione");
                     if (tmp != null) {
-                        csu.setDataSospensione(tmp.toLocalDate());
+                        ((CSU) user).setDataSospensione(tmp.toLocalDate());
                     }
-                    user = csu;
                 }
             }
-
         } finally {
-            if (preparedStatement != null) {
-                preparedStatement.close();
-            }
             Database.freeConnection(connection);
         }
-
         return user;
     }
 
@@ -272,9 +242,7 @@ public final class UtenteDB {
         PreparedStatement preparedStatement = null;
 
         List<Utente> users = new ArrayList<>();
-
-        CSU csu = null;
-        Utente u = null;
+        Utente u;
 
         try {
             connection = Database.getConnection();
@@ -300,21 +268,16 @@ public final class UtenteDB {
                 u.setDataDiNascita(rs.getDate("data_di_nascita").toLocalDate());
                 u.setSesso(rs.getInt("sesso"));
                 if (!b) {
-                    csu = (CSU) u;
                     Date tmp = rs.getDate("data_sospensione");
                     if (tmp != null) {
-                        csu.setDataSospensione(tmp.toLocalDate());
+                        ((CSU) u).setDataSospensione(tmp.toLocalDate());
                     }
-                    u = csu;
                 }
 
                 users.add(u);
             }
 
         } finally {
-            if (preparedStatement != null) {
-                preparedStatement.close();
-            }
             Database.freeConnection(connection);
         }
 
@@ -334,7 +297,7 @@ public final class UtenteDB {
     public int delete(final String aEmail) throws SQLException {
         Connection connection = null;
         PreparedStatement s = null;
-        int res = 0;
+        int res;
 
         try {
             connection = Database.getConnection();
@@ -344,13 +307,7 @@ public final class UtenteDB {
             res = s.executeUpdate();
 
         } finally {
-            try {
-                if (s != null) {
-                    s.close();
-                }
-            } finally {
-                Database.freeConnection(connection);
-            }
+            Database.freeConnection(connection);
         }
         return (res);
     }
@@ -369,7 +326,7 @@ public final class UtenteDB {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         CSU csu = (CSU) aUtente;
-        int res = 0;
+        int res;
 
         try {
             connection = Database.getConnection();
@@ -380,9 +337,6 @@ public final class UtenteDB {
             res = preparedStatement.executeUpdate();
 
         } finally {
-            if (preparedStatement != null) {
-                preparedStatement.close();
-            }
             Database.freeConnection(connection);
         }
 
