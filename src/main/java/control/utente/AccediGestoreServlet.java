@@ -18,7 +18,7 @@ import java.io.IOException;
  * Servlet per accesso gestore.
  */
 @WebServlet("/gestore/accedi")
-public class AccediGestoreServlet extends HttpServlet {
+public final class AccediGestoreServlet extends HttpServlet {
     /**
      *
      */

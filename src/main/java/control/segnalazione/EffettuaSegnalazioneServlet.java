@@ -24,7 +24,7 @@ import java.io.IOException;
  * Servlet to make a reporting.
  */
 @WebServlet("/utente/effettuaSegnalazione")
-public class EffettuaSegnalazioneServlet extends HttpServlet {
+public final class EffettuaSegnalazioneServlet extends HttpServlet {
     /**
      * doGet method.
      */

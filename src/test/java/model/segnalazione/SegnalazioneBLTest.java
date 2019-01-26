@@ -145,8 +145,7 @@ public final class SegnalazioneBLTest {
      */
     @Test
     public void testInsertSegnalazione1() throws SQLException {
-
-        final String aTitolo = "";
+        final String aTitolo = null;
         final String aDescrizione = "Ciaooo";
         final Tipologia tipologia = new Tipologia();
         tipologia.setId(TIPOLOGIA_ESISTENTE);
@@ -172,8 +171,8 @@ public final class SegnalazioneBLTest {
      */
     @Test
     public void testInsertSegnalazione2() throws SQLException {
-        final String aTitolo = "Si è guastato il calorifero";
-        final String aDescrizione = "";
+        final String aTitolo = "";
+        final String aDescrizione = "Ciaooo";
         final Tipologia tipologia = new Tipologia();
         tipologia.setId(TIPOLOGIA_ESISTENTE);
 
@@ -198,6 +197,59 @@ public final class SegnalazioneBLTest {
      */
     @Test
     public void testInsertSegnalazione3() throws SQLException {
+        final String aTitolo = "Si è guastato il calorifero";
+        final String aDescrizione = null;
+        final Tipologia tipologia = new Tipologia();
+        tipologia.setId(TIPOLOGIA_ESISTENTE);
+
+        final Utente autore = new CSU();
+        autore.setId(UTENTE_ESISTENTE);
+
+        final Segnalazione segnalazione = new Segnalazione();
+        segnalazione.setAutore(autore);
+        segnalazione.setDescrizione(aDescrizione);
+        segnalazione.setTipologia(tipologia);
+        segnalazione.setTitolo(aTitolo);
+        segnalazione.setDescrizione(aDescrizione);
+
+        final Boolean res = manager.insertSegnalazione(segnalazione);
+        assertFalse(res);
+    }
+
+
+    /**
+     * Test insert segnalazione 4.
+     *
+     * @throws SQLException the SQL exception
+     */
+    @Test
+    public void testInsertSegnalazione4() throws SQLException {
+        final String aTitolo = "Si è guastato il calorifero";
+        final String aDescrizione = "";
+        final Tipologia tipologia = new Tipologia();
+        tipologia.setId(TIPOLOGIA_ESISTENTE);
+
+        final Utente autore = new CSU();
+        autore.setId(UTENTE_ESISTENTE);
+
+        final Segnalazione segnalazione = new Segnalazione();
+        segnalazione.setAutore(autore);
+        segnalazione.setDescrizione(aDescrizione);
+        segnalazione.setTipologia(tipologia);
+        segnalazione.setTitolo(aTitolo);
+        segnalazione.setDescrizione(aDescrizione);
+
+        final Boolean res = manager.insertSegnalazione(segnalazione);
+        assertFalse(res);
+    }
+
+    /**
+     * Test insert segnalazione 5.
+     *
+     * @throws SQLException the SQL exception
+     */
+    @Test
+    public void testInsertSegnalazione5() throws SQLException {
         final String aTitolo = "Si è guastato il calorifero";
         final String aDescrizione = "Il calorifero vicino all’entrata dell’aula"
                 + " F8 emana aria fredda.";
@@ -225,7 +277,7 @@ public final class SegnalazioneBLTest {
      */
     @Test
     public void testUpdateSegnalazione1() throws SQLException {
-        final String aTitolo = "";
+        final String aTitolo = null;
         final String aDescrizione = "Ciaooo";
         final Tipologia tipologia = new Tipologia();
         tipologia.setId(TIPOLOGIA_ESISTENTE);
@@ -253,8 +305,8 @@ public final class SegnalazioneBLTest {
      */
     @Test
     public void testUpdateSegnalazione2() throws SQLException {
-        final String aTitolo = "Si è guastato il calorifero";
-        final String aDescrizione = "";
+        final String aTitolo = "";
+        final String aDescrizione = "Ciaooo";
         final Tipologia tipologia = new Tipologia();
         tipologia.setId(TIPOLOGIA_ESISTENTE);
 
@@ -282,6 +334,62 @@ public final class SegnalazioneBLTest {
     @Test
     public void testUpdateSegnalazione3() throws SQLException {
         final String aTitolo = "Si è guastato il calorifero";
+        final String aDescrizione = null;
+        final Tipologia tipologia = new Tipologia();
+        tipologia.setId(TIPOLOGIA_ESISTENTE);
+
+        final Utente autore = new CSU();
+        autore.setId(UTENTE_ESISTENTE);
+
+        final Segnalazione segnalazione = new Segnalazione();
+        segnalazione.setAutore(autore);
+        segnalazione.setDescrizione(aDescrizione);
+        segnalazione.setTipologia(tipologia);
+        segnalazione.setTitolo(aTitolo);
+        segnalazione.setDescrizione(aDescrizione);
+        segnalazione.setCod(SEGNALAZIONE_APERTA);
+        segnalazione.setStato(Segnalazione.STATO_APERTO);
+
+        final Boolean res = manager.updateSegnalazione(segnalazione);
+        assertFalse(res);
+    }
+
+    /**
+     * Test update segnalazione 4.
+     *
+     * @throws SQLException the SQL exception
+     */
+    @Test
+    public void testUpdateSegnalazione4() throws SQLException {
+        final String aTitolo = "Si è guastato il calorifero";
+        final String aDescrizione = "";
+        final Tipologia tipologia = new Tipologia();
+        tipologia.setId(TIPOLOGIA_ESISTENTE);
+
+        final Utente autore = new CSU();
+        autore.setId(UTENTE_ESISTENTE);
+
+        final Segnalazione segnalazione = new Segnalazione();
+        segnalazione.setAutore(autore);
+        segnalazione.setDescrizione(aDescrizione);
+        segnalazione.setTipologia(tipologia);
+        segnalazione.setTitolo(aTitolo);
+        segnalazione.setDescrizione(aDescrizione);
+        segnalazione.setCod(SEGNALAZIONE_APERTA);
+        segnalazione.setStato(Segnalazione.STATO_APERTO);
+
+        final Boolean res = manager.updateSegnalazione(segnalazione);
+        assertFalse(res);
+    }
+
+    /**
+     * Test update segnalazione 5.
+     *
+     * @throws SQLException the SQL exception
+     */
+    @Test
+    public void testUpdateSegnalazione5() throws SQLException {
+        final String aTitolo = "Si è guastato il calorifero";
         final String aDescrizione = "Il calorifero vicino all’entrata dell’aula"
                 + " F8 emana aria fredda.";
         final Tipologia tipologia = new Tipologia();
@@ -304,12 +412,12 @@ public final class SegnalazioneBLTest {
     }
 
     /**
-     * Test update segnalazione 4.
+     * Test update segnalazione 6.
      *
      * @throws SQLException the SQL exception
      */
     @Test
-    public void testUpdateSegnalazione4() throws SQLException {
+    public void testUpdateSegnalazione6() throws SQLException {
         final String aTitolo = "Si è guastato il calorifero";
         final String aDescrizione = "Il calorifero vicino all’entrata dell’aula"
                 + " F8 emana aria fredda.";
@@ -333,12 +441,12 @@ public final class SegnalazioneBLTest {
     }
 
     /**
-     * Test update segnalazione 5.
+     * Test update segnalazione 7.
      *
      * @throws SQLException the SQL exception
      */
     @Test
-    public void testUpdateSegnalazione5() throws SQLException {
+    public void testUpdateSegnalazione7() throws SQLException {
         final String aTitolo = "Si è guastato il calorifero";
         final String aDescrizione = "Il calorifero vicino all’entrata dell’aula"
                 + " F8 emana aria fredda.";

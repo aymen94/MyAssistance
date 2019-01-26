@@ -17,7 +17,7 @@ import java.io.IOException;
  * Servlet for redirecting to the index of the manager.
  */
 @WebServlet("/gestore/")
-public class IndexGestoreServlet extends HttpServlet {
+public final class IndexGestoreServlet extends HttpServlet {
     /**
      *
      */

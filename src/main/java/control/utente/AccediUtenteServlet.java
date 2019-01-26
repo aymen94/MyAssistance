@@ -17,7 +17,7 @@ import java.io.IOException;
  * Servlet per accesso utente(CSU).
  */
 @WebServlet("/utente/accedi")
-public class AccediUtenteServlet extends HttpServlet {
+public final class AccediUtenteServlet extends HttpServlet {
     /**
      *
      */
