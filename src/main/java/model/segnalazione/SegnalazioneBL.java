@@ -109,8 +109,8 @@ public final class SegnalazioneBL {
         final Segnalazione aSegnalazione = segnalazioneDB.getByCod(aCod);
         if (aSegnalazione != null
                 && aSegnalazione.getStato() == Segnalazione.STATO_APERTO
-                && aSegnalazione.getAutore().getId() == aSegnalazione
-                        .getAutore().getId()) {
+                && aUtente != null
+                && aSegnalazione.getAutore().getId() == aUtente.getId()) {
             return segnalazioneDB.deleteById(aCod) > 0;
         }
         return false;

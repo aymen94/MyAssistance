@@ -16,6 +16,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import model.utente.CSU;
+import model.utente.Gestore;
 import model.utente.Utente;
 
 /**
@@ -71,7 +72,12 @@ public final class SegnalazioneBLTest {
     /**
      * The Constant UTENTE_ESISTENTE.
      */
-    private static final int UTENTE_ESISTENTE = 1;
+    private static final int UTENTE_1 = 1;
+
+    /**
+     * The Constant UTENTE_ESISTENTE.
+     */
+    private static final int UTENTE_2 = 2;
 
     /**
      * The Constant TIPOLOGIA_ESISTENTE.
@@ -90,6 +96,8 @@ public final class SegnalazioneBLTest {
 
     private Utente utenteTest;
 
+    private Utente utenteTest2;
+
     /**
      * Instantiates a new segnalazione BL test.
      */
@@ -105,7 +113,10 @@ public final class SegnalazioneBLTest {
     public void setUp() throws Exception {
 
         utenteTest = new CSU();
-        utenteTest.setId(UTENTE_ESISTENTE);
+        utenteTest.setId(UTENTE_1);
+        utenteTest2 = new Gestore();
+        utenteTest2.setId(UTENTE_2);
+
         segnalazioneDB = mock(SegnalazioneDBInterface.class);
         segnalazioneAperta = new Segnalazione();
         segnalazioneAperta.setStato(Segnalazione.STATO_APERTO);
@@ -304,7 +315,8 @@ public final class SegnalazioneBLTest {
      */
     @Test
     public void testUpdateSegnalazione2() throws SQLException {
-        final String aTitolo = "";
+        final String aTitolo = "asdfghjklloiuytrewqwertyuijoklmkngfcdxszasdfgh"
+                + "jkoijhuygftrdeswaqawserdftyghuijk";
         final String aDescrizione = "Ciaooo";
         final Tipologia tipologia = new Tipologia();
         tipologia.setId(TIPOLOGIA_ESISTENTE);
@@ -447,6 +459,62 @@ public final class SegnalazioneBLTest {
         final Tipologia tipologia = new Tipologia();
         tipologia.setId(TIPOLOGIA_ESISTENTE);
 
+        final Utente autore = null;
+
+        final Segnalazione segnalazione = new Segnalazione();
+        segnalazione.setAutore(autore);
+        segnalazione.setDescrizione(aDescrizione);
+        segnalazione.setTipologia(tipologia);
+        segnalazione.setTitolo(aTitolo);
+        segnalazione.setDescrizione(aDescrizione);
+        segnalazione.setCod(SEGNALAZIONE_APERTA);
+        segnalazione.setStato(Segnalazione.STATO_APERTO);
+
+        final Boolean res = manager.updateSegnalazione(segnalazione);
+        assertFalse(res);
+    }
+
+    /**
+     * Test update segnalazione 8.
+     *
+     * @throws SQLException the SQL exception
+     */
+    @Test
+    public void testUpdateSegnalazione8() throws SQLException {
+        final String aTitolo = "Si è guastato il calorifero";
+        final String aDescrizione = "Il calorifero vicino all’entrata dell’aula"
+                + " F8 emana aria fredda.";
+        final Tipologia tipologia = new Tipologia();
+        tipologia.setId(TIPOLOGIA_ESISTENTE);
+
+        final Utente autore = utenteTest2;
+
+        final Segnalazione segnalazione = new Segnalazione();
+        segnalazione.setAutore(autore);
+        segnalazione.setDescrizione(aDescrizione);
+        segnalazione.setTipologia(tipologia);
+        segnalazione.setTitolo(aTitolo);
+        segnalazione.setDescrizione(aDescrizione);
+        segnalazione.setCod(SEGNALAZIONE_APERTA);
+        segnalazione.setStato(Segnalazione.STATO_APERTO);
+
+        final Boolean res = manager.updateSegnalazione(segnalazione);
+        assertFalse(res);
+    }
+
+    /**
+     * Test update segnalazione 9.
+     *
+     * @throws SQLException the SQL exception
+     */
+    @Test
+    public void testUpdateSegnalazione9() throws SQLException {
+        final String aTitolo = "Si è guastato il calorifero";
+        final String aDescrizione = "Il calorifero vicino all’entrata dell’aula"
+                + " F8 emana aria fredda.";
+        final Tipologia tipologia = new Tipologia();
+        tipologia.setId(TIPOLOGIA_ESISTENTE);
+
         final Utente autore = utenteTest;
 
         final Segnalazione segnalazione = new Segnalazione();
@@ -538,7 +606,7 @@ public final class SegnalazioneBLTest {
     @Test
     public void testRifiutaSegnalazione3() throws SQLException {
         final int aCod = SEGNALAZIONE_APERTA;
-        final String aMotivazioneRifiuto = "";
+        final String aMotivazioneRifiuto = null;
         final Boolean res = manager.rifiutaSegnalazione(aCod,
                 aMotivazioneRifiuto);
         assertFalse(res);
@@ -551,6 +619,20 @@ public final class SegnalazioneBLTest {
      */
     @Test
     public void testRifiutaSegnalazione4() throws SQLException {
+        final int aCod = SEGNALAZIONE_APERTA;
+        final String aMotivazioneRifiuto = "";
+        final Boolean res = manager.rifiutaSegnalazione(aCod,
+                aMotivazioneRifiuto);
+        assertFalse(res);
+    }
+
+    /**
+     * Test rifiuta segnalazione 5.
+     *
+     * @throws SQLException the SQL exception
+     */
+    @Test
+    public void testRifiutaSegnalazione5() throws SQLException {
         final int aCod = SEGNALAZIONE_APERTA;
         final String aMotivazioneRifiuto = "Segnalazione duplicata";
         final Boolean res = manager.rifiutaSegnalazione(aCod,
@@ -602,8 +684,8 @@ public final class SegnalazioneBLTest {
     @Test
     public void testDeleteSegnalazione1() throws SQLException {
         final int aCod = SEGNALAZIONE_NON_ESISTENTE;
-        final Utente aUtente=utenteTest;
-        final Boolean res = manager.deleteSegnalazione(aCod,aUtente);
+        final Utente aUtente = utenteTest;
+        final Boolean res = manager.deleteSegnalazione(aCod, aUtente);
         assertFalse(res);
     }
 
@@ -615,8 +697,8 @@ public final class SegnalazioneBLTest {
     @Test
     public void testDeleteSegnalazione2() throws SQLException {
         final int aCod = SEGNALAZIONE_ASSEGNATA;
-        final Utente aUtente=utenteTest;
-        final Boolean res = manager.deleteSegnalazione(aCod,aUtente);
+        final Utente aUtente = utenteTest;
+        final Boolean res = manager.deleteSegnalazione(aCod, aUtente);
         assertFalse(res);
     }
 
@@ -628,8 +710,34 @@ public final class SegnalazioneBLTest {
     @Test
     public void testDeleteSegnalazione3() throws SQLException {
         final int aCod = SEGNALAZIONE_APERTA;
-        final Utente aUtente=utenteTest;
-        final Boolean res = manager.deleteSegnalazione(aCod,aUtente);
+        final Utente aUtente = null;
+        final Boolean res = manager.deleteSegnalazione(aCod, aUtente);
+        assertFalse(res);
+    }
+
+    /**
+     * Test elimina segnalazione 4.
+     *
+     * @throws SQLException the SQL exception
+     */
+    @Test
+    public void testDeleteSegnalazione4() throws SQLException {
+        final int aCod = SEGNALAZIONE_APERTA;
+        final Utente aUtente = utenteTest2;
+        final Boolean res = manager.deleteSegnalazione(aCod, aUtente);
+        assertFalse(res);
+    }
+
+    /**
+     * Test elimina segnalazione 5.
+     *
+     * @throws SQLException the SQL exception
+     */
+    @Test
+    public void testDeleteSegnalazione5() throws SQLException {
+        final int aCod = SEGNALAZIONE_APERTA;
+        final Utente aUtente = utenteTest;
+        final Boolean res = manager.deleteSegnalazione(aCod, aUtente);
         assertTrue(res);
     }
 
