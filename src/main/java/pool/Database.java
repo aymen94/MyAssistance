@@ -42,9 +42,10 @@ public class Database implements ServletContextListener {
     public static synchronized void initializePool(final String configFile,
             final String configName) throws RuntimeException {
 
-        XMLDatabaseParser parser = new XMLDatabaseParser(configFile,
-                configName);
         try {
+            XMLDatabaseParser parser = new XMLDatabaseParser(configFile,
+                    configName);
+
             pool = new JDBCConnectionPool(parser.getDriver(), parser.getUrl(),
                     parser.getUser(), parser.getPassword());
         } catch (final Exception e) {
@@ -83,8 +84,10 @@ public class Database implements ServletContextListener {
      * Destroy pool.
      */
     public static synchronized void destroyPool() {
-        pool.destroyUnlocked();
-        pool = null;
+        if (pool != null) {
+            pool.destroyUnlocked();
+            pool = null;
+        }
     }
 
     /**

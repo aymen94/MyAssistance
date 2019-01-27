@@ -4,7 +4,6 @@ import java.io.File;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -76,8 +75,10 @@ public class XMLDatabaseParser {
      *
      * @param fileName     the file name
      * @param databaseName the database name
+     * @throws Exception the exception
      */
-    public XMLDatabaseParser(final String fileName, final String databaseName) {
+    public XMLDatabaseParser(final String fileName, final String databaseName)
+            throws Exception {
         parseXML(fileName, databaseName);
     }
 
@@ -87,61 +88,54 @@ public class XMLDatabaseParser {
      * @param fileName     the file name
      * @param databaseName the database name
      * @return true, if successful
+     * @throws Exception the exception
      */
-    private boolean parseXML(final String fileName, final String databaseName) {
-        try {
-            final File inputFile = getFile(fileName);
-            final DocumentBuilderFactory dbFactory = DocumentBuilderFactory
-                    .newInstance();
-            final DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-            final Document doc = dBuilder.parse(inputFile);
-            doc.getDocumentElement().normalize();
+    private boolean parseXML(final String fileName, final String databaseName)
+            throws Exception {
+        final File inputFile = getFile(fileName);
+        final DocumentBuilderFactory dbFactory = DocumentBuilderFactory
+                .newInstance();
+        final DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+        final Document doc = dBuilder.parse(inputFile);
+        doc.getDocumentElement().normalize();
 
-            final NodeList nList = doc.getElementsByTagName("database");
+        final NodeList nList = doc.getElementsByTagName("database");
 
-            System.out.println("Parsing Database xml");
-            for (int i = 0; i < nList.getLength(); i++) {
-                final Node nNode = nList.item(i);
+        System.out.println("Parsing Database xml");
+        for (int i = 0; i < nList.getLength(); i++) {
+            final Node nNode = nList.item(i);
 
-                if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-                    final Element eElement = (Element) nNode;
-                    if (eElement.getAttribute("name")
-                            .equalsIgnoreCase(databaseName)) {
-                        System.out.println(
-                                "Database Config Name: " + databaseName);
+            final Element eElement = (Element) nNode;
+            if (eElement.getAttribute("name").equalsIgnoreCase(databaseName)) {
+                System.out.println("Database Config Name: " + databaseName);
 
-                        driver = eElement.getElementsByTagName("driver").item(0)
-                                .getTextContent();
-                        System.out.println("Driver : " + driver);
-                        user = eElement.getElementsByTagName("user").item(0)
-                                .getTextContent();
-                        System.out.println("User : " + user);
-                        password = eElement.getElementsByTagName("password")
-                                .item(0).getTextContent();
-                        System.out.println("Password : " + "***");
+                driver = eElement.getElementsByTagName("driver").item(0)
+                        .getTextContent();
+                System.out.println("Driver : " + driver);
+                user = eElement.getElementsByTagName("user").item(0)
+                        .getTextContent();
+                System.out.println("User : " + user);
+                password = eElement.getElementsByTagName("password").item(0)
+                        .getTextContent();
+                System.out.println("Password : " + "***");
 
-                        url = eElement.getElementsByTagName("url").item(0)
-                                .getTextContent();
-                        final NodeList parameters = (eElement
-                                .getElementsByTagName("parameter"));
-                        for (int j = 0; j < parameters.getLength(); j++) {
+                url = eElement.getElementsByTagName("url").item(0)
+                        .getTextContent();
+                final NodeList parameters = (eElement
+                        .getElementsByTagName("parameter"));
 
-                            if (j == 0 && !url.contains("?")) {
-                                url += "?";
-                            } else {
-                                url += "&";
-                            }
-
-                            url += parameters.item(j).getTextContent();
-                        }
-
-                        System.out.println("Url : " + url);
-
+                for (int j = 0; j < parameters.getLength(); j++) {
+                    if (!url.contains("?")) {
+                        url += "?";
+                    } else {
+                        url += "&";
                     }
+                    url += parameters.item(j).getTextContent();
                 }
+
+                System.out.println("Url : " + url);
+
             }
-        } catch (final Exception e) {
-            throw new RuntimeException(e);
         }
         return true;
     }

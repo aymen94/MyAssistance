@@ -127,15 +127,6 @@ public abstract class ObjectPool<T> {
     }
 
     /**
-     * Gets the deadtime.
-     *
-     * @return the deadtime
-     */
-    public final long getDeadtime() {
-        return deadTime;
-    }
-
-    /**
      * Sets the deadtime.
      *
      * @param deadtime the new deadtime
