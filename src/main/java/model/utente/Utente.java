@@ -16,7 +16,7 @@ public abstract class Utente {
     /**
      * l' id.
      */
-    private Integer id;
+    private int id;
 
     /**
      * lo user name.

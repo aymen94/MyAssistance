@@ -151,6 +151,8 @@ public final class SegnalazioneBLTest {
         when(segnalazioneDB.deleteById(any(Integer.class))).thenReturn(1);
         when(segnalazioneDB.getByAutore(any(Integer.class)))
                 .thenReturn(listaSegnalazioni);
+        when(segnalazioneDB.getByAutore(0))
+        .thenReturn(null);
 
         manager = new SegnalazioneBL(segnalazioneDB);
 
