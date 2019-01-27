@@ -80,13 +80,71 @@ public final class Tipologia {
         priorita = aPriorita;
     }
 
-    /* (non-Javadoc)
+    /**
+     * To string.
+     *
+     * @return the string
      * @see java.lang.Object#toString()
      */
     @Override
     public String toString() {
         return "Tipologia [nome=" + nome + ", id=" + id + ", priorita="
                 + priorita + "]";
+    }
+
+    /**
+     * Hash code.
+     *
+     * @return the int
+     * @see java.lang.Object#hashCode()
+     */
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + id;
+        if (nome == null) {
+            result = prime * result + 0;
+        } else {
+            result = prime * result + nome.hashCode();
+        }
+        result = prime * result + priorita;
+        return result;
+    }
+
+    /**
+     * Equals.
+     *
+     * @param obj the obj
+     * @return true, if successful
+     * @see java.lang.Object#equals(java.lang.Object)
+     */
+    @Override
+    public boolean equals(final Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (!(obj instanceof Tipologia)) {
+            return false;
+        }
+        final Tipologia other = (Tipologia) obj;
+        if (id != other.id) {
+            return false;
+        }
+        if (nome == null) {
+            if (other.nome != null) {
+                return false;
+            }
+        } else if (!nome.equals(other.nome)) {
+            return false;
+        }
+        if (priorita != other.priorita) {
+            return false;
+        }
+        return true;
     }
 
 }
