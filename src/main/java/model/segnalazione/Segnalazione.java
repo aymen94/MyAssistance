@@ -486,4 +486,22 @@ public final class Segnalazione {
         return true;
     }
 
+    /**
+     * To string.
+     *
+     * @return the string
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        return "Segnalazione [cod=" + cod + ", titolo=" + titolo
+                + ", descrizione=" + descrizione + ", stato=" + stato
+                + ", dataSegnalazione=" + dataSegnalazione + ", dataRifiuto="
+                + dataRifiuto + ", dataAssegnazione=" + dataAssegnazione
+                + ", dataRisoluzione=" + dataRisoluzione
+                + ", motivazioneRifiuto=" + motivazioneRifiuto + ", tipologia="
+                + tipologia + ", autore=" + autore + ", tecnico=" + tecnico
+                + "]";
+    }
+
 }
