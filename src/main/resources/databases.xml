@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE databases>
+<databases>
+	<database name="Production">
+		<driver>com.mysql.jdbc.Driver</driver>
+		<user>root</user>
+		<password>root</password>
+		<url>jdbc:mysql://localhost:3306/my_assistance</url>
+		<parameters>
+			<parameter>autoReconnect=true</parameter>
+			<parameter>allowMultiQueries=true</parameter>
+			<parameter>useSSL=false</parameter>
+			<parameter>serverTimezone=Europe/Rome</parameter>
+		</parameters>
+	</database>
+	<database name="Test">
+		<driver>com.mysql.jdbc.Driver</driver>
+		<user>root</user>
+		<password>root</password>
+		<url>jdbc:mysql://localhost:3306/my_assistance</url>
+		<parameters>
+			<parameter>autoReconnect=true</parameter>
+			<parameter>allowMultiQueries=true</parameter>
+			<parameter>useSSL=false</parameter>
+			<parameter>serverTimezone=Europe/Rome</parameter>
+		</parameters>
+	</database>
+</databases>

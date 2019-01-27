@@ -39,12 +39,11 @@ public class Database implements ServletContextListener {
      */
     public static synchronized void initializePool() throws RuntimeException {
 
-        final String database = "jdbc:mysql://localhost:3306/my_assistance?"
-                + "autoReconnect=true&amp;allowMultiQueries=true&amp;"
-                + "useSSL=false&amp;serverTimezone=Europe/Rome\"";
+        XMLDatabaseParser parser = new XMLDatabaseParser("databases.xml",
+                "Production");
         try {
-            pool = new JDBCConnectionPool("com.mysql.jdbc.Driver", database,
-                    "root", "root");
+            pool = new JDBCConnectionPool(parser.getDriver(), parser.getUrl(),
+                    parser.getUser(), parser.getPassword());
         } catch (final Exception e) {
             throw new RuntimeException(e);
         }
