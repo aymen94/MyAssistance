@@ -12,3 +12,4 @@ script: mvn test
 after_success:
   - bash <(curl -s https://codecov.io/bash)
   - mvn coveralls:report
+  - printf "\n\n\033[1m\033[33mTest output\n\n\033[0m"
