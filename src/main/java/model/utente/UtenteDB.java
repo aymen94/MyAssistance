@@ -137,7 +137,7 @@ public final class UtenteDB {
      */
     public Utente getById(final int aId) throws SQLException {
         Connection connection = null;
-        PreparedStatement preparedStatement = null;
+        PreparedStatement preparedStatement;
         Utente user = null;
         try {
             connection = Database.getConnection();
@@ -188,7 +188,7 @@ public final class UtenteDB {
      */
     public Utente getByEmail(final String aEmail) throws SQLException {
         Connection connection = null;
-        PreparedStatement preparedStatement = null;
+        PreparedStatement preparedStatement;
         Utente user = null;
 
         try {
@@ -239,7 +239,7 @@ public final class UtenteDB {
      */
     public List<Utente> getAll() throws SQLException {
         Connection connection = null;
-        PreparedStatement preparedStatement = null;
+        PreparedStatement preparedStatement;
 
         List<Utente> users = new ArrayList<>();
         Utente u;
@@ -296,7 +296,7 @@ public final class UtenteDB {
      */
     public int delete(final String aEmail) throws SQLException {
         Connection connection = null;
-        PreparedStatement s = null;
+        PreparedStatement s;
         int res;
 
         try {
