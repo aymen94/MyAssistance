@@ -41,7 +41,7 @@ CREATE TABLE my_assistance.segnalazione
   data_assegnazione   DATE,
   data_risoluzione    DATE,
   motivazione_rifiuto VARCHAR(255),
-  tipologia           INT REFERENCES tipologia (id) ON DELETE CASCADE ON UPDATE CASCADE,
-  autore              INT REFERENCES utente (id) ON DELETE CASCADE ON UPDATE CASCADE,
+  tipologia           INT NOT NULL REFERENCES tipologia (id) ON DELETE CASCADE ON UPDATE CASCADE,
+  autore              INT NOT NULL REFERENCES utente (id) ON DELETE CASCADE ON UPDATE CASCADE,
   tecnico             INT REFERENCES ufficio_tecnico (id) ON DELETE CASCADE ON UPDATE CASCADE
 );
