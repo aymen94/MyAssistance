@@ -167,6 +167,7 @@ public final class SegnalazioneBL {
                 && aMotivazioneRifiuto != null
                 && aMotivazioneRifiuto.length() > 0) {
             aSegnalazione.setStato(Segnalazione.STATO_RIFIUTATO);
+            aSegnalazione.setDataRifiuto(LocalDate.now());
             aSegnalazione.setMotivazioneRifiuto(aMotivazioneRifiuto);
             return segnalazioneDB.update(aSegnalazione) > 0;
         }
