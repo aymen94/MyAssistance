@@ -6,10 +6,10 @@ import static org.junit.Assert.assertTrue;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
+import static utility.TestUtility.listEqualsIgnoreOrder;
 
 import java.sql.SQLException;
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
 
 import org.junit.Before;
@@ -778,19 +778,6 @@ public final class SegnalazioneBLTest {
         final List<Segnalazione> res = manager
                 .getSegnalazioniEffettuate(aUtente);
         assertTrue(listEqualsIgnoreOrder(res, listaSegnalazioni));
-    }
-
-    /**
-     * List equals ignore order.
-     *
-     * @param       <T> the generic type
-     * @param list1 the list 1
-     * @param list2 the list 2
-     * @return true, if successful
-     */
-    private <T> boolean listEqualsIgnoreOrder(final List<T> list1,
-            final List<T> list2) {
-        return new HashSet<>(list1).equals(new HashSet<>(list2));
     }
 
 }

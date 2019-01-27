@@ -3,12 +3,12 @@ package model.ufficio_tecnico;
 import static junit.framework.TestCase.assertEquals;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
+import static utility.TestUtility.listEqualsIgnoreOrder;
 
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.logging.FileHandler;
 import java.util.logging.Logger;
@@ -291,23 +291,10 @@ public class UfficioTecnicoDBTest {
         }
 
         final List<UfficioTecnico> lista1 = ufficioTecnicoDBTest.getAll();
-        logger.info("return : " + this.listEqualsIgnoreOrder(lista1, lista2));
+        logger.info("return : " + listEqualsIgnoreOrder(lista1, lista2));
         System.out.println("lista 1 " + lista1 + "\n");
         System.out.println(lista2);
         assertTrue(listEqualsIgnoreOrder(lista1, lista2));
-    }
-
-    /**
-     * List equals ignore order.
-     *
-     * @param       <T> the generic type
-     * @param list1 the list 1
-     * @param list2 the list 2
-     * @return true, if successful
-     */
-    private <T> boolean listEqualsIgnoreOrder(final List<T> list1,
-            final List<T> list2) {
-        return new HashSet<>(list1).equals(new HashSet<>(list2));
     }
 
 }
