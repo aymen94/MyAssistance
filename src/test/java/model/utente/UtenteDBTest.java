@@ -10,7 +10,6 @@ import org.junit.AfterClass;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 
-import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
@@ -19,8 +18,7 @@ import org.junit.runners.MethodSorters;
 import pool.Database;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING) public final class UtenteDBTest {
-    @BeforeClass public static void setUpClass()
-        throws IOException, SQLException {
+    @BeforeClass public static void setUpClass() throws SQLException {
         Database.initializePool("databases.xml", "Test");
         Database.getConnection().prepareStatement(
             "ALTER TABLE my_assistance.utente AUTO_INCREMENT = 1")
@@ -30,7 +28,7 @@ import pool.Database;
     /**
      * Tear down class.
      */
-    @AfterClass public static void tearDownClass() throws SQLException {
+    @AfterClass public static void tearDownClass() {
         Database.destroyPool();
     }
 
@@ -57,8 +55,23 @@ import pool.Database;
         test2.setEmail("test2@test.com");
         test2.setSesso(0);
         test2.setDataDiNascita(LocalDate.of(2000, 1, 20));
+        ((CSU) test2).setDataSospensione(LocalDate.of(2018,9,2));
         UtenteDB utenteDBTest = new UtenteDB();
         final boolean result = utenteDBTest.insert(test2) == 1;
+        assertTrue(result);
+    }
+
+    @Test public void testAInsert3() throws SQLException {
+        Utente test3 = new Gestore();
+        test3.setNome("test3");
+        test3.setCognome("test3");
+        test3.setUserName("test3");
+        test3.setPassword("test3");
+        test3.setEmail("test3@test.com");
+        test3.setSesso(0);
+        test3.setDataDiNascita(LocalDate.of(1989, 5, 22));
+        UtenteDB utenteDBTest = new UtenteDB();
+        final boolean result = utenteDBTest.insert(test3) == 1;
         assertTrue(result);
     }
 
@@ -79,7 +92,7 @@ import pool.Database;
         UtenteDB utenteDBTest = new UtenteDB();
         List<Utente> list = utenteDBTest.getAll();
         final int result = list.size();
-        assertEquals(2, result);
+        assertEquals(3, result);
     }
 
     @Test public void testCGetAll2() throws SQLException {
@@ -123,8 +136,8 @@ import pool.Database;
 
     @Test public void testEDelete3() throws SQLException {
         UtenteDB utenteDBTest = new UtenteDB();
-        final int result = utenteDBTest.delete("test2@test.com");
-        assertEquals(0, result);
+        final int result = utenteDBTest.delete("test3@test.com");
+        assertEquals(1, result);
     }
 
 }
