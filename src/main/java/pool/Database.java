@@ -29,18 +29,21 @@ public class Database implements ServletContextListener {
     @Override
     public final void contextInitialized(final ServletContextEvent sce) {
         System.out.println("### run ###");
-        initializePool();
+        initializePool("databases.xml", "Production");
     }
 
     /**
      * Initialize pool.
      *
+     * @param configFile the config file
+     * @param configName the config name
      * @throws RuntimeException the runtime exception
      */
-    public static synchronized void initializePool() throws RuntimeException {
+    public static synchronized void initializePool(final String configFile,
+            final String configName) throws RuntimeException {
 
-        XMLDatabaseParser parser = new XMLDatabaseParser("databases.xml",
-                "Production");
+        XMLDatabaseParser parser = new XMLDatabaseParser(configFile,
+                configName);
         try {
             pool = new JDBCConnectionPool(parser.getDriver(), parser.getUrl(),
                     parser.getUser(), parser.getPassword());

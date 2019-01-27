@@ -42,7 +42,7 @@ public class UfficioTecnicoDBTest {
      */
     @BeforeClass
     public static void setUpClass() throws IOException {
-        Database.initializePool();
+        Database.initializePool("databases.xml", "Test");
 
         fileHandler = new FileHandler(
                 "result_test\\" + UfficioTecnicoDB.class.getName());

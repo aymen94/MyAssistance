@@ -21,7 +21,7 @@ import pool.Database;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING) public final class UtenteDBTest {
     @BeforeClass public static void setUpClass()
         throws IOException, SQLException {
-        Database.initializePool();
+        Database.initializePool("databases.xml", "Test");
         Database.getConnection().prepareStatement(
             "ALTER TABLE my_assistance.utente AUTO_INCREMENT = 1")
             .executeUpdate();
