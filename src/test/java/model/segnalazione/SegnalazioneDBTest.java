@@ -37,6 +37,10 @@ public class SegnalazioneDBTest {
     @BeforeClass
     public static void setUpClass() throws Exception {
         Database.initializePool("databases.xml", "Test");
+        final Connection conn = Database.getConnection();
+        // disable foreign key checks
+        conn.prepareStatement("SET FOREIGN_KEY_CHECKS=0;").executeUpdate();
+        Database.freeConnection(conn);
     }
 
     /**
@@ -46,6 +50,10 @@ public class SegnalazioneDBTest {
      */
     @AfterClass
     public static void tearDownClass() throws Exception {
+        final Connection conn = Database.getConnection();
+        // enable foreign key checks
+        conn.prepareStatement("SET FOREIGN_KEY_CHECKS=1;").executeUpdate();
+        Database.freeConnection(conn);
         Database.destroyPool();
     }
 

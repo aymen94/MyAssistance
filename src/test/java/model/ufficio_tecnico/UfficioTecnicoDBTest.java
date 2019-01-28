@@ -39,9 +39,10 @@ public class UfficioTecnicoDBTest {
      * Sets the up class.
      *
      * @throws IOException Signals that an I/O exception has occurred.
+     * @throws SQLException
      */
     @BeforeClass
-    public static void setUpClass() throws IOException {
+    public static void setUpClass() throws IOException, SQLException {
         Database.initializePool("databases.xml", "Test");
 
         fileHandler = new FileHandler(
@@ -49,6 +50,10 @@ public class UfficioTecnicoDBTest {
         logger = Logger.getLogger(UfficioTecnicoDBTest.class.getName());
         logger.addHandler(fileHandler);
         logger.config("logger loaded");
+        final Connection conn = Database.getConnection();
+        //disable foreign key checks
+        conn.prepareStatement("SET FOREIGN_KEY_CHECKS=0;").executeUpdate();
+        Database.freeConnection(conn);
     }
 
     /**
@@ -61,8 +66,11 @@ public class UfficioTecnicoDBTest {
         final UfficioTecnicoDB utenteDBTest = new UfficioTecnicoDB();
         utenteDBTest.deleteById(1);
         logger.info("clear db  \n output:" + utenteDBTest.deleteById(1));
+        final Connection conn = Database.getConnection();
+        //enable foreign key checks
+        conn.prepareStatement("SET FOREIGN_KEY_CHECKS=1;").executeUpdate();
+        Database.freeConnection(conn);
         Database.destroyPool();
-
     }
 
     /**

@@ -10,6 +10,7 @@ import org.junit.AfterClass;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
@@ -20,15 +21,27 @@ import pool.Database;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING) public final class UtenteDBTest {
     @BeforeClass public static void setUpClass() throws SQLException {
         Database.initializePool("databases.xml", "Test");
-        Database.getConnection().prepareStatement(
-            "ALTER TABLE my_assistance.utente AUTO_INCREMENT = 1")
-            .executeUpdate();
+        final Connection conn = Database.getConnection();
+        conn.prepareStatement(
+                "ALTER TABLE my_assistance.utente AUTO_INCREMENT = 1")
+                .executeUpdate();
+
+        // disable foreign key checks
+        conn.prepareStatement("SET FOREIGN_KEY_CHECKS=0;").executeUpdate();
+        Database.freeConnection(conn);
     }
 
     /**
      * Tear down class.
+     *
+     * @throws SQLException
      */
-    @AfterClass public static void tearDownClass() {
+    @AfterClass
+    public static void tearDownClass() throws SQLException {
+        final Connection conn = Database.getConnection();
+        // enable foreign key checks
+        conn.prepareStatement("SET FOREIGN_KEY_CHECKS=1;").executeUpdate();
+        Database.freeConnection(conn);
         Database.destroyPool();
     }
 
