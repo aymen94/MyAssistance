@@ -189,9 +189,9 @@ public final class SegnalazioneDB implements SegnalazioneDBInterface {
                 segnalazione.setAutore(autore);
 
                 // Use a fake Tecnico
-                if (result.getInt("tecnico") != 0) {
-                    final UfficioTecnico tecnico = new UfficioTecnico();
-                    tecnico.setId(result.getInt("tecnico"));
+                final UfficioTecnico tecnico = new UfficioTecnico();
+                tecnico.setId(result.getInt("tecnico"));
+                if (!result.wasNull()) {
                     segnalazione.setTecnico(tecnico);
                 }
 
