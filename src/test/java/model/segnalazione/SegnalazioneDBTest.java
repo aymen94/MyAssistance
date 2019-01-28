@@ -36,6 +36,7 @@ public class SegnalazioneDBTest {
      * The autore test.
      */
     private Utente autoreTest;
+
     /**
      * The db.
      */
@@ -54,7 +55,7 @@ public class SegnalazioneDBTest {
     /**
      * Sets the up class.
      *
-     * @throws Exception the SQL exception
+     * @throws Exception the exception
      */
     @BeforeClass
     public static void setUpClass() throws Exception {
@@ -68,7 +69,7 @@ public class SegnalazioneDBTest {
     /**
      * Tear down class.
      *
-     * @throws Exception the SQL exception
+     * @throws Exception the exception
      */
     @AfterClass
     public static void tearDownClass() throws Exception {
@@ -80,9 +81,9 @@ public class SegnalazioneDBTest {
     }
 
     /**
-     * Clear db.
+     * Clear DB.
      *
-     * @throws Exception the SQL exception
+     * @throws Exception the exception
      */
     @Before
     public void clearDB() throws Exception {
@@ -110,7 +111,7 @@ public class SegnalazioneDBTest {
         segnalazioneTest2.setStato(Segnalazione.STATO_ASSEGNATO);
         segnalazioneTest2
                 .setDataAssegnazione(Date.valueOf("2019-01-19").toLocalDate());
-        UfficioTecnico ufficioTecnico=new UfficioTecnico();
+        final UfficioTecnico ufficioTecnico = new UfficioTecnico();
         ufficioTecnico.setId(1);
         segnalazioneTest2.setTecnico(ufficioTecnico);
 
@@ -132,9 +133,7 @@ public class SegnalazioneDBTest {
     /**
      * Test get by cod 1.
      *
-     * Database void
-     *
-     * @throws Exception the SQL exception
+     * @throws Exception the exception
      */
     @Test
     public void testGetByCod1() throws Exception {
@@ -145,9 +144,7 @@ public class SegnalazioneDBTest {
     /**
      * Test get by cod 2.
      *
-     * Database void
-     *
-     * @throws Exception the SQL exception
+     * @throws Exception the exception
      */
     @Test
     public void testGetByCod2() throws Exception {
@@ -179,33 +176,44 @@ public class SegnalazioneDBTest {
     /**
      * Test insert 1.
      *
-     * @throws Exception the SQL exception
+     * @throws Exception the exception
      */
     @Test(expected = Exception.class)
     public void testInsert1() throws Exception {
-        segnalazioneTest.setTitolo(null);
+        segnalazioneTest = null;
         db.insert(segnalazioneTest);
     }
 
     /**
      * Test insert 2.
      *
-     * @throws Exception the SQL exception
+     * @throws Exception the exception
      */
     @Test(expected = Exception.class)
     public void testInsert2() throws Exception {
-        segnalazioneTest.setTitolo("Lorem ipsum");
-        segnalazioneTest.setDescrizione(null);
+        segnalazioneTest.setTitolo(null);
         db.insert(segnalazioneTest);
     }
 
     /**
      * Test insert 3.
      *
-     * @throws Exception the SQL exception
+     * @throws Exception the exception
      */
     @Test(expected = Exception.class)
     public void testInsert3() throws Exception {
+        segnalazioneTest.setTitolo("Lorem ipsum");
+        segnalazioneTest.setDescrizione(null);
+        db.insert(segnalazioneTest);
+    }
+
+    /**
+     * Test insert 4.
+     *
+     * @throws Exception the exception
+     */
+    @Test(expected = Exception.class)
+    public void testInsert4() throws Exception {
         segnalazioneTest.setTitolo("Lorem ipsum");
         segnalazioneTest.setDescrizione("Lorem ipsum dolor sit amet");
         segnalazioneTest.setAutore(null);
@@ -213,12 +221,12 @@ public class SegnalazioneDBTest {
     }
 
     /**
-     * Test insert 4.
+     * Test insert 5.
      *
-     * @throws Exception the SQL exception
+     * @throws Exception the exception
      */
     @Test(expected = Exception.class)
-    public void testInsert4() throws Exception {
+    public void testInsert5() throws Exception {
         segnalazioneTest.setTitolo("Lorem ipsum");
         segnalazioneTest.setDescrizione("Lorem ipsum dolor sit amet");
         segnalazioneTest.setAutore(new CSU());
@@ -227,12 +235,12 @@ public class SegnalazioneDBTest {
     }
 
     /**
-     * Test insert 5.
+     * Test insert 6.
      *
-     * @throws Exception the SQL exception
+     * @throws Exception the exception
      */
     @Test(expected = Exception.class)
-    public void testInsert5() throws Exception {
+    public void testInsert6() throws Exception {
         segnalazioneTest.setTitolo("Lorem ipsum");
         segnalazioneTest.setDescrizione("Lorem ipsum dolor sit amet");
         segnalazioneTest.setAutore(new CSU());
@@ -243,12 +251,12 @@ public class SegnalazioneDBTest {
     }
 
     /**
-     * Test insert 6.
+     * Test insert 7.
      *
-     * @throws Exception the SQL exception
+     * @throws Exception the exception
      */
     @Test
-    public void testInsert6() throws Exception {
+    public void testInsert7() throws Exception {
         segnalazioneTest.setTitolo("Lorem ipsum");
         segnalazioneTest.setDescrizione("Lorem ipsum dolor sit amet");
         segnalazioneTest.setAutore(new CSU());
@@ -263,7 +271,7 @@ public class SegnalazioneDBTest {
     /**
      * Test delete 1.
      *
-     * @throws Exception the SQL exception
+     * @throws Exception the exception
      */
     @Test
     public void testDelete1() throws Exception {
@@ -275,7 +283,7 @@ public class SegnalazioneDBTest {
     /**
      * Test delete 2.
      *
-     * @throws Exception the SQL exception
+     * @throws Exception the exception
      */
     @Test
     public void testDelete2() throws Exception {
@@ -286,24 +294,36 @@ public class SegnalazioneDBTest {
     }
 
     /**
-     * Test insert 1.
+     * Test update 1.
      *
-     * @throws Exception the SQL exception
+     * @throws Exception the exception
+     */
+    @Test(expected = Exception.class)
+    public void testUpdate1() throws Exception {
+        segnalazioneTest = null;
+        final Boolean res = db.update(segnalazioneTest) > 0;
+        assertFalse(res);
+    }
+
+    /**
+     * Test update 2.
+     *
+     * @throws Exception the exception
      */
     @Test
-    public void testUpdate1() throws Exception {
+    public void testUpdate2() throws Exception {
         segnalazioneTest.setCod(0);
         final Boolean res = db.update(segnalazioneTest) > 0;
         assertFalse(res);
     }
 
     /**
-     * Test insert 1.
+     * Test update 3.
      *
-     * @throws Exception the SQL exception
+     * @throws Exception the exception
      */
     @Test(expected = Exception.class)
-    public void testUpdate2() throws Exception {
+    public void testUpdate3() throws Exception {
         db.insert(segnalazioneTest);
         final Segnalazione newSegnalazione = new Segnalazione();
         newSegnalazione.setCod(1);
@@ -312,12 +332,12 @@ public class SegnalazioneDBTest {
     }
 
     /**
-     * Test insert 2.
+     * Test update 4.
      *
-     * @throws Exception the SQL exception
+     * @throws Exception the exception
      */
     @Test(expected = Exception.class)
-    public void testUpdate3() throws Exception {
+    public void testUpdate4() throws Exception {
         db.insert(segnalazioneTest);
         final Segnalazione newSegnalazione = new Segnalazione();
         newSegnalazione.setCod(1);
@@ -327,12 +347,12 @@ public class SegnalazioneDBTest {
     }
 
     /**
-     * Test insert 3.
+     * Test update 5.
      *
-     * @throws Exception the SQL exception
+     * @throws Exception the exception
      */
     @Test(expected = Exception.class)
-    public void testUpdate4() throws Exception {
+    public void testUpdate5() throws Exception {
         db.insert(segnalazioneTest);
         final Segnalazione newSegnalazione = new Segnalazione();
         newSegnalazione.setCod(1);
@@ -344,12 +364,12 @@ public class SegnalazioneDBTest {
     }
 
     /**
-     * Test insert 5.
+     * Test update 6.
      *
-     * @throws Exception the SQL exception
+     * @throws Exception the exception
      */
     @Test(expected = Exception.class)
-    public void testUpdate5() throws Exception {
+    public void testUpdate6() throws Exception {
         db.insert(segnalazioneTest);
         final Segnalazione newSegnalazione = new Segnalazione();
         newSegnalazione.setCod(1);
@@ -361,12 +381,12 @@ public class SegnalazioneDBTest {
     }
 
     /**
-     * Test insert 6.
+     * Test update 7.
      *
-     * @throws Exception the SQL exception
+     * @throws Exception the exception
      */
     @Test(expected = Exception.class)
-    public void testUpdate6() throws Exception {
+    public void testUpdate7() throws Exception {
         db.insert(segnalazioneTest);
         final Segnalazione newSegnalazione = new Segnalazione();
         newSegnalazione.setCod(1);
@@ -380,12 +400,12 @@ public class SegnalazioneDBTest {
     }
 
     /**
-     * Test insert 7.
+     * Test update 8.
      *
-     * @throws Exception the SQL exception
+     * @throws Exception the exception
      */
     @Test
-    public void testUpdate7() throws Exception {
+    public void testUpdate8() throws Exception {
         db.insert(segnalazioneTest);
         final Segnalazione newSegnalazione = new Segnalazione();
         newSegnalazione.setCod(1);
