@@ -8,7 +8,7 @@ public final class UfficioTecnico {
     /**
      * The id.
      */
-    private Integer id;
+    private int id;
 
     /**
      * The nome.
@@ -41,7 +41,7 @@ public final class UfficioTecnico {
      *
      * @return id get the id of UfficioTecnico
      */
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
@@ -50,7 +50,7 @@ public final class UfficioTecnico {
      *
      * @param aId setta identificatore dell'ufficio tecnico
      */
-    public void setId(final Integer aId) {
+    public void setId(final int aId) {
         this.id = aId;
     }
 
@@ -154,8 +154,8 @@ public final class UfficioTecnico {
         final UfficioTecnico other = (UfficioTecnico) obj;
 
         // if id or other.id is null do not compare
-        if (id != null && other.id != null) {
-            if (!id.equals(other.id)) {
+        if (id != 0 && other.id != 0) {
+            if (!(id == other.id)) {
                 return false;
             }
         }
