@@ -1,5 +1,7 @@
 package model.segnalazione;
 
+import java.util.Objects;
+
 /**
  * The Class Tipologia.
  */
@@ -100,16 +102,7 @@ public final class Tipologia {
      */
     @Override
     public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + id;
-        if (nome == null) {
-            result = prime * result + 0;
-        } else {
-            result = prime * result + nome.hashCode();
-        }
-        result = prime * result + priorita;
-        return result;
+        return Objects.hash(nome, id, priorita);
     }
 
     /**

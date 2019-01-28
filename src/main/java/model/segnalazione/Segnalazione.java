@@ -6,6 +6,7 @@ Date: 23/12/2018
 package model.segnalazione;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 import model.ufficio_tecnico.UfficioTecnico;
 import model.utente.Utente;
@@ -317,71 +318,16 @@ public final class Segnalazione {
      */
     @Override
     public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-
-        if (autore == null) {
-            result = prime * result + 0;
-        } else {
-            result = prime * result + autore.hashCode();
-        }
-
-        if ((dataAssegnazione == null)) {
-            result = prime * result + 0;
-        } else {
-            result = prime * result + dataAssegnazione.hashCode();
-        }
-
-        if (dataRifiuto == null) {
-            result = prime * result + 0;
-        } else {
-            result = prime * result + dataRifiuto.hashCode();
-        }
-
-        if (dataRisoluzione == null) {
-            result = prime * result + 0;
-        } else {
-            result = prime * result + dataRisoluzione.hashCode();
-        }
-
-        if (dataSegnalazione == null) {
-            result = prime * result + 0;
-        } else {
-            result = prime * result + dataSegnalazione.hashCode();
-        }
-
-        if (descrizione == null) {
-            result = prime * result + 0;
-        } else {
-            result = prime * result + descrizione.hashCode();
-        }
-
-        if (motivazioneRifiuto == null) {
-            result = prime * result + 0;
-        } else {
-            result = prime * result + motivazioneRifiuto.hashCode();
-        }
-
-        result = prime * result + stato;
-
-        if (tecnico == null) {
-            result = prime * result + 0;
-        } else {
-            result = prime * result + tecnico.hashCode();
-        }
-
-        if (tipologia == null) {
-            result = prime * result + 0;
-        } else {
-            result = prime * result + tipologia.hashCode();
-        }
-
-        if (titolo == null) {
-            result = prime * result + 0;
-        } else {
-            result = prime * result + titolo.hashCode();
-        }
-        return result;
+        return Objects.hash(autore,
+                dataAssegnazione,
+                dataRifiuto,
+                dataRisoluzione,
+                dataSegnalazione,
+                descrizione,
+                motivazioneRifiuto,
+                tecnico,
+                tipologia,
+                titolo);
     }
 
     /**
