@@ -18,7 +18,7 @@ import pool.Database;
 /**
  * This class manages stored data about Users into the database.
  */
-public final class UtenteDB {
+public final class UtenteDB implements UtenteDBInterface {
     /**
      * This private attribute is a string that contains
      * the name of the table.
