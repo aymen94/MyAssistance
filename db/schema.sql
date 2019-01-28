@@ -42,9 +42,9 @@ CREATE TABLE my_assistance.segnalazione
   data_risoluzione    DATE,
   motivazione_rifiuto VARCHAR(255),
   tipologia           INT NOT NULL,
-  FOREIGN KEY (tipologia) REFERENCES tipologia (id) ON DELETE CASCADE ON UPDATE CASCADE,
+  FOREIGN KEY (tipologia) REFERENCES my_assistance.tipologia (id) ON DELETE CASCADE ON UPDATE CASCADE,
   autore              INT NOT NULL,
-  FOREIGN KEY (autore) REFERENCES utente (id) ON DELETE CASCADE ON UPDATE CASCADE,
+  FOREIGN KEY (autore) REFERENCES my_assistance.utente (id) ON DELETE CASCADE ON UPDATE CASCADE,
   tecnico             INT,
-  FOREIGN KEY (tecnico) REFERENCES ufficio_tecnico (id) ON DELETE CASCADE ON UPDATE CASCADE
+  FOREIGN KEY (tecnico) REFERENCES my_assistance.ufficio_tecnico (id) ON DELETE CASCADE ON UPDATE CASCADE
 );
