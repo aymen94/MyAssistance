@@ -76,7 +76,7 @@ public abstract class Utente {
      *
      * @return id ottienti l'identificatore dell'utente.
      */
-    public Integer getId() {
+    public final Integer getId() {
         return id;
     }
 
@@ -85,7 +85,7 @@ public abstract class Utente {
      *
      * @param aId imposta il valore id dell'utente.
      */
-    public void setId(final int aId) {
+    public final void setId(final int aId) {
         id = aId;
     }
 
@@ -94,7 +94,7 @@ public abstract class Utente {
      *
      * @return username Ottieni l'username dell'utente.
      */
-    public String getUserName() {
+    public final String getUserName() {
         return userName;
     }
 
@@ -103,7 +103,7 @@ public abstract class Utente {
      *
      * @param aUserName imposta il valore di username.
      */
-    public void setUserName(final String aUserName) {
+    public final void setUserName(final String aUserName) {
         userName = aUserName;
     }
 
@@ -112,7 +112,7 @@ public abstract class Utente {
      *
      * @return password ottieni la passoword dell'utente.
      */
-    public String getPassword() {
+    public final String getPassword() {
         return password;
     }
 
@@ -121,7 +121,7 @@ public abstract class Utente {
      *
      * @param aPassword imposta la password dell'utente.
      */
-    public void setPassword(final String aPassword) {
+    public final void setPassword(final String aPassword) {
         password = aPassword;
     }
 
@@ -130,7 +130,7 @@ public abstract class Utente {
      *
      * @return email ottieni l'email dell'utente.
      */
-    public String getEmail() {
+    public final String getEmail() {
         return email;
     }
 
@@ -139,7 +139,7 @@ public abstract class Utente {
      *
      * @param aEmail imposta l'emaio dell'utente.
      */
-    public void setEmail(final String aEmail) {
+    public final void setEmail(final String aEmail) {
         email = aEmail;
     }
 
@@ -148,7 +148,7 @@ public abstract class Utente {
      *
      * @return nome ottieni il nome dell'utente.
      */
-    public String getNome() {
+    public final String getNome() {
         return nome;
     }
 
@@ -157,7 +157,7 @@ public abstract class Utente {
      *
      * @param aNome imposta il nome dell'utente.
      */
-    public void setNome(final String aNome) {
+    public final void setNome(final String aNome) {
         this.nome = aNome;
     }
 
@@ -166,7 +166,7 @@ public abstract class Utente {
      *
      * @return cognome ottieni il cognome dell'utente.
      */
-    public String getCognome() {
+    public final String getCognome() {
         return cognome;
     }
 
@@ -175,7 +175,7 @@ public abstract class Utente {
      *
      * @param aCognogme imposta il cognome dell'utente.
      */
-    public void setCognome(final String aCognogme) {
+    public final void setCognome(final String aCognogme) {
         cognome = aCognogme;
     }
 
@@ -184,7 +184,7 @@ public abstract class Utente {
      *
      * @return sesso
      */
-    public int getSesso() {
+    public final int getSesso() {
         return sesso;
     }
 
@@ -193,7 +193,7 @@ public abstract class Utente {
      *
      * @param aSesso imposta il valore sesso dell'utente.
      */
-    public void setSesso(final int aSesso) {
+    public final void setSesso(final int aSesso) {
         sesso = aSesso;
     }
 
@@ -202,7 +202,7 @@ public abstract class Utente {
      *
      * @return Date
      */
-    public LocalDate getDataDiNascita() {
+    public final LocalDate getDataDiNascita() {
         return dataDiNascita;
     }
 
@@ -211,7 +211,7 @@ public abstract class Utente {
      *
      * @param aData imposta il valore sesso dell'utente.
      */
-    public void setDataDiNascita(final LocalDate aData) {
+    public final void setDataDiNascita(final LocalDate aData) {
         dataDiNascita = aData;
     }
 
@@ -220,7 +220,7 @@ public abstract class Utente {
      *
      * @return boolean
      */
-    @Override public boolean equals(final Object o) {
+    @Override public final boolean equals(final Object o) {
         if (this == o) {
             return true;
         }
@@ -241,7 +241,7 @@ public abstract class Utente {
      *
      * @return int Utente
      */
-    @Override public int hashCode() {
+    @Override public final int hashCode() {
         return Objects.hash(id,
             userName,
             password,
@@ -257,7 +257,7 @@ public abstract class Utente {
      *
      * @return String
      */
-    @Override public String toString() {
+    @Override public final String toString() {
         return "Utente {" + "id = " + id + ", userName = '" + userName + '\''
             + ", password = " + password + ", email = '" + email + '\''
             + ", nome = '" + nome + '\'' + ", cognome = '" + cognome + '\''
