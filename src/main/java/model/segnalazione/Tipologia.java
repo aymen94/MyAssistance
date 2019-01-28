@@ -117,27 +117,13 @@ public final class Tipologia {
         if (this == obj) {
             return true;
         }
-        if (obj == null) {
+        if (obj == null || !(obj instanceof Tipologia)) {
             return false;
         }
-        if (!(obj instanceof Tipologia)) {
-            return false;
-        }
+
         final Tipologia other = (Tipologia) obj;
-        if (id != other.id) {
-            return false;
-        }
-        if (nome == null) {
-            if (other.nome != null) {
-                return false;
-            }
-        } else if (!nome.equals(other.nome)) {
-            return false;
-        }
-        if (priorita != other.priorita) {
-            return false;
-        }
-        return true;
+        return id == other.id && priorita == other.priorita
+                && Objects.equals(nome, other.nome);
     }
 
 }

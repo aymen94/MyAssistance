@@ -342,94 +342,23 @@ public final class Segnalazione {
         if (this == obj) {
             return true;
         }
-        if (obj == null) {
-            return false;
-        }
-        if (!(obj instanceof Segnalazione)) {
+        if (obj == null || !(obj instanceof Segnalazione)) {
             return false;
         }
         final Segnalazione other = (Segnalazione) obj;
 
         // if cod or other.cod is 0 do not compare them
-        if (cod != 0 && other.cod != 0) {
-            if (cod != other.cod) {
-                return false;
-            }
-        }
-        if (autore == null) {
-            if (other.autore != null) {
-                return false;
-            }
-        } else if (!autore.equals(other.autore)) {
-            return false;
-        }
-        if (dataAssegnazione == null) {
-            if (other.dataAssegnazione != null) {
-                return false;
-            }
-        } else if (!dataAssegnazione.equals(other.dataAssegnazione)) {
-            return false;
-        }
-        if (dataRifiuto == null) {
-            if (other.dataRifiuto != null) {
-                return false;
-            }
-        } else if (!dataRifiuto.equals(other.dataRifiuto)) {
-            return false;
-        }
-        if (dataRisoluzione == null) {
-            if (other.dataRisoluzione != null) {
-                return false;
-            }
-        } else if (!dataRisoluzione.equals(other.dataRisoluzione)) {
-            return false;
-        }
-        if (dataSegnalazione == null) {
-            if (other.dataSegnalazione != null) {
-                return false;
-            }
-        } else if (!dataSegnalazione.equals(other.dataSegnalazione)) {
-            return false;
-        }
-        if (descrizione == null) {
-            if (other.descrizione != null) {
-                return false;
-            }
-        } else if (!descrizione.equals(other.descrizione)) {
-            return false;
-        }
-        if (motivazioneRifiuto == null) {
-            if (other.motivazioneRifiuto != null) {
-                return false;
-            }
-        } else if (!motivazioneRifiuto.equals(other.motivazioneRifiuto)) {
-            return false;
-        }
-        if (stato != other.stato) {
-            return false;
-        }
-        if (tecnico == null) {
-            if (other.tecnico != null) {
-                return false;
-            }
-        } else if (!tecnico.equals(other.tecnico)) {
-            return false;
-        }
-        if (tipologia == null) {
-            if (other.tipologia != null) {
-                return false;
-            }
-        } else if (!tipologia.equals(other.tipologia)) {
-            return false;
-        }
-        if (titolo == null) {
-            if (other.titolo != null) {
-                return false;
-            }
-        } else if (!titolo.equals(other.titolo)) {
-            return false;
-        }
-        return true;
+        return (cod == 0 || other.cod == 0 || cod == other.cod)
+                && stato == other.stato && Objects.equals(autore, other.autore)
+                && Objects.equals(dataAssegnazione, other.dataAssegnazione)
+                && Objects.equals(dataRifiuto, other.dataRifiuto)
+                && Objects.equals(dataRisoluzione, other.dataRisoluzione)
+                && Objects.equals(dataSegnalazione, other.dataSegnalazione)
+                && Objects.equals(descrizione, other.descrizione)
+                && Objects.equals(motivazioneRifiuto, other.motivazioneRifiuto)
+                && Objects.equals(tecnico, other.tecnico)
+                && Objects.equals(tipologia, other.tipologia)
+                && Objects.equals(titolo, other.titolo);
     }
 
     /**
