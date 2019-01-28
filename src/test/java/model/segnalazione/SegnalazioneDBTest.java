@@ -9,12 +9,16 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import model.ufficio_tecnico.UfficioTecnico;
 import model.utente.CSU;
 import model.utente.Utente;
 import pool.Database;
@@ -25,9 +29,28 @@ import pool.Database;
 public class SegnalazioneDBTest {
 
     /**
+     * The segnalazione test.
+     */
+    private Segnalazione segnalazioneTest;
+
+    /**
+     * The autore test.
+     */
+    private Utente autoreTest;
+    /**
      * The db.
      */
     SegnalazioneDB db;
+
+    /**
+     * The segnalazione test 2.
+     */
+    private Segnalazione segnalazioneTest2;
+
+    /**
+     * The segnalazione test 3.
+     */
+    private Segnalazione segnalazioneTest3;
 
     /**
      * Sets the up class.
@@ -68,6 +91,43 @@ public class SegnalazioneDBTest {
         conn.prepareStatement("TRUNCATE TABLE segnalazione").executeUpdate();
         Database.freeConnection(conn);
         db = new SegnalazioneDB();
+        autoreTest = new CSU();
+        autoreTest.setId(1);
+        segnalazioneTest = new Segnalazione();
+        segnalazioneTest.setTitolo("Lorem ipsum");
+        segnalazioneTest.setDescrizione("Lorem ipsum dolor sit amet");
+
+        segnalazioneTest.setAutore(autoreTest);
+        segnalazioneTest
+                .setDataSegnalazione(Date.valueOf("2018-10-06").toLocalDate());
+        segnalazioneTest.setTipologia(new Tipologia());
+        segnalazioneTest2 = new Segnalazione();
+        segnalazioneTest2.setTitolo("Lorem ipsum 2");
+        segnalazioneTest2.setDescrizione("Lorem ipsum dolor sit amet adcedew");
+        segnalazioneTest2.setAutore(autoreTest);
+        segnalazioneTest2
+                .setDataSegnalazione(Date.valueOf("2018-10-19").toLocalDate());
+        segnalazioneTest2.setTipologia(new Tipologia());
+        segnalazioneTest2.setStato(Segnalazione.STATO_ASSEGNATO);
+        segnalazioneTest2
+                .setDataAssegnazione(Date.valueOf("2019-01-19").toLocalDate());
+        UfficioTecnico ufficioTecnico=new UfficioTecnico();
+        ufficioTecnico.setId(1);
+        segnalazioneTest2.setTecnico(ufficioTecnico);
+
+        segnalazioneTest3 = new Segnalazione();
+        segnalazioneTest3.setTitolo("Lorem ipsum 3");
+        segnalazioneTest3.setDescrizione("Lorem ipsum dolor sit amet ede");
+        segnalazioneTest3.setAutore(new CSU());
+        segnalazioneTest3
+                .setDataSegnalazione(Date.valueOf("2018-10-20").toLocalDate());
+        segnalazioneTest3.setTipologia(new Tipologia());
+        segnalazioneTest3.setStato(Segnalazione.STATO_RISOLTO);
+        segnalazioneTest3
+                .setDataAssegnazione(Date.valueOf("2019-01-17").toLocalDate());
+        segnalazioneTest3.setTecnico(ufficioTecnico);
+        segnalazioneTest3
+                .setDataRisoluzione(Date.valueOf("2019-01-20").toLocalDate());
     }
 
     /**
@@ -226,14 +286,7 @@ public class SegnalazioneDBTest {
      */
     @Test
     public void testDelete2() throws Exception {
-        final Segnalazione segnalazione = new Segnalazione();
-        segnalazione.setTitolo("Lorem ipsum");
-        segnalazione.setDescrizione("Lorem ipsum dolor sit amet");
-        segnalazione.setAutore(new CSU());
-        segnalazione
-                .setDataSegnalazione(Date.valueOf("2018-10-06").toLocalDate());
-        segnalazione.setTipologia(new Tipologia());
-        db.insert(segnalazione);
+        db.insert(segnalazioneTest);
         final boolean res = db.deleteById(1) > 0;
         assertTrue(res);
         assertNull(db.getByCod(1));
@@ -259,14 +312,7 @@ public class SegnalazioneDBTest {
      */
     @Test(expected = SQLException.class)
     public void testUpdate2() throws Exception {
-        final Segnalazione segnalazione = new Segnalazione();
-        segnalazione.setTitolo("Lorem ipsum");
-        segnalazione.setDescrizione("Lorem ipsum dolor sit amet");
-        segnalazione.setAutore(new CSU());
-        segnalazione
-                .setDataSegnalazione(Date.valueOf("2018-10-06").toLocalDate());
-        segnalazione.setTipologia(new Tipologia());
-        db.insert(segnalazione);
+        db.insert(segnalazioneTest);
         final Segnalazione newSegnalazione = new Segnalazione();
         newSegnalazione.setCod(1);
         newSegnalazione.setTitolo("null");
@@ -280,14 +326,7 @@ public class SegnalazioneDBTest {
      */
     @Test(expected = SQLException.class)
     public void testUpdate3() throws Exception {
-        final Segnalazione segnalazione = new Segnalazione();
-        segnalazione.setTitolo("Lorem ipsum");
-        segnalazione.setDescrizione("Lorem ipsum dolor sit amet");
-        segnalazione.setAutore(new CSU());
-        segnalazione
-                .setDataSegnalazione(Date.valueOf("2018-10-06").toLocalDate());
-        segnalazione.setTipologia(new Tipologia());
-        db.insert(segnalazione);
+        db.insert(segnalazioneTest);
         final Segnalazione newSegnalazione = new Segnalazione();
         newSegnalazione.setCod(1);
         newSegnalazione.setTitolo("Lorem ipsum");
@@ -302,14 +341,7 @@ public class SegnalazioneDBTest {
      */
     @Test(expected = SQLException.class)
     public void testUpdate4() throws Exception {
-        final Segnalazione segnalazione = new Segnalazione();
-        segnalazione.setTitolo("Lorem ipsum");
-        segnalazione.setDescrizione("Lorem ipsum dolor sit amet");
-        segnalazione.setAutore(new CSU());
-        segnalazione
-                .setDataSegnalazione(Date.valueOf("2018-10-06").toLocalDate());
-        segnalazione.setTipologia(new Tipologia());
-        db.insert(segnalazione);
+        db.insert(segnalazioneTest);
         final Segnalazione newSegnalazione = new Segnalazione();
         newSegnalazione.setCod(1);
         newSegnalazione.setTitolo("Lorem ipsum");
@@ -326,14 +358,7 @@ public class SegnalazioneDBTest {
      */
     @Test(expected = SQLException.class)
     public void testUpdate5() throws Exception {
-        final Segnalazione segnalazione = new Segnalazione();
-        segnalazione.setTitolo("Lorem ipsum");
-        segnalazione.setDescrizione("Lorem ipsum dolor sit amet");
-        segnalazione.setAutore(new CSU());
-        segnalazione
-                .setDataSegnalazione(Date.valueOf("2018-10-06").toLocalDate());
-        segnalazione.setTipologia(new Tipologia());
-        db.insert(segnalazione);
+        db.insert(segnalazioneTest);
         final Segnalazione newSegnalazione = new Segnalazione();
         newSegnalazione.setCod(1);
         newSegnalazione.setTitolo("Lorem ipsum");
@@ -350,14 +375,7 @@ public class SegnalazioneDBTest {
      */
     @Test(expected = SQLException.class)
     public void testUpdate6() throws Exception {
-        final Segnalazione segnalazione = new Segnalazione();
-        segnalazione.setTitolo("Lorem ipsum");
-        segnalazione.setDescrizione("Lorem ipsum dolor sit amet");
-        segnalazione.setAutore(new CSU());
-        segnalazione
-                .setDataSegnalazione(Date.valueOf("2018-10-06").toLocalDate());
-        segnalazione.setTipologia(new Tipologia());
-        db.insert(segnalazione);
+        db.insert(segnalazioneTest);
         final Segnalazione newSegnalazione = new Segnalazione();
         newSegnalazione.setCod(1);
         newSegnalazione.setTitolo("Lorem ipsum");
@@ -376,14 +394,7 @@ public class SegnalazioneDBTest {
      */
     @Test
     public void testUpdate7() throws Exception {
-        final Segnalazione segnalazione = new Segnalazione();
-        segnalazione.setTitolo("Lorem ipsum");
-        segnalazione.setDescrizione("Lorem ipsum dolor sit amet");
-        segnalazione.setAutore(new CSU());
-        segnalazione
-                .setDataSegnalazione(Date.valueOf("2018-10-06").toLocalDate());
-        segnalazione.setTipologia(new Tipologia());
-        db.insert(segnalazione);
+        db.insert(segnalazioneTest);
         final Segnalazione newSegnalazione = new Segnalazione();
         newSegnalazione.setCod(1);
         newSegnalazione.setTitolo("Lorem ipsum");
@@ -400,4 +411,66 @@ public class SegnalazioneDBTest {
         assertEquals(newSegnalazione, db.getByCod(1));
     }
 
+    /**
+     * Test get by autore 1.
+     *
+     * @throws Exception the exception
+     */
+    @Test
+    public void testGetByAutore1() throws Exception {
+        final List<Segnalazione> segnalazioneList = db.getByAutore(0);
+        assertEquals(segnalazioneList.size(), 0);
+    }
+
+    /**
+     * Test get by autore 2.
+     *
+     * @throws Exception the exception
+     */
+    @Test
+    public void testGetByAutore2() throws Exception {
+        final List<Segnalazione> listExpected = new ArrayList<>();
+        listExpected.add(segnalazioneTest);
+        listExpected.add(segnalazioneTest2);
+
+        db.insert(segnalazioneTest);
+        db.insert(segnalazioneTest2);
+        db.insert(segnalazioneTest3);
+        final List<Segnalazione> segnalazioneList = db
+                .getByAutore(autoreTest.getId());
+
+        assertEquals(new HashSet<>(listExpected),
+                new HashSet<>(segnalazioneList));
+    }
+
+    /**
+     * Test get all 1.
+     *
+     * @throws Exception the exception
+     */
+    @Test
+    public void testGetAll1() throws Exception {
+        final List<Segnalazione> segnalazioneList = db.getAll();
+        assertEquals(segnalazioneList.size(), 0);
+    }
+
+    /**
+     * Test get all 2.
+     *
+     * @throws Exception the exception
+     */
+    @Test
+    public void testGetAll2() throws Exception {
+        final List<Segnalazione> listExpected = new ArrayList<>();
+        listExpected.add(segnalazioneTest);
+        listExpected.add(segnalazioneTest2);
+        listExpected.add(segnalazioneTest3);
+
+        db.insert(segnalazioneTest);
+        db.insert(segnalazioneTest2);
+        db.insert(segnalazioneTest3);
+        final List<Segnalazione> segnalazioneList = db.getAll();
+        assertEquals(new HashSet<>(listExpected),
+                new HashSet<>(segnalazioneList));
+    }
 }
