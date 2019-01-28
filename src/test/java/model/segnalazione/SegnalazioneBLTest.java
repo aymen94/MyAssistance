@@ -8,7 +8,6 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import static utility.TestUtility.listEqualsIgnoreOrder;
 
-import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -161,10 +160,10 @@ public final class SegnalazioneBLTest {
     /**
      * Test insert segnalazione 1.
      *
-     * @throws SQLException the SQL exception
+     * @throws Exception the SQL exception
      */
     @Test
-    public void testInsertSegnalazione1() throws SQLException {
+    public void testInsertSegnalazione1() throws Exception {
         final String aTitolo = null;
         final String aDescrizione = "Ciaooo";
         final Tipologia tipologia = new Tipologia();
@@ -186,10 +185,10 @@ public final class SegnalazioneBLTest {
     /**
      * Test insert segnalazione 2.
      *
-     * @throws SQLException the SQL exception
+     * @throws Exception the SQL exception
      */
     @Test
-    public void testInsertSegnalazione2() throws SQLException {
+    public void testInsertSegnalazione2() throws Exception {
         final String aTitolo = "";
         final String aDescrizione = "Ciaooo";
         final Tipologia tipologia = new Tipologia();
@@ -210,10 +209,10 @@ public final class SegnalazioneBLTest {
     /**
      * Test insert segnalazione 3.
      *
-     * @throws SQLException the SQL exception
+     * @throws Exception the SQL exception
      */
     @Test
-    public void testInsertSegnalazione3() throws SQLException {
+    public void testInsertSegnalazione3() throws Exception {
         final String aTitolo = "Si è guastato il calorifero";
         final String aDescrizione = null;
         final Tipologia tipologia = new Tipologia();
@@ -235,10 +234,10 @@ public final class SegnalazioneBLTest {
     /**
      * Test insert segnalazione 4.
      *
-     * @throws SQLException the SQL exception
+     * @throws Exception the SQL exception
      */
     @Test
-    public void testInsertSegnalazione4() throws SQLException {
+    public void testInsertSegnalazione4() throws Exception {
         final String aTitolo = "Si è guastato il calorifero";
         final String aDescrizione = "";
         final Tipologia tipologia = new Tipologia();
@@ -260,10 +259,10 @@ public final class SegnalazioneBLTest {
     /**
      * Test insert segnalazione 5.
      *
-     * @throws SQLException the SQL exception
+     * @throws Exception the SQL exception
      */
     @Test
-    public void testInsertSegnalazione5() throws SQLException {
+    public void testInsertSegnalazione5() throws Exception {
         final String aTitolo = "Si è guastato il calorifero";
         final String aDescrizione = "Il calorifero vicino all’entrata dell’aula"
                 + " F8 emana aria fredda.";
@@ -286,10 +285,10 @@ public final class SegnalazioneBLTest {
     /**
      * Test update segnalazione 1.
      *
-     * @throws SQLException the SQL exception
+     * @throws Exception the SQL exception
      */
     @Test
-    public void testUpdateSegnalazione1() throws SQLException {
+    public void testUpdateSegnalazione1() throws Exception {
         final String aTitolo = null;
         final String aDescrizione = "Ciaooo";
         final Tipologia tipologia = new Tipologia();
@@ -313,10 +312,10 @@ public final class SegnalazioneBLTest {
     /**
      * Test update segnalazione 2.
      *
-     * @throws SQLException the SQL exception
+     * @throws Exception the SQL exception
      */
     @Test
-    public void testUpdateSegnalazione2() throws SQLException {
+    public void testUpdateSegnalazione2() throws Exception {
         final String aTitolo = "asdfghjklloiuytrewqwertyuijoklmkngfcdxszasdfgh"
                 + "jkoijhuygftrdeswaqawserdftyghuijk";
         final String aDescrizione = "Ciaooo";
@@ -341,10 +340,10 @@ public final class SegnalazioneBLTest {
     /**
      * Test update segnalazione 3.
      *
-     * @throws SQLException the SQL exception
+     * @throws Exception the SQL exception
      */
     @Test
-    public void testUpdateSegnalazione3() throws SQLException {
+    public void testUpdateSegnalazione3() throws Exception {
         final String aTitolo = "Si è guastato il calorifero";
         final String aDescrizione = null;
         final Tipologia tipologia = new Tipologia();
@@ -368,10 +367,10 @@ public final class SegnalazioneBLTest {
     /**
      * Test update segnalazione 4.
      *
-     * @throws SQLException the SQL exception
+     * @throws Exception the SQL exception
      */
     @Test
-    public void testUpdateSegnalazione4() throws SQLException {
+    public void testUpdateSegnalazione4() throws Exception {
         final String aTitolo = "Si è guastato il calorifero";
         final String aDescrizione = "";
         final Tipologia tipologia = new Tipologia();
@@ -395,10 +394,10 @@ public final class SegnalazioneBLTest {
     /**
      * Test update segnalazione 5.
      *
-     * @throws SQLException the SQL exception
+     * @throws Exception the SQL exception
      */
     @Test
-    public void testUpdateSegnalazione5() throws SQLException {
+    public void testUpdateSegnalazione5() throws Exception {
         final String aTitolo = "Si è guastato il calorifero";
         final String aDescrizione = "Il calorifero vicino all’entrata dell’aula"
                 + " F8 emana aria fredda.";
@@ -423,10 +422,10 @@ public final class SegnalazioneBLTest {
     /**
      * Test update segnalazione 6.
      *
-     * @throws SQLException the SQL exception
+     * @throws Exception the SQL exception
      */
     @Test
-    public void testUpdateSegnalazione6() throws SQLException {
+    public void testUpdateSegnalazione6() throws Exception {
         final String aTitolo = "Si è guastato il calorifero";
         final String aDescrizione = "Il calorifero vicino all’entrata dell’aula"
                 + " F8 emana aria fredda.";
@@ -451,10 +450,10 @@ public final class SegnalazioneBLTest {
     /**
      * Test update segnalazione 7.
      *
-     * @throws SQLException the SQL exception
+     * @throws Exception the SQL exception
      */
     @Test
-    public void testUpdateSegnalazione7() throws SQLException {
+    public void testUpdateSegnalazione7() throws Exception {
         final String aTitolo = "Si è guastato il calorifero";
         final String aDescrizione = "Il calorifero vicino all’entrata dell’aula"
                 + " F8 emana aria fredda.";
@@ -479,10 +478,10 @@ public final class SegnalazioneBLTest {
     /**
      * Test update segnalazione 8.
      *
-     * @throws SQLException the SQL exception
+     * @throws Exception the SQL exception
      */
     @Test
-    public void testUpdateSegnalazione8() throws SQLException {
+    public void testUpdateSegnalazione8() throws Exception {
         final String aTitolo = "Si è guastato il calorifero";
         final String aDescrizione = "Il calorifero vicino all’entrata dell’aula"
                 + " F8 emana aria fredda.";
@@ -507,10 +506,10 @@ public final class SegnalazioneBLTest {
     /**
      * Test update segnalazione 9.
      *
-     * @throws SQLException the SQL exception
+     * @throws Exception the SQL exception
      */
     @Test
-    public void testUpdateSegnalazione9() throws SQLException {
+    public void testUpdateSegnalazione9() throws Exception {
         final String aTitolo = "Si è guastato il calorifero";
         final String aDescrizione = "Il calorifero vicino all’entrata dell’aula"
                 + " F8 emana aria fredda.";
@@ -535,10 +534,10 @@ public final class SegnalazioneBLTest {
     /**
      * Test inoltra segnalazione 1.
      *
-     * @throws SQLException the SQL exception
+     * @throws Exception the SQL exception
      */
     @Test
-    public void testInoltraSegnalazione1() throws SQLException {
+    public void testInoltraSegnalazione1() throws Exception {
         final int aCod = SEGNALAZIONE_NON_ESISTENTE;
         final int aIdTecnico = TECNICO_ESISTENTE;
 
@@ -549,10 +548,10 @@ public final class SegnalazioneBLTest {
     /**
      * Test inoltra segnalazione 2.
      *
-     * @throws SQLException the SQL exception
+     * @throws Exception the SQL exception
      */
     @Test
-    public void testInoltraSegnalazione2() throws SQLException {
+    public void testInoltraSegnalazione2() throws Exception {
         final int aCod = SEGNALAZIONE_RISOLTA;
         final int aIdTecnico = TECNICO_ESISTENTE;
         final Boolean res = manager.inoltraSegnalazione(aCod, aIdTecnico);
@@ -562,10 +561,10 @@ public final class SegnalazioneBLTest {
     /**
      * Test inoltra segnalazione 3.
      *
-     * @throws SQLException the SQL exception
+     * @throws Exception the SQL exception
      */
     @Test
-    public void testInoltraSegnalazione3() throws SQLException {
+    public void testInoltraSegnalazione3() throws Exception {
         final int aCod = SEGNALAZIONE_APERTA;
         final int aIdTecnico = TECNICO_ESISTENTE;
         final Boolean res = manager.inoltraSegnalazione(aCod, aIdTecnico);
@@ -575,10 +574,10 @@ public final class SegnalazioneBLTest {
     /**
      * Test rifiuta segnalazione 1.
      *
-     * @throws SQLException the SQL exception
+     * @throws Exception the SQL exception
      */
     @Test
-    public void testRifiutaSegnalazione1() throws SQLException {
+    public void testRifiutaSegnalazione1() throws Exception {
         final int aCod = SEGNALAZIONE_NON_ESISTENTE;
         final String aMotivazioneRifiuto = "Ciao";
         final Boolean res = manager.rifiutaSegnalazione(aCod,
@@ -589,10 +588,10 @@ public final class SegnalazioneBLTest {
     /**
      * Test rifiuta segnalazione 2.
      *
-     * @throws SQLException the SQL exception
+     * @throws Exception the SQL exception
      */
     @Test
-    public void testRifiutaSegnalazione2() throws SQLException {
+    public void testRifiutaSegnalazione2() throws Exception {
         final int aCod = SEGNALAZIONE_RISOLTA;
         final String aMotivazioneRifiuto = "Ciao";
         final Boolean res = manager.rifiutaSegnalazione(aCod,
@@ -603,10 +602,10 @@ public final class SegnalazioneBLTest {
     /**
      * Test rifiuta segnalazione 3.
      *
-     * @throws SQLException the SQL exception
+     * @throws Exception the SQL exception
      */
     @Test
-    public void testRifiutaSegnalazione3() throws SQLException {
+    public void testRifiutaSegnalazione3() throws Exception {
         final int aCod = SEGNALAZIONE_APERTA;
         final String aMotivazioneRifiuto = null;
         final Boolean res = manager.rifiutaSegnalazione(aCod,
@@ -617,10 +616,10 @@ public final class SegnalazioneBLTest {
     /**
      * Test rifiuta segnalazione 4.
      *
-     * @throws SQLException the SQL exception
+     * @throws Exception the SQL exception
      */
     @Test
-    public void testRifiutaSegnalazione4() throws SQLException {
+    public void testRifiutaSegnalazione4() throws Exception {
         final int aCod = SEGNALAZIONE_APERTA;
         final String aMotivazioneRifiuto = "";
         final Boolean res = manager.rifiutaSegnalazione(aCod,
@@ -631,10 +630,10 @@ public final class SegnalazioneBLTest {
     /**
      * Test rifiuta segnalazione 5.
      *
-     * @throws SQLException the SQL exception
+     * @throws Exception the SQL exception
      */
     @Test
-    public void testRifiutaSegnalazione5() throws SQLException {
+    public void testRifiutaSegnalazione5() throws Exception {
         final int aCod = SEGNALAZIONE_APERTA;
         final String aMotivazioneRifiuto = "Segnalazione duplicata";
         final Boolean res = manager.rifiutaSegnalazione(aCod,
@@ -645,10 +644,10 @@ public final class SegnalazioneBLTest {
     /**
      * Test segna risolta.
      *
-     * @throws SQLException the SQL exception
+     * @throws Exception the SQL exception
      */
     @Test
-    public void testSegnaRisolta1() throws SQLException {
+    public void testSegnaRisolta1() throws Exception {
         final int aCod = SEGNALAZIONE_NON_ESISTENTE;
         final Boolean res = manager.segnaRisolta(aCod);
         assertFalse(res);
@@ -657,10 +656,10 @@ public final class SegnalazioneBLTest {
     /**
      * Test segna risolta 2.
      *
-     * @throws SQLException the SQL exception
+     * @throws Exception the SQL exception
      */
     @Test
-    public void testSegnaRisolta2() throws SQLException {
+    public void testSegnaRisolta2() throws Exception {
         final int aCod = SEGNALAZIONE_RISOLTA;
         final Boolean res = manager.segnaRisolta(aCod);
         assertFalse(res);
@@ -669,10 +668,10 @@ public final class SegnalazioneBLTest {
     /**
      * Test segna risolta 3.
      *
-     * @throws SQLException the SQL exception
+     * @throws Exception the SQL exception
      */
     @Test
-    public void testSegnaRisolta3() throws SQLException {
+    public void testSegnaRisolta3() throws Exception {
         final int aCod = SEGNALAZIONE_ASSEGNATA;
         final Boolean res = manager.segnaRisolta(aCod);
         assertTrue(res);
@@ -681,10 +680,10 @@ public final class SegnalazioneBLTest {
     /**
      * Test elimina segnalazione 1.
      *
-     * @throws SQLException the SQL exception
+     * @throws Exception the SQL exception
      */
     @Test
-    public void testDeleteSegnalazione1() throws SQLException {
+    public void testDeleteSegnalazione1() throws Exception {
         final int aCod = SEGNALAZIONE_NON_ESISTENTE;
         final Utente aUtente = utenteTest;
         final Boolean res = manager.deleteSegnalazione(aCod, aUtente);
@@ -694,10 +693,10 @@ public final class SegnalazioneBLTest {
     /**
      * Test elimina segnalazione 2.
      *
-     * @throws SQLException the SQL exception
+     * @throws Exception the SQL exception
      */
     @Test
-    public void testDeleteSegnalazione2() throws SQLException {
+    public void testDeleteSegnalazione2() throws Exception {
         final int aCod = SEGNALAZIONE_ASSEGNATA;
         final Utente aUtente = utenteTest;
         final Boolean res = manager.deleteSegnalazione(aCod, aUtente);
@@ -707,10 +706,10 @@ public final class SegnalazioneBLTest {
     /**
      * Test elimina segnalazione 3.
      *
-     * @throws SQLException the SQL exception
+     * @throws Exception the SQL exception
      */
     @Test
-    public void testDeleteSegnalazione3() throws SQLException {
+    public void testDeleteSegnalazione3() throws Exception {
         final int aCod = SEGNALAZIONE_APERTA;
         final Utente aUtente = null;
         final Boolean res = manager.deleteSegnalazione(aCod, aUtente);
@@ -720,10 +719,10 @@ public final class SegnalazioneBLTest {
     /**
      * Test elimina segnalazione 4.
      *
-     * @throws SQLException the SQL exception
+     * @throws Exception the SQL exception
      */
     @Test
-    public void testDeleteSegnalazione4() throws SQLException {
+    public void testDeleteSegnalazione4() throws Exception {
         final int aCod = SEGNALAZIONE_APERTA;
         final Utente aUtente = utenteTest2;
         final Boolean res = manager.deleteSegnalazione(aCod, aUtente);
@@ -733,10 +732,10 @@ public final class SegnalazioneBLTest {
     /**
      * Test elimina segnalazione 5.
      *
-     * @throws SQLException the SQL exception
+     * @throws Exception the SQL exception
      */
     @Test
-    public void testDeleteSegnalazione5() throws SQLException {
+    public void testDeleteSegnalazione5() throws Exception {
         final int aCod = SEGNALAZIONE_APERTA;
         final Utente aUtente = utenteTest;
         final Boolean res = manager.deleteSegnalazione(aCod, aUtente);
@@ -746,10 +745,10 @@ public final class SegnalazioneBLTest {
     /**
      * Test elimina segnalazione 3.
      *
-     * @throws SQLException the SQL exception
+     * @throws Exception the SQL exception
      */
     @Test
-    public void testGetSegnalazioniEffettuate1() throws SQLException {
+    public void testGetSegnalazioniEffettuate1() throws Exception {
         final Utente aUtente = null;
         final List<Segnalazione> res = manager
                 .getSegnalazioniEffettuate(aUtente);
@@ -759,10 +758,10 @@ public final class SegnalazioneBLTest {
     /**
      * Test elimina segnalazione 3.
      *
-     * @throws SQLException the SQL exception
+     * @throws Exception the SQL exception
      */
     @Test
-    public void testGetSegnalazioniEffettuate2() throws SQLException {
+    public void testGetSegnalazioniEffettuate2() throws Exception {
         final Utente aUtente = new CSU();
         final List<Segnalazione> res = manager
                 .getSegnalazioniEffettuate(aUtente);
@@ -772,10 +771,10 @@ public final class SegnalazioneBLTest {
     /**
      * Test elimina segnalazione 3.
      *
-     * @throws SQLException the SQL exception
+     * @throws Exception the SQL exception
      */
     @Test
-    public void testGetSegnalazioniEffettuate3() throws SQLException {
+    public void testGetSegnalazioniEffettuate3() throws Exception {
         final Utente aUtente = utenteTest;
         final List<Segnalazione> res = manager
                 .getSegnalazioniEffettuate(aUtente);

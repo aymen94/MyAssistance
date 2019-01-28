@@ -32,30 +32,30 @@ public class SegnalazioneDBTest {
     /**
      * Sets the up class.
      *
-     * @throws SQLException the SQL exception
+     * @throws Exception the SQL exception
      */
     @BeforeClass
-    public static void setUpClass() throws SQLException {
+    public static void setUpClass() throws Exception {
         Database.initializePool("databases.xml", "Test");
     }
 
     /**
      * Tear down class.
      *
-     * @throws SQLException the SQL exception
+     * @throws Exception the SQL exception
      */
     @AfterClass
-    public static void tearDownClass() throws SQLException {
+    public static void tearDownClass() throws Exception {
         Database.destroyPool();
     }
 
     /**
      * Clear db.
      *
-     * @throws SQLException the SQL exception
+     * @throws Exception the SQL exception
      */
     @Before
-    public void clearDB() throws SQLException {
+    public void clearDB() throws Exception {
         final Connection conn = Database.getConnection();
         conn.prepareStatement("TRUNCATE TABLE segnalazione").executeUpdate();
         Database.freeConnection(conn);
@@ -67,10 +67,10 @@ public class SegnalazioneDBTest {
      *
      * Database void
      *
-     * @throws SQLException the SQL exception
+     * @throws Exception the SQL exception
      */
     @Test
-    public void testGetByCod1() throws SQLException {
+    public void testGetByCod1() throws Exception {
         final Segnalazione segnalazione = db.getByCod(0);
         assertNull(segnalazione);
     }
@@ -80,10 +80,10 @@ public class SegnalazioneDBTest {
      *
      * Database void
      *
-     * @throws SQLException the SQL exception
+     * @throws Exception the SQL exception
      */
     @Test
-    public void testGetByCod2() throws SQLException {
+    public void testGetByCod2() throws Exception {
         final Segnalazione segnalazione = new Segnalazione();
         segnalazione.setCod(1);
         segnalazione
@@ -112,10 +112,10 @@ public class SegnalazioneDBTest {
     /**
      * Test insert 1.
      *
-     * @throws SQLException the SQL exception
+     * @throws Exception the SQL exception
      */
     @Test(expected = SQLException.class)
-    public void testInsert1() throws SQLException {
+    public void testInsert1() throws Exception {
         final Segnalazione segnalazione = new Segnalazione();
         segnalazione.setTitolo("null");
         db.insert(segnalazione);
@@ -124,10 +124,10 @@ public class SegnalazioneDBTest {
     /**
      * Test insert 2.
      *
-     * @throws SQLException the SQL exception
+     * @throws Exception the SQL exception
      */
     @Test(expected = SQLException.class)
-    public void testInsert2() throws SQLException {
+    public void testInsert2() throws Exception {
         final Segnalazione segnalazione = new Segnalazione();
         segnalazione.setTitolo("Lorem ipsum");
         segnalazione.setDescrizione(null);
@@ -137,10 +137,10 @@ public class SegnalazioneDBTest {
     /**
      * Test insert 3.
      *
-     * @throws SQLException the SQL exception
+     * @throws Exception the SQL exception
      */
     @Test(expected = SQLException.class)
-    public void testInsert3() throws SQLException {
+    public void testInsert3() throws Exception {
         final Segnalazione segnalazione = new Segnalazione();
         segnalazione.setTitolo("Lorem ipsum");
         segnalazione.setDescrizione("Lorem ipsum dolor sit amet");
@@ -151,10 +151,10 @@ public class SegnalazioneDBTest {
     /**
      * Test insert 4.
      *
-     * @throws SQLException the SQL exception
+     * @throws Exception the SQL exception
      */
     @Test(expected = SQLException.class)
-    public void testInsert4() throws SQLException {
+    public void testInsert4() throws Exception {
         final Segnalazione segnalazione = new Segnalazione();
         segnalazione.setTitolo("Lorem ipsum");
         segnalazione.setDescrizione("Lorem ipsum dolor sit amet");
@@ -166,10 +166,10 @@ public class SegnalazioneDBTest {
     /**
      * Test insert 5.
      *
-     * @throws SQLException the SQL exception
+     * @throws Exception the SQL exception
      */
     @Test(expected = SQLException.class)
-    public void testInsert5() throws SQLException {
+    public void testInsert5() throws Exception {
         final Segnalazione segnalazione = new Segnalazione();
         segnalazione.setTitolo("Lorem ipsum");
         segnalazione.setDescrizione("Lorem ipsum dolor sit amet");
@@ -183,10 +183,10 @@ public class SegnalazioneDBTest {
     /**
      * Test insert 6.
      *
-     * @throws SQLException the SQL exception
+     * @throws Exception the SQL exception
      */
     @Test
-    public void testInsert6() throws SQLException {
+    public void testInsert6() throws Exception {
         final Segnalazione segnalazione = new Segnalazione();
         segnalazione.setTitolo("Lorem ipsum");
         segnalazione.setDescrizione("Lorem ipsum dolor sit amet");
@@ -202,10 +202,10 @@ public class SegnalazioneDBTest {
     /**
      * Test delete 1.
      *
-     * @throws SQLException the SQL exception
+     * @throws Exception the SQL exception
      */
     @Test
-    public void testDelete1() throws SQLException {
+    public void testDelete1() throws Exception {
         final boolean res = db.deleteById(0) > 0;
         assertFalse(res);
         assertNull(db.getByCod(0));
@@ -214,10 +214,10 @@ public class SegnalazioneDBTest {
     /**
      * Test delete 2.
      *
-     * @throws SQLException the SQL exception
+     * @throws Exception the SQL exception
      */
     @Test
-    public void testDelete2() throws SQLException {
+    public void testDelete2() throws Exception {
         final Segnalazione segnalazione = new Segnalazione();
         segnalazione.setTitolo("Lorem ipsum");
         segnalazione.setDescrizione("Lorem ipsum dolor sit amet");
@@ -234,10 +234,10 @@ public class SegnalazioneDBTest {
     /**
      * Test insert 1.
      *
-     * @throws SQLException the SQL exception
+     * @throws Exception the SQL exception
      */
     @Test
-    public void testUpdate1() throws SQLException {
+    public void testUpdate1() throws Exception {
         final Segnalazione segnalazione = new Segnalazione();
         segnalazione.setCod(0);
         final Boolean res = db.update(segnalazione) > 0;
@@ -247,10 +247,10 @@ public class SegnalazioneDBTest {
     /**
      * Test insert 1.
      *
-     * @throws SQLException the SQL exception
+     * @throws Exception the SQL exception
      */
     @Test(expected = SQLException.class)
-    public void testUpdate2() throws SQLException {
+    public void testUpdate2() throws Exception {
         final Segnalazione segnalazione = new Segnalazione();
         segnalazione.setTitolo("Lorem ipsum");
         segnalazione.setDescrizione("Lorem ipsum dolor sit amet");
@@ -268,10 +268,10 @@ public class SegnalazioneDBTest {
     /**
      * Test insert 2.
      *
-     * @throws SQLException the SQL exception
+     * @throws Exception the SQL exception
      */
     @Test(expected = SQLException.class)
-    public void testUpdate3() throws SQLException {
+    public void testUpdate3() throws Exception {
         final Segnalazione segnalazione = new Segnalazione();
         segnalazione.setTitolo("Lorem ipsum");
         segnalazione.setDescrizione("Lorem ipsum dolor sit amet");
@@ -290,10 +290,10 @@ public class SegnalazioneDBTest {
     /**
      * Test insert 3.
      *
-     * @throws SQLException the SQL exception
+     * @throws Exception the SQL exception
      */
     @Test(expected = SQLException.class)
-    public void testUpdate4() throws SQLException {
+    public void testUpdate4() throws Exception {
         final Segnalazione segnalazione = new Segnalazione();
         segnalazione.setTitolo("Lorem ipsum");
         segnalazione.setDescrizione("Lorem ipsum dolor sit amet");
@@ -314,10 +314,10 @@ public class SegnalazioneDBTest {
     /**
      * Test insert 5.
      *
-     * @throws SQLException the SQL exception
+     * @throws Exception the SQL exception
      */
     @Test(expected = SQLException.class)
-    public void testUpdate5() throws SQLException {
+    public void testUpdate5() throws Exception {
         final Segnalazione segnalazione = new Segnalazione();
         segnalazione.setTitolo("Lorem ipsum");
         segnalazione.setDescrizione("Lorem ipsum dolor sit amet");
@@ -338,10 +338,10 @@ public class SegnalazioneDBTest {
     /**
      * Test insert 6.
      *
-     * @throws SQLException the SQL exception
+     * @throws Exception the SQL exception
      */
     @Test(expected = SQLException.class)
-    public void testUpdate6() throws SQLException {
+    public void testUpdate6() throws Exception {
         final Segnalazione segnalazione = new Segnalazione();
         segnalazione.setTitolo("Lorem ipsum");
         segnalazione.setDescrizione("Lorem ipsum dolor sit amet");
@@ -364,10 +364,10 @@ public class SegnalazioneDBTest {
     /**
      * Test insert 7.
      *
-     * @throws SQLException the SQL exception
+     * @throws Exception the SQL exception
      */
     @Test
-    public void testUpdate7() throws SQLException {
+    public void testUpdate7() throws Exception {
         final Segnalazione segnalazione = new Segnalazione();
         segnalazione.setTitolo("Lorem ipsum");
         segnalazione.setDescrizione("Lorem ipsum dolor sit amet");
