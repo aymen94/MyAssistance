@@ -8,7 +8,7 @@ package model.utente;
 /**
  * The Class Gestore.
  */
-public class Gestore extends Utente {
+public final class Gestore extends Utente {
     /**
      * Instantiates a new gestore.
      */

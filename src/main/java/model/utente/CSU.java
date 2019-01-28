@@ -10,7 +10,7 @@ import java.time.LocalDate;
 /**
  * The Class CSU.
  */
-public class CSU extends Utente {
+public final class CSU extends Utente {
 
     /**
      * LocalDate dataSospensione.
