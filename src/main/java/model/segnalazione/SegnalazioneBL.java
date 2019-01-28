@@ -5,7 +5,6 @@ Date: 23/12/2018
 */
 package model.segnalazione;
 
-import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -41,10 +40,10 @@ public final class SegnalazioneBL {
      *
      * @param segnalazione the segnalazione
      * @return true, if successful
-     * @throws SQLException the SQL exception
+     * @throws Exception the exception
      */
     public boolean insertSegnalazione(final Segnalazione segnalazione)
-            throws SQLException {
+            throws Exception {
 
         if (validateSegnalazione(segnalazione)) {
             // Set the current date
@@ -59,10 +58,10 @@ public final class SegnalazioneBL {
      *
      * @param aUtente the utente
      * @return the list
-     * @throws SQLException the SQL exception
+     * @throws Exception the exception
      */
     public List<Segnalazione> getSegnalazioniEffettuate(final Utente aUtente)
-            throws SQLException {
+            throws Exception {
         if (aUtente != null && aUtente.getId() != null) {
             return segnalazioneDB.getByAutore(aUtente.getId());
         }
@@ -74,10 +73,10 @@ public final class SegnalazioneBL {
      *
      * @param segnalazione the segnalazione
      * @return true, if successful
-     * @throws SQLException the SQL exception
+     * @throws Exception the exception
      */
     public boolean updateSegnalazione(final Segnalazione segnalazione)
-            throws SQLException {
+            throws Exception {
 
         if (validateSegnalazione(segnalazione)) {
             final Segnalazione aSegnalazione = segnalazioneDB
@@ -102,10 +101,10 @@ public final class SegnalazioneBL {
      * @param aCod    the cod
      * @param aUtente the utente
      * @return true, if successful
-     * @throws SQLException the SQL exception
+     * @throws Exception the exception
      */
     public boolean deleteSegnalazione(final int aCod, final Utente aUtente)
-            throws SQLException {
+            throws Exception {
         final Segnalazione aSegnalazione = segnalazioneDB.getByCod(aCod);
         if (aSegnalazione != null
                 && aSegnalazione.getStato() == Segnalazione.STATO_APERTO
@@ -122,10 +121,10 @@ public final class SegnalazioneBL {
      * @param aCod       the cod
      * @param aIdTecnico the tecnico
      * @return true, if successful
-     * @throws SQLException the SQL exception
+     * @throws Exception the exception
      */
     public boolean inoltraSegnalazione(final int aCod, final int aIdTecnico)
-            throws SQLException {
+            throws Exception {
         Segnalazione aSegnalazione;
         aSegnalazione = segnalazioneDB.getByCod(aCod);
         if (aSegnalazione != null
@@ -143,9 +142,9 @@ public final class SegnalazioneBL {
      * Ottieni segnalazioni ricevute.
      *
      * @return the list
-     * @throws SQLException the SQL exception
+     * @throws Exception the exception
      */
-    public List<Segnalazione> getSegnalazioniRicevute() throws SQLException {
+    public List<Segnalazione> getSegnalazioniRicevute() throws Exception {
         return segnalazioneDB.getAll();
 
     }
@@ -156,10 +155,10 @@ public final class SegnalazioneBL {
      * @param aCod                the cod
      * @param aMotivazioneRifiuto the motivazione rifiuto
      * @return true, if successful
-     * @throws SQLException the SQL exception
+     * @throws Exception the exception
      */
     public boolean rifiutaSegnalazione(final int aCod,
-            final String aMotivazioneRifiuto) throws SQLException {
+            final String aMotivazioneRifiuto) throws Exception {
 
         final Segnalazione aSegnalazione = segnalazioneDB.getByCod(aCod);
         if (aSegnalazione != null
@@ -179,9 +178,9 @@ public final class SegnalazioneBL {
      *
      * @param aCod the cod
      * @return true, if successful
-     * @throws SQLException the SQL exception
+     * @throws Exception the SQL exception
      */
-    public boolean segnaRisolta(final int aCod) throws SQLException {
+    public boolean segnaRisolta(final int aCod) throws Exception {
         final Segnalazione aSegnalazione = segnalazioneDB.getByCod(aCod);
         if (aSegnalazione != null
                 && aSegnalazione.getStato() == Segnalazione.STATO_ASSEGNATO) {

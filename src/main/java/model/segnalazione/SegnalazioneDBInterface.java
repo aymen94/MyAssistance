@@ -1,6 +1,5 @@
 package model.segnalazione;
 
-import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -13,52 +12,52 @@ public interface SegnalazioneDBInterface {
      *
      * @param aSegnalazione the segnalazione
      * @return the int
-     * @throws SQLException the exception
+     * @throws Exception the exception
      */
-    int insert(Segnalazione aSegnalazione) throws SQLException;
+    int insert(Segnalazione aSegnalazione) throws Exception;
 
     /**
      * Update.
      *
      * @param aSegnalazione the segnalazione
      * @return the int
-     * @throws SQLException the exception
+     * @throws Exception the exception
      */
-    int update(Segnalazione aSegnalazione) throws SQLException;
+    int update(Segnalazione aSegnalazione) throws Exception;
 
     /**
      * Gets the by autore.
      *
      * @param aAutorId the autor id
      * @return the by autore
-     * @throws SQLException the exception
+     * @throws Exception the exception
      */
-    List<Segnalazione> getByAutore(int aAutorId) throws SQLException;
+    List<Segnalazione> getByAutore(int aAutorId) throws Exception;
 
     /**
      * Gets the all.
      *
      * @return the all
-     * @throws SQLException the exception
+     * @throws Exception the exception
      */
-    List<Segnalazione> getAll() throws SQLException;
+    List<Segnalazione> getAll() throws Exception;
 
     /**
      * Gets the by cod.
      *
      * @param aCod the cod
      * @return the by cod
-     * @throws SQLException the exception
+     * @throws Exception the exception
      */
-    Segnalazione getByCod(int aCod) throws SQLException;
+    Segnalazione getByCod(int aCod) throws Exception;
 
     /**
      * Delete by id.
      *
      * @param aId the id
      * @return the int
-     * @throws SQLException the SQL exception
+     * @throws Exception the exception
      */
-    int deleteById(int aId) throws SQLException;
+    int deleteById(int aId) throws Exception;
 
 }

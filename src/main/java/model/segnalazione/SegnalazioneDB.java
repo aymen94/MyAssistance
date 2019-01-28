@@ -9,7 +9,6 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Types;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -76,10 +75,10 @@ public final class SegnalazioneDB implements SegnalazioneDBInterface {
      *
      * @param aSegnalazione the segnalazione
      * @return the int
-     * @throws SQLException the SQL exception
+     * @throws Exception the exception
      */
     @Override
-    public int insert(final Segnalazione aSegnalazione) throws SQLException {
+    public int insert(final Segnalazione aSegnalazione) throws Exception {
         return genericInsertUpdate(INSERT_SEGNALAZIONE, aSegnalazione);
     }
 
@@ -88,10 +87,10 @@ public final class SegnalazioneDB implements SegnalazioneDBInterface {
      *
      * @param aSegnalazione the segnalazione
      * @return the int
-     * @throws SQLException the SQL exception
+     * @throws Exception the SQL exception
      */
     @Override
-    public int update(final Segnalazione aSegnalazione) throws SQLException {
+    public int update(final Segnalazione aSegnalazione) throws Exception {
         return genericInsertUpdate(UPDATE_SEGNALAZIONE, aSegnalazione);
     }
 
@@ -100,11 +99,11 @@ public final class SegnalazioneDB implements SegnalazioneDBInterface {
      *
      * @param aAutorId the autor id
      * @return the by autore
-     * @throws SQLException the SQL exception
+     * @throws Exception the exception
      */
     @Override
     public List<Segnalazione> getByAutore(final int aAutorId)
-            throws SQLException {
+            throws Exception {
         return genericGet(SELECT_BY_AUTHOR, aAutorId);
     }
 
@@ -112,10 +111,10 @@ public final class SegnalazioneDB implements SegnalazioneDBInterface {
      * Gets the all.
      *
      * @return the all
-     * @throws SQLException the SQL exception
+     * @throws Exception the SQL exception
      */
     @Override
-    public List<Segnalazione> getAll() throws SQLException {
+    public List<Segnalazione> getAll() throws Exception {
         return genericGet(SELECT_ALL, -1);
     }
 
@@ -124,10 +123,10 @@ public final class SegnalazioneDB implements SegnalazioneDBInterface {
      *
      * @param aCod the cod
      * @return the by cod
-     * @throws SQLException the SQL exception
+     * @throws Exception the exception
      */
     @Override
-    public Segnalazione getByCod(final int aCod) throws SQLException {
+    public Segnalazione getByCod(final int aCod) throws Exception {
         final List<Segnalazione> segnalazioneList = genericGet(SELECT_BY_COD,
                 aCod);
         if (segnalazioneList.size() > 0) {
@@ -143,17 +142,17 @@ public final class SegnalazioneDB implements SegnalazioneDBInterface {
      * @param aQuery     the query
      * @param aParameter the parameter
      * @return the list
-     * @throws SQLException the SQL exception
+     * @throws Exception the exception
      */
     private List<Segnalazione> genericGet(final String aQuery,
-            final int aParameter) throws SQLException {
-        Connection connection = null;
-        PreparedStatement preparedStatement = null;
+            final int aParameter) throws Exception {
+        Connection connection = Database.getConnection();
+
         final List<Segnalazione> segnalazioneList = new ArrayList<>();
 
         try {
-            connection = Database.getConnection();
-            preparedStatement = connection.prepareStatement(aQuery);
+            PreparedStatement preparedStatement = connection
+                    .prepareStatement(aQuery);
             if (!aQuery.equals(SELECT_ALL)) {
                 preparedStatement.setInt(1, aParameter);
             }
@@ -206,7 +205,7 @@ public final class SegnalazioneDB implements SegnalazioneDBInterface {
             }
             return segnalazioneList;
         } finally {
-            freeResources(preparedStatement, connection);
+            Database.freeConnection(connection);
         }
     }
 
@@ -215,38 +214,20 @@ public final class SegnalazioneDB implements SegnalazioneDBInterface {
      *
      * @param aId the id
      * @return the int
-     * @throws SQLException the SQL exception
+     * @throws Exception the exception
      */
     @Override
-    public int deleteById(final int aId) throws SQLException {
-        Connection connection = null;
-        PreparedStatement preparedStatement = null;
-        int res;
+    public int deleteById(final int aId) throws Exception {
+        Connection connection = Database.getConnection();
         try {
-            connection = Database.getConnection();
-            preparedStatement = connection.prepareStatement(DELETE_BY_COD);
+            PreparedStatement preparedStatement = connection
+                    .prepareStatement(DELETE_BY_COD);
             preparedStatement.setInt(1, aId);
 
-            res = preparedStatement.executeUpdate();
+            return preparedStatement.executeUpdate();
         } finally {
-            freeResources(preparedStatement, connection);
+            Database.freeConnection(connection);
         }
-        return (res);
-    }
-
-    /**
-     * Free resources.
-     *
-     * @param con  The Connection
-     * @param aStm the stm
-     * @throws SQLException the SQL exception
-     */
-    private void freeResources(final PreparedStatement aStm,
-            final Connection con) throws SQLException {
-        if (aStm != null) {
-            aStm.close();
-        }
-        con.close();
     }
 
     /**
@@ -269,15 +250,14 @@ public final class SegnalazioneDB implements SegnalazioneDBInterface {
      * @param aQuery        the query
      * @param aSegnalazione the segnalazione
      * @return the int
-     * @throws SQLException the SQL exception
+     * @throws Exception the SQL exception
      */
     private int genericInsertUpdate(final String aQuery,
-            final Segnalazione aSegnalazione) throws SQLException {
-        Connection connection = null;
-        PreparedStatement preparedStatement = null;
+            final Segnalazione aSegnalazione) throws Exception {
+        Connection connection = Database.getConnection();
         try {
-            connection = Database.getConnection();
-            preparedStatement = connection.prepareStatement(aQuery);
+            PreparedStatement preparedStatement = connection
+                    .prepareStatement(aQuery);
             int i = 1;
 
             preparedStatement.setString(i++, aSegnalazione.getTitolo());
@@ -319,7 +299,7 @@ public final class SegnalazioneDB implements SegnalazioneDBInterface {
 
             return preparedStatement.executeUpdate();
         } finally {
-            freeResources(preparedStatement, connection);
+            Database.freeConnection(connection);
         }
     }
 }
