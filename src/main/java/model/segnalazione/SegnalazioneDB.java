@@ -102,8 +102,7 @@ public final class SegnalazioneDB implements SegnalazioneDBInterface {
      * @throws Exception the exception
      */
     @Override
-    public List<Segnalazione> getByAutore(final int aAutorId)
-            throws Exception {
+    public List<Segnalazione> getByAutore(final int aAutorId) throws Exception {
         return genericGet(SELECT_BY_AUTHOR, aAutorId);
     }
 
@@ -160,24 +159,14 @@ public final class SegnalazioneDB implements SegnalazioneDBInterface {
             while (result.next()) {
                 final Segnalazione segnalazione = new Segnalazione();
                 segnalazione.setCod(result.getInt("cod"));
-
-                Date tempData = result.getDate("data_assegnazione");
-                if (tempData != null) {
-                    segnalazione.setDataAssegnazione(tempData.toLocalDate());
-                }
-
-                tempData = result.getDate("data_rifiuto");
-                if (tempData != null) {
-                    segnalazione.setDataRifiuto(tempData.toLocalDate());
-                }
-
-                tempData = result.getDate("data_risoluzione");
-                if (tempData != null) {
-                    segnalazione.setDataRisoluzione(tempData.toLocalDate());
-                }
-
+                segnalazione.setDataAssegnazione(
+                        toLocalDate(result.getDate("data_assegnazione")));
+                segnalazione.setDataRifiuto(
+                        toLocalDate(result.getDate("data_rifiuto")));
+                segnalazione.setDataRisoluzione(
+                        toLocalDate(result.getDate("data_risoluzione")));
                 segnalazione.setDataSegnalazione(
-                        result.getDate("data_segnalazione").toLocalDate());
+                        toLocalDate(result.getDate("data_segnalazione")));
                 segnalazione.setDescrizione(result.getString("descrizione"));
                 segnalazione.setMotivazioneRifiuto(
                         result.getString("motivazione_rifiuto"));
@@ -239,6 +228,20 @@ public final class SegnalazioneDB implements SegnalazioneDBInterface {
     private Date toDate(final LocalDate date) {
         if (date != null) {
             return Date.valueOf(date);
+        } else {
+            return null;
+        }
+    }
+
+    /**
+     * To date.
+     *
+     * @param date the date
+     * @return the date
+     */
+    private LocalDate toLocalDate(final Date date) {
+        if (date != null) {
+            return date.toLocalDate();
         } else {
             return null;
         }
