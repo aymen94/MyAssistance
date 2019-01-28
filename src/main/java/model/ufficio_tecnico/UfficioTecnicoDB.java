@@ -15,7 +15,7 @@ import java.sql.Connection;
      *  technicians
      */
 
-public final class UfficioTecnicoDB {
+public final class UfficioTecnicoDB implements UfficioTecnicoDBInterface {
 
     /**
      * Empty construct.
@@ -42,12 +42,6 @@ public final class UfficioTecnicoDB {
      * The Constant SELECT_ALL.
      */
     private static final String SELECT_ALL = "SELECT * FROM " + TABLE_NAME;
-
-    /**
-     * The Constant DELETE_BY_ID.
-     */
-    private static final String DELETE_BY_ID = "DELETE FROM " + TABLE_NAME
-            + " WHERE id = ?";
 
     /**
      * The Constant GET_BY_ID.
@@ -145,43 +139,6 @@ public final class UfficioTecnicoDB {
     }
 
     /**
-     * This method deletes a user from the database given his email address.
-     *
-     * @param aId id the id of UfficioTecnico.
-     * @return returns true if a technical office has been canceled, otherwise
-     *         false.
-     * @throws SQLException is the exception that can be thrown during the
-     *                      execution.
-     */
-    public int deleteById(final Integer aId)
-            throws SQLException {
-        Connection connection = null;
-        PreparedStatement s = null;
-        int res;
-
-        try {
-            connection = Database.getConnection();
-            s = connection.prepareStatement(DELETE_BY_ID);
-            s.setInt(1, aId);
-
-            res = s.executeUpdate();
-
-        } finally {
-            try {
-                if (s != null) {
-                    s.close();
-                }
-            } finally {
-                Database.freeConnection(connection);
-            }
-        }
-        return (res);
-    }
-
-
-
-
-    /**
      * This method select the UfficioTecnico by a id from the database given all
      * dates of UfficioTecnico.
      * @param aId id the id of UfficioTecnico.
@@ -189,7 +146,7 @@ public final class UfficioTecnicoDB {
      * @throws SQLException is the exception that can be thrown during the
      *                      execution.
      */
-    public UfficioTecnico getById(final Integer aId) throws SQLException {
+    public UfficioTecnico getById(final int aId) throws SQLException {
 
         Connection connection = null;
         PreparedStatement preparedStatement = null;

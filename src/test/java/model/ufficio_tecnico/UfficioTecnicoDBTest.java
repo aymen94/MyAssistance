@@ -63,9 +63,6 @@ public class UfficioTecnicoDBTest {
      */
     @AfterClass
     public static void tearDownClass() throws SQLException {
-        final UfficioTecnicoDB utenteDBTest = new UfficioTecnicoDB();
-        utenteDBTest.deleteById(1);
-        logger.info("clear db  \n output:" + utenteDBTest.deleteById(1));
         final Connection conn = Database.getConnection();
         //enable foreign key checks
         conn.prepareStatement("SET FOREIGN_KEY_CHECKS=1;").executeUpdate();
@@ -156,19 +153,6 @@ public class UfficioTecnicoDBTest {
         logger.info(
                 "method: getById(1)\noutput :" + uff + " \noracolo:" + uff2);
         assertEquals(uff, uff2);
-    }
-
-    /**
-     * Delete by id.
-     *
-     * @throws SQLException the SQL exception
-     */
-    @Test
-    public void deleteById() throws SQLException {
-        final UfficioTecnicoDB ufficioTecnicoTest = new UfficioTecnicoDB();
-
-        logger.info("method: deleteById(1) \noutput:"
-                + ufficioTecnicoTest.deleteById(1));
     }
 
     /**

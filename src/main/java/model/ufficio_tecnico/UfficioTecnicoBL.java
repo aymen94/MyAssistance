@@ -107,25 +107,4 @@ public final class UfficioTecnicoBL {
 
         return byId != null;
     }
-
-    /**
-     * check if id is validate and delete technical office .
-     *
-     * @param aId the ubicazione
-     * @return true, if successful
-     * @throws SQLException the SQL exception
-     */
-    public boolean deleteUfficioTecnico(final Integer aId) throws SQLException {
-        try {
-            final UfficioTecnico uff = new UfficioTecnico();
-            if (aId != null && aId != 0) {
-                uff.setId(aId);
-                return database.deleteById(uff.getId()) > 0;
-            }
-        } catch (final SQLException e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
-
 }
