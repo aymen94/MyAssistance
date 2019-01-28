@@ -166,7 +166,7 @@ public final class SegnalazioneDB implements SegnalazioneDBInterface {
                 segnalazione.setDataRisoluzione(
                         toLocalDate(result.getDate("data_risoluzione")));
                 segnalazione.setDataSegnalazione(
-                        toLocalDate(result.getDate("data_segnalazione")));
+                        result.getDate("data_segnalazione").toLocalDate());
                 segnalazione.setDescrizione(result.getString("descrizione"));
                 segnalazione.setMotivazioneRifiuto(
                         result.getString("motivazione_rifiuto"));
@@ -267,7 +267,7 @@ public final class SegnalazioneDB implements SegnalazioneDBInterface {
             preparedStatement.setString(i++, aSegnalazione.getDescrizione());
             preparedStatement.setShort(i++, aSegnalazione.getStato());
             preparedStatement.setDate(i++,
-                    toDate(aSegnalazione.getDataSegnalazione()));
+                    Date.valueOf(aSegnalazione.getDataSegnalazione()));
             preparedStatement.setDate(i++,
                     toDate(aSegnalazione.getDataRifiuto()));
             preparedStatement.setDate(i++,
@@ -277,18 +277,9 @@ public final class SegnalazioneDB implements SegnalazioneDBInterface {
             preparedStatement.setString(i++,
                     aSegnalazione.getMotivazioneRifiuto());
 
-            if (aSegnalazione.getTipologia() != null) {
-                preparedStatement.setInt(i++,
-                        aSegnalazione.getTipologia().getId());
-            } else {
-                preparedStatement.setNull(i++, Types.INTEGER);
-            }
-            if (aSegnalazione.getAutore() != null) {
-                preparedStatement.setInt(i++,
-                        aSegnalazione.getAutore().getId());
-            } else {
-                preparedStatement.setNull(i++, Types.INTEGER);
-            }
+            preparedStatement.setInt(i++, aSegnalazione.getTipologia().getId());
+
+            preparedStatement.setInt(i++, aSegnalazione.getAutore().getId());
 
             if (aSegnalazione.getTecnico() != null) {
                 preparedStatement.setInt(i++,

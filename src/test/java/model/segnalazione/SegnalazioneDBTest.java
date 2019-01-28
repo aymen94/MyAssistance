@@ -7,7 +7,6 @@ import static org.junit.Assert.assertTrue;
 
 import java.sql.Connection;
 import java.sql.Date;
-import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -182,11 +181,10 @@ public class SegnalazioneDBTest {
      *
      * @throws Exception the SQL exception
      */
-    @Test(expected = SQLException.class)
+    @Test(expected = Exception.class)
     public void testInsert1() throws Exception {
-        final Segnalazione segnalazione = new Segnalazione();
-        segnalazione.setTitolo("null");
-        db.insert(segnalazione);
+        segnalazioneTest.setTitolo(null);
+        db.insert(segnalazioneTest);
     }
 
     /**
@@ -194,12 +192,11 @@ public class SegnalazioneDBTest {
      *
      * @throws Exception the SQL exception
      */
-    @Test(expected = SQLException.class)
+    @Test(expected = Exception.class)
     public void testInsert2() throws Exception {
-        final Segnalazione segnalazione = new Segnalazione();
-        segnalazione.setTitolo("Lorem ipsum");
-        segnalazione.setDescrizione(null);
-        db.insert(segnalazione);
+        segnalazioneTest.setTitolo("Lorem ipsum");
+        segnalazioneTest.setDescrizione(null);
+        db.insert(segnalazioneTest);
     }
 
     /**
@@ -207,13 +204,12 @@ public class SegnalazioneDBTest {
      *
      * @throws Exception the SQL exception
      */
-    @Test(expected = SQLException.class)
+    @Test(expected = Exception.class)
     public void testInsert3() throws Exception {
-        final Segnalazione segnalazione = new Segnalazione();
-        segnalazione.setTitolo("Lorem ipsum");
-        segnalazione.setDescrizione("Lorem ipsum dolor sit amet");
-        segnalazione.setAutore(null);
-        db.insert(segnalazione);
+        segnalazioneTest.setTitolo("Lorem ipsum");
+        segnalazioneTest.setDescrizione("Lorem ipsum dolor sit amet");
+        segnalazioneTest.setAutore(null);
+        db.insert(segnalazioneTest);
     }
 
     /**
@@ -221,14 +217,13 @@ public class SegnalazioneDBTest {
      *
      * @throws Exception the SQL exception
      */
-    @Test(expected = SQLException.class)
+    @Test(expected = Exception.class)
     public void testInsert4() throws Exception {
-        final Segnalazione segnalazione = new Segnalazione();
-        segnalazione.setTitolo("Lorem ipsum");
-        segnalazione.setDescrizione("Lorem ipsum dolor sit amet");
-        segnalazione.setAutore(new CSU());
-        segnalazione.setDataSegnalazione(null);
-        db.insert(segnalazione);
+        segnalazioneTest.setTitolo("Lorem ipsum");
+        segnalazioneTest.setDescrizione("Lorem ipsum dolor sit amet");
+        segnalazioneTest.setAutore(new CSU());
+        segnalazioneTest.setDataSegnalazione(null);
+        db.insert(segnalazioneTest);
     }
 
     /**
@@ -236,16 +231,15 @@ public class SegnalazioneDBTest {
      *
      * @throws Exception the SQL exception
      */
-    @Test(expected = SQLException.class)
+    @Test(expected = Exception.class)
     public void testInsert5() throws Exception {
-        final Segnalazione segnalazione = new Segnalazione();
-        segnalazione.setTitolo("Lorem ipsum");
-        segnalazione.setDescrizione("Lorem ipsum dolor sit amet");
-        segnalazione.setAutore(new CSU());
-        segnalazione
+        segnalazioneTest.setTitolo("Lorem ipsum");
+        segnalazioneTest.setDescrizione("Lorem ipsum dolor sit amet");
+        segnalazioneTest.setAutore(new CSU());
+        segnalazioneTest
                 .setDataSegnalazione(Date.valueOf("2018-10-06").toLocalDate());
-        segnalazione.setTipologia(null);
-        db.insert(segnalazione);
+        segnalazioneTest.setTipologia(null);
+        db.insert(segnalazioneTest);
     }
 
     /**
@@ -255,16 +249,15 @@ public class SegnalazioneDBTest {
      */
     @Test
     public void testInsert6() throws Exception {
-        final Segnalazione segnalazione = new Segnalazione();
-        segnalazione.setTitolo("Lorem ipsum");
-        segnalazione.setDescrizione("Lorem ipsum dolor sit amet");
-        segnalazione.setAutore(new CSU());
-        segnalazione
+        segnalazioneTest.setTitolo("Lorem ipsum");
+        segnalazioneTest.setDescrizione("Lorem ipsum dolor sit amet");
+        segnalazioneTest.setAutore(new CSU());
+        segnalazioneTest
                 .setDataSegnalazione(Date.valueOf("2018-10-06").toLocalDate());
-        segnalazione.setTipologia(new Tipologia());
-        final boolean res = db.insert(segnalazione) > 0;
+        segnalazioneTest.setTipologia(new Tipologia());
+        final boolean res = db.insert(segnalazioneTest) > 0;
         assertTrue(res);
-        assertEquals(segnalazione, db.getByCod(1));
+        assertEquals(segnalazioneTest, db.getByCod(1));
     }
 
     /**
@@ -299,9 +292,8 @@ public class SegnalazioneDBTest {
      */
     @Test
     public void testUpdate1() throws Exception {
-        final Segnalazione segnalazione = new Segnalazione();
-        segnalazione.setCod(0);
-        final Boolean res = db.update(segnalazione) > 0;
+        segnalazioneTest.setCod(0);
+        final Boolean res = db.update(segnalazioneTest) > 0;
         assertFalse(res);
     }
 
@@ -310,7 +302,7 @@ public class SegnalazioneDBTest {
      *
      * @throws Exception the SQL exception
      */
-    @Test(expected = SQLException.class)
+    @Test(expected = Exception.class)
     public void testUpdate2() throws Exception {
         db.insert(segnalazioneTest);
         final Segnalazione newSegnalazione = new Segnalazione();
@@ -324,7 +316,7 @@ public class SegnalazioneDBTest {
      *
      * @throws Exception the SQL exception
      */
-    @Test(expected = SQLException.class)
+    @Test(expected = Exception.class)
     public void testUpdate3() throws Exception {
         db.insert(segnalazioneTest);
         final Segnalazione newSegnalazione = new Segnalazione();
@@ -339,7 +331,7 @@ public class SegnalazioneDBTest {
      *
      * @throws Exception the SQL exception
      */
-    @Test(expected = SQLException.class)
+    @Test(expected = Exception.class)
     public void testUpdate4() throws Exception {
         db.insert(segnalazioneTest);
         final Segnalazione newSegnalazione = new Segnalazione();
@@ -356,7 +348,7 @@ public class SegnalazioneDBTest {
      *
      * @throws Exception the SQL exception
      */
-    @Test(expected = SQLException.class)
+    @Test(expected = Exception.class)
     public void testUpdate5() throws Exception {
         db.insert(segnalazioneTest);
         final Segnalazione newSegnalazione = new Segnalazione();
@@ -373,7 +365,7 @@ public class SegnalazioneDBTest {
      *
      * @throws Exception the SQL exception
      */
-    @Test(expected = SQLException.class)
+    @Test(expected = Exception.class)
     public void testUpdate6() throws Exception {
         db.insert(segnalazioneTest);
         final Segnalazione newSegnalazione = new Segnalazione();
