@@ -78,7 +78,7 @@ public final class TipologiaDB {
      * @return the by id
      * @throws SQLException the SQL exception
      */
-    public Tipologia getById(final int aId) throws SQLException {
+    public Tipologia getById(final short aId) throws SQLException {
         final List<Tipologia> tipologiaList = genericGet(SELECT_BY_ID, aId);
         if (tipologiaList.size() > 0) {
             return tipologiaList.get(0);
