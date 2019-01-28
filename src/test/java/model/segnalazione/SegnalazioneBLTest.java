@@ -808,12 +808,10 @@ public final class SegnalazioneBLTest {
      *
      * @throws Exception the exception
      */
-    @Test
+    @Test(expected = NullPointerException.class)
     public void testGetSegnalazioniEffettuate1() throws Exception {
         final Utente aUtente = null;
-        final List<Segnalazione> res = manager
-                .getSegnalazioniEffettuate(aUtente);
-        assertNull(res);
+        manager.getSegnalazioniEffettuate(aUtente);
     }
 
     /**

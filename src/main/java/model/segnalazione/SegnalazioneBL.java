@@ -62,10 +62,7 @@ public final class SegnalazioneBL {
      */
     public List<Segnalazione> getSegnalazioniEffettuate(final Utente aUtente)
             throws Exception {
-        if (aUtente != null && aUtente.getId() != null) {
-            return segnalazioneDB.getByAutore(aUtente.getId());
-        }
-        return null;
+        return segnalazioneDB.getByAutore(aUtente.getId());
     }
 
     /**
