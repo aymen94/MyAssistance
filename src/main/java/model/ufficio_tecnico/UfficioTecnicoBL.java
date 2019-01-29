@@ -84,11 +84,8 @@ public final class UfficioTecnicoBL {
      * @return true, if successful.
      * @throws SQLException error sql.
      */
-    public boolean getUfficiTecnici() throws SQLException {
-
-        List<UfficioTecnico> all = database.getAll();
-
-        return all != null;
+    public List<UfficioTecnico> getUfficiTecnici() throws SQLException {
+        return database.getAll();
     }
 
     /**
@@ -98,13 +95,14 @@ public final class UfficioTecnicoBL {
      * @return true, if successful
      * @throws SQLException the SQL exception
      */
-    public boolean ottieniUfficio(final Integer aId) throws SQLException {
+    public UfficioTecnico ottieniUfficio(final Integer aId)
+            throws SQLException {
         UfficioTecnico byId = null;
 
             if (aId != null && aId > 0) {
                 byId = database.getById(aId);
             }
 
-        return byId != null;
+        return byId;
     }
 }
