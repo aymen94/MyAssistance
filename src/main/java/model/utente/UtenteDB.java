@@ -6,6 +6,7 @@ Date: 30/12/2018
 package model.utente;
 
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.sql.ResultSet;
 import java.sql.Connection;
 import java.sql.Date;
@@ -90,7 +91,6 @@ public final class UtenteDB implements UtenteDBInterface {
     public int insert(final Utente aUtente) throws SQLException {
         Connection connection = null;
         PreparedStatement preparedStatement;
-        int res;
         Utente utente = aUtente;
 
         try {
@@ -103,27 +103,24 @@ public final class UtenteDB implements UtenteDBInterface {
             preparedStatement.setString(i++, aUtente.getNome());
             preparedStatement.setString(i++, aUtente.getCognome());
             preparedStatement.setInt(i++, aUtente.getSesso());
-            preparedStatement
-                .setDate(i++, Date.valueOf(aUtente.getDataDiNascita()));
+            preparedStatement.setDate(i++,
+                    Date.valueOf(aUtente.getDataDiNascita()));
 
             if (aUtente instanceof Gestore) {
                 preparedStatement.setDate(i++, null);
-                preparedStatement.setBoolean(i, utente.isGestore());
             } else {
                 if (((CSU) utente).getDataSospensione() != null) {
                     preparedStatement.setDate(i++,
-                        Date.valueOf(((CSU) utente).getDataSospensione()));
+                            Date.valueOf(((CSU) utente).getDataSospensione()));
                 } else {
                     preparedStatement.setDate(i++, null);
                 }
-
-                preparedStatement.setBoolean(i, false);
             }
-            res = preparedStatement.executeUpdate();
+            preparedStatement.setBoolean(i, utente.isGestore());
+            return preparedStatement.executeUpdate();
         } finally {
             Database.freeConnection(connection);
         }
-        return (res);
     }
 
     /**
@@ -147,12 +144,13 @@ public final class UtenteDB implements UtenteDBInterface {
 
             ResultSet rs = preparedStatement.executeQuery();
 
-            while (rs.next()) {
-                boolean b = rs.getBoolean("is_gestore");
-                if (b) {
+            if (rs.next()) {
+                if (rs.getBoolean("is_gestore")) {
                     user = new Gestore();
                 } else {
                     user = new CSU();
+                    ((CSU) user).setDataSospensione(
+                            toLocalDate(rs.getDate("data_sospensione")));
                 }
                 user.setId(rs.getInt("id"));
                 user.setUserName(rs.getString("username"));
@@ -160,21 +158,15 @@ public final class UtenteDB implements UtenteDBInterface {
                 user.setEmail(rs.getString("email"));
                 user.setNome(rs.getString("nome"));
                 user.setCognome(rs.getString("cognome"));
-                user.setDataDiNascita(rs.getDate("data_di_nascita")
-                    .toLocalDate());
+                user.setDataDiNascita(
+                        rs.getDate("data_di_nascita").toLocalDate());
                 user.setSesso(rs.getInt("sesso"));
-                if (!b) {
-                    Date tmp = rs.getDate("data_sospensione");
-                    if (tmp != null) {
-                        ((CSU) user).setDataSospensione(tmp.toLocalDate());
-                    }
-                }
             }
+            return user;
+
         } finally {
             Database.freeConnection(connection);
         }
-
-        return user;
     }
 
     /**
@@ -199,12 +191,13 @@ public final class UtenteDB implements UtenteDBInterface {
 
             ResultSet rs = preparedStatement.executeQuery();
 
-            while (rs.next()) {
-                boolean b = rs.getBoolean("is_gestore");
-                if (b) {
+            if (rs.next()) {
+                if (rs.getBoolean("is_gestore")) {
                     user = new Gestore();
                 } else {
                     user = new CSU();
+                    ((CSU) user).setDataSospensione(
+                            toLocalDate(rs.getDate("data_sospensione")));
                 }
 
                 user.setId(rs.getInt("Id"));
@@ -213,20 +206,14 @@ public final class UtenteDB implements UtenteDBInterface {
                 user.setEmail(rs.getString("email"));
                 user.setNome(rs.getString("nome"));
                 user.setCognome(rs.getString("cognome"));
-                user.setDataDiNascita(rs.getDate("data_di_nascita")
-                    .toLocalDate());
+                user.setDataDiNascita(
+                        rs.getDate("data_di_nascita").toLocalDate());
                 user.setSesso(rs.getInt("sesso"));
-                if (!b) {
-                    Date tmp = rs.getDate("data_sospensione");
-                    if (tmp != null) {
-                        ((CSU) user).setDataSospensione(tmp.toLocalDate());
-                    }
-                }
             }
+            return user;
         } finally {
             Database.freeConnection(connection);
         }
-        return user;
     }
 
     /**
@@ -252,11 +239,12 @@ public final class UtenteDB implements UtenteDBInterface {
 
             while (rs.next()) {
 
-                boolean b = rs.getBoolean("is_gestore");
-                if (b) {
+                if (rs.getBoolean("is_gestore")) {
                     u = new Gestore();
                 } else {
                     u = new CSU();
+                    ((CSU) u).setDataSospensione(
+                            toLocalDate(rs.getDate("data_sospensione")));
                 }
 
                 u.setId(rs.getInt("Id"));
@@ -267,21 +255,13 @@ public final class UtenteDB implements UtenteDBInterface {
                 u.setCognome(rs.getString("cognome"));
                 u.setDataDiNascita(rs.getDate("data_di_nascita").toLocalDate());
                 u.setSesso(rs.getInt("sesso"));
-                if (!b) {
-                    Date tmp = rs.getDate("data_sospensione");
-                    if (tmp != null) {
-                        ((CSU) u).setDataSospensione(tmp.toLocalDate());
-                    }
-                }
-
                 users.add(u);
             }
-
+            return users;
         } finally {
             Database.freeConnection(connection);
         }
 
-        return users;
     }
 
     /**
@@ -326,20 +306,31 @@ public final class UtenteDB implements UtenteDBInterface {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         CSU csu = (CSU) aUtente;
-        int res;
 
         try {
             connection = Database.getConnection();
             preparedStatement = connection.prepareStatement(UPDATE);
-            preparedStatement
-                .setDate(1, Date.valueOf(csu.getDataSospensione()));
+            preparedStatement.setDate(1,
+                    Date.valueOf(csu.getDataSospensione()));
             preparedStatement.setInt(2, csu.getId());
-            res = preparedStatement.executeUpdate();
+            return preparedStatement.executeUpdate();
 
         } finally {
             Database.freeConnection(connection);
         }
+    }
 
-        return (res);
+    /**
+     * To date.
+     *
+     * @param date the date
+     * @return the date
+     */
+    private LocalDate toLocalDate(final Date date) {
+        if (date != null) {
+            return date.toLocalDate();
+        } else {
+            return null;
+        }
     }
 }
