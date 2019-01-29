@@ -27,9 +27,9 @@ public interface TipologiaDBInterface {
     /**
      * Gets the by id.
      *
-     * @param aExternal the id
+     * @param id the id
      * @return the by id
      * @throws Exception the exception
      */
-    Tipologia getById(int aExternal) throws Exception;
+    Tipologia getById(int id) throws Exception;
 }

@@ -4,6 +4,9 @@ import static junit.framework.TestCase.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 import java.sql.Connection;
 import java.sql.Date;
@@ -18,8 +21,10 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import model.ufficio_tecnico.UfficioTecnico;
+import model.ufficio_tecnico.UfficioTecnicoDBInterface;
 import model.utente.CSU;
 import model.utente.Utente;
+import model.utente.UtenteDBInterface;
 import pool.Database;
 
 /**
@@ -51,6 +56,16 @@ public class SegnalazioneDBTest {
      * The segnalazione test 3.
      */
     private Segnalazione segnalazioneTest3;
+
+    private TipologiaDBInterface tipologiaDB;
+
+    private UfficioTecnicoDBInterface tecnicoDB;
+
+    private UtenteDBInterface autoreDB;
+
+    private Tipologia tipologiaTest;
+
+    private UfficioTecnico tecnicoTest;
 
     /**
      * Sets the up class.
@@ -87,20 +102,24 @@ public class SegnalazioneDBTest {
      */
     @Before
     public void clearDB() throws Exception {
+
         final Connection conn = Database.getConnection();
         conn.prepareStatement("TRUNCATE TABLE segnalazione").executeUpdate();
         Database.freeConnection(conn);
-        db = new SegnalazioneDB();
+
         autoreTest = new CSU();
         autoreTest.setId(1);
+        tipologiaTest = new Tipologia();
+        tipologiaTest.setId(1);
+
         segnalazioneTest = new Segnalazione();
         segnalazioneTest.setTitolo("Lorem ipsum");
         segnalazioneTest.setDescrizione("Lorem ipsum dolor sit amet");
-
         segnalazioneTest.setAutore(autoreTest);
         segnalazioneTest
                 .setDataSegnalazione(Date.valueOf("2018-10-06").toLocalDate());
         segnalazioneTest.setTipologia(new Tipologia());
+
         segnalazioneTest2 = new Segnalazione();
         segnalazioneTest2.setTitolo("Lorem ipsum 2");
         segnalazioneTest2.setDescrizione("Lorem ipsum dolor sit amet adcedew");
@@ -111,9 +130,9 @@ public class SegnalazioneDBTest {
         segnalazioneTest2.setStato(Segnalazione.STATO_ASSEGNATO);
         segnalazioneTest2
                 .setDataAssegnazione(Date.valueOf("2019-01-19").toLocalDate());
-        final UfficioTecnico ufficioTecnico = new UfficioTecnico();
-        ufficioTecnico.setId(1);
-        segnalazioneTest2.setTecnico(ufficioTecnico);
+        tecnicoTest = new UfficioTecnico();
+        tecnicoTest.setId(1);
+        segnalazioneTest2.setTecnico(tecnicoTest);
 
         segnalazioneTest3 = new Segnalazione();
         segnalazioneTest3.setTitolo("Lorem ipsum 3");
@@ -125,9 +144,21 @@ public class SegnalazioneDBTest {
         segnalazioneTest3.setStato(Segnalazione.STATO_RISOLTO);
         segnalazioneTest3
                 .setDataAssegnazione(Date.valueOf("2019-01-17").toLocalDate());
-        segnalazioneTest3.setTecnico(ufficioTecnico);
+        segnalazioneTest3.setTecnico(tecnicoTest);
         segnalazioneTest3
                 .setDataRisoluzione(Date.valueOf("2019-01-20").toLocalDate());
+
+        tipologiaDB = mock(TipologiaDBInterface.class);
+        when(tipologiaDB.getById(anyInt())).thenReturn(new Tipologia());
+
+        when(tipologiaDB.getById(1)).thenReturn(tipologiaTest);
+
+        tecnicoDB = mock(UfficioTecnicoDBInterface.class);
+        when(tecnicoDB.getById(1)).thenReturn(tecnicoTest);
+        autoreDB = mock(UtenteDBInterface.class);
+        when(autoreDB.getById(anyInt())).thenReturn(new CSU());
+        when(autoreDB.getById(autoreTest.getId())).thenReturn(autoreTest);
+        db = new SegnalazioneDB(tecnicoDB, tipologiaDB, autoreDB);
     }
 
     /**
@@ -155,9 +186,7 @@ public class SegnalazioneDBTest {
         segnalazione.setDescrizione("Lorem ipsum dolor sit amet");
         segnalazione.setTitolo("Lorem ipsum");
         segnalazione.setStato(Segnalazione.STATO_APERTO);
-        final Tipologia tipologia = new Tipologia();
-        tipologia.setId(2);
-        segnalazione.setTipologia(tipologia);
+        segnalazione.setTipologia(tipologiaTest);
         final Utente utente = new CSU();
         utente.setId(1);
         segnalazione.setAutore(utente);
@@ -166,7 +195,7 @@ public class SegnalazioneDBTest {
                 "INSERT INTO segnalazione (titolo, descrizione, stato,"
                         + "data_segnalazione, tipologia," + " autore) "
                         + "VALUES ('Lorem ipsum','Lorem ipsum dolor sit amet',"
-                        + "0, '2018-10-06', 2, 1)")
+                        + "0, '2018-10-06', 1, 1)")
                 .executeUpdate();
         Database.freeConnection(conn);
         final Segnalazione segnalazioneNew = db.getByCod(1);
