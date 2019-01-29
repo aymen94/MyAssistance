@@ -20,7 +20,7 @@ public final class UtenteBL {
      * The Constant NAME_REGEX.
      */
     private static final String NAME_REGEX = "^[\\w'\\-,.][^0-9_!¡?÷?¿/\\\\+"
-            + "=@#$%ˆ&*(){}|~<>;:[\\]]+$";
+            + "=@#$%ˆ&*(){}|~<>;:\\[\\]]+$";
 
     /**
      * The Constant DATE_REGEX.
@@ -130,7 +130,7 @@ public final class UtenteBL {
                         EMAIL_REGEX)) {
             final String password = PasswordHash.createHash(aPassword);
             final LocalDate date = LocalDate.parse(aDataDiNascita,
-                    DateTimeFormatter.ofPattern("dd[-][.][/]mm[-][.][/]yyyy"));
+                    DateTimeFormatter.ofPattern("dd[-][.][/]MM[-][.][/]yyyy"));
             final Utente utente = new CSU(aUserName.toLowerCase(Locale.ROOT),
                     password, aEmail, aNome, aCognome, aSesso, date);
 

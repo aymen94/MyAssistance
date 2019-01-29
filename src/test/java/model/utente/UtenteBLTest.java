@@ -2,7 +2,10 @@
 package model.utente;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -54,6 +57,8 @@ public class UtenteBLTest {
                 .thenReturn(utenteTest);
         when(utenteDB.getByUserName(utenteTest2.getUserName()))
                 .thenReturn(utenteTest2);
+        when(utenteDB.insert(any(Utente.class))).thenReturn(1);
+
         manager = new UtenteBL(utenteDB);
     }
 
@@ -192,107 +197,218 @@ public class UtenteBLTest {
                 password);
         assertEquals(utenteTest2, utente);
     }
-//    public void testRegistrazione1() {
-//        boolean utente=UtenteBL.effettuaRegistrazione("", "", "", "", "", "");
-//        assertFalse(utente);
-//    }
-//
-//    public void testRegistrazione2() {
-//        boolean utente=UtenteBL.effettuaRegistrazione("", "", "", "9####", "", "");
-//        assertFalse(utente);
-//    }
-//
-//    public void testRegistrazione3() {
-//        boolean utente=UtenteBL.effettuaRegistrazione("", "", "", "Mario", "", "");
-//        assertFalse(utente);
-//    }
-//
-//    public void testRegistrazione4() {
-//        boolean utente=UtenteBL.effettuaRegistrazione("", "", "", "Mario", "Rossi].[]", "");
-//        assertFalse(utente);
-//    }
-//
-//    public void testRegistrazione5() {
-//        boolean utente=UtenteBL.effettuaRegistrazione("", "", "", "Mario", "Rossi", "");
-//        assertFalse(utente);
-//    }
-//
-//    public void testRegistrazione6() {
-//        boolean utente=UtenteBL.effettuaRegistrazione("", "", "", "Mario", "Rossi", "");
-//        assertFalse(utente);
-//    }
-//
-//    public void testRegistrazione7() {
-//        boolean utente=UtenteBL.effettuaRegistrazione("Marissi", "", "", "Mario", "Rossi", "1985-30-03");
-//        assertFalse(utente);
-//    }
-//
-//    public void testRegistrazione8() {
-//        boolean utente=UtenteBL.effettuaRegistrazione("Marissi", "", "", "Mario", "Rossi", "1985-30-03");
-//        assertFalse(utente);
-//    }
-//
-//    public void testRegistrazione9() {
-//        boolean utente=UtenteBL.effettuaRegistrazione("Marissi", "Chaive1095", "", "Mario", "Rossi", "1985-30-03");
-//        assertFalse(utente);
-//    }
-//
-//    public void testRegistrazione10() {
-//        boolean utente=UtenteBL.effettuaRegistrazione("Marissi", "Chiave1095", "mariorossi@gmail.com", "Mario", "Rossi", "14-06-1985");
-//        assertFalse(utente);
-//    }
-//
-//    public void testRegistrazione11() {
-//        boolean utente=UtenteBL.effettuaRegistrazione("Marissi", "Chiave1095", "m.rossi12@studenti.unisa.it", "Mario", "Rossi", "14-06-1985");
-//        assertFalse(utente);
-//    }
-//
-//    public void testRegistrazione12() {
-//        boolean utente=UtenteBL.effettuaRegistrazione("Marissi", "Chiave1095", "m.rossi12@studenti.unisa.it", "Mario", "Rossi", "14-06-1985");
-//        udb.delete("m.rossi12@studenti.unisa.it");
-//        assertTrue(utente);
-//    }
-//
-//
-//
-///**
-//     * Test di getByEmail della classe UtenteDB.
-//     * @throws SQLException eccezione in mancato ottenimento query
-//     *//*
-//
-//    @Test
-//    public void testGetByEmail() throws SQLException {
-//        System.out.println("getByEmail");
-//
-//        Utente u = udb.getByEmail("a.dauria@test.it");
-//        assertNotNull(u);
-//    }
-//
-//
-///**
-//     * Test di getAll della classe UtenteDB.
-//     * @throws SQLException eccezione in mancato ottenimento utenti
-//     *//*
-//
-//    @Test
-//    public void testGetAll() throws SQLException {
-//        System.out.println("getAll");
-//
-//        ArrayList<Utente> users = (ArrayList<Utente>) udb.getAll();
-//        assertNotNull(users);
-//    }
-//
-///**
-//     * Test di delete della classe UtenteDB.
-//     * @throws SQLException eccezione in mancata eliminzaione query
-//     *//*
-//
-//    @Test
-//    public void testDelete() throws SQLException {
-//        System.out.println("delete");
-//
-//        int result = udb.delete("xxx@yy.it");
-//        assertTrue(result > 0);
-//    }
-//}
+
+    /**
+     * Test registrazione 1.
+     *
+     * @throws Exception the exception
+     */
+    @Test
+    public void testRegistrazione1() throws Exception {
+        final int sesso = Utente.SESSO_ALTRO;
+        final boolean utente = manager
+                .effettuaRegistrazione("", "", "", "", "", "", sesso);
+        assertFalse(utente);
+    }
+
+    /**
+     * Test registrazione 2.
+     *
+     * @throws Exception the exception
+     */
+    @Test
+    public void testRegistrazione2() throws Exception {
+        final int sesso = Utente.SESSO_ALTRO;
+        final boolean utente = manager
+                .effettuaRegistrazione("", "", "", "9####", "", "", sesso);
+        assertFalse(utente);
+    }
+
+    /**
+     * Test registrazione 3.
+     *
+     * @throws Exception the exception
+     */
+    @Test
+    public void testRegistrazione3() throws Exception {
+        final int sesso = Utente.SESSO_ALTRO;
+        final boolean utente = manager
+                .effettuaRegistrazione("", "", "", "Mario", "", "", sesso);
+        assertFalse(utente);
+    }
+
+    /**
+     * Test registrazione 4.
+     *
+     * @throws Exception the exception
+     */
+    @Test
+    public void testRegistrazione4() throws Exception {
+        final int sesso = Utente.SESSO_ALTRO;
+        final boolean utente = manager.effettuaRegistrazione("",
+                "",
+                "",
+                "Mario",
+                "Rossi].[]",
+                "",
+                sesso);
+        assertFalse(utente);
+    }
+
+    /**
+     * Test registrazione 5.
+     *
+     * @throws Exception the exception
+     */
+    @Test
+    public void testRegistrazione5() throws Exception {
+        final int sesso = Utente.SESSO_ALTRO;
+        final boolean utente = manager
+                .effettuaRegistrazione("", "", "", "Mario", "Rossi", "", sesso);
+        assertFalse(utente);
+    }
+
+    /**
+     * Test registrazione 6.
+     *
+     * @throws Exception the exception
+     */
+    @Test
+    public void testRegistrazione6() throws Exception {
+        final int sesso = Utente.SESSO_FEMMINILE;
+        final boolean utente = manager.effettuaRegistrazione("Blablablablabla",
+                "",
+                "",
+                "Mario",
+                "Rossi",
+                "",
+                sesso);
+        assertFalse(utente);
+    }
+
+    /**
+     * Test registrazione 7.
+     *
+     * @throws Exception the exception
+     */
+    @Test
+    public void testRegistrazione7() throws Exception {
+        final int sesso = Utente.SESSO_MASCHILE;
+        final boolean utente = manager.effettuaRegistrazione("Marissi",
+                "",
+                "",
+                "Mario",
+                "Rossi",
+                "14-06-1985",
+                sesso);
+        assertFalse(utente);
+    }
+
+    /**
+     * Test registrazione 8.
+     *
+     * @throws Exception the exception
+     */
+    @Test
+    public void testRegistrazione8() throws Exception {
+        final int sesso = Utente.SESSO_ALTRO;
+        final boolean utente = manager.effettuaRegistrazione("Marissi",
+                "",
+                "",
+                "Mario",
+                "Rossi",
+                "14-06-1985",
+                sesso);
+        assertFalse(utente);
+    }
+
+    /**
+     * Test registrazione 9.
+     *
+     * @throws Exception the exception
+     */
+    @Test
+    public void testRegistrazione9() throws Exception {
+        final int sesso = Utente.SESSO_ALTRO;
+        final boolean utente = manager.effettuaRegistrazione("Marissi",
+                "Chiave1095",
+                "",
+                "Mario",
+                "Rossi",
+                "14-06-1985",
+                sesso);
+        assertFalse(utente);
+    }
+
+    /**
+     * Test registrazione 10.
+     *
+     * @throws Exception the exception
+     */
+    @Test
+    public void testRegistrazione10() throws Exception {
+        final int sesso = Utente.SESSO_ALTRO;
+        final boolean utente = manager.effettuaRegistrazione("Marissi",
+                "Chiave1095",
+                "mariorossi@gmail.com",
+                "Mario",
+                "Rossi",
+                "14-06-1985",
+                sesso);
+        assertFalse(utente);
+    }
+
+    /**
+     * Test registrazione 11.
+     *
+     * @throws Exception the exception
+     */
+    @Test
+    public void testRegistrazione11() throws Exception {
+        final int sesso = Utente.SESSO_ALTRO;
+        final boolean utente = manager.effettuaRegistrazione("Marissi",
+                "Chiave1095",
+                "m.rossi12@studenti.unisa.it",
+                "Mario",
+                "Rossi",
+                "1985-30-03",
+                sesso);
+        assertFalse(utente);
+    }
+
+    /**
+     * Test registrazione 12.
+     *
+     * @throws Exception the exception
+     */
+    @Test
+    public void testRegistrazione12() throws Exception {
+        final int sesso = -1;
+        final boolean utente = manager.effettuaRegistrazione("Marissi",
+                "Chiave1095",
+                "m.rossi12@studenti.unisa.it",
+                "Mario",
+                "Rossi",
+                "14-06-1985",
+                sesso);
+        assertFalse(utente);
+    }
+
+    /**
+     * Test registrazione 13.
+     *
+     * @throws Exception the exception
+     */
+    @Test
+    public void testRegistrazione13() throws Exception {
+        final int sesso = Utente.SESSO_ALTRO;
+        final boolean utente = manager.effettuaRegistrazione("Marissi",
+                "Chiave1095",
+                "m.rossi12@studenti.unisa.it",
+                "Mario",
+                "Rossi",
+                "14-06-1985",
+                sesso);
+        assertTrue(utente);
+    }
 }
