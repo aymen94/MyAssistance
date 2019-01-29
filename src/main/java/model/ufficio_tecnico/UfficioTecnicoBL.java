@@ -92,17 +92,10 @@ public final class UfficioTecnicoBL {
      * get only the technical office with this id.
      *
      * @param aId the id
-     * @return true, if successful
-     * @throws SQLException the SQL exception
+     * @return the ufficio tecnico
+     * @throws Exception the exception
      */
-    public UfficioTecnico ottieniUfficio(final Integer aId)
-            throws SQLException {
-        UfficioTecnico byId = null;
-
-            if (aId != null && aId > 0) {
-                byId = database.getById(aId);
-            }
-
-        return byId;
+    public UfficioTecnico ottieniUfficio(final int aId) throws Exception {
+        return database.getById(aId);
     }
 }
