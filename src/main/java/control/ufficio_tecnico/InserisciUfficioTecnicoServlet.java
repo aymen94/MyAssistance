@@ -53,7 +53,7 @@ public final class InserisciUfficioTecnicoServlet extends HttpServlet {
             ufficioTecnico.setUbicazione(ubicazione);
 
             try {
-                ubl.insertUfficioTecnico(nome, tel, email, ubicazione);
+                ubl.insertUfficioTecnico(ufficioTecnico);
             } catch (Exception e) {
                 String msgError = "Si e' verificato un errore.";
                 req.setAttribute("msgError", msgError);

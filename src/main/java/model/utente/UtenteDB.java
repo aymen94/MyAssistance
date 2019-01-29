@@ -6,6 +6,7 @@ Date: 30/12/2018
 package model.utente;
 
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.sql.ResultSet;
 import java.sql.Connection;
 import java.sql.Date;
@@ -43,10 +44,10 @@ public final class UtenteDB implements UtenteDBInterface {
 
     /**
      * This private attribute is a string that contains
-     * the query get user by email.
+     * the query get user by username.
      */
-    private static final String GET_BY_EMAIL =
-        "SELECT * FROM " + UtenteDB.TABLE_NAME + " WHERE email = ?";
+    private static final String GET_BY_USERNAME =
+        "SELECT * FROM " + UtenteDB.TABLE_NAME + " WHERE username = ?";
 
     /**
      * This private attribute is a string that contains
@@ -57,14 +58,14 @@ public final class UtenteDB implements UtenteDBInterface {
 
     /**
      * This private attribute is a string that contains
-     * the query to delete user by email.
+     * the query to delete user by username.
      */
     private static final String DELETE =
         "DELETE FROM " + UtenteDB.TABLE_NAME + " WHERE email =?;";
 
     /**
      * This private attribute is a string that contains
-     * the query to update data user by email.
+     * the query to update data user by username.
      */
     private static final String UPDATE =
         "UPDATE " + UtenteDB.TABLE_NAME + " SET data_sospensione = ?"
@@ -179,23 +180,23 @@ public final class UtenteDB implements UtenteDBInterface {
 
     /**
      * This method fetches information about a user
-     * given his email address.
+     * given his username address.
      *
-     * @param aEmail is the email address of the user.
-     * @return user is the user whose the email address is of.
+     * @param aUserName is the username of the user.
+     * @return user is the user whose the username is of.
      * @throws SQLException is the exception that can be thrown
      *                      during the execution.
      */
-    public Utente getByEmail(final String aEmail) throws SQLException {
+    public Utente getByUserName(final String aUserName) throws SQLException {
         Connection connection = null;
         PreparedStatement preparedStatement;
         Utente user = null;
 
         try {
             connection = Database.getConnection();
-            preparedStatement = connection.prepareStatement(GET_BY_EMAIL);
+            preparedStatement = connection.prepareStatement(GET_BY_USERNAME);
 
-            preparedStatement.setString(1, aEmail);
+            preparedStatement.setString(1, aUserName);
 
             ResultSet rs = preparedStatement.executeQuery();
 
@@ -314,7 +315,7 @@ public final class UtenteDB implements UtenteDBInterface {
 
     /**
      * This method updates information about a given user.
-     *
+     * THIS UPDATE ONLY DATA SOSPENSIONE!
      * @param aUtente is the object containing updated information
      *                about the user.
      * @return res is 0 if the update operation is not made,
@@ -331,8 +332,12 @@ public final class UtenteDB implements UtenteDBInterface {
         try {
             connection = Database.getConnection();
             preparedStatement = connection.prepareStatement(UPDATE);
-            preparedStatement
-                .setDate(1, Date.valueOf(csu.getDataSospensione()));
+            LocalDate dataSospensione = csu.getDataSospensione();
+            Date tempDate = null;
+            if (dataSospensione != null) {
+                Date.valueOf(dataSospensione);
+            }
+            preparedStatement.setDate(1, tempDate);
             preparedStatement.setInt(2, csu.getId());
             res = preparedStatement.executeUpdate();
 

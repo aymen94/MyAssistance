@@ -1,5 +1,7 @@
 package model.ufficio_tecnico;
 
+import java.util.Objects;
+
 /**
  * The Class UfficioTecnico.
  */
@@ -138,94 +140,38 @@ public final class UfficioTecnico {
     }
 
     /**
-     * @param obj
-     * @return result of eguals
+     * Equals.
+     *
+     * @param obj the obj
+     * @return result of equals
      */
-    @Override public boolean equals(final Object obj) {
+    @Override
+    public boolean equals(final Object obj) {
         if (this == obj) {
             return true;
         }
-        if (obj == null) {
-            return false;
-        }
-        if (!(obj instanceof UfficioTecnico)) {
+
+        if (obj == null || !(obj instanceof UfficioTecnico)) {
             return false;
         }
         final UfficioTecnico other = (UfficioTecnico) obj;
 
-        // if id or other.id is null do not compare
-        if (id != 0 && other.id != 0) {
-            if (!(id == other.id)) {
-                return false;
-            }
-        }
-
-        if (email == null) {
-            if (other.email != null) {
-                return false;
-            }
-        } else if (!email.equals(other.email)) {
-            return false;
-        }
-        if (nome == null) {
-            if (other.nome != null) {
-                return false;
-            }
-        } else if (!nome.equals(other.nome)) {
-            return false;
-        }
-        if (tel == null) {
-            if (other.tel != null) {
-                return false;
-            }
-        } else if (!tel.equals(other.tel)) {
-            return false;
-        }
-        if (ubicazione == null) {
-            if (other.ubicazione != null) {
-                return false;
-            }
-        } else if (!ubicazione.equals(other.ubicazione)) {
-            return false;
-        }
-        return true;
+        // if id or other.id is 0 do not compare them
+        return (id == 0 || other.id == 0 || id == other.id)
+                && Objects.equals(nome, other.nome)
+                && Objects.equals(ubicazione, other.ubicazione)
+                && Objects.equals(email, other.email)
+                && Objects.equals(tel, other.tel);
     }
 
-
     /**
+     * Hash code.
      *
      * @return result
      */
-
-    @Override public int hashCode() {
-
-         final int tr = 31;
-        /*int result = (nome != null ? nome.hashCode() : 0);
-        result = 31 * result + (tel != null ? tel.hashCode() : 0);
-        result = 31 * result + (email != null ? email.hashCode() : 0);
-        result = 31 * result + (ubicazione != null ? ubicazione.hashCode() : 0);
-        return result;*/
-        int result = 0;
-
-        if (nome != null) {
-              result = tr * result + nome.hashCode();
-        }
-
-        if (tel != null) {
-              result = tr * result + tel.hashCode();
-            return result;
-        }
-
-        if (email != null) {
-              result = tr * result + email.hashCode();
-            return result;
-        }
-
-        if (ubicazione != null) {
-              result = tr * result + ubicazione.hashCode();
-            return result;
-        }
-        return 0;
+    @Override
+    public int hashCode() {
+        return Objects.hash(nome, ubicazione, email, tel);
     }
 
 }
