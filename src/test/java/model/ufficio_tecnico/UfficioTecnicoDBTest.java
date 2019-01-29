@@ -66,35 +66,6 @@ public class UfficioTecnicoDBTest {
 
     }
 
-    /*
-     *
-     * @Test public void insert() throws SQLException { UfficioTecnicoDB
-     * ufficioTecnicoDB = new UfficioTecnicoDB(); UfficioTecnico test1 = new
-     * UfficioTecnico(); test1.setNome("nomesettato");
-     * test1.setTel("1234567890"); test1.setEmail("abcdef@gmail.com");
-     * test1.setUbicazione("Roma"); ufficioTecnicoDB.insert(test1);
-     * System.out.println("method: insert, \noutput: " + test1); }
-     *
-     */
-
-    /**
-     * Gets the all.
-     *
-     *
-     * @throws SQLException the SQL exception
-     */
-
-    @Test
-    public void getAll() throws SQLException {
-        final UfficioTecnicoDB ufficioTecnicoTest = new UfficioTecnicoDB();
-        final List<UfficioTecnico> list = ufficioTecnicoTest.getAll();
-        if (list == null) {
-            System.out.println("method: getAll()==1 \noutput:\n " + 0);
-        } else {
-            System.out.println("method: getAll()==1 \noutput:\n " + list.size());
-        }
-    }
-
     /**
      * Test get by id 1.
      *
