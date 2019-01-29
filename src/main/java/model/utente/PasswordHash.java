@@ -196,21 +196,4 @@ public final class PasswordHash {
             return hex;
         }
     }
-
-    /**
-     * Tests the basic functionality of the PasswordHash class.
-     *
-     * @param args ignored
-     */
-    public static void main(final String[] args) {
-
-        try {
-            System.out.println(
-                    PasswordHash.createHash("aygusadjfksmgjndsb").length());
-
-        } catch (Exception ex) {
-            System.out.println("ERROR: " + ex);
-        }
-    }
-
 }
