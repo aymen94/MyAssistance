@@ -79,17 +79,19 @@ public final class UfficioTecnicoBL {
         if (validateLengthRegex(uff.getNome(),
                 1,
                 MAX_NOME_LENGTH,
-                "^[\\w]+$")
-                && validateLengthRegex(uff.getTel(),
+                "^[\\w\\h]+$")
+                && (uff.getTel() == null || validateLengthRegex(uff.getTel(),
                         MIN_TEL_LENGTH,
                         MAX_TEL_LENGTH,
-                        "^(+){0,1}[0-9]*$")
+                        "^(\\+){0,1}[0-9]*$"))
                 && validateLengthRegex(uff.getEmail(),
                         MIN_EMAIL_LENGTH,
                         MAX_EMAIL_LENGTH,
                         REGEX_EMAIL)
-                && uff.getUbicazione().length() > 0
-                && uff.getUbicazione().length() <= MAX_UBICAZIONE_LENGTH) {
+                && (uff.getUbicazione() == null
+                        || (uff.getUbicazione().length() > 0
+                                && uff.getUbicazione()
+                                        .length() <= MAX_UBICAZIONE_LENGTH))) {
 
             return database.insert(uff) > 0;
         }
