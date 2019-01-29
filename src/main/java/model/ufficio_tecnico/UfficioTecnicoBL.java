@@ -51,17 +51,6 @@ public final class UfficioTecnicoBL {
     private UfficioTecnicoDBInterface database;
 
     /**
-     * Instantiates a new ufficio tecnico BL. Using the default db manager
-     *
-     * This will be removed in final release, please use
-     * {@link #UfficioTecnicoBL(UfficioTecnicoDBInterface)} constructor.
-     */
-    @Deprecated
-    public UfficioTecnicoBL() {
-        this(new UfficioTecnicoDB());
-    }
-
-    /**
      * Instantiates a new ufficio tecnico BL.
      *
      * @param db it's database manager
@@ -73,32 +62,26 @@ public final class UfficioTecnicoBL {
     /**
      * Memorize and check the technical office.
      *
-     * @param aNome       the nome
-     * @param aTel        the tel
-     * @param aEmail      the email
-     * @param aUbicazione the ubicazione
+     * @param uff the ufficio tecnico to insert
      * @return true, if successful
      * @throws Exception the exception
      */
-    public boolean insertUfficioTecnico(final String aNome, final String aTel,
-            final String aEmail, final String aUbicazione) throws Exception {
-        final UfficioTecnico uff = new UfficioTecnico();
-
-        if (validateLengthRegex(aNome, 1, MAX_NOME_LENGTH, "^[A-Za-z0-9]+$")
-                && validateLengthRegex(aTel,
+    public boolean insertUfficioTecnico(final UfficioTecnico uff)
+            throws Exception {
+        if (validateLengthRegex(uff.getNome(),
+                1,
+                MAX_NOME_LENGTH,
+                "^[\\w]+$")
+                && validateLengthRegex(uff.getTel(),
                         MIN_TEL_LENGTH,
                         MAX_TEL_LENGTH,
                         "^(+){0,1}[0-9]*$")
-                && validateLengthRegex(aEmail,
+                && validateLengthRegex(uff.getEmail(),
                         MIN_EMAIL_LENGTH,
                         MAX_EMAIL_LENGTH,
                         REGEX_EMAIL)
-                && aUbicazione.length() > 0
-                && aUbicazione.length() <= MAX_UBICAZIONE_LENGTH) {
-            uff.setNome(aNome);
-            uff.setTel(aTel);
-            uff.setEmail(aEmail);
-            uff.setUbicazione(aUbicazione);
+                && uff.getUbicazione().length() > 0
+                && uff.getUbicazione().length() <= MAX_UBICAZIONE_LENGTH) {
 
             return database.insert(uff) > 0;
         }

@@ -90,6 +90,14 @@ public final class UtenteBL {
     }
 
     /**
+     * Instantiates a new utente BL. Using the default db manager
+     *
+     */
+    public UtenteBL() {
+        this(new UtenteDB());
+    }
+
+    /**
      * Effettua registrazione.
      *
      * @param aUserName      the user name
