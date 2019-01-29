@@ -5,7 +5,6 @@ Date: 23/12/2018
 */
 package model.utente;
 
-import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -144,10 +143,10 @@ public final class UtenteBL {
      *
      * @param aCSU the CSU
      * @return true, if successful
-     * @throws SQLException the SQL exception
+     * @throws Exception the exception
      */
-    public boolean sospendiUtente(final CSU aCSU) throws SQLException {
-        return false;
+    public boolean sospendiUtente(final CSU aCSU) throws Exception {
+        return utenteDB.update(aCSU) > 0;
     }
 
     /**
@@ -160,7 +159,7 @@ public final class UtenteBL {
      */
     public CSU autenticazioneCSU(final String aUserName, final String aPass)
             throws Exception {
-            return (CSU) autenticazione(aUserName, aPass);
+        return (CSU) autenticazione(aUserName, aPass);
     }
 
     /**
@@ -173,7 +172,7 @@ public final class UtenteBL {
      */
     public Gestore autenticazioneGestore(final String aUserName,
             final String aPass) throws Exception {
-            return (Gestore) autenticazione(aUserName, aPass);
+        return (Gestore) autenticazione(aUserName, aPass);
     }
 
     /**

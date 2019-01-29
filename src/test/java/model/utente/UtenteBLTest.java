@@ -58,7 +58,7 @@ public class UtenteBLTest {
         when(utenteDB.getByUserName(utenteTest2.getUserName()))
                 .thenReturn(utenteTest2);
         when(utenteDB.insert(any(Utente.class))).thenReturn(1);
-
+        when(utenteDB.update(any(Utente.class))).thenReturn(1);
         manager = new UtenteBL(utenteDB);
     }
 
@@ -410,5 +410,22 @@ public class UtenteBLTest {
                 "14-06-1985",
                 sesso);
         assertTrue(utente);
+    }
+
+    @Test
+    public void testSospendiUtente1() throws Exception {
+        utenteTest.setId(0);
+        utenteTest.setDataSospensione(null);
+        when(utenteDB.update(utenteTest)).thenReturn(0);
+        final Boolean res = manager.sospendiUtente(utenteTest);
+        assertFalse(res);
+    }
+
+    @Test
+    public void testSospendiUtente2() throws Exception {
+        utenteTest.setId(1);
+        utenteTest.setDataSospensione(LocalDate.parse("2019-01-21"));
+        final Boolean res = manager.sospendiUtente(utenteTest);
+        assertTrue(res);
     }
 }
