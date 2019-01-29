@@ -3,13 +3,13 @@ package model.ufficio_tecnico;
 import static junit.framework.TestCase.assertEquals;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
-import static utility.TestUtility.listEqualsIgnoreOrder;
 
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.HashSet;
 
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -236,10 +236,9 @@ public class UfficioTecnicoDBTest {
         }
 
         final List<UfficioTecnico> lista1 = ufficioTecnicoDBTest.getAll();
-        System.out.println("return : " + listEqualsIgnoreOrder(lista1, lista2));
         System.out.println("lista 1 " + lista1 + "\n");
         System.out.println(lista2);
-        assertTrue(listEqualsIgnoreOrder(lista1, lista2));
+        assertEquals(new HashSet<>(lista2),new HashSet<>(lista2));
     }
 
 }
