@@ -6,7 +6,6 @@ Date: 30/12/2018
 package model.utente;
 
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.sql.ResultSet;
 import java.sql.Connection;
 import java.sql.Date;
@@ -315,7 +314,7 @@ public final class UtenteDB implements UtenteDBInterface {
 
     /**
      * This method updates information about a given user.
-     * THIS UPDATE ONLY DATA SOSPENSIONE!
+     *
      * @param aUtente is the object containing updated information
      *                about the user.
      * @return res is 0 if the update operation is not made,
@@ -332,12 +331,8 @@ public final class UtenteDB implements UtenteDBInterface {
         try {
             connection = Database.getConnection();
             preparedStatement = connection.prepareStatement(UPDATE);
-            LocalDate dataSospensione = csu.getDataSospensione();
-            Date tempDate = null;
-            if (dataSospensione != null) {
-                Date.valueOf(dataSospensione);
-            }
-            preparedStatement.setDate(1, tempDate);
+            preparedStatement
+                .setDate(1, Date.valueOf(csu.getDataSospensione()));
             preparedStatement.setInt(2, csu.getId());
             res = preparedStatement.executeUpdate();
 
