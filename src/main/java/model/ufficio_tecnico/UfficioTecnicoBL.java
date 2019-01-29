@@ -51,6 +51,14 @@ public final class UfficioTecnicoBL {
     private UfficioTecnicoDBInterface database;
 
     /**
+     * Instantiates a new ufficio tecnico BL. Using the default db manager
+     *
+     */
+    public UfficioTecnicoBL() {
+        this(new UfficioTecnicoDB());
+    }
+
+    /**
      * Instantiates a new ufficio tecnico BL.
      *
      * @param db it's database manager
