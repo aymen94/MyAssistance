@@ -56,7 +56,7 @@ public final class SegnalazioneBL {
         if (validateSegnalazione(segnalazione)) {
             // Set the current date
             segnalazione.setDataSegnalazione(LocalDate.now());
-            return segnalazioneDB.insert(segnalazione) > 0;
+            return segnalazioneDB.insert(segnalazione);
         }
         return false;
     }
@@ -93,7 +93,7 @@ public final class SegnalazioneBL {
                 aSegnalazione.setTitolo(segnalazione.getTitolo());
                 aSegnalazione.setDescrizione(segnalazione.getDescrizione());
                 aSegnalazione.setTipologia(segnalazione.getTipologia());
-                return segnalazioneDB.update(aSegnalazione) > 0;
+                return segnalazioneDB.update(aSegnalazione);
             }
         }
         return false;
@@ -115,7 +115,7 @@ public final class SegnalazioneBL {
                 && aSegnalazione.getStato() == Segnalazione.STATO_APERTO
                 && aUtente != null
                 && aSegnalazione.getAutore().getId() == aUtente.getId()) {
-            return segnalazioneDB.deleteById(aCod) > 0;
+            return segnalazioneDB.deleteById(aCod);
         }
         return false;
     }
@@ -138,7 +138,7 @@ public final class SegnalazioneBL {
             tecnico.setId(aIdTecnico);
             aSegnalazione.setTecnico(tecnico);
             aSegnalazione.setDataAssegnazione(LocalDate.now());
-            return segnalazioneDB.update(aSegnalazione) > 0;
+            return segnalazioneDB.update(aSegnalazione);
         }
         return false;
     }
@@ -173,7 +173,7 @@ public final class SegnalazioneBL {
             aSegnalazione.setStato(Segnalazione.STATO_RIFIUTATO);
             aSegnalazione.setDataRifiuto(LocalDate.now());
             aSegnalazione.setMotivazioneRifiuto(aMotivazioneRifiuto);
-            return segnalazioneDB.update(aSegnalazione) > 0;
+            return segnalazioneDB.update(aSegnalazione);
         }
         return false;
     }
@@ -190,7 +190,7 @@ public final class SegnalazioneBL {
         if (aSegnalazione != null
                 && aSegnalazione.getStato() == Segnalazione.STATO_ASSEGNATO) {
             aSegnalazione.setStato(Segnalazione.STATO_RISOLTO);
-            return segnalazioneDB.update(aSegnalazione) > 0;
+            return segnalazioneDB.update(aSegnalazione);
         }
         return false;
     }

@@ -14,7 +14,7 @@ public interface SegnalazioneDBInterface {
      * @return the int
      * @throws Exception the exception
      */
-    int insert(Segnalazione aSegnalazione) throws Exception;
+    boolean insert(Segnalazione aSegnalazione) throws Exception;
 
     /**
      * Update.
@@ -23,7 +23,7 @@ public interface SegnalazioneDBInterface {
      * @return the int
      * @throws Exception the exception
      */
-    int update(Segnalazione aSegnalazione) throws Exception;
+    boolean update(Segnalazione aSegnalazione) throws Exception;
 
     /**
      * Gets the by autore.
@@ -58,6 +58,6 @@ public interface SegnalazioneDBInterface {
      * @return the int
      * @throws Exception the exception
      */
-    int deleteById(int aId) throws Exception;
+    boolean deleteById(int aId) throws Exception;
 
 }

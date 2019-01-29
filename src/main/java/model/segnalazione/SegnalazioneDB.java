@@ -78,7 +78,7 @@ public final class SegnalazioneDB implements SegnalazioneDBInterface {
      * @throws Exception the exception
      */
     @Override
-    public int insert(final Segnalazione aSegnalazione) throws Exception {
+    public boolean insert(final Segnalazione aSegnalazione) throws Exception {
         return genericInsertUpdate(INSERT_SEGNALAZIONE, aSegnalazione);
     }
 
@@ -90,7 +90,7 @@ public final class SegnalazioneDB implements SegnalazioneDBInterface {
      * @throws Exception the SQL exception
      */
     @Override
-    public int update(final Segnalazione aSegnalazione) throws Exception {
+    public boolean update(final Segnalazione aSegnalazione) throws Exception {
         return genericInsertUpdate(UPDATE_SEGNALAZIONE, aSegnalazione);
     }
 
@@ -206,14 +206,14 @@ public final class SegnalazioneDB implements SegnalazioneDBInterface {
      * @throws Exception the exception
      */
     @Override
-    public int deleteById(final int aId) throws Exception {
+    public boolean deleteById(final int aId) throws Exception {
         Connection connection = Database.getConnection();
         try {
             PreparedStatement preparedStatement = connection
                     .prepareStatement(DELETE_BY_COD);
             preparedStatement.setInt(1, aId);
 
-            return preparedStatement.executeUpdate();
+            return preparedStatement.executeUpdate() > 0;
         } finally {
             Database.freeConnection(connection);
         }
@@ -252,10 +252,10 @@ public final class SegnalazioneDB implements SegnalazioneDBInterface {
      *
      * @param aQuery        the query
      * @param aSegnalazione the segnalazione
-     * @return the int
+     * @return the boolean
      * @throws Exception the SQL exception
      */
-    private int genericInsertUpdate(final String aQuery,
+    private boolean genericInsertUpdate(final String aQuery,
             final Segnalazione aSegnalazione) throws Exception {
         Connection connection = Database.getConnection();
         try {
@@ -291,7 +291,7 @@ public final class SegnalazioneDB implements SegnalazioneDBInterface {
                 preparedStatement.setInt(i, aSegnalazione.getCod());
             }
 
-            return preparedStatement.executeUpdate();
+            return preparedStatement.executeUpdate() > 0;
         } finally {
             Database.freeConnection(connection);
         }

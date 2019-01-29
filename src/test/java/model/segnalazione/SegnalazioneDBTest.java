@@ -263,7 +263,7 @@ public class SegnalazioneDBTest {
         segnalazioneTest
                 .setDataSegnalazione(Date.valueOf("2018-10-06").toLocalDate());
         segnalazioneTest.setTipologia(new Tipologia());
-        final boolean res = db.insert(segnalazioneTest) > 0;
+        final boolean res = db.insert(segnalazioneTest);
         assertTrue(res);
         assertEquals(segnalazioneTest, db.getByCod(1));
     }
@@ -275,7 +275,7 @@ public class SegnalazioneDBTest {
      */
     @Test
     public void testDelete1() throws Exception {
-        final boolean res = db.deleteById(0) > 0;
+        final boolean res = db.deleteById(0);
         assertFalse(res);
         assertNull(db.getByCod(0));
     }
@@ -288,7 +288,7 @@ public class SegnalazioneDBTest {
     @Test
     public void testDelete2() throws Exception {
         db.insert(segnalazioneTest);
-        final boolean res = db.deleteById(1) > 0;
+        final boolean res = db.deleteById(1);
         assertTrue(res);
         assertNull(db.getByCod(1));
     }
@@ -301,7 +301,7 @@ public class SegnalazioneDBTest {
     @Test(expected = Exception.class)
     public void testUpdate1() throws Exception {
         segnalazioneTest = null;
-        final Boolean res = db.update(segnalazioneTest) > 0;
+        final Boolean res = db.update(segnalazioneTest);
         assertFalse(res);
     }
 
@@ -313,7 +313,7 @@ public class SegnalazioneDBTest {
     @Test
     public void testUpdate2() throws Exception {
         segnalazioneTest.setCod(0);
-        final Boolean res = db.update(segnalazioneTest) > 0;
+        final Boolean res = db.update(segnalazioneTest);
         assertFalse(res);
     }
 
@@ -418,7 +418,7 @@ public class SegnalazioneDBTest {
         newSegnalazione.setDataRifiuto(LocalDate.now());
         newSegnalazione.setMotivazioneRifiuto("Prova prova");
         newSegnalazione.setTipologia(new Tipologia());
-        final Boolean res = db.update(newSegnalazione) > 0;
+        final Boolean res = db.update(newSegnalazione);
         assertTrue(res);
         assertEquals(newSegnalazione, db.getByCod(1));
     }

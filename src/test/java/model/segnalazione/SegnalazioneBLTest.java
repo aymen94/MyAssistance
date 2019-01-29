@@ -159,9 +159,9 @@ public final class SegnalazioneBLTest {
                 .thenReturn(segnalazioneRisolta);
         when(segnalazioneDB.getByCod(SEGNALAZIONE_ASSEGNATA))
                 .thenReturn(segnalazioneAssegnata);
-        when(segnalazioneDB.insert(any(Segnalazione.class))).thenReturn(1);
-        when(segnalazioneDB.update(any(Segnalazione.class))).thenReturn(1);
-        when(segnalazioneDB.deleteById(any(Integer.class))).thenReturn(1);
+        when(segnalazioneDB.insert(any(Segnalazione.class))).thenReturn(true);
+        when(segnalazioneDB.update(any(Segnalazione.class))).thenReturn(true);
+        when(segnalazioneDB.deleteById(any(Integer.class))).thenReturn(true);
         when(segnalazioneDB.getByAutore(any(Integer.class)))
                 .thenReturn(listaSegnalazioni);
         when(segnalazioneDB.getByAutore(0)).thenReturn(null);
