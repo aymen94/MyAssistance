@@ -133,37 +133,20 @@ public final class UtenteDB implements UtenteDBInterface {
      *                      during the execution.
      */
     public Utente getById(final int aId) throws SQLException {
-        Connection connection = null;
+        Connection connection = Database.getConnection();
         PreparedStatement preparedStatement;
-        Utente user = null;
         try {
-            connection = Database.getConnection();
             preparedStatement = connection.prepareStatement(GET_BY_ID);
 
             preparedStatement.setInt(1, aId);
 
-            ResultSet rs = preparedStatement.executeQuery();
-
-            if (rs.next()) {
-                if (rs.getBoolean("is_gestore")) {
-                    user = new Gestore();
-                } else {
-                    user = new CSU();
-                    ((CSU) user).setDataSospensione(
-                            toLocalDate(rs.getDate("data_sospensione")));
-                }
-                user.setId(rs.getInt("id"));
-                user.setUserName(rs.getString("username"));
-                user.setPassword(rs.getString("pass"));
-                user.setEmail(rs.getString("email"));
-                user.setNome(rs.getString("nome"));
-                user.setCognome(rs.getString("cognome"));
-                user.setDataDiNascita(
-                        rs.getDate("data_di_nascita").toLocalDate());
-                user.setSesso(rs.getInt("sesso"));
+            List<Utente> listUtente = parseResultSet(
+                    preparedStatement.executeQuery());
+            if (listUtente.size() > 0) {
+                return listUtente.get(0);
+            } else {
+                return null;
             }
-            return user;
-
         } finally {
             Database.freeConnection(connection);
         }
@@ -179,38 +162,20 @@ public final class UtenteDB implements UtenteDBInterface {
      *                      during the execution.
      */
     public Utente getByUserName(final String aUserName) throws SQLException {
-        Connection connection = null;
-        PreparedStatement preparedStatement;
-        Utente user = null;
-
+        Connection connection = Database.getConnection();
         try {
-            connection = Database.getConnection();
-            preparedStatement = connection.prepareStatement(GET_BY_USERNAME);
+            PreparedStatement preparedStatement = connection
+                    .prepareStatement(GET_BY_USERNAME);
 
             preparedStatement.setString(1, aUserName);
 
-            ResultSet rs = preparedStatement.executeQuery();
-
-            if (rs.next()) {
-                if (rs.getBoolean("is_gestore")) {
-                    user = new Gestore();
-                } else {
-                    user = new CSU();
-                    ((CSU) user).setDataSospensione(
-                            toLocalDate(rs.getDate("data_sospensione")));
-                }
-
-                user.setId(rs.getInt("Id"));
-                user.setUserName(rs.getString("username"));
-                user.setPassword(rs.getString("pass"));
-                user.setEmail(rs.getString("email"));
-                user.setNome(rs.getString("nome"));
-                user.setCognome(rs.getString("cognome"));
-                user.setDataDiNascita(
-                        rs.getDate("data_di_nascita").toLocalDate());
-                user.setSesso(rs.getInt("sesso"));
+            List<Utente> listUtente = parseResultSet(
+                    preparedStatement.executeQuery());
+            if (listUtente.size() > 0) {
+                return listUtente.get(0);
+            } else {
+                return null;
             }
-            return user;
         } finally {
             Database.freeConnection(connection);
         }
@@ -225,43 +190,13 @@ public final class UtenteDB implements UtenteDBInterface {
      *                      during the execution.
      */
     public List<Utente> getAll() throws SQLException {
-        Connection connection = null;
-        PreparedStatement preparedStatement;
-
-        List<Utente> users = new ArrayList<>();
-        Utente u;
-
+        Connection connection = Database.getConnection();
         try {
-            connection = Database.getConnection();
-            preparedStatement = connection.prepareStatement(GET_ALL);
-
-            ResultSet rs = preparedStatement.executeQuery();
-
-            while (rs.next()) {
-
-                if (rs.getBoolean("is_gestore")) {
-                    u = new Gestore();
-                } else {
-                    u = new CSU();
-                    ((CSU) u).setDataSospensione(
-                            toLocalDate(rs.getDate("data_sospensione")));
-                }
-
-                u.setId(rs.getInt("Id"));
-                u.setUserName(rs.getString("username"));
-                u.setPassword(rs.getString("pass"));
-                u.setEmail(rs.getString("email"));
-                u.setNome(rs.getString("nome"));
-                u.setCognome(rs.getString("cognome"));
-                u.setDataDiNascita(rs.getDate("data_di_nascita").toLocalDate());
-                u.setSesso(rs.getInt("sesso"));
-                users.add(u);
-            }
-            return users;
+            return parseResultSet(
+                    connection.prepareStatement(GET_ALL).executeQuery());
         } finally {
             Database.freeConnection(connection);
         }
-
     }
 
     /**
@@ -318,6 +253,39 @@ public final class UtenteDB implements UtenteDBInterface {
         } finally {
             Database.freeConnection(connection);
         }
+    }
+
+    /**
+     * Parses the result set.
+     *
+     * @param rs the rs
+     * @return the list
+     * @throws SQLException the SQL exception
+     */
+    private List<Utente> parseResultSet(final ResultSet rs)
+            throws SQLException {
+        List<Utente> users = new ArrayList<>();
+        Utente u;
+        while (rs.next()) {
+
+            if (rs.getBoolean("is_gestore")) {
+                u = new Gestore();
+            } else {
+                u = new CSU();
+                ((CSU) u).setDataSospensione(
+                        toLocalDate(rs.getDate("data_sospensione")));
+            }
+            u.setId(rs.getInt("Id"));
+            u.setUserName(rs.getString("username"));
+            u.setPassword(rs.getString("pass"));
+            u.setEmail(rs.getString("email"));
+            u.setNome(rs.getString("nome"));
+            u.setCognome(rs.getString("cognome"));
+            u.setDataDiNascita(rs.getDate("data_di_nascita").toLocalDate());
+            u.setSesso(rs.getInt("sesso"));
+            users.add(u);
+        }
+        return users;
     }
 
     /**
