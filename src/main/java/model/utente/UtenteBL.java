@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * The Class UtenteBL.
@@ -130,8 +131,8 @@ public final class UtenteBL {
             final String password = PasswordHash.createHash(aPassword);
             final LocalDate date = LocalDate.parse(aDataDiNascita,
                     DateTimeFormatter.ofPattern("dd[-][.][/]mm[-][.][/]yyyy"));
-            final Utente utente = new CSU(aUserName, password, aEmail, aNome,
-                    aCognome, aSesso, date);
+            final Utente utente = new CSU(aUserName.toLowerCase(Locale.ROOT),
+                    password, aEmail, aNome, aCognome, aSesso, date);
 
             return utenteDB.insert(utente) > 0;
         }
@@ -159,11 +160,7 @@ public final class UtenteBL {
      */
     public CSU autenticazioneCSU(final String aUserName, final String aPass)
             throws Exception {
-        try {
             return (CSU) autenticazione(aUserName, aPass);
-        } catch (ClassCastException ex) {
-            return null;
-        }
     }
 
     /**
@@ -176,11 +173,7 @@ public final class UtenteBL {
      */
     public Gestore autenticazioneGestore(final String aUserName,
             final String aPass) throws Exception {
-        try {
             return (Gestore) autenticazione(aUserName, aPass);
-        } catch (ClassCastException ex) {
-            return null;
-        }
     }
 
     /**
