@@ -116,14 +116,14 @@ import pool.Database;
 
     @Test public void testDGetByEmail1() throws SQLException {
         UtenteDB utenteDBTest = new UtenteDB();
-        Utente utente = utenteDBTest.getByEmail("test@test.com");
-        final String result = utente.getEmail();
-        assertEquals("test@test.com", result);
+        Utente utente = utenteDBTest.getByUserName("test11");
+        final String result = utente.getUserName();
+        assertEquals("test11", result);
     }
 
     @Test public void testDGetByEmail2() throws SQLException {
         UtenteDB utenteDBTest = new UtenteDB();
-        Utente utente = utenteDBTest.getByEmail("abc@test.com");
+        Utente utente = utenteDBTest.getByUserName("abc@test.com");
         assertNull(utente);
     }
 

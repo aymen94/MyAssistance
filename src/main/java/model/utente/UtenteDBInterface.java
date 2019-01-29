@@ -34,13 +34,13 @@ public interface UtenteDBInterface {
     Utente getById(int aId) throws Exception;
 
     /**
-     * Gets the by email.
+     * Gets the by username.
      *
-     * @param aEmail the email
-     * @return the by email
+     * @param aUserName the username
+     * @return the utente
      * @throws Exception the exception
      */
-    Utente getByEmail(String aEmail) throws Exception;
+    Utente getByUserName(String aUserName) throws Exception;
 
     /**
      * Update.

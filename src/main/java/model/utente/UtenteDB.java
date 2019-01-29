@@ -43,10 +43,10 @@ public final class UtenteDB implements UtenteDBInterface {
 
     /**
      * This private attribute is a string that contains
-     * the query get user by email.
+     * the query get user by username.
      */
-    private static final String GET_BY_EMAIL =
-        "SELECT * FROM " + UtenteDB.TABLE_NAME + " WHERE email = ?";
+    private static final String GET_BY_USERNAME =
+        "SELECT * FROM " + UtenteDB.TABLE_NAME + " WHERE username = ?";
 
     /**
      * This private attribute is a string that contains
@@ -57,14 +57,14 @@ public final class UtenteDB implements UtenteDBInterface {
 
     /**
      * This private attribute is a string that contains
-     * the query to delete user by email.
+     * the query to delete user by username.
      */
     private static final String DELETE =
         "DELETE FROM " + UtenteDB.TABLE_NAME + " WHERE email =?;";
 
     /**
      * This private attribute is a string that contains
-     * the query to update data user by email.
+     * the query to update data user by username.
      */
     private static final String UPDATE =
         "UPDATE " + UtenteDB.TABLE_NAME + " SET data_sospensione = ?"
@@ -179,23 +179,23 @@ public final class UtenteDB implements UtenteDBInterface {
 
     /**
      * This method fetches information about a user
-     * given his email address.
+     * given his username address.
      *
-     * @param aEmail is the email address of the user.
-     * @return user is the user whose the email address is of.
+     * @param aUserName is the username of the user.
+     * @return user is the user whose the username is of.
      * @throws SQLException is the exception that can be thrown
      *                      during the execution.
      */
-    public Utente getByEmail(final String aEmail) throws SQLException {
+    public Utente getByUserName(final String aUserName) throws SQLException {
         Connection connection = null;
         PreparedStatement preparedStatement;
         Utente user = null;
 
         try {
             connection = Database.getConnection();
-            preparedStatement = connection.prepareStatement(GET_BY_EMAIL);
+            preparedStatement = connection.prepareStatement(GET_BY_USERNAME);
 
-            preparedStatement.setString(1, aEmail);
+            preparedStatement.setString(1, aUserName);
 
             ResultSet rs = preparedStatement.executeQuery();
 
