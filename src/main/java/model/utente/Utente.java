@@ -14,6 +14,21 @@ import java.util.Objects;
 public abstract class Utente {
 
     /**
+     * The Constant SESSO_ALTRO.
+     */
+    public static final int SESSO_ALTRO = 0;
+
+    /**
+     * The Constant SESSO_MASCHILE.
+     */
+    public static final int SESSO_MASCHILE = 1;
+
+    /**
+     * The Constant SESSO_FEMMINILE.
+     */
+    public static final int SESSO_FEMMINILE = 2;
+
+    /**
      * l' id.
      */
     private int id;
@@ -44,11 +59,6 @@ public abstract class Utente {
     private String cognome;
 
     /**
-     * is gestore.
-     */
-    private Boolean isGestore;
-
-    /**
      * il sesso.
      */
     private int sesso;
@@ -62,6 +72,29 @@ public abstract class Utente {
      * Costruttore vuoto.
      */
     public Utente() {
+    }
+
+    /**
+     * Instantiates a new utente.
+     *
+     * @param aUserName      the user name
+     * @param aPassword      the password
+     * @param aEmail         the email
+     * @param aNome          the nome
+     * @param aCognome       the cognome
+     * @param aSesso         the sesso
+     * @param aDataDiNascita the data di nascita
+     */
+    public Utente(final String aUserName, final String aPassword,
+            final String aEmail, final String aNome, final String aCognome,
+            final int aSesso, final LocalDate aDataDiNascita) {
+        userName = aUserName;
+        password = aPassword;
+        email = aEmail;
+        nome = aNome;
+        cognome = aCognome;
+        sesso = aSesso;
+        dataDiNascita = aDataDiNascita;
     }
 
     /**
@@ -189,7 +222,7 @@ public abstract class Utente {
     }
 
     /**
-     * Impsti  sesso dell'utente.
+     * Impsti sesso dell'utente.
      *
      * @param aSesso imposta il valore sesso dell'utente.
      */
@@ -207,7 +240,7 @@ public abstract class Utente {
     }
 
     /**
-     * Impsti  la data di nascità dell'utente.
+     * Impsti la data di nascità dell'utente.
      *
      * @param aData imposta il valore sesso dell'utente.
      */
@@ -228,12 +261,12 @@ public abstract class Utente {
             return false;
         }
         Utente utente = (Utente) o;
-        return sesso == utente.sesso && Objects.equals(id, utente.id) && Objects
-            .equals(userName, utente.userName) && Objects
-            .equals(password, utente.password) && Objects
-            .equals(email, utente.email) && Objects.equals(nome, utente.nome)
-            && Objects.equals(cognome, utente.cognome) && Objects
-            .equals(isGestore, utente.isGestore);
+        return sesso == utente.sesso && Objects.equals(id, utente.id)
+                && Objects.equals(userName, utente.userName)
+                && Objects.equals(password, utente.password)
+                && Objects.equals(email, utente.email)
+                && Objects.equals(nome, utente.nome)
+                && Objects.equals(cognome, utente.cognome);
     }
 
     /**
@@ -242,14 +275,8 @@ public abstract class Utente {
      * @return int Utente
      */
     @Override public final int hashCode() {
-        return Objects.hash(id,
-            userName,
-            password,
-            email,
-            nome,
-            cognome,
-            isGestore,
-            sesso);
+        return Objects
+                .hash(id, userName, password, email, nome, cognome, sesso);
     }
 
     /**
@@ -265,4 +292,3 @@ public abstract class Utente {
     }
 
 }
-
