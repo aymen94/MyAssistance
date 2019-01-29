@@ -1,5 +1,6 @@
 package model.ufficio_tecnico;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -8,12 +9,10 @@ import java.util.List;
 
 import pool.Database;
 
-import java.sql.Connection;
-
-    /**
-     * This class allows the management of persistent data relating to offices.
-     *  technicians
-     */
+/**
+ * This class allows the management of persistent data relating to offices.
+ * technicians
+ */
 
 public final class UfficioTecnicoDB implements UfficioTecnicoDBInterface {
 
@@ -60,37 +59,24 @@ public final class UfficioTecnicoDB implements UfficioTecnicoDBInterface {
      *                      execution of the method.
      */
 
+    @Override
     public synchronized int insert(final UfficioTecnico uff)
             throws SQLException {
-        Connection connection = null;
-        PreparedStatement preparedStatement = null;
-        int res = 0;
-
+        final Connection connection = Database.getConnection();
         try {
-            connection = Database.getConnection();
-            preparedStatement = connection
+
+            final PreparedStatement preparedStatement = connection
                     .prepareStatement(INSERT_UFFICIO_TECNICO);
             int i = 1;
             preparedStatement.setString(i++, uff.getNome());
             preparedStatement.setString(i++, uff.getTel());
             preparedStatement.setString(i++, uff.getEmail());
             preparedStatement.setString(i, uff.getUbicazione());
-            res = preparedStatement.executeUpdate();
-
-            res++;
+            return preparedStatement.executeUpdate();
         } finally {
-            try {
-                if (preparedStatement != null) {
-                    preparedStatement.close();
-                }
-            } finally {
-                Database.freeConnection(connection);
-            }
+            Database.freeConnection(connection);
         }
-        return (res);
     }
-
-
 
     /**
      * This method allows everyone to get information from the database
@@ -101,64 +87,48 @@ public final class UfficioTecnicoDB implements UfficioTecnicoDBInterface {
      *                      execution of the method.
      */
 
-    public List<UfficioTecnico> getAll()
-            throws SQLException {
-        Connection connection = null;
-        PreparedStatement preparedStatement = null;
-        List<UfficioTecnico> uffici;
-        uffici = null;
-
+    @Override
+    public List<UfficioTecnico> getAll() throws SQLException {
+        final Connection connection = Database.getConnection();
         try {
-            connection = Database.getConnection();
-            preparedStatement = connection.prepareStatement(SELECT_ALL);
-
-            ResultSet rs = preparedStatement.executeQuery();
-            uffici = new ArrayList<UfficioTecnico>();
+            final PreparedStatement preparedStatement = connection
+                    .prepareStatement(SELECT_ALL);
+            final ResultSet rs = preparedStatement.executeQuery();
+            final List<UfficioTecnico> uffici = new ArrayList<UfficioTecnico>();
             while (rs.next()) {
-                UfficioTecnico uff = new UfficioTecnico();
-
+                final UfficioTecnico uff = new UfficioTecnico();
                 uff.setId(rs.getInt("Id"));
                 uff.setNome(rs.getString("nome"));
                 uff.setTel(rs.getString("tel"));
                 uff.setEmail(rs.getString("email"));
                 uff.setUbicazione(rs.getString("ubicazione"));
-
                 uffici.add(uff);
             }
-
+            return uffici;
         } finally {
-            try {
-                if (preparedStatement != null) {
-                    preparedStatement.close();
-                }
-            } finally {
-                Database.freeConnection(connection);
-            }
+            Database.freeConnection(connection);
         }
-        return uffici;
     }
 
     /**
      * This method select the UfficioTecnico by a id from the database given all
      * dates of UfficioTecnico.
+     *
      * @param aId id the id of UfficioTecnico.
-     * @return uffici a  type list of  UfficioTecnico.
+     * @return uffici a type list of UfficioTecnico.
      * @throws SQLException is the exception that can be thrown during the
      *                      execution.
      */
+    @Override
     public UfficioTecnico getById(final int aId) throws SQLException {
-
-        Connection connection = null;
-        PreparedStatement preparedStatement = null;
+        final Connection connection = Database.getConnection();
         UfficioTecnico uff = null;
 
         try {
-            connection = Database.getConnection();
-
-            preparedStatement = connection.prepareStatement(GET_BY_ID);
+            final PreparedStatement preparedStatement = connection
+                    .prepareStatement(GET_BY_ID);
             preparedStatement.setInt(1, aId);
-
-            ResultSet rs = preparedStatement.executeQuery();
+            final ResultSet rs = preparedStatement.executeQuery();
 
             if (rs.next()) {
                 uff = new UfficioTecnico();
@@ -167,18 +137,10 @@ public final class UfficioTecnicoDB implements UfficioTecnicoDBInterface {
                 uff.setTel(rs.getString("tel"));
                 uff.setEmail(rs.getString("email"));
                 uff.setUbicazione(rs.getString("ubicazione"));
-
             }
-
+            return uff;
         } finally {
-            try {
-                if (preparedStatement != null) {
-                    preparedStatement.close();
-                }
-            } finally {
-                Database.freeConnection(connection);
-            }
+            Database.freeConnection(connection);
         }
-        return uff;
     }
 }
