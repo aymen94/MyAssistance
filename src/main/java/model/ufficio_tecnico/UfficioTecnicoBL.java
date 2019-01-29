@@ -31,21 +31,14 @@ public final class UfficioTecnicoBL {
     /**
      * variable database.
      */
-    private UfficioTecnicoDB database;
+    private UfficioTecnicoDBInterface database;
 
     /**
-     * This is an utility class. So no constructor should be used.
-     */
-    public UfficioTecnicoBL() {
-        this.database = new UfficioTecnicoDB();
-    }
-
-    /**
-     * This is an utility class. So no constructor should be used.
+     * Instantiates a new ufficio tecnico BL.
      *
      * @param db it's database
      */
-    public UfficioTecnicoBL(final UfficioTecnicoDB db) {
+    public UfficioTecnicoBL(final UfficioTecnicoDBInterface db) {
         this.database = db;
     }
 
@@ -57,10 +50,10 @@ public final class UfficioTecnicoBL {
      * @param aEmail      the email
      * @param aUbicazione the ubicazione
      * @return true, if successful
-     * @throws SQLException the SQL exception
+     * @throws Exception the exception
      */
     public boolean insertUfficioTecnico(final String aNome, final String aTel,
-            final String aEmail, final String aUbicazione) throws SQLException {
+            final String aEmail, final String aUbicazione) throws Exception {
         final UfficioTecnico uff = new UfficioTecnico();
 
         if (aNome.length() > 0 && aNome.length() <= MAX_NOME_LENGTH
@@ -82,9 +75,9 @@ public final class UfficioTecnicoBL {
      * gets and check all the technical office.
      *
      * @return true, if successful.
-     * @throws SQLException error sql.
+     * @throws Exception the exception
      */
-    public List<UfficioTecnico> getUfficiTecnici() throws SQLException {
+    public List<UfficioTecnico> getUfficiTecnici() throws Exception {
         return database.getAll();
     }
 
