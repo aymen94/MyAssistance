@@ -141,8 +141,10 @@ public final class SegnalazioneBL {
             aSegnalazione.setTecnico(tecnico);
             aSegnalazione.setDataAssegnazione(LocalDate.now());
             //LA MAIL PER ORA è FAKE
-            if(segnalazioneDB.update(aSegnalazione)){
-                SendMailSSL.sendEmail(tecnico.getEmail(),aSegnalazione.getTitolo(),aSegnalazione.getDescrizione());
+            if (segnalazioneDB.update(aSegnalazione)) {
+                SendMailSSL.sendEmail(tecnico.getEmail(),
+                        aSegnalazione.getTitolo(),
+                        aSegnalazione.getDescrizione());
             }
             return true;
         }
