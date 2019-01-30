@@ -30,11 +30,11 @@
                 <form class="form" role="form" id="formLogin" method="POST">
                   <div class="form-group">
                     <label for="usr">Username</label>
-                    <input type="text" class="form-control form-control-lg" autocomplete="username" id="usr">
+                    <input type="text" class="form-control form-control-lg" autocomplete="username" id="usr" name="username">
                   </div>
                   <div class="form-group">
                     <label for="pwd">Password</label>
-                    <input type="password" class="form-control form-control-lg" autocomplete="current-password" id="pwd">
+                    <input type="password" class="form-control form-control-lg" autocomplete="current-password" id="pwd" name="password">
                   </div>
                   <button type="submit" class="btn btn-success btn-lg btn-block" id="btnLogin">Accedi</button>
                   <div class="text-center m-4">Se sei un utente <a href="../utente/accedi.jsp">clicca qui</a></div>

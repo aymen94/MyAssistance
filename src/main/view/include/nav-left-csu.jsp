@@ -6,6 +6,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <div class="side">
 	<h4>Funzionalità</h4>
-	<a href="./utente/effettuaSegnalazione" class="btn">Effettua Segnalazione</a>
-	<a href="./utente/" class="btn">Segnalazioni Effettuate</a>
+	<a href="${pageContext.servletContext.contextPath}/utente/" class="btn">Indice</a>
+	<a href="${pageContext.servletContext.contextPath}/utente/effettuaSegnalazione" class="btn">Effettua Segnalazione</a>
+	<a href="${pageContext.servletContext.contextPath}/utente/segnalazioni" class="btn">Segnalazioni Effettuate</a>
 </div>
