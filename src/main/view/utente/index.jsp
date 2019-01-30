@@ -24,7 +24,7 @@
 		<div class="page">
 			<%@include file="../include/header.jsp" %>
 			<div class="content">
-				<%@include file="../include/nav-left-gestore.jsp" %>
+				<%@include file="../include/nav-left-csu.jsp" %>
 				<div>
 					<h3>Benvenuto Nella Piattaforma!</h3>
 					Seleziona un'attività da poter svolgere, selezionandola dal menu a sinistra.
