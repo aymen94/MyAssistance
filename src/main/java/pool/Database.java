@@ -109,7 +109,11 @@ public class Database implements ServletContextListener {
         pool.takeIn(connection);
     }
 
-
+    /**
+     *Control if inialized.
+     *
+     * @return pool to null a pull
+     */
     public static boolean isInitialized() {
         return pool != null;
     }
