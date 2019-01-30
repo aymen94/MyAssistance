@@ -48,11 +48,11 @@ public class TipologiaDBTest {
      */
     @BeforeClass
     public static void setUpClass() throws Exception {
-        Database.initializePool("databases.xml", "Test");
-        final Connection conn = Database.getConnection();
+        Database.getInstance().initializePool("databases.xml", "Test");
+        final Connection conn = Database.getInstance().getConnection();
         // disable foreign key checks
         conn.prepareStatement("SET FOREIGN_KEY_CHECKS=0;").executeUpdate();
-        Database.freeConnection(conn);
+        Database.getInstance().freeConnection(conn);
     }
 
     /**
@@ -62,11 +62,11 @@ public class TipologiaDBTest {
      */
     @AfterClass
     public static void tearDownClass() throws Exception {
-        final Connection conn = Database.getConnection();
+        final Connection conn = Database.getInstance().getConnection();
         // enable foreign key checks
         conn.prepareStatement("SET FOREIGN_KEY_CHECKS=1;").executeUpdate();
-        Database.freeConnection(conn);
-        Database.destroyPool();
+        Database.getInstance().freeConnection(conn);
+        Database.getInstance().destroyPool();
     }
 
     /**
@@ -76,9 +76,9 @@ public class TipologiaDBTest {
      */
     @Before
     public void clearDB() throws Exception {
-        final Connection conn = Database.getConnection();
+        final Connection conn = Database.getInstance().getConnection();
         conn.prepareStatement("TRUNCATE TABLE tipologia").executeUpdate();
-        Database.freeConnection(conn);
+        Database.getInstance().freeConnection(conn);
         db = new TipologiaDB();
         tipologiaTest = new Tipologia();
         tipologiaTest.setId(1);
@@ -112,10 +112,10 @@ public class TipologiaDBTest {
      */
     @Test
     public void testGetById2() throws Exception {
-        final Connection conn = Database.getConnection();
+        final Connection conn = Database.getInstance().getConnection();
         conn.prepareStatement("INSERT INTO tipologia (nome, priorita) "
                 + "VALUES ('Guasto','1')").executeUpdate();
-        Database.freeConnection(conn);
+        Database.getInstance().freeConnection(conn);
         final Tipologia tipologiaNew = db.getById((short) 1);
         assertEquals(tipologiaTest, tipologiaNew);
     }

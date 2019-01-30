@@ -20,9 +20,31 @@ import pool.Database;
 public final class TipologiaDB implements TipologiaDBInterface {
 
     /**
+     * The connection manager.
+     */
+    private Database connectionManager;
+
+    /**
      * The Constant TABLE_NAME.
      */
     private static final String TABLE_NAME = "tipologia";
+
+    /**
+     * Instantiates a new tipologia DB.
+     * Use the default connection Manager
+     */
+    public TipologiaDB() {
+        this(Database.getInstance());
+    }
+
+    /**
+     * Instantiates a new tipologia DB.
+     *
+     * @param aConnectionManager the connection manager
+     */
+    public TipologiaDB(final Database aConnectionManager) {
+        connectionManager = aConnectionManager;
+    }
 
     /**
      * The Constant INSERT_TIPOLOGIA.
@@ -49,7 +71,7 @@ public final class TipologiaDB implements TipologiaDBInterface {
      * @throws SQLException the SQL exception
      */
     public int insert(final Tipologia aTipologia) throws SQLException {
-        final Connection connection = Database.getConnection();
+        final Connection connection = connectionManager.getConnection();
         try {
             final PreparedStatement preparedStatement = connection
                     .prepareStatement(INSERT_TIPOLOGIA);
@@ -57,7 +79,7 @@ public final class TipologiaDB implements TipologiaDBInterface {
             preparedStatement.setShort(2, aTipologia.getPriorita());
             return preparedStatement.executeUpdate();
         } finally {
-            Database.freeConnection(connection);
+            connectionManager.freeConnection(connection);
         }
     }
 
@@ -97,7 +119,7 @@ public final class TipologiaDB implements TipologiaDBInterface {
      */
     private List<Tipologia> genericGet(final String aQuery,
             final int aParameter) throws SQLException {
-        final Connection connection = Database.getConnection();
+        final Connection connection = connectionManager.getConnection();
         final List<Tipologia> tipologiaList = new ArrayList<Tipologia>();
         try {
 
@@ -117,7 +139,7 @@ public final class TipologiaDB implements TipologiaDBInterface {
             }
             return tipologiaList;
         } finally {
-            Database.freeConnection(connection);
+            connectionManager.freeConnection(connection);
         }
     }
 }

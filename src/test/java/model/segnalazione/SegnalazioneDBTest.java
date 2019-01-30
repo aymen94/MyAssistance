@@ -74,11 +74,11 @@ public class SegnalazioneDBTest {
      */
     @BeforeClass
     public static void setUpClass() throws Exception {
-        Database.initializePool("databases.xml", "Test");
-        final Connection conn = Database.getConnection();
+        Database.getInstance().initializePool("databases.xml", "Test");
+        final Connection conn = Database.getInstance().getConnection();
         // disable foreign key checks
         conn.prepareStatement("SET FOREIGN_KEY_CHECKS=0;").executeUpdate();
-        Database.freeConnection(conn);
+        Database.getInstance().freeConnection(conn);
     }
 
     /**
@@ -88,11 +88,11 @@ public class SegnalazioneDBTest {
      */
     @AfterClass
     public static void tearDownClass() throws Exception {
-        final Connection conn = Database.getConnection();
+        final Connection conn = Database.getInstance().getConnection();
         // enable foreign key checks
         conn.prepareStatement("SET FOREIGN_KEY_CHECKS=1;").executeUpdate();
-        Database.freeConnection(conn);
-        Database.destroyPool();
+        Database.getInstance().freeConnection(conn);
+        Database.getInstance().destroyPool();
     }
 
     /**
@@ -103,9 +103,9 @@ public class SegnalazioneDBTest {
     @Before
     public void clearDB() throws Exception {
 
-        final Connection conn = Database.getConnection();
+        final Connection conn = Database.getInstance().getConnection();
         conn.prepareStatement("TRUNCATE TABLE segnalazione").executeUpdate();
-        Database.freeConnection(conn);
+        Database.getInstance().freeConnection(conn);
 
         autoreTest = new CSU();
         autoreTest.setId(1);
@@ -158,7 +158,7 @@ public class SegnalazioneDBTest {
         autoreDB = mock(UtenteDBInterface.class);
         when(autoreDB.getById(anyInt())).thenReturn(new CSU());
         when(autoreDB.getById(autoreTest.getId())).thenReturn(autoreTest);
-        db = new SegnalazioneDB(tecnicoDB, tipologiaDB, autoreDB);
+        db = new SegnalazioneDB(tecnicoDB, tipologiaDB, autoreDB,Database.getInstance());
     }
 
     /**
@@ -190,14 +190,14 @@ public class SegnalazioneDBTest {
         final Utente utente = new CSU();
         utente.setId(1);
         segnalazione.setAutore(utente);
-        final Connection conn = Database.getConnection();
+        final Connection conn = Database.getInstance().getConnection();
         conn.prepareStatement(
                 "INSERT INTO segnalazione (titolo, descrizione, stato,"
                         + "data_segnalazione, tipologia," + " autore) "
                         + "VALUES ('Lorem ipsum','Lorem ipsum dolor sit amet',"
                         + "0, '2018-10-06', 1, 1)")
                 .executeUpdate();
-        Database.freeConnection(conn);
+        Database.getInstance().freeConnection(conn);
         final Segnalazione segnalazioneNew = db.getByCod(1);
         assertEquals(segnalazione, segnalazioneNew);
     }

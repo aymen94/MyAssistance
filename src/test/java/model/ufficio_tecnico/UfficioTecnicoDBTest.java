@@ -31,11 +31,11 @@ public class UfficioTecnicoDBTest {
      */
     @BeforeClass
     public static void setUpClass() throws IOException, SQLException {
-        Database.initializePool("databases.xml", "Test");
-        final Connection conn = Database.getConnection();
+        Database.getInstance().initializePool("databases.xml", "Test");
+        final Connection conn = Database.getInstance().getConnection();
         //disable foreign key checks
         conn.prepareStatement("SET FOREIGN_KEY_CHECKS=0;").executeUpdate();
-        Database.freeConnection(conn);
+        Database.getInstance().freeConnection(conn);
     }
 
     /**
@@ -45,11 +45,11 @@ public class UfficioTecnicoDBTest {
      */
     @AfterClass
     public static void tearDownClass() throws SQLException {
-        final Connection conn = Database.getConnection();
+        final Connection conn = Database.getInstance().getConnection();
         //enable foreign key checks
         conn.prepareStatement("SET FOREIGN_KEY_CHECKS=1;").executeUpdate();
-        Database.freeConnection(conn);
-        Database.destroyPool();
+        Database.getInstance().freeConnection(conn);
+        Database.getInstance().destroyPool();
     }
 
     /**
@@ -59,10 +59,10 @@ public class UfficioTecnicoDBTest {
      */
     @Before
     public void clearDb() throws SQLException {
-        final Connection conn = Database.getConnection();
+        final Connection conn = Database.getInstance().getConnection();
         conn.prepareStatement("TRUNCATE TABLE my_assistance.ufficio_tecnico")
                 .executeUpdate();
-        Database.freeConnection(conn);
+        Database.getInstance().freeConnection(conn);
 
     }
 
@@ -87,13 +87,13 @@ public class UfficioTecnicoDBTest {
     @Test
     public void testGetById2() throws SQLException {
 
-        final Connection conn = Database.getConnection();
+        final Connection conn = Database.getInstance().getConnection();
         conn.prepareStatement(
                 "INSERT INTO my_assistance.ufficio_tecnico "
                         + "(nome,tel,email,ubicazione) VALUES "
                         + "('PIO','1234567890','ABCD@GMAIL.COM','RIMINI')")
                 .executeUpdate();
-        Database.freeConnection(conn);
+        Database.getInstance().freeConnection(conn);
         final UfficioTecnico uff2 = new UfficioTecnico();
         uff2.setId(1);
         uff2.setNome("PIO");

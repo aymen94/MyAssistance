@@ -20,15 +20,15 @@ import pool.Database;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING) public final class UtenteDBTest {
     @BeforeClass public static void setUpClass() throws SQLException {
-        Database.initializePool("databases.xml", "Test");
-        final Connection conn = Database.getConnection();
+        Database.getInstance().initializePool("databases.xml", "Test");
+        final Connection conn = Database.getInstance().getConnection();
         conn.prepareStatement(
                 "ALTER TABLE my_assistance.utente AUTO_INCREMENT = 1")
                 .executeUpdate();
 
         // disable foreign key checks
         conn.prepareStatement("SET FOREIGN_KEY_CHECKS=0;").executeUpdate();
-        Database.freeConnection(conn);
+        Database.getInstance().freeConnection(conn);
     }
 
     /**
@@ -38,11 +38,11 @@ import pool.Database;
      */
     @AfterClass
     public static void tearDownClass() throws SQLException {
-        final Connection conn = Database.getConnection();
+        final Connection conn = Database.getInstance().getConnection();
         // enable foreign key checks
         conn.prepareStatement("SET FOREIGN_KEY_CHECKS=1;").executeUpdate();
-        Database.freeConnection(conn);
-        Database.destroyPool();
+        Database.getInstance().freeConnection(conn);
+        Database.getInstance().destroyPool();
     }
 
     @Test public void testAInsert1() throws SQLException {
