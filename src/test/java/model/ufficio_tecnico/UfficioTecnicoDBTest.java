@@ -3,37 +3,25 @@ package model.ufficio_tecnico;
 import static junit.framework.TestCase.assertEquals;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
-import static utility.TestUtility.listEqualsIgnoreOrder;
 
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.FileHandler;
-import java.util.logging.Logger;
+import java.util.HashSet;
 
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import pool.Database;
+import pool.ConnectionManager;
 
 /**
  * The Class UfficioTecnicoDBTest.
  */
 public class UfficioTecnicoDBTest {
-
-    /**
-     * The file handler.
-     */
-    private static FileHandler fileHandler = null;
-
-    /**
-     * The logger.
-     */
-    private static Logger logger = null;
 
     /**
      * Sets the up class.
@@ -43,17 +31,11 @@ public class UfficioTecnicoDBTest {
      */
     @BeforeClass
     public static void setUpClass() throws IOException, SQLException {
-        Database.initializePool("databases.xml", "Test");
-
-        fileHandler = new FileHandler(
-                "result_test\\" + UfficioTecnicoDB.class.getName());
-        logger = Logger.getLogger(UfficioTecnicoDBTest.class.getName());
-        logger.addHandler(fileHandler);
-        logger.config("logger loaded");
-        final Connection conn = Database.getConnection();
+        ConnectionManager.getInstance().initializePool("databases.xml", "Test");
+        final Connection conn = ConnectionManager.getInstance().getConnection();
         //disable foreign key checks
         conn.prepareStatement("SET FOREIGN_KEY_CHECKS=0;").executeUpdate();
-        Database.freeConnection(conn);
+        ConnectionManager.getInstance().freeConnection(conn);
     }
 
     /**
@@ -63,11 +45,11 @@ public class UfficioTecnicoDBTest {
      */
     @AfterClass
     public static void tearDownClass() throws SQLException {
-        final Connection conn = Database.getConnection();
+        final Connection conn = ConnectionManager.getInstance().getConnection();
         //enable foreign key checks
         conn.prepareStatement("SET FOREIGN_KEY_CHECKS=1;").executeUpdate();
-        Database.freeConnection(conn);
-        Database.destroyPool();
+        ConnectionManager.getInstance().freeConnection(conn);
+        ConnectionManager.getInstance().destroyPool();
     }
 
     /**
@@ -77,40 +59,11 @@ public class UfficioTecnicoDBTest {
      */
     @Before
     public void clearDb() throws SQLException {
-        final Connection conn = Database.getConnection();
+        final Connection conn = ConnectionManager.getInstance().getConnection();
         conn.prepareStatement("TRUNCATE TABLE my_assistance.ufficio_tecnico")
                 .executeUpdate();
-        Database.freeConnection(conn);
+        ConnectionManager.getInstance().freeConnection(conn);
 
-    }
-
-    /*
-     *
-     * @Test public void insert() throws SQLException { UfficioTecnicoDB
-     * ufficioTecnicoDB = new UfficioTecnicoDB(); UfficioTecnico test1 = new
-     * UfficioTecnico(); test1.setNome("nomesettato");
-     * test1.setTel("1234567890"); test1.setEmail("abcdef@gmail.com");
-     * test1.setUbicazione("Roma"); ufficioTecnicoDB.insert(test1);
-     * logger.info("method: insert, \noutput: " + test1); }
-     *
-     */
-
-    /**
-     * Gets the all.
-     *
-     *
-     * @throws SQLException the SQL exception
-     */
-
-    @Test
-    public void getAll() throws SQLException {
-        final UfficioTecnicoDB ufficioTecnicoTest = new UfficioTecnicoDB();
-        final List<UfficioTecnico> list = ufficioTecnicoTest.getAll();
-        if (list == null) {
-            logger.info("method: getAll()==1 \noutput:\n " + 0);
-        } else {
-            logger.info("method: getAll()==1 \noutput:\n " + list.size());
-        }
     }
 
     /**
@@ -122,7 +75,7 @@ public class UfficioTecnicoDBTest {
     public void testGetById1() throws SQLException {
         final UfficioTecnicoDB ufficioTecnicoTest = new UfficioTecnicoDB();
         final UfficioTecnico uff = ufficioTecnicoTest.getById(3);
-        logger.info("method: getById(1) \noutput:" + uff);
+        System.out.println("method: getById(1) \noutput:" + uff);
         assertNull(uff);
     }
 
@@ -134,13 +87,13 @@ public class UfficioTecnicoDBTest {
     @Test
     public void testGetById2() throws SQLException {
 
-        final Connection conn = Database.getConnection();
+        final Connection conn = ConnectionManager.getInstance().getConnection();
         conn.prepareStatement(
                 "INSERT INTO my_assistance.ufficio_tecnico "
                         + "(nome,tel,email,ubicazione) VALUES "
                         + "('PIO','1234567890','ABCD@GMAIL.COM','RIMINI')")
                 .executeUpdate();
-        Database.freeConnection(conn);
+        ConnectionManager.getInstance().freeConnection(conn);
         final UfficioTecnico uff2 = new UfficioTecnico();
         uff2.setId(1);
         uff2.setNome("PIO");
@@ -150,7 +103,7 @@ public class UfficioTecnicoDBTest {
         final UfficioTecnicoDB ufficioTecnicoTest = new UfficioTecnicoDB();
         final UfficioTecnico uff = ufficioTecnicoTest.getById(1);
 
-        logger.info(
+        System.out.println(
                 "method: getById(1)\noutput :" + uff + " \noracolo:" + uff2);
         assertEquals(uff, uff2);
     }
@@ -178,7 +131,7 @@ public class UfficioTecnicoDBTest {
         try {
             res = ufficioTecnicoTest.insert(uff) > 0;
         } finally {
-            logger.info("methods Insert Test 1 (empty string 'nome') : "
+            System.out.println("methods Insert Test 1 (empty string 'nome') : "
                     + "\nEsito inserimento : " + res);
         }
 
@@ -206,7 +159,7 @@ public class UfficioTecnicoDBTest {
         try {
             res = ufficioTecnicoTest.insert(uff) > 0;
         } finally {
-            logger.info("methods Insert Test 2 (empty string 'email') : "
+            System.out.println("methods Insert Test 2 (empty string 'email') : "
                     + "\nEsito inserimento : " + res);
         }
 
@@ -239,7 +192,7 @@ public class UfficioTecnicoDBTest {
             assertTrue(res);
             assertEquals(uff, nuovoUfficioTecnico);
         } finally {
-            logger.info("methods Insert Test 3 (empty string 'tel') :"
+            System.out.println("methods Insert Test 3 (empty string 'tel') :"
                     + "\nEsito inserimento : " + res);
 
         }
@@ -283,10 +236,9 @@ public class UfficioTecnicoDBTest {
         }
 
         final List<UfficioTecnico> lista1 = ufficioTecnicoDBTest.getAll();
-        logger.info("return : " + listEqualsIgnoreOrder(lista1, lista2));
         System.out.println("lista 1 " + lista1 + "\n");
         System.out.println(lista2);
-        assertTrue(listEqualsIgnoreOrder(lista1, lista2));
+        assertEquals(new HashSet<>(lista2),new HashSet<>(lista2));
     }
 
 }

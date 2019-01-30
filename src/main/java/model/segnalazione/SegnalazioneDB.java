@@ -14,10 +14,12 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.ufficio_tecnico.UfficioTecnico;
-import model.utente.CSU;
-import model.utente.Utente;
-import pool.Database;
+import model.ufficio_tecnico.UfficioTecnicoDB;
+import model.ufficio_tecnico.UfficioTecnicoDBInterface;
+import model.utente.UtenteDB;
+import model.utente.UtenteDBInterface;
+import pool.ConnectionManager;
+import pool.ConnectionManagerInterface;
 
 /**
  * The Class SegnalazioneDB.
@@ -26,8 +28,14 @@ public final class SegnalazioneDB implements SegnalazioneDBInterface {
 
     /**
      * The Constant TABLE_NAME.
+     *
      */
     private static final String TABLE_NAME = "segnalazione";
+
+    /**
+     * The connection manager.
+     */
+    private ConnectionManagerInterface connectionManager;
 
     /**
      * The Constant INSERT_SEGNALAZIONE.
@@ -69,6 +77,47 @@ public final class SegnalazioneDB implements SegnalazioneDBInterface {
      */
     private static final String DELETE_BY_COD = "DELETE FROM " + TABLE_NAME
             + " WHERE cod = ?";
+
+    /**
+     * The tecnico DB.
+     */
+    private final UfficioTecnicoDBInterface tecnicoDB;
+
+    /**
+     * The tipologia DB.
+     */
+    private final TipologiaDBInterface tipologiaDB;
+
+    /**
+     * The utente DB.
+     */
+    private final UtenteDBInterface utenteDB;
+
+    /**
+     * Instantiates a new segnalazione DB.
+     */
+    public SegnalazioneDB() {
+        this(new UfficioTecnicoDB(), new TipologiaDB(), new UtenteDB(),
+                ConnectionManager.getInstance());
+    }
+
+    /**
+     * Instantiates a new segnalazione DB.
+     *
+     * @param aTecnicoDB         the tecnico DB
+     * @param aTipologiaDB       the tipologia DB
+     * @param aUtenteDB          the utente DB
+     * @param aConnectionManager the connection manager
+     */
+    public SegnalazioneDB(final UfficioTecnicoDBInterface aTecnicoDB,
+            final TipologiaDBInterface aTipologiaDB,
+            final UtenteDBInterface aUtenteDB,
+            final ConnectionManagerInterface aConnectionManager) {
+        tecnicoDB = aTecnicoDB;
+        tipologiaDB = aTipologiaDB;
+        utenteDB = aUtenteDB;
+        connectionManager = aConnectionManager;
+    }
 
     /**
      * Insert.
@@ -145,12 +194,12 @@ public final class SegnalazioneDB implements SegnalazioneDBInterface {
      */
     private List<Segnalazione> genericGet(final String aQuery,
             final int aParameter) throws Exception {
-        Connection connection = Database.getConnection();
+        final Connection connection = connectionManager.getConnection();
 
         final List<Segnalazione> segnalazioneList = new ArrayList<>();
 
         try {
-            PreparedStatement preparedStatement = connection
+            final PreparedStatement preparedStatement = connection
                     .prepareStatement(aQuery);
             if (!aQuery.equals(SELECT_ALL)) {
                 preparedStatement.setInt(1, aParameter);
@@ -171,30 +220,22 @@ public final class SegnalazioneDB implements SegnalazioneDBInterface {
                 segnalazione.setMotivazioneRifiuto(
                         result.getString("motivazione_rifiuto"));
                 segnalazione.setStato(result.getShort("stato"));
+                segnalazione.setTitolo(result.getString("titolo"));
+                segnalazione
+                        .setAutore(utenteDB.getById(result.getInt("autore")));
+                segnalazione.setTipologia(
+                        tipologiaDB.getById(result.getInt("tipologia")));
 
-                // Use a fake author
-                final Utente autore = new CSU();
-                autore.setId(result.getInt("autore"));
-                segnalazione.setAutore(autore);
-
-                // Use a fake Tecnico
-                final UfficioTecnico tecnico = new UfficioTecnico();
-                tecnico.setId(result.getInt("tecnico"));
+                final int tecnicoId = result.getInt("tecnico");
                 if (!result.wasNull()) {
-                    segnalazione.setTecnico(tecnico);
+                    segnalazione.setTecnico(tecnicoDB.getById(tecnicoId));
                 }
 
-                // Use a fake Tipologia
-                final Tipologia tipologia = new Tipologia();
-                tipologia.setId(result.getInt("tipologia"));
-                segnalazione.setTipologia(tipologia);
-
-                segnalazione.setTitolo(result.getString("titolo"));
                 segnalazioneList.add(segnalazione);
             }
             return segnalazioneList;
         } finally {
-            Database.freeConnection(connection);
+            connectionManager.freeConnection(connection);
         }
     }
 
@@ -207,15 +248,15 @@ public final class SegnalazioneDB implements SegnalazioneDBInterface {
      */
     @Override
     public boolean deleteById(final int aId) throws Exception {
-        Connection connection = Database.getConnection();
+        final Connection connection = connectionManager.getConnection();
         try {
-            PreparedStatement preparedStatement = connection
+            final PreparedStatement preparedStatement = connection
                     .prepareStatement(DELETE_BY_COD);
             preparedStatement.setInt(1, aId);
 
             return preparedStatement.executeUpdate() > 0;
         } finally {
-            Database.freeConnection(connection);
+            connectionManager.freeConnection(connection);
         }
     }
 
@@ -257,9 +298,9 @@ public final class SegnalazioneDB implements SegnalazioneDBInterface {
      */
     private boolean genericInsertUpdate(final String aQuery,
             final Segnalazione aSegnalazione) throws Exception {
-        Connection connection = Database.getConnection();
+        final Connection connection = connectionManager.getConnection();
         try {
-            PreparedStatement preparedStatement = connection
+            final PreparedStatement preparedStatement = connection
                     .prepareStatement(aQuery);
             int i = 1;
 
@@ -276,9 +317,7 @@ public final class SegnalazioneDB implements SegnalazioneDBInterface {
                     toDate(aSegnalazione.getDataRisoluzione()));
             preparedStatement.setString(i++,
                     aSegnalazione.getMotivazioneRifiuto());
-
             preparedStatement.setInt(i++, aSegnalazione.getTipologia().getId());
-
             preparedStatement.setInt(i++, aSegnalazione.getAutore().getId());
 
             if (aSegnalazione.getTecnico() != null) {
@@ -293,7 +332,7 @@ public final class SegnalazioneDB implements SegnalazioneDBInterface {
 
             return preparedStatement.executeUpdate() > 0;
         } finally {
-            Database.freeConnection(connection);
+            connectionManager.freeConnection(connection);
         }
     }
 }
