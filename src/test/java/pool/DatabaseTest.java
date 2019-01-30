@@ -19,6 +19,7 @@ public class DatabaseTest {
     @Test public void getConnection() throws Exception {
         Database.initializePool("databases.xml", "Test");
         conn = Database.getConnection();
+        assertNotNull(conn);
         System.out.println(" --- Database connected --- ");
     }
 
