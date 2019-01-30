@@ -7,8 +7,7 @@ import java.sql.Connection;
 import static org.junit.Assert.*;
 
 public class DatabaseTest {
-
-    private  JDBCConnectionPool pool;
+    
     private Connection conn;
 
     @Test public void initializePool() throws Exception {
