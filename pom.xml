@@ -54,6 +54,13 @@
 			<version>1.10.19</version>
 			<scope>test</scope>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/javax.mail/mail -->
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>mail</artifactId>
+			<version>1.4.7</version>
+		</dependency>
+
 	</dependencies>
 	<build>
 		<finalName>myassistance</finalName>
@@ -99,15 +106,27 @@
 				</configuration>
 				<executions>
 					<execution>
+						<id>default-prepare-agent</id>
 						<goals>
 							<goal>prepare-agent</goal>
 						</goals>
 					</execution>
 					<execution>
-						<id>report</id>
-						<phase>test</phase>
+						<id>default-prepare-agent-integration</id>
+						<goals>
+							<goal>prepare-agent-integration</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>default-report</id>
 						<goals>
 							<goal>report</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>default-report-integration</id>
+						<goals>
+							<goal>report-integration</goal>
 						</goals>
 					</execution>
 				</executions>
@@ -127,7 +146,44 @@
 					<redirectTestOutputToFile>true</redirectTestOutputToFile>
 				</configuration>
 			</plugin>
-
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<version>3.0.0</version>
+				<executions>
+					<execution>
+						<id>add-test-source</id>
+						<phase>process-resources</phase>
+						<goals>
+							<goal>add-test-source</goal>
+						</goals>
+						<configuration>
+							<sources>
+								<source>src/it/java</source>
+							</sources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-failsafe-plugin</artifactId>
+				<version>2.22.1</version>
+				<executions>
+					<execution>
+						<id>integration-test</id>
+						<goals>
+							<goal>integration-test</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>verify</id>
+						<goals>
+							<goal>verify</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
 	</build>
 	<properties>
