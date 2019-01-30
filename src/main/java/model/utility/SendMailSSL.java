@@ -22,6 +22,9 @@ public final class SendMailSSL {
 
     }
 
+    final static Properties props = new Properties();
+
+
     final static Session session = Session.getDefaultInstance(props,
             new javax.mail.Authenticator() {
                 /* (non-Javadoc)
@@ -37,7 +40,6 @@ public final class SendMailSSL {
     final static String username = "myassistance.teamC@gmail.com";
     final static String password = "myassistance";
 
-    final static Properties props = new Properties();
 
 
     /**
@@ -57,7 +59,7 @@ public final class SendMailSSL {
             message.setFrom(
                     new InternetAddress("myassistance.teamC@gmail.com"));
             message.setRecipients(Message.RecipientType.TO,
-                    InternetAddress.parse(""));
+                    InternetAddress.parse("myassistance.teamC@gmail.com"));
             message.setSubject("Testing Subject");
             message.setText(
                     "Dear Mail Crawler," + "\n\n No spam to my email, please!");
@@ -73,7 +75,7 @@ public final class SendMailSSL {
     }
 
 
-    public void sendEmail(String recipient,String subject,String msg){
+    public static void sendEmail(String recipient,String subject,String msg){
 
         try {
             props.put("mail.smtp.host", "smtp.gmail.com");

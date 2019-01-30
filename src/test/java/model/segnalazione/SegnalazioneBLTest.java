@@ -648,6 +648,8 @@ public final class SegnalazioneBLTest {
      */
     @Test
     public void testInoltraSegnalazione3() throws Exception {
+        segnalazioneAperta.setTitolo("URGENTE : si è guastato il termosifone ");
+        segnalazioneAperta.setDescrizione("ciao ciao ciao muovetevi");
         final int aCod = SEGNALAZIONE_APERTA;
         final int aIdTecnico = TECNICO_ESISTENTE;
         final Boolean res = manager.inoltraSegnalazione(aCod, aIdTecnico);

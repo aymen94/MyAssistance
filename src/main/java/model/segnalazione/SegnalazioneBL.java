@@ -10,6 +10,7 @@ import java.util.List;
 
 import model.ufficio_tecnico.UfficioTecnico;
 import model.utente.Utente;
+import model.utility.SendMailSSL;
 
 /**
  * The Class SegnalazioneBL.
@@ -136,9 +137,14 @@ public final class SegnalazioneBL {
                 && aSegnalazione.getStato() == Segnalazione.STATO_APERTO) {
             final UfficioTecnico tecnico = new UfficioTecnico();
             tecnico.setId(aIdTecnico);
+            tecnico.setEmail("myassistance.teamc@gmail.com");
             aSegnalazione.setTecnico(tecnico);
             aSegnalazione.setDataAssegnazione(LocalDate.now());
-            return segnalazioneDB.update(aSegnalazione);
+            //LA MAIL PER ORA è FAKE
+            if(segnalazioneDB.update(aSegnalazione)){
+                SendMailSSL.sendEmail(tecnico.getEmail(),aSegnalazione.getTitolo(),aSegnalazione.getDescrizione());
+            }
+            return true;
         }
         return false;
     }
