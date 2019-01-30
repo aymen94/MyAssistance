@@ -10,7 +10,6 @@ import static org.junit.Assert.*;
 public class DatabaseTest {
 
 
-    @Before
 
     @Test public void initializePool() throws Exception {
         Database.initializePool("databases.xml", "Test");
