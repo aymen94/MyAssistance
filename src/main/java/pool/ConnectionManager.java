@@ -131,7 +131,7 @@ public final class ConnectionManager
      *
      * @return pool to null a pull
      */
-    public static boolean isInitialized() {
+    public boolean isInitialized() {
         return pool != null;
     }
 }

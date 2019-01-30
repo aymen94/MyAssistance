@@ -35,4 +35,11 @@ public interface ConnectionManagerInterface {
      * @param connection the connection
      */
     void freeConnection(Connection connection);
+
+    /**
+     * Checks if is initialized.
+     *
+     * @return true, if is initialized
+     */
+    boolean isInitialized();
 }
