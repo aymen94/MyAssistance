@@ -1,14 +1,10 @@
 package pool;
 
 import java.sql.Connection;
-import java.sql.SQLException;
-
-import javax.naming.NamingException;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 
-// TODO: Auto-generated Javadoc
 /**
  * La Classe Database inizializza un pool di tipo {@link JDBCConnectionPool}
  * all'avvio del container, mette a disposizione i metodi per ottenere una
@@ -26,40 +22,53 @@ public class Database implements ServletContextListener {
     /**
      * Inizializza un JDBCConnectionPool all'avvio del container.
      *
+     * @param sce the sce
      * @see javax.servlet.ServletContextListener#contextInitialized(
-     * javax.servlet.ServletContextEvent)
+     *      javax.servlet.ServletContextEvent)
      */
     @Override
     public final void contextInitialized(final ServletContextEvent sce) {
         System.out.println("### run ###");
-        initializePool();
+        initializePool("databases.xml", "Production");
     }
 
     /**
      * Initialize pool.
+     *
+     * @param configFile the config file
+     * @param configName the config name
+     * @throws RuntimeException the runtime exception
      */
-    public static synchronized void initializePool() {
+    public static synchronized void initializePool(final String configFile,
+            final String configName) throws RuntimeException {
+
         try {
-            String database = "jdbc:mysql://localhost:3306/my_assistance?"
-                    + "autoReconnect=true&amp;allowMultiQueries=true&amp;"
-                    + "useSSL=false&amp;serverTimezone=Europe/Rome\"";
-            pool = new JDBCConnectionPool("com.mysql.jdbc.Driver", database,
-                    "root", "root");
+            XMLDatabaseParser parser = new XMLDatabaseParser(configFile,
+                    configName);
 
-            if (pool == null) {
-                String message = "Could not find Database";
-                System.err.println("### " + message);
-                throw new Exception(message);
-            } else {
-                String message = "Estabilished connection with database";
-                System.out.println("### " + message);
-
-            }
-        } catch (Exception e) {
-            System.err.println("### " + e.getMessage());
+            pool = new JDBCConnectionPool(parser.getDriver(), parser.getUrl(),
+                    parser.getUser(), parser.getPassword());
+        } catch (final Exception e) {
+            throw new RuntimeException(e);
+        }
+        // try connection
+        final Connection connection = getConnection();
+        if (connection == null) {
+            final String message = "Could not find Database";
+            System.err.println("### " + message + " ###");
+            throw new RuntimeException(message);
+        } else {
+            final String message = "Estabilished connection with database";
+            System.out.println("### " + message + " ###");
+            freeConnection(connection);
         }
     }
 
+    /**
+     * Context destroyed.
+     *
+     * @param sce the sce
+     */
     /*
      * (non-Javadoc)
      *
@@ -75,17 +84,18 @@ public class Database implements ServletContextListener {
      * Destroy pool.
      */
     public static synchronized void destroyPool() {
-        pool.destroyUnlocked();
-        pool = null;
+        if (pool != null) {
+            pool.destroyUnlocked();
+            pool = null;
+        }
     }
 
     /**
      * Gets the connection.
      *
      * @return the connection
-     * @throws SQLException the SQL exception
      */
-    public static synchronized Connection getConnection() throws SQLException {
+    public static synchronized Connection getConnection() {
         return pool.takeOut();
     }
 
@@ -96,13 +106,15 @@ public class Database implements ServletContextListener {
      */
     public static synchronized void freeConnection(
             final Connection connection) {
-        try {
-            pool.takeIn(connection);
-        } catch (Exception e) {
-            System.err.println(
-                    "Threw an exception unlocking a database connection");
-            e.printStackTrace();
-        }
+        pool.takeIn(connection);
     }
 
+    /**
+     *Control if inialized.
+     *
+     * @return pool to null a pull
+     */
+    public static boolean isInitialized() {
+        return pool != null;
+    }
 }

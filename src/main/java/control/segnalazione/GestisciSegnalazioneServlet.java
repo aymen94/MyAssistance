@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import model.segnalazione.SegnalazioneBL;
 import model.segnalazione.SegnalazioneDB;
+import model.utente.Gestore;
 import model.utente.Utente;
 
 import java.io.IOException;
@@ -22,7 +23,7 @@ import java.io.IOException;
  * Servlet for handling a report.
  */
 @WebServlet("/gestore/segnalazioni")
-public class GestisciSegnalazioneServlet extends HttpServlet {
+public final class GestisciSegnalazioneServlet extends HttpServlet {
     /**
      * doGet method.
      */
@@ -39,7 +40,7 @@ public class GestisciSegnalazioneServlet extends HttpServlet {
                     getServletContext().getRequestDispatcher(
                             "/gestore/segnalazioni.jsp");
             dispatcher.forward(req, resp);
-        } else {
+        } else if (rUser instanceof Gestore) {
             SegnalazioneDB sdb = new SegnalazioneDB();
             SegnalazioneBL sbl = new SegnalazioneBL(sdb);
             String operation = null, motivation;

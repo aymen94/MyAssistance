@@ -2,12 +2,12 @@ package pool;
 
 import java.util.Enumeration;
 import java.util.Hashtable;
-import java.util.Set;
 
-// TODO: Auto-generated Javadoc
-/** Object Pool Design Pattern
- *  Questa è una classe astratta che definisce l'interfaccia di un ObjectPool.
- *  Vanno implementati i metodi {@link #create()} e {@link #destroy(Object)}
+// TODO Auto-generated Javadoc
+/**
+ * Object Pool Design Pattern Questa è una classe astratta che definisce
+ * l'interfaccia di un ObjectPool. Vanno implementati i metodi {@link #create()}
+ * e {@link #destroy(Object)}
  *
  * @author Andrea Mennillo
  *
@@ -22,7 +22,7 @@ public abstract class ObjectPool<T> {
     private long deadTime;
 
     /** The unlock. */
-    private Hashtable<T, Long> lock, unlock;
+    private final Hashtable<T, Long> lock, unlock;
 
     /**
      * Instantiates a new object pool.
@@ -58,10 +58,10 @@ public abstract class ObjectPool<T> {
     /**
      * Destroy unlocked.
      */
-    public synchronized void destroyUnlocked() {
+    public final synchronized void destroyUnlocked() {
         T t;
         if (unlock.size() > 0) {
-            Enumeration<T> e = unlock.keys();
+            final Enumeration<T> e = unlock.keys();
             while (e.hasMoreElements()) {
                 t = e.nextElement();
                 unlock.remove(t);
@@ -82,11 +82,11 @@ public abstract class ObjectPool<T> {
      *
      * @return the t
      */
-    public synchronized T takeOut() {
-        long now = System.currentTimeMillis();
+    public final synchronized T takeOut() {
+        final long now = System.currentTimeMillis();
         T t;
         if (unlock.size() > 0) {
-            Enumeration<T> e = unlock.keys();
+            final Enumeration<T> e = unlock.keys();
             while (e.hasMoreElements()) {
                 t = e.nextElement();
                 if ((now - unlock.get(t)) > deadTime) {
@@ -110,7 +110,9 @@ public abstract class ObjectPool<T> {
         }
         // no objects available, create a new one
         t = create();
-        lock.put(t, now);
+        if (t != null) {
+            lock.put(t, now);
+        }
         return (t);
     }
 
@@ -119,18 +121,9 @@ public abstract class ObjectPool<T> {
      *
      * @param t the t
      */
-    public synchronized void takeIn(final T t) {
+    public final synchronized void takeIn(final T t) {
         lock.remove(t);
         unlock.put(t, System.currentTimeMillis());
-    }
-
-    /**
-     * Gets the deadtime.
-     *
-     * @return the deadtime
-     */
-    public long getDeadtime() {
-        return deadTime;
     }
 
     /**
@@ -138,7 +131,7 @@ public abstract class ObjectPool<T> {
      *
      * @param deadtime the new deadtime
      */
-    public void setDeadtime(final long deadtime) {
+    public final void setDeadtime(final long deadtime) {
         this.deadTime = deadtime;
     }
 }

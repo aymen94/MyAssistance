@@ -9,12 +9,12 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Types;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.ufficiotecnico.UfficioTecnico;
+import model.ufficio_tecnico.UfficioTecnico;
 import model.utente.CSU;
 import model.utente.Utente;
 import pool.Database;
@@ -22,7 +22,7 @@ import pool.Database;
 /**
  * The Class SegnalazioneDB.
  */
-public class SegnalazioneDB {
+public final class SegnalazioneDB implements SegnalazioneDBInterface {
 
     /**
      * The Constant TABLE_NAME.
@@ -32,8 +32,8 @@ public class SegnalazioneDB {
     /**
      * The Constant INSERT_SEGNALAZIONE.
      */
-    private static final String INSERT_SEGNALAZIONE =
-        "INSERT INTO " + TABLE_NAME
+    private static final String INSERT_SEGNALAZIONE = "INSERT INTO "
+            + TABLE_NAME
             + " (titolo,descrizione,stato,data_segnalazione,data_rifiuto,"
             + "data_assegnazione,data_risoluzione,motivazione_rifiuto,"
             + "tipologia, autore, tecnico) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
@@ -41,8 +41,8 @@ public class SegnalazioneDB {
     /**
      * The Constant UPDATE_SEGNALAZIONE.
      */
-    private static final String UPDATE_SEGNALAZIONE =
-        "UPDATE " + TABLE_NAME + " SET titolo = ?, descrizione = ?, stato = ?,"
+    private static final String UPDATE_SEGNALAZIONE = "UPDATE " + TABLE_NAME
+            + " SET titolo = ?, descrizione = ?, stato = ?,"
             + " data_segnalazione = ?, data_rifiuto = ?, data_assegnazione = ?,"
             + " data_risoluzione = ?, motivazione_rifiuto = ?, "
             + "tipologia = ?,  autore = ?,  tecnico= ? " + " WHERE cod = ?";
@@ -50,14 +50,14 @@ public class SegnalazioneDB {
     /**
      * The Constant SELECT_BY_AUTHOR.
      */
-    private static final String SELECT_BY_AUTHOR =
-        " SELECT * FROM " + TABLE_NAME + " WHERE autore = ?";
+    private static final String SELECT_BY_AUTHOR = " SELECT * FROM "
+            + TABLE_NAME + " WHERE autore = ?";
 
     /**
      * The Constant SELECT_BY_ID.
      */
-    private static final String SELECT_BY_ID =
-        "SELECT * FROM " + TABLE_NAME + " WHERE cod = ?";
+    private static final String SELECT_BY_COD = "SELECT * FROM " + TABLE_NAME
+            + " WHERE cod = ?";
 
     /**
      * The Constant SELECT_ALL.
@@ -67,49 +67,19 @@ public class SegnalazioneDB {
     /**
      * The Constant DELETE_BY_ID.
      */
-    private static final String DELETE_BY_ID =
-        "DELETE FROM " + TABLE_NAME + " WHERE id=?";
+    private static final String DELETE_BY_COD = "DELETE FROM " + TABLE_NAME
+            + " WHERE cod = ?";
 
     /**
      * Insert.
      *
      * @param aSegnalazione the segnalazione
      * @return the int
-     * @throws SQLException the SQL exception
+     * @throws Exception the exception
      */
-    public int insert(final Segnalazione aSegnalazione) throws SQLException {
-        Connection connection = null;
-        PreparedStatement preparedStatement = null;
-        try {
-            connection = Database.getConnection();
-            preparedStatement = connection
-                .prepareStatement(INSERT_SEGNALAZIONE);
-            int i = 1;
-            preparedStatement.setString(i++, aSegnalazione.getTitolo());
-            preparedStatement.setString(i++, aSegnalazione.getDescrizione());
-            preparedStatement.setShort(i++, aSegnalazione.getStato());
-            preparedStatement.setDate(i++,
-                    Date.valueOf(aSegnalazione.getDataSegnalazione()));
-            preparedStatement.setDate(i++,
-                    Date.valueOf(aSegnalazione.getDataRifiuto()));
-            preparedStatement.setDate(i++,
-                    Date.valueOf(aSegnalazione.getDataAssegnazione()));
-            preparedStatement.setDate(i++,
-                    Date.valueOf(aSegnalazione.getDataRisoluzione()));
-            preparedStatement
-                .setString(i++, aSegnalazione.getMotivazioneRifiuto());
-            preparedStatement.setInt(i++, aSegnalazione.getTipologia().getId());
-            preparedStatement.setInt(i++, aSegnalazione.getAutore().getId());
-            if (aSegnalazione.getTecnico() != null) {
-                preparedStatement.setInt(i, aSegnalazione.getTecnico().getId());
-            } else {
-                preparedStatement.setNull(i, Types.INTEGER);
-            }
-            return preparedStatement.executeUpdate();
-        } finally {
-            freeResources(preparedStatement, connection);
-        }
-
+    @Override
+    public boolean insert(final Segnalazione aSegnalazione) throws Exception {
+        return genericInsertUpdate(INSERT_SEGNALAZIONE, aSegnalazione);
     }
 
     /**
@@ -117,42 +87,11 @@ public class SegnalazioneDB {
      *
      * @param aSegnalazione the segnalazione
      * @return the int
-     * @throws SQLException the SQL exception
+     * @throws Exception the SQL exception
      */
-    public int update(final Segnalazione aSegnalazione) throws SQLException {
-        Connection connection = null;
-        PreparedStatement preparedStatement = null;
-        try {
-            connection = Database.getConnection();
-            preparedStatement = connection
-                .prepareStatement(UPDATE_SEGNALAZIONE);
-            int i = 1;
-            preparedStatement.setString(i++, aSegnalazione.getTitolo());
-            preparedStatement.setString(i++, aSegnalazione.getDescrizione());
-            preparedStatement.setShort(i++, aSegnalazione.getStato());
-            preparedStatement.setDate(i++,
-                    Date.valueOf(aSegnalazione.getDataSegnalazione()));
-            preparedStatement.setDate(i++,
-                    Date.valueOf(aSegnalazione.getDataRifiuto()));
-            preparedStatement.setDate(i++,
-                    Date.valueOf(aSegnalazione.getDataAssegnazione()));
-            preparedStatement.setDate(i++,
-                    Date.valueOf(aSegnalazione.getDataRisoluzione()));
-            preparedStatement
-                .setString(i++, aSegnalazione.getMotivazioneRifiuto());
-            preparedStatement.setInt(i++, aSegnalazione.getTipologia().getId());
-            preparedStatement.setInt(i++, aSegnalazione.getAutore().getId());
-            if (aSegnalazione.getTecnico() != null) {
-                preparedStatement
-                    .setInt(i++, aSegnalazione.getTecnico().getId());
-            } else {
-                preparedStatement.setNull(i++, Types.INTEGER);
-            }
-            preparedStatement.setInt(i, aSegnalazione.getCod());
-            return preparedStatement.executeUpdate();
-        } finally {
-            freeResources(preparedStatement, connection);
-        }
+    @Override
+    public boolean update(final Segnalazione aSegnalazione) throws Exception {
+        return genericInsertUpdate(UPDATE_SEGNALAZIONE, aSegnalazione);
     }
 
     /**
@@ -160,10 +99,10 @@ public class SegnalazioneDB {
      *
      * @param aAutorId the autor id
      * @return the by autore
-     * @throws SQLException the SQL exception
+     * @throws Exception the exception
      */
-    public List<Segnalazione> getByAutore(final int aAutorId)
-        throws SQLException {
+    @Override
+    public List<Segnalazione> getByAutore(final int aAutorId) throws Exception {
         return genericGet(SELECT_BY_AUTHOR, aAutorId);
     }
 
@@ -171,9 +110,10 @@ public class SegnalazioneDB {
      * Gets the all.
      *
      * @return the all
-     * @throws SQLException the SQL exception
+     * @throws Exception the SQL exception
      */
-    public List<Segnalazione> getAll() throws SQLException {
+    @Override
+    public List<Segnalazione> getAll() throws Exception {
         return genericGet(SELECT_ALL, -1);
     }
 
@@ -182,11 +122,17 @@ public class SegnalazioneDB {
      *
      * @param aCod the cod
      * @return the by cod
-     * @throws SQLException the SQL exception
+     * @throws Exception the exception
      */
-    public Segnalazione getByCod(final int aCod) throws SQLException {
-        List<Segnalazione> segnalazioneList = genericGet(SELECT_BY_ID, aCod);
-        return segnalazioneList.get(0);
+    @Override
+    public Segnalazione getByCod(final int aCod) throws Exception {
+        final List<Segnalazione> segnalazioneList = genericGet(SELECT_BY_COD,
+                aCod);
+        if (segnalazioneList.size() > 0) {
+            return segnalazioneList.get(0);
+        } else {
+            return null;
+        }
     }
 
     /**
@@ -195,31 +141,30 @@ public class SegnalazioneDB {
      * @param aQuery     the query
      * @param aParameter the parameter
      * @return the list
-     * @throws SQLException the SQL exception
+     * @throws Exception the exception
      */
     private List<Segnalazione> genericGet(final String aQuery,
-        final int aParameter) throws SQLException {
-        Connection connection = null;
-        PreparedStatement preparedStatement = null;
+            final int aParameter) throws Exception {
+        Connection connection = Database.getConnection();
+
         final List<Segnalazione> segnalazioneList = new ArrayList<>();
 
         try {
-            connection = Database.getConnection();
-            preparedStatement = connection.prepareStatement(aQuery);
-            if (aParameter > 0) {
+            PreparedStatement preparedStatement = connection
+                    .prepareStatement(aQuery);
+            if (!aQuery.equals(SELECT_ALL)) {
                 preparedStatement.setInt(1, aParameter);
             }
             final ResultSet result = preparedStatement.executeQuery();
             while (result.next()) {
                 final Segnalazione segnalazione = new Segnalazione();
                 segnalazione.setCod(result.getInt("cod"));
-
                 segnalazione.setDataAssegnazione(
-                        result.getDate("data_assegnazione").toLocalDate());
+                        toLocalDate(result.getDate("data_assegnazione")));
                 segnalazione.setDataRifiuto(
-                        result.getDate("data_rifiuto").toLocalDate());
+                        toLocalDate(result.getDate("data_rifiuto")));
                 segnalazione.setDataRisoluzione(
-                        result.getDate("data_risoluzione").toLocalDate());
+                        toLocalDate(result.getDate("data_risoluzione")));
                 segnalazione.setDataSegnalazione(
                         result.getDate("data_segnalazione").toLocalDate());
                 segnalazione.setDescrizione(result.getString("descrizione"));
@@ -227,29 +172,29 @@ public class SegnalazioneDB {
                         result.getString("motivazione_rifiuto"));
                 segnalazione.setStato(result.getShort("stato"));
 
-                // HACK: Use a fake author until UtenteDB.getById() is
-                // implemented
-                Utente autore = new CSU();
-                autore.setId(1);
+                // Use a fake author
+                final Utente autore = new CSU();
+                autore.setId(result.getInt("autore"));
                 segnalazione.setAutore(autore);
 
-                // HACK: Use a fake Tecnico until UfficioTecnicoDB.getById() is
-                // implemented
-                if (result.getInt("tecnico") != 0) {
-                    UfficioTecnico tecnico = new UfficioTecnico();
-                    tecnico.setId(1);
+                // Use a fake Tecnico
+                final UfficioTecnico tecnico = new UfficioTecnico();
+                tecnico.setId(result.getInt("tecnico"));
+                if (!result.wasNull()) {
                     segnalazione.setTecnico(tecnico);
                 }
 
-                segnalazione.setTipologia(TipologiaDB
-                    .getById(result.getInt("tipologia")));
+                // Use a fake Tipologia
+                final Tipologia tipologia = new Tipologia();
+                tipologia.setId(result.getInt("tipologia"));
+                segnalazione.setTipologia(tipologia);
 
                 segnalazione.setTitolo(result.getString("titolo"));
                 segnalazioneList.add(segnalazione);
             }
-                return segnalazioneList;
+            return segnalazioneList;
         } finally {
-            freeResources(preparedStatement, connection);
+            Database.freeConnection(connection);
         }
     }
 
@@ -258,36 +203,97 @@ public class SegnalazioneDB {
      *
      * @param aId the id
      * @return the int
-     * @throws SQLException the SQL exception
+     * @throws Exception the exception
      */
-    public int deleteById(final int aId) throws SQLException {
-        Connection connection = null;
-        PreparedStatement preparedStatement = null;
-        int res = 0;
+    @Override
+    public boolean deleteById(final int aId) throws Exception {
+        Connection connection = Database.getConnection();
         try {
-            connection = Database.getConnection();
-            preparedStatement = connection.prepareStatement(DELETE_BY_ID);
+            PreparedStatement preparedStatement = connection
+                    .prepareStatement(DELETE_BY_COD);
             preparedStatement.setInt(1, aId);
 
-            res = preparedStatement.executeUpdate(DELETE_BY_ID);
+            return preparedStatement.executeUpdate() > 0;
         } finally {
-            freeResources(preparedStatement, connection);
+            Database.freeConnection(connection);
         }
-        return (res);
     }
 
     /**
-     * Free resources.
-     * @param con The Connection
-     * @param aStm the stm
-     * @throws SQLException the SQL exception
+     * To date.
+     *
+     * @param date the date
+     * @return the date
      */
-    private void freeResources(final PreparedStatement aStm,
-        final Connection con) throws SQLException {
-        if (aStm != null) {
-            aStm.close();
+    private Date toDate(final LocalDate date) {
+        if (date != null) {
+            return Date.valueOf(date);
+        } else {
+            return null;
         }
-        con.close();
     }
 
+    /**
+     * To date.
+     *
+     * @param date the date
+     * @return the date
+     */
+    private LocalDate toLocalDate(final Date date) {
+        if (date != null) {
+            return date.toLocalDate();
+        } else {
+            return null;
+        }
+    }
+
+    /**
+     * Generic insert update.
+     *
+     * @param aQuery        the query
+     * @param aSegnalazione the segnalazione
+     * @return the boolean
+     * @throws Exception the SQL exception
+     */
+    private boolean genericInsertUpdate(final String aQuery,
+            final Segnalazione aSegnalazione) throws Exception {
+        Connection connection = Database.getConnection();
+        try {
+            PreparedStatement preparedStatement = connection
+                    .prepareStatement(aQuery);
+            int i = 1;
+
+            preparedStatement.setString(i++, aSegnalazione.getTitolo());
+            preparedStatement.setString(i++, aSegnalazione.getDescrizione());
+            preparedStatement.setShort(i++, aSegnalazione.getStato());
+            preparedStatement.setDate(i++,
+                    Date.valueOf(aSegnalazione.getDataSegnalazione()));
+            preparedStatement.setDate(i++,
+                    toDate(aSegnalazione.getDataRifiuto()));
+            preparedStatement.setDate(i++,
+                    toDate(aSegnalazione.getDataAssegnazione()));
+            preparedStatement.setDate(i++,
+                    toDate(aSegnalazione.getDataRisoluzione()));
+            preparedStatement.setString(i++,
+                    aSegnalazione.getMotivazioneRifiuto());
+
+            preparedStatement.setInt(i++, aSegnalazione.getTipologia().getId());
+
+            preparedStatement.setInt(i++, aSegnalazione.getAutore().getId());
+
+            if (aSegnalazione.getTecnico() != null) {
+                preparedStatement.setInt(i++,
+                        aSegnalazione.getTecnico().getId());
+            } else {
+                preparedStatement.setNull(i++, Types.INTEGER);
+            }
+            if (aQuery.equals(UPDATE_SEGNALAZIONE)) {
+                preparedStatement.setInt(i, aSegnalazione.getCod());
+            }
+
+            return preparedStatement.executeUpdate() > 0;
+        } finally {
+            Database.freeConnection(connection);
+        }
+    }
 }

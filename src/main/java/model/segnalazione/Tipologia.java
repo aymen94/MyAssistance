@@ -1,9 +1,11 @@
 package model.segnalazione;
 
+import java.util.Objects;
+
 /**
  * The Class Tipologia.
  */
-public class Tipologia {
+public final class Tipologia {
 
     /**
      * The nome.
@@ -80,13 +82,48 @@ public class Tipologia {
         priorita = aPriorita;
     }
 
-    /* (non-Javadoc)
+    /**
+     * To string.
+     *
+     * @return the string
      * @see java.lang.Object#toString()
      */
     @Override
     public String toString() {
         return "Tipologia [nome=" + nome + ", id=" + id + ", priorita="
                 + priorita + "]";
+    }
+
+    /**
+     * Hash code.
+     *
+     * @return the int
+     * @see java.lang.Object#hashCode()
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(nome, id, priorita);
+    }
+
+    /**
+     * Equals.
+     *
+     * @param obj the obj
+     * @return true, if successful
+     * @see java.lang.Object#equals(java.lang.Object)
+     */
+    @Override
+    public boolean equals(final Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || !(obj instanceof Tipologia)) {
+            return false;
+        }
+
+        final Tipologia other = (Tipologia) obj;
+        return id == other.id && priorita == other.priorita
+                && Objects.equals(nome, other.nome);
     }
 
 }

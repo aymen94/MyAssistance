@@ -1,14 +1,16 @@
-package model.ufficiotecnico;
+package model.ufficio_tecnico;
+
+import java.util.Objects;
 
 /**
  * The Class UfficioTecnico.
  */
-public class UfficioTecnico {
+public final class UfficioTecnico {
 
     /**
      * The id.
      */
-    private Integer id;
+    private int id;
 
     /**
      * The nome.
@@ -41,7 +43,7 @@ public class UfficioTecnico {
      *
      * @return id get the id of UfficioTecnico
      */
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
@@ -50,7 +52,7 @@ public class UfficioTecnico {
      *
      * @param aId setta identificatore dell'ufficio tecnico
      */
-    public void setId(final Integer aId) {
+    public void setId(final int aId) {
         this.id = aId;
     }
 
@@ -138,54 +140,38 @@ public class UfficioTecnico {
     }
 
     /**
-     * @param o
-     * @return
+     * Equals.
+     *
+     * @param obj the obj
+     * @return result of equals
      */
-    @Override public boolean equals(Object o) {
-        if (this == o)
+    @Override
+    public boolean equals(final Object obj) {
+        if (this == obj) {
             return true;
-        if (o == null || getClass() != o.getClass())
-            return false;
-
-        UfficioTecnico that = (UfficioTecnico) o;
-
-        /*if (id != null ? !id.equals(that.id) : that.id != null)
-            return false;
-        if (nome != null ? !nome.equals(that.nome) : that.nome != null)
-            return false;
-        if (tel != null ? !tel.equals(that.tel) : that.tel != null)
-            return false;
-        if (email != null ? !email.equals(that.email) : that.email != null)
-            return false;
-
-        return ubicazione != null ?
-                ubicazione.equals(that.ubicazione) :
-                that.ubicazione == null;*/
-
-        if (id != null && that.id != null) {
-            if (!id.equals(that.id))
-                return false;
-
         }
 
-        if (nome != null ? !nome.equals(that.nome) : that.nome != null)
+        if (obj == null || !(obj instanceof UfficioTecnico)) {
             return false;
-        if (tel != null ? !tel.equals(that.tel) : that.tel != null)
-            return false;
-        if (email != null ? !email.equals(that.email) : that.email != null)
-            return false;
+        }
+        final UfficioTecnico other = (UfficioTecnico) obj;
 
-        return ubicazione != null ?
-                ubicazione.equals(that.ubicazione) :
-                that.ubicazione == null;
+        // if id or other.id is 0 do not compare them
+        return (id == 0 || other.id == 0 || id == other.id)
+                && Objects.equals(nome, other.nome)
+                && Objects.equals(ubicazione, other.ubicazione)
+                && Objects.equals(email, other.email)
+                && Objects.equals(tel, other.tel);
     }
 
-    @Override public int hashCode() {
-        int result = (nome != null ? nome.hashCode() : 0);
-        result = 31 * result + (tel != null ? tel.hashCode() : 0);
-        result = 31 * result + (email != null ? email.hashCode() : 0);
-        result = 31 * result + (ubicazione != null ? ubicazione.hashCode() : 0);
-        return result;
+    /**
+     * Hash code.
+     *
+     * @return result
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(nome, ubicazione, email, tel);
     }
 
 }

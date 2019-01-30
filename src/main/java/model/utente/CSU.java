@@ -10,7 +10,7 @@ import java.time.LocalDate;
 /**
  * The Class CSU.
  */
-public class CSU extends Utente {
+public final class CSU extends Utente {
 
     /**
      * LocalDate dataSospensione.
@@ -22,6 +22,24 @@ public class CSU extends Utente {
      */
     public CSU() {
 
+    }
+
+    /**
+     * Instantiates a new csu.
+     *
+     * @param aUserName      the user name
+     * @param aPassword      the password
+     * @param aEmail         the email
+     * @param aNome          the nome
+     * @param aCognome       the cognome
+     * @param aSesso         the sesso
+     * @param aDataDiNascita the data di nascita
+     */
+    public CSU(final String aUserName, final String aPassword,
+            final String aEmail, final String aNome, final String aCognome,
+            final int aSesso, final LocalDate aDataDiNascita) {
+        super(aUserName, aPassword, aEmail, aNome, aCognome, aSesso,
+                aDataDiNascita);
     }
 
     /**
@@ -46,6 +64,7 @@ public class CSU extends Utente {
     /**
      * @return false because is CSU.
      */
+    @Override
     public Boolean isGestore() {
         return false;
     }

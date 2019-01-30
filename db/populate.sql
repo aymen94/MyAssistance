@@ -21,7 +21,7 @@ INSERT INTO my_assistance.segnalazione (titolo, descrizione, stato, data_segnala
                                         data_risoluzione, motivazione_rifiuto, tipologia, autore, tecnico)
 VALUES ('Lorem ipsum',
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lectus urna duis convallis convallis tellus. Vitae proin sagittis nisl rhoncus mattis rhoncus. Platea dictumst vestibulum rhoncus est pellentesque elit ullamcorper. Quisque sagittis purus sit amet volutpat consequat mauris nunc congue.',
-        0, '2018-10-06', NULL, NULL, NULL, NULL, 2, NULL, 1),
+        0, '2018-10-06', NULL, NULL, NULL, NULL, 2, 1, 1),
        ('Eiusmod tempor incididunt',
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lectus urna duis convallis convallis tellus. Vitae proin sagittis nisl rhoncus mattis rhoncus. Platea dictumst vestibulum rhoncus est pellentesque elit ullamcorper. Quisque sagittis purus sit amet volutpat consequat mauris nunc congue.',
         1, '2018-09-05', NULL, '2018-09-11', NULL, NULL, 3, 2, 2),

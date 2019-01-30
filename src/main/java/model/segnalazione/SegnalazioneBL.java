@@ -5,11 +5,10 @@ Date: 23/12/2018
 */
 package model.segnalazione;
 
-import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
 
-import model.ufficiotecnico.UfficioTecnico;
+import model.ufficio_tecnico.UfficioTecnico;
 import model.utente.Utente;
 
 /**
@@ -25,15 +24,23 @@ public final class SegnalazioneBL {
     /**
      * The segnalazione DB.
      */
-    private SegnalazioneDB segnalazioneDB;
+    private final SegnalazioneDBInterface segnalazioneDB;
 
     /**
      * Instantiates a new segnalazione BL.
      *
      * @param aSegnalazioneDB the segnalazione DB
      */
-    public SegnalazioneBL(final SegnalazioneDB aSegnalazioneDB) {
+    public SegnalazioneBL(final SegnalazioneDBInterface aSegnalazioneDB) {
         segnalazioneDB = aSegnalazioneDB;
+    }
+
+    /**
+     * Instantiates a new segnalazione BL. Using the default db manager
+     *
+     */
+    public SegnalazioneBL() {
+        this(new SegnalazioneDB());
     }
 
     /**
@@ -41,23 +48,15 @@ public final class SegnalazioneBL {
      *
      * @param segnalazione the segnalazione
      * @return true, if successful
-     * @throws SQLException the SQL exception
+     * @throws Exception the exception
      */
     public boolean insertSegnalazione(final Segnalazione segnalazione)
-            throws SQLException {
-        if (segnalazione.getTitolo().length() > 0
-                && segnalazione.getTitolo().length() <= MAX_TITLE_LENGTH
-                && segnalazione.getDescrizione().length() > 0
-                && segnalazione.getAutore() != null
-                && segnalazione.getTipologia() != null) {
+            throws Exception {
 
-            segnalazione.setTitolo(segnalazione.getTitolo());
-            segnalazione.setDescrizione(segnalazione.getDescrizione());
-            segnalazione.setTipologia(segnalazione.getTipologia());
-            segnalazione.setAutore(segnalazione.getAutore());
+        if (validateSegnalazione(segnalazione)) {
             // Set the current date
             segnalazione.setDataSegnalazione(LocalDate.now());
-            return segnalazioneDB.insert(segnalazione) > 0;
+            return segnalazioneDB.insert(segnalazione);
         }
         return false;
     }
@@ -67,11 +66,11 @@ public final class SegnalazioneBL {
      *
      * @param aUtente the utente
      * @return the list
+     * @throws Exception the exception
      */
-    public static List<Segnalazione> getSegnalazioniEffettuate(
-            final Utente aUtente) {
-        return null;
-
+    public List<Segnalazione> getSegnalazioniEffettuate(final Utente aUtente)
+            throws Exception {
+        return segnalazioneDB.getByAutore(aUtente.getId());
     }
 
     /**
@@ -79,23 +78,22 @@ public final class SegnalazioneBL {
      *
      * @param segnalazione the segnalazione
      * @return true, if successful
-     * @throws SQLException the SQL exception
+     * @throws Exception the exception
      */
     public boolean updateSegnalazione(final Segnalazione segnalazione)
-            throws SQLException {
-        if (segnalazione.getTitolo().length() > 0
-                && segnalazione.getTitolo().length() <= MAX_TITLE_LENGTH
-                && segnalazione.getDescrizione().length() > 0
-                && segnalazione.getTipologia() != null) {
+            throws Exception {
 
+        if (validateSegnalazione(segnalazione)) {
             final Segnalazione aSegnalazione = segnalazioneDB
                     .getByCod(segnalazione.getCod());
             if (aSegnalazione != null
-                    && aSegnalazione.getStato() == Segnalazione.STATO_APERTO) {
+                    && aSegnalazione.getStato() == Segnalazione.STATO_APERTO
+                    && segnalazione.getAutore().getId() == aSegnalazione
+                            .getAutore().getId()) {
                 aSegnalazione.setTitolo(segnalazione.getTitolo());
                 aSegnalazione.setDescrizione(segnalazione.getDescrizione());
                 aSegnalazione.setTipologia(segnalazione.getTipologia());
-                return segnalazioneDB.update(aSegnalazione) > 0;
+                return segnalazioneDB.update(aSegnalazione);
             }
         }
         return false;
@@ -105,12 +103,21 @@ public final class SegnalazioneBL {
     /**
      * Elimina segnalazione.
      *
-     * @param aCod the cod
+     * @param aCod    the cod
+     * @param aUtente the utente
      * @return true, if successful
+     * @throws Exception the exception
      */
-    public boolean deleteSegnalazione(final int aCod) {
+    public boolean deleteSegnalazione(final int aCod, final Utente aUtente)
+            throws Exception {
+        final Segnalazione aSegnalazione = segnalazioneDB.getByCod(aCod);
+        if (aSegnalazione != null
+                && aSegnalazione.getStato() == Segnalazione.STATO_APERTO
+                && aUtente != null
+                && aSegnalazione.getAutore().getId() == aUtente.getId()) {
+            return segnalazioneDB.deleteById(aCod);
+        }
         return false;
-
     }
 
     /**
@@ -119,20 +126,19 @@ public final class SegnalazioneBL {
      * @param aCod       the cod
      * @param aIdTecnico the tecnico
      * @return true, if successful
-     * @throws SQLException the SQL exception
+     * @throws Exception the exception
      */
     public boolean inoltraSegnalazione(final int aCod, final int aIdTecnico)
-            throws SQLException {
+            throws Exception {
         Segnalazione aSegnalazione;
         aSegnalazione = segnalazioneDB.getByCod(aCod);
         if (aSegnalazione != null
                 && aSegnalazione.getStato() == Segnalazione.STATO_APERTO) {
-            UfficioTecnico tecnico = new UfficioTecnico();
+            final UfficioTecnico tecnico = new UfficioTecnico();
             tecnico.setId(aIdTecnico);
             aSegnalazione.setTecnico(tecnico);
-            aSegnalazione.setDataAssegnazione(
-                    LocalDate.now());
-            return segnalazioneDB.update(aSegnalazione) > 0;
+            aSegnalazione.setDataAssegnazione(LocalDate.now());
+            return segnalazioneDB.update(aSegnalazione);
         }
         return false;
     }
@@ -141,10 +147,10 @@ public final class SegnalazioneBL {
      * Ottieni segnalazioni ricevute.
      *
      * @return the list
-     * @throws SQLException the SQL exception
+     * @throws Exception the exception
      */
-    public List<Segnalazione> getSegnalazioniRicevute() throws SQLException {
-        return null;
+    public List<Segnalazione> getSegnalazioniRicevute() throws Exception {
+        return segnalazioneDB.getAll();
 
     }
 
@@ -154,18 +160,20 @@ public final class SegnalazioneBL {
      * @param aCod                the cod
      * @param aMotivazioneRifiuto the motivazione rifiuto
      * @return true, if successful
-     * @throws SQLException the SQL exception
+     * @throws Exception the exception
      */
     public boolean rifiutaSegnalazione(final int aCod,
-            final String aMotivazioneRifiuto) throws SQLException {
+            final String aMotivazioneRifiuto) throws Exception {
 
         final Segnalazione aSegnalazione = segnalazioneDB.getByCod(aCod);
         if (aSegnalazione != null
                 && aSegnalazione.getStato() == Segnalazione.STATO_APERTO
+                && aMotivazioneRifiuto != null
                 && aMotivazioneRifiuto.length() > 0) {
             aSegnalazione.setStato(Segnalazione.STATO_RIFIUTATO);
+            aSegnalazione.setDataRifiuto(LocalDate.now());
             aSegnalazione.setMotivazioneRifiuto(aMotivazioneRifiuto);
-            return segnalazioneDB.update(aSegnalazione) > 0;
+            return segnalazioneDB.update(aSegnalazione);
         }
         return false;
     }
@@ -175,16 +183,34 @@ public final class SegnalazioneBL {
      *
      * @param aCod the cod
      * @return true, if successful
-     * @throws SQLException the SQL exception
+     * @throws Exception the SQL exception
      */
-    public boolean segnaRisolta(final int aCod) throws SQLException {
+    public boolean segnaRisolta(final int aCod) throws Exception {
         final Segnalazione aSegnalazione = segnalazioneDB.getByCod(aCod);
         if (aSegnalazione != null
                 && aSegnalazione.getStato() == Segnalazione.STATO_ASSEGNATO) {
-            aSegnalazione.setStato(Segnalazione.STATO_RISOLTA);
-            return segnalazioneDB.update(aSegnalazione) > 0;
+            aSegnalazione.setStato(Segnalazione.STATO_RISOLTO);
+            return segnalazioneDB.update(aSegnalazione);
         }
         return false;
     }
 
+    /**
+     * Validate segnalazione.
+     *
+     * @param segnalazione the segnalazione
+     * @return true, if successful
+     */
+    private boolean validateSegnalazione(final Segnalazione segnalazione) {
+        if (segnalazione != null && segnalazione.getTitolo() != null
+                && segnalazione.getTitolo().length() > 0
+                && segnalazione.getTitolo().length() <= MAX_TITLE_LENGTH
+                && segnalazione.getDescrizione() != null
+                && segnalazione.getDescrizione().length() > 0
+                && segnalazione.getAutore() != null
+                && segnalazione.getTipologia() != null) {
+            return true;
+        }
+        return false;
+    }
 }

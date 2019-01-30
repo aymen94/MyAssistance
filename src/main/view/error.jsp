@@ -22,7 +22,7 @@
 	</head>
 	<body>
 		<div class="page">
-			<%@include file="../include/header.jsp" %>
+			<%@include file="./include/header.jsp" %>
 			<div class="content" style="flex-direction: column; padding: 16px">
 				<h3>Errore Riscontrato</h3>
 				<br>
@@ -32,6 +32,6 @@
 				<br>
 			</div>
 		</div>
-		<%@include file="../include/footer.jsp" %>
+		<%@include file="./include/footer.jsp" %>
 	</body>
 </html>

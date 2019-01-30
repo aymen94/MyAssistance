@@ -11,8 +11,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.ufficiotecnico.UfficioTecnico;
-import model.ufficiotecnico.UfficioTecnicoBL;
+import model.ufficio_tecnico.UfficioTecnico;
+import model.ufficio_tecnico.UfficioTecnicoBL;
+import model.utente.Gestore;
 import model.utente.Utente;
 import java.io.IOException;
 
@@ -20,7 +21,7 @@ import java.io.IOException;
  * Servlet for inserting a technical office.
  */
 @WebServlet("/gestore/ufficioTecnico")
-public class InserisciUfficioTecnicoServlet extends HttpServlet {
+public final class InserisciUfficioTecnicoServlet extends HttpServlet {
     /**
      * doGet method.
      */
@@ -37,7 +38,7 @@ public class InserisciUfficioTecnicoServlet extends HttpServlet {
                     getServletContext().getRequestDispatcher(
                             "/gestore/ufficioTecnico.jsp");
             dispatcher.forward(req, resp);
-        } else {
+        } else if (rUser instanceof Gestore) {
             UfficioTecnicoBL ubl = new UfficioTecnicoBL();
 
             String nome = req.getParameter("field-name");
@@ -52,7 +53,7 @@ public class InserisciUfficioTecnicoServlet extends HttpServlet {
             ufficioTecnico.setUbicazione(ubicazione);
 
             try {
-                ubl.insertUfficioTecnico(nome, tel, email, ubicazione);
+                ubl.insertUfficioTecnico(ufficioTecnico);
             } catch (Exception e) {
                 String msgError = "Si e' verificato un errore.";
                 req.setAttribute("msgError", msgError);

@@ -6,6 +6,7 @@ Date: 30/12/2018
 package model.utente;
 
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.sql.ResultSet;
 import java.sql.Connection;
 import java.sql.Date;
@@ -18,7 +19,7 @@ import pool.Database;
 /**
  * This class manages stored data about Users into the database.
  */
-public final class UtenteDB {
+public final class UtenteDB implements UtenteDBInterface {
     /**
      * This private attribute is a string that contains
      * the name of the table.
@@ -43,10 +44,10 @@ public final class UtenteDB {
 
     /**
      * This private attribute is a string that contains
-     * the query get user by email.
+     * the query get user by username.
      */
-    private static final String GET_BY_EMAIL =
-        "SELECT * FROM " + UtenteDB.TABLE_NAME + " WHERE email = ?";
+    private static final String GET_BY_USERNAME =
+        "SELECT * FROM " + UtenteDB.TABLE_NAME + " WHERE username = ?";
 
     /**
      * This private attribute is a string that contains
@@ -57,14 +58,14 @@ public final class UtenteDB {
 
     /**
      * This private attribute is a string that contains
-     * the query to delete user by email.
+     * the query to delete user by username.
      */
     private static final String DELETE =
         "DELETE FROM " + UtenteDB.TABLE_NAME + " WHERE email =?;";
 
     /**
      * This private attribute is a string that contains
-     * the query to update data user by email.
+     * the query to update data user by username.
      */
     private static final String UPDATE =
         "UPDATE " + UtenteDB.TABLE_NAME + " SET data_sospensione = ?"
@@ -89,16 +90,8 @@ public final class UtenteDB {
      */
     public int insert(final Utente aUtente) throws SQLException {
         Connection connection = null;
-        PreparedStatement preparedStatement = null;
-        int res = 0;
-        Gestore g = null;
-        CSU csu = null;
-
-        if (aUtente instanceof Gestore) {
-            g = (Gestore) aUtente;
-        } else {
-            csu = (CSU) aUtente;
-        }
+        PreparedStatement preparedStatement;
+        Utente utente = aUtente;
 
         try {
             connection = Database.getConnection();
@@ -110,36 +103,24 @@ public final class UtenteDB {
             preparedStatement.setString(i++, aUtente.getNome());
             preparedStatement.setString(i++, aUtente.getCognome());
             preparedStatement.setInt(i++, aUtente.getSesso());
-            preparedStatement
-                .setDate(i++, Date.valueOf(aUtente.getDataDiNascita()));
+            preparedStatement.setDate(i++,
+                    Date.valueOf(aUtente.getDataDiNascita()));
 
             if (aUtente instanceof Gestore) {
                 preparedStatement.setDate(i++, null);
-                preparedStatement.setBoolean(i, g.isGestore());
             } else {
-                if (csu.getDataSospensione() != null) {
-                    preparedStatement
-                        .setDate(i++, Date.valueOf(csu.getDataSospensione()));
+                if (((CSU) utente).getDataSospensione() != null) {
+                    preparedStatement.setDate(i++,
+                            Date.valueOf(((CSU) utente).getDataSospensione()));
                 } else {
                     preparedStatement.setDate(i++, null);
                 }
-
-                preparedStatement.setBoolean(i, false);
             }
-
-            res = preparedStatement.executeUpdate();
-
+            preparedStatement.setBoolean(i, utente.isGestore());
+            return preparedStatement.executeUpdate();
         } finally {
-            try {
-                if (preparedStatement != null) {
-                    preparedStatement.close();
-                }
-            } finally {
-                Database.freeConnection(connection);
-            }
+            Database.freeConnection(connection);
         }
-
-        return (res);
     }
 
     /**
@@ -152,122 +133,52 @@ public final class UtenteDB {
      *                      during the execution.
      */
     public Utente getById(final int aId) throws SQLException {
-        Connection connection = null;
-        PreparedStatement preparedStatement = null;
-        CSU csu = null;
-        Utente user = null;
-
+        Connection connection = Database.getConnection();
+        PreparedStatement preparedStatement;
         try {
-            connection = Database.getConnection();
             preparedStatement = connection.prepareStatement(GET_BY_ID);
 
             preparedStatement.setInt(1, aId);
 
-            ResultSet rs = preparedStatement.executeQuery();
-
-            while (rs.next()) {
-                boolean b = rs.getBoolean("is_gestore");
-                if (b) {
-                    user = new Gestore();
-                } else {
-                    user = new CSU();
-                }
-
-                user.setId(rs.getInt("id"));
-                user.setUserName(rs.getString("username"));
-                user.setPassword(rs.getString("pass"));
-                user.setEmail(rs.getString("email"));
-                user.setNome(rs.getString("nome"));
-                user.setCognome(rs.getString("cognome"));
-                user.setDataDiNascita(rs.getDate("data_di_nascita")
-                    .toLocalDate());
-                user.setSesso(rs.getInt("sesso"));
-                if (!b) {
-                    csu = (CSU) user;
-                    Date tmp = rs.getDate("data_sospensione");
-                    if (tmp != null) {
-                        csu.setDataSospensione(tmp.toLocalDate());
-                    }
-                    user = csu;
-                }
+            List<Utente> listUtente = parseResultSet(
+                    preparedStatement.executeQuery());
+            if (listUtente.size() > 0) {
+                return listUtente.get(0);
+            } else {
+                return null;
             }
-
         } finally {
-            try {
-                if (preparedStatement != null) {
-                    preparedStatement.close();
-                }
-            } finally {
-                Database.freeConnection(connection);
-            }
+            Database.freeConnection(connection);
         }
-
-        return user;
     }
 
     /**
      * This method fetches information about a user
-     * given his email address.
+     * given his username address.
      *
-     * @param aEmail is the email address of the user.
-     * @return user is the user whose the email address is of.
+     * @param aUserName is the username of the user.
+     * @return user is the user whose the username is of.
      * @throws SQLException is the exception that can be thrown
      *                      during the execution.
      */
-    public Utente getByEmail(final String aEmail) throws SQLException {
-        Connection connection = null;
-        PreparedStatement preparedStatement = null;
-        CSU csu = null;
-
-        Utente user = null;
-
+    public Utente getByUserName(final String aUserName) throws SQLException {
+        Connection connection = Database.getConnection();
         try {
-            connection = Database.getConnection();
-            preparedStatement = connection.prepareStatement(GET_BY_EMAIL);
+            PreparedStatement preparedStatement = connection
+                    .prepareStatement(GET_BY_USERNAME);
 
-            preparedStatement.setString(1, aEmail);
+            preparedStatement.setString(1, aUserName);
 
-            ResultSet rs = preparedStatement.executeQuery();
-
-            while (rs.next()) {
-
-                boolean b = rs.getBoolean("is_gestore");
-                if (b) {
-                    user = new Gestore();
-                } else {
-                    user = new CSU();
-                }
-
-                user.setId(rs.getInt("Id"));
-                user.setUserName(rs.getString("username"));
-                user.setPassword(rs.getString("pass"));
-                user.setEmail(rs.getString("email"));
-                user.setNome(rs.getString("nome"));
-                user.setCognome(rs.getString("cognome"));
-                user.setDataDiNascita(rs.getDate("data_di_nascita")
-                    .toLocalDate());
-                user.setSesso(rs.getInt("sesso"));
-                if (!b) {
-                    csu = (CSU) user;
-                    Date tmp = rs.getDate("data_sospensione");
-                    if (tmp != null) {
-                        csu.setDataSospensione(tmp.toLocalDate());
-                    }
-                    user = csu;
-                }
+            List<Utente> listUtente = parseResultSet(
+                    preparedStatement.executeQuery());
+            if (listUtente.size() > 0) {
+                return listUtente.get(0);
+            } else {
+                return null;
             }
-
         } finally {
-            try {
-                if (preparedStatement != null) {
-                    preparedStatement.close();
-                }
-            } finally {
-                Database.freeConnection(connection);
-            }
+            Database.freeConnection(connection);
         }
-
-        return user;
     }
 
     /**
@@ -279,59 +190,13 @@ public final class UtenteDB {
      *                      during the execution.
      */
     public List<Utente> getAll() throws SQLException {
-        Connection connection = null;
-        PreparedStatement preparedStatement = null;
-
-        List<Utente> users = new ArrayList<>();
-
-        CSU csu = null;
-        Utente u = null;
-
+        Connection connection = Database.getConnection();
         try {
-            connection = Database.getConnection();
-            preparedStatement = connection.prepareStatement(GET_ALL);
-
-            ResultSet rs = preparedStatement.executeQuery();
-
-            while (rs.next()) {
-
-                boolean b = rs.getBoolean("is_gestore");
-                if (b) {
-                    u = new Gestore();
-                } else {
-                    u = new CSU();
-                }
-
-                u.setId(rs.getInt("Id"));
-                u.setUserName(rs.getString("username"));
-                u.setPassword(rs.getString("pass"));
-                u.setEmail(rs.getString("email"));
-                u.setNome(rs.getString("nome"));
-                u.setCognome(rs.getString("cognome"));
-                u.setDataDiNascita(rs.getDate("data_di_nascita").toLocalDate());
-                u.setSesso(rs.getInt("sesso"));
-                if (!b) {
-                    csu = (CSU) u;
-                    Date tmp = rs.getDate("data_sospensione");
-                    if (tmp != null) {
-                        csu.setDataSospensione(tmp.toLocalDate());
-                    }
-                    u = csu;
-                }
-
-                users.add(u);
-            }
-
+            return parseResultSet(
+                    connection.prepareStatement(GET_ALL).executeQuery());
         } finally {
-            try {
-                if (preparedStatement != null) {
-                    preparedStatement.close();
-                }
-            } finally {
-                Database.freeConnection(connection);
-            }
+            Database.freeConnection(connection);
         }
-        return users;
     }
 
     /**
@@ -346,8 +211,8 @@ public final class UtenteDB {
      */
     public int delete(final String aEmail) throws SQLException {
         Connection connection = null;
-        PreparedStatement s = null;
-        int res = 0;
+        PreparedStatement s;
+        int res;
 
         try {
             connection = Database.getConnection();
@@ -357,13 +222,7 @@ public final class UtenteDB {
             res = s.executeUpdate();
 
         } finally {
-            try {
-                if (s != null) {
-                    s.close();
-                }
-            } finally {
-                Database.freeConnection(connection);
-            }
+            Database.freeConnection(connection);
         }
         return (res);
     }
@@ -382,7 +241,6 @@ public final class UtenteDB {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         CSU csu = (CSU) aUtente;
-        int res = 0;
 
         try {
             connection = Database.getConnection();
@@ -390,16 +248,57 @@ public final class UtenteDB {
             preparedStatement.setDate(1,
                     Date.valueOf(csu.getDataSospensione()));
             preparedStatement.setInt(2, csu.getId());
-            res = preparedStatement.executeUpdate();
+            return preparedStatement.executeUpdate();
+
         } finally {
-            try {
-                if (preparedStatement != null) {
-                    preparedStatement.close();
-                }
-            } finally {
-                Database.freeConnection(connection);
-            }
+            Database.freeConnection(connection);
         }
-        return (res);
+    }
+
+    /**
+     * Parses the result set.
+     *
+     * @param rs the rs
+     * @return the list
+     * @throws SQLException the SQL exception
+     */
+    private List<Utente> parseResultSet(final ResultSet rs)
+            throws SQLException {
+        List<Utente> users = new ArrayList<>();
+        Utente u;
+        while (rs.next()) {
+
+            if (rs.getBoolean("is_gestore")) {
+                u = new Gestore();
+            } else {
+                u = new CSU();
+                ((CSU) u).setDataSospensione(
+                        toLocalDate(rs.getDate("data_sospensione")));
+            }
+            u.setId(rs.getInt("Id"));
+            u.setUserName(rs.getString("username"));
+            u.setPassword(rs.getString("pass"));
+            u.setEmail(rs.getString("email"));
+            u.setNome(rs.getString("nome"));
+            u.setCognome(rs.getString("cognome"));
+            u.setDataDiNascita(rs.getDate("data_di_nascita").toLocalDate());
+            u.setSesso(rs.getInt("sesso"));
+            users.add(u);
+        }
+        return users;
+    }
+
+    /**
+     * To date.
+     *
+     * @param date the date
+     * @return the date
+     */
+    private LocalDate toLocalDate(final Date date) {
+        if (date != null) {
+            return date.toLocalDate();
+        } else {
+            return null;
+        }
     }
 }

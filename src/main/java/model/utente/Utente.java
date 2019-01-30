@@ -14,9 +14,24 @@ import java.util.Objects;
 public abstract class Utente {
 
     /**
+     * The Constant SESSO_ALTRO.
+     */
+    public static final int SESSO_ALTRO = 0;
+
+    /**
+     * The Constant SESSO_MASCHILE.
+     */
+    public static final int SESSO_MASCHILE = 1;
+
+    /**
+     * The Constant SESSO_FEMMINILE.
+     */
+    public static final int SESSO_FEMMINILE = 2;
+
+    /**
      * l' id.
      */
-    private Integer id;
+    private int id;
 
     /**
      * lo user name.
@@ -44,11 +59,6 @@ public abstract class Utente {
     private String cognome;
 
     /**
-     * is gestore.
-     */
-    private Boolean isGestore;
-
-    /**
      * il sesso.
      */
     private int sesso;
@@ -65,6 +75,29 @@ public abstract class Utente {
     }
 
     /**
+     * Instantiates a new utente.
+     *
+     * @param aUserName      the user name
+     * @param aPassword      the password
+     * @param aEmail         the email
+     * @param aNome          the nome
+     * @param aCognome       the cognome
+     * @param aSesso         the sesso
+     * @param aDataDiNascita the data di nascita
+     */
+    public Utente(final String aUserName, final String aPassword,
+            final String aEmail, final String aNome, final String aCognome,
+            final int aSesso, final LocalDate aDataDiNascita) {
+        userName = aUserName;
+        password = aPassword;
+        email = aEmail;
+        nome = aNome;
+        cognome = aCognome;
+        sesso = aSesso;
+        dataDiNascita = aDataDiNascita;
+    }
+
+    /**
      * Effetuare Ovveride.
      *
      * @return Boolean
@@ -76,7 +109,7 @@ public abstract class Utente {
      *
      * @return id ottienti l'identificatore dell'utente.
      */
-    public Integer getId() {
+    public final Integer getId() {
         return id;
     }
 
@@ -85,7 +118,7 @@ public abstract class Utente {
      *
      * @param aId imposta il valore id dell'utente.
      */
-    public void setId(final int aId) {
+    public final void setId(final int aId) {
         id = aId;
     }
 
@@ -94,7 +127,7 @@ public abstract class Utente {
      *
      * @return username Ottieni l'username dell'utente.
      */
-    public String getUserName() {
+    public final String getUserName() {
         return userName;
     }
 
@@ -103,7 +136,7 @@ public abstract class Utente {
      *
      * @param aUserName imposta il valore di username.
      */
-    public void setUserName(final String aUserName) {
+    public final void setUserName(final String aUserName) {
         userName = aUserName;
     }
 
@@ -112,7 +145,7 @@ public abstract class Utente {
      *
      * @return password ottieni la passoword dell'utente.
      */
-    public String getPassword() {
+    public final String getPassword() {
         return password;
     }
 
@@ -121,7 +154,7 @@ public abstract class Utente {
      *
      * @param aPassword imposta la password dell'utente.
      */
-    public void setPassword(final String aPassword) {
+    public final void setPassword(final String aPassword) {
         password = aPassword;
     }
 
@@ -130,7 +163,7 @@ public abstract class Utente {
      *
      * @return email ottieni l'email dell'utente.
      */
-    public String getEmail() {
+    public final String getEmail() {
         return email;
     }
 
@@ -139,7 +172,7 @@ public abstract class Utente {
      *
      * @param aEmail imposta l'emaio dell'utente.
      */
-    public void setEmail(final String aEmail) {
+    public final void setEmail(final String aEmail) {
         email = aEmail;
     }
 
@@ -148,7 +181,7 @@ public abstract class Utente {
      *
      * @return nome ottieni il nome dell'utente.
      */
-    public String getNome() {
+    public final String getNome() {
         return nome;
     }
 
@@ -157,7 +190,7 @@ public abstract class Utente {
      *
      * @param aNome imposta il nome dell'utente.
      */
-    public void setNome(final String aNome) {
+    public final void setNome(final String aNome) {
         this.nome = aNome;
     }
 
@@ -166,7 +199,7 @@ public abstract class Utente {
      *
      * @return cognome ottieni il cognome dell'utente.
      */
-    public String getCognome() {
+    public final String getCognome() {
         return cognome;
     }
 
@@ -175,7 +208,7 @@ public abstract class Utente {
      *
      * @param aCognogme imposta il cognome dell'utente.
      */
-    public void setCognome(final String aCognogme) {
+    public final void setCognome(final String aCognogme) {
         cognome = aCognogme;
     }
 
@@ -184,16 +217,16 @@ public abstract class Utente {
      *
      * @return sesso
      */
-    public int getSesso() {
+    public final int getSesso() {
         return sesso;
     }
 
     /**
-     * Impsti  sesso dell'utente.
+     * Impsti sesso dell'utente.
      *
      * @param aSesso imposta il valore sesso dell'utente.
      */
-    public void setSesso(final int aSesso) {
+    public final void setSesso(final int aSesso) {
         sesso = aSesso;
     }
 
@@ -202,16 +235,16 @@ public abstract class Utente {
      *
      * @return Date
      */
-    public LocalDate getDataDiNascita() {
+    public final LocalDate getDataDiNascita() {
         return dataDiNascita;
     }
 
     /**
-     * Impsti  la data di nascità dell'utente.
+     * Impsti la data di nascità dell'utente.
      *
      * @param aData imposta il valore sesso dell'utente.
      */
-    public void setDataDiNascita(final LocalDate aData) {
+    public final void setDataDiNascita(final LocalDate aData) {
         dataDiNascita = aData;
     }
 
@@ -220,7 +253,7 @@ public abstract class Utente {
      *
      * @return boolean
      */
-    @Override public boolean equals(final Object o) {
+    @Override public final boolean equals(final Object o) {
         if (this == o) {
             return true;
         }
@@ -228,12 +261,12 @@ public abstract class Utente {
             return false;
         }
         Utente utente = (Utente) o;
-        return sesso == utente.sesso && Objects.equals(id, utente.id) && Objects
-            .equals(userName, utente.userName) && Objects
-            .equals(password, utente.password) && Objects
-            .equals(email, utente.email) && Objects.equals(nome, utente.nome)
-            && Objects.equals(cognome, utente.cognome) && Objects
-            .equals(isGestore, utente.isGestore);
+        return sesso == utente.sesso && Objects.equals(id, utente.id)
+                && Objects.equals(userName, utente.userName)
+                && Objects.equals(password, utente.password)
+                && Objects.equals(email, utente.email)
+                && Objects.equals(nome, utente.nome)
+                && Objects.equals(cognome, utente.cognome);
     }
 
     /**
@@ -241,15 +274,9 @@ public abstract class Utente {
      *
      * @return int Utente
      */
-    @Override public int hashCode() {
-        return Objects.hash(id,
-            userName,
-            password,
-            email,
-            nome,
-            cognome,
-            isGestore,
-            sesso);
+    @Override public final int hashCode() {
+        return Objects
+                .hash(id, userName, password, email, nome, cognome, sesso);
     }
 
     /**
@@ -257,7 +284,7 @@ public abstract class Utente {
      *
      * @return String
      */
-    @Override public String toString() {
+    @Override public final String toString() {
         return "Utente {" + "id = " + id + ", userName = '" + userName + '\''
             + ", password = " + password + ", email = '" + email + '\''
             + ", nome = '" + nome + '\'' + ", cognome = '" + cognome + '\''
@@ -265,4 +292,3 @@ public abstract class Utente {
     }
 
 }
-

@@ -6,14 +6,15 @@ Date: 23/12/2018
 package model.segnalazione;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
-import model.ufficiotecnico.UfficioTecnico;
+import model.ufficio_tecnico.UfficioTecnico;
 import model.utente.Utente;
 
 /**
  * The Class Segnalazione.
  */
-public class Segnalazione {
+public final class Segnalazione {
 
     /**
      * The cod.
@@ -91,9 +92,9 @@ public class Segnalazione {
     public static final short STATO_ASSEGNATO = 1;
 
     /**
-     * The Constant STATO_RISOLTA.
+     * The Constant STATO_RISOLTO.
      */
-    public static final short STATO_RISOLTA = 2;
+    public static final short STATO_RISOLTO = 2;
 
     /**
      * Instantiates a new segnalazione.
@@ -307,6 +308,75 @@ public class Segnalazione {
      */
     public void setTecnico(final UfficioTecnico aTecnico) {
         tecnico = aTecnico;
+    }
+
+    /**
+     * Hash code.
+     *
+     * @return the hash
+     * @see java.lang.Object#hashCode()
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(autore,
+                dataAssegnazione,
+                dataRifiuto,
+                dataRisoluzione,
+                dataSegnalazione,
+                descrizione,
+                motivazioneRifiuto,
+                tecnico,
+                tipologia,
+                titolo);
+    }
+
+    /**
+     * Equals.
+     *
+     * @param obj the obj
+     * @return true, if successful
+     * @see java.lang.Object#equals(java.lang.Object)
+     */
+    @Override
+    public boolean equals(final Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || !(obj instanceof Segnalazione)) {
+            return false;
+        }
+        final Segnalazione other = (Segnalazione) obj;
+
+        // if cod or other.cod is 0 do not compare them
+        return (cod == 0 || other.cod == 0 || cod == other.cod)
+                && stato == other.stato && Objects.equals(autore, other.autore)
+                && Objects.equals(dataAssegnazione, other.dataAssegnazione)
+                && Objects.equals(dataRifiuto, other.dataRifiuto)
+                && Objects.equals(dataRisoluzione, other.dataRisoluzione)
+                && Objects.equals(dataSegnalazione, other.dataSegnalazione)
+                && Objects.equals(descrizione, other.descrizione)
+                && Objects.equals(motivazioneRifiuto, other.motivazioneRifiuto)
+                && Objects.equals(tecnico, other.tecnico)
+                && Objects.equals(tipologia, other.tipologia)
+                && Objects.equals(titolo, other.titolo);
+    }
+
+    /**
+     * To string.
+     *
+     * @return the string
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        return "Segnalazione [cod=" + cod + ", titolo=" + titolo
+                + ", descrizione=" + descrizione + ", stato=" + stato
+                + ", dataSegnalazione=" + dataSegnalazione + ", dataRifiuto="
+                + dataRifiuto + ", dataAssegnazione=" + dataAssegnazione
+                + ", dataRisoluzione=" + dataRisoluzione
+                + ", motivazioneRifiuto=" + motivazioneRifiuto + ", tipologia="
+                + tipologia + ", autore=" + autore + ", tecnico=" + tecnico
+                + "]";
     }
 
 }
