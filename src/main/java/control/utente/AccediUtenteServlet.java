@@ -26,7 +26,7 @@ public class AccediUtenteServlet extends HttpServlet {
             throws ServletException, IOException {
         RequestDispatcher dispatcher =
                 getServletContext().getRequestDispatcher(
-                        "/utente/utenti.jsp");
+                        "/utente/accedi.jsp");
         dispatcher.forward(req, resp);
     }
 
