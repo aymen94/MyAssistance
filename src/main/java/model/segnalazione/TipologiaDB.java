@@ -12,7 +12,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import pool.Database;
+import pool.ConnectionManager;
 
 /**
  * The Class TipologiaDB.
@@ -22,7 +22,7 @@ public final class TipologiaDB implements TipologiaDBInterface {
     /**
      * The connection manager.
      */
-    private Database connectionManager;
+    private ConnectionManager connectionManager;
 
     /**
      * The Constant TABLE_NAME.
@@ -34,7 +34,7 @@ public final class TipologiaDB implements TipologiaDBInterface {
      * Use the default connection Manager
      */
     public TipologiaDB() {
-        this(Database.getInstance());
+        this(ConnectionManager.getInstance());
     }
 
     /**
@@ -42,7 +42,7 @@ public final class TipologiaDB implements TipologiaDBInterface {
      *
      * @param aConnectionManager the connection manager
      */
-    public TipologiaDB(final Database aConnectionManager) {
+    public TipologiaDB(final ConnectionManager aConnectionManager) {
         connectionManager = aConnectionManager;
     }
 

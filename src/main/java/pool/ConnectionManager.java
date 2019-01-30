@@ -14,21 +14,22 @@ import javax.servlet.annotation.WebListener;
  * @author Andrea Mennillo
  */
 @WebListener
-public final class Database implements ServletContextListener {
+public final class ConnectionManager
+        implements ServletContextListener, ConnectionManagerInterface {
 
     /**
      * The instance.
      */
-    private static Database instance;
+    private static ConnectionManager instance;
 
     /**
      * Gets the instance.
      *
      * @return the instance
      */
-    public static Database getInstance() {
+    public static ConnectionManager getInstance() {
         if (instance == null) {
-            instance = new Database();
+            instance = new ConnectionManager();
         }
         return instance;
     }

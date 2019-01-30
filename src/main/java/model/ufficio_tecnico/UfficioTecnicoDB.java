@@ -7,7 +7,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import pool.Database;
+import pool.ConnectionManager;
+import pool.ConnectionManagerInterface;
 
 /**
  * This class allows the management of persistent data relating to offices.
@@ -19,14 +20,13 @@ public final class UfficioTecnicoDB implements UfficioTecnicoDBInterface {
     /**
      * The connection manager.
      */
-    private Database connectionManager;
+    private ConnectionManagerInterface connectionManager;
 
     /**
-     * Instantiates a new ufficio tecnico DB.
-     * With default connection manager
+     * Instantiates a new ufficio tecnico DB. With default connection manager
      */
     public UfficioTecnicoDB() {
-        this(Database.getInstance());
+        this(ConnectionManager.getInstance());
     }
 
     /**
@@ -34,7 +34,8 @@ public final class UfficioTecnicoDB implements UfficioTecnicoDBInterface {
      *
      * @param aConnectionManager the connection manager
      */
-    public UfficioTecnicoDB(final Database aConnectionManager) {
+    public UfficioTecnicoDB(
+            final ConnectionManagerInterface aConnectionManager) {
         connectionManager = aConnectionManager;
     }
 

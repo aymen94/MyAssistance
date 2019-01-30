@@ -133,7 +133,8 @@ public final class UfficioTecnico {
      *
      * @return return rappresentation of class
      */
-    @Override public String toString() {
+    @Override
+    public String toString() {
         return "UfficioTecnico{" + "id=" + id + ", nome='" + nome + '\''
                 + ", tel='" + tel + '\'' + ", email='" + email + '\''
                 + ", ubicazione='" + ubicazione + '\'' + '}';

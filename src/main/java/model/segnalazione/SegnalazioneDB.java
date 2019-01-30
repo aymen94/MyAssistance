@@ -18,7 +18,8 @@ import model.ufficio_tecnico.UfficioTecnicoDB;
 import model.ufficio_tecnico.UfficioTecnicoDBInterface;
 import model.utente.UtenteDB;
 import model.utente.UtenteDBInterface;
-import pool.Database;
+import pool.ConnectionManager;
+import pool.ConnectionManagerInterface;
 
 /**
  * The Class SegnalazioneDB.
@@ -27,13 +28,14 @@ public final class SegnalazioneDB implements SegnalazioneDBInterface {
 
     /**
      * The Constant TABLE_NAME.
+     *
      */
     private static final String TABLE_NAME = "segnalazione";
 
     /**
      * The connection manager.
      */
-    private Database connectionManager;
+    private ConnectionManagerInterface connectionManager;
 
     /**
      * The Constant INSERT_SEGNALAZIONE.
@@ -96,7 +98,7 @@ public final class SegnalazioneDB implements SegnalazioneDBInterface {
      */
     public SegnalazioneDB() {
         this(new UfficioTecnicoDB(), new TipologiaDB(), new UtenteDB(),
-                Database.getInstance());
+                ConnectionManager.getInstance());
     }
 
     /**
@@ -110,7 +112,7 @@ public final class SegnalazioneDB implements SegnalazioneDBInterface {
     public SegnalazioneDB(final UfficioTecnicoDBInterface aTecnicoDB,
             final TipologiaDBInterface aTipologiaDB,
             final UtenteDBInterface aUtenteDB,
-            final Database aConnectionManager) {
+            final ConnectionManagerInterface aConnectionManager) {
         tecnicoDB = aTecnicoDB;
         tipologiaDB = aTipologiaDB;
         utenteDB = aUtenteDB;

@@ -25,7 +25,7 @@ import model.ufficio_tecnico.UfficioTecnicoDBInterface;
 import model.utente.CSU;
 import model.utente.Utente;
 import model.utente.UtenteDBInterface;
-import pool.Database;
+import pool.ConnectionManager;
 
 /**
  * The Class SegnalazioneDBTest.
@@ -74,11 +74,11 @@ public class SegnalazioneDBTest {
      */
     @BeforeClass
     public static void setUpClass() throws Exception {
-        Database.getInstance().initializePool("databases.xml", "Test");
-        final Connection conn = Database.getInstance().getConnection();
+        ConnectionManager.getInstance().initializePool("databases.xml", "Test");
+        final Connection conn = ConnectionManager.getInstance().getConnection();
         // disable foreign key checks
         conn.prepareStatement("SET FOREIGN_KEY_CHECKS=0;").executeUpdate();
-        Database.getInstance().freeConnection(conn);
+        ConnectionManager.getInstance().freeConnection(conn);
     }
 
     /**
@@ -88,11 +88,11 @@ public class SegnalazioneDBTest {
      */
     @AfterClass
     public static void tearDownClass() throws Exception {
-        final Connection conn = Database.getInstance().getConnection();
+        final Connection conn = ConnectionManager.getInstance().getConnection();
         // enable foreign key checks
         conn.prepareStatement("SET FOREIGN_KEY_CHECKS=1;").executeUpdate();
-        Database.getInstance().freeConnection(conn);
-        Database.getInstance().destroyPool();
+        ConnectionManager.getInstance().freeConnection(conn);
+        ConnectionManager.getInstance().destroyPool();
     }
 
     /**
@@ -103,9 +103,9 @@ public class SegnalazioneDBTest {
     @Before
     public void clearDB() throws Exception {
 
-        final Connection conn = Database.getInstance().getConnection();
+        final Connection conn = ConnectionManager.getInstance().getConnection();
         conn.prepareStatement("TRUNCATE TABLE segnalazione").executeUpdate();
-        Database.getInstance().freeConnection(conn);
+        ConnectionManager.getInstance().freeConnection(conn);
 
         autoreTest = new CSU();
         autoreTest.setId(1);
@@ -158,7 +158,7 @@ public class SegnalazioneDBTest {
         autoreDB = mock(UtenteDBInterface.class);
         when(autoreDB.getById(anyInt())).thenReturn(new CSU());
         when(autoreDB.getById(autoreTest.getId())).thenReturn(autoreTest);
-        db = new SegnalazioneDB(tecnicoDB, tipologiaDB, autoreDB,Database.getInstance());
+        db = new SegnalazioneDB(tecnicoDB, tipologiaDB, autoreDB,ConnectionManager.getInstance());
     }
 
     /**
@@ -190,14 +190,14 @@ public class SegnalazioneDBTest {
         final Utente utente = new CSU();
         utente.setId(1);
         segnalazione.setAutore(utente);
-        final Connection conn = Database.getInstance().getConnection();
+        final Connection conn = ConnectionManager.getInstance().getConnection();
         conn.prepareStatement(
                 "INSERT INTO segnalazione (titolo, descrizione, stato,"
                         + "data_segnalazione, tipologia," + " autore) "
                         + "VALUES ('Lorem ipsum','Lorem ipsum dolor sit amet',"
                         + "0, '2018-10-06', 1, 1)")
                 .executeUpdate();
-        Database.getInstance().freeConnection(conn);
+        ConnectionManager.getInstance().freeConnection(conn);
         final Segnalazione segnalazioneNew = db.getByCod(1);
         assertEquals(segnalazione, segnalazioneNew);
     }

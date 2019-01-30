@@ -14,7 +14,8 @@ import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.List;
 
-import pool.Database;
+import pool.ConnectionManager;
+import pool.ConnectionManagerInterface;
 
 /**
  * This class manages stored data about Users into the database.
@@ -24,7 +25,7 @@ public final class UtenteDB implements UtenteDBInterface {
     /**
      * The connection manager.
      */
-    private Database connectionManager;
+    private ConnectionManagerInterface connectionManager;
 
     /**
      * This private attribute is a string that contains
@@ -81,7 +82,7 @@ public final class UtenteDB implements UtenteDBInterface {
      * Default constructor.
      */
     public UtenteDB() {
-        this(Database.getInstance());
+        this(ConnectionManager.getInstance());
     }
 
     /**
@@ -89,7 +90,7 @@ public final class UtenteDB implements UtenteDBInterface {
      *
      * @param aConnectionManager the connection manager
      */
-    public UtenteDB(final Database aConnectionManager) {
+    public UtenteDB(final ConnectionManagerInterface aConnectionManager) {
         connectionManager = aConnectionManager;
     }
 
