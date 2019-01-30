@@ -5,33 +5,43 @@
 */
 package control.utente;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import control.BasicServlet;
+
 import java.io.IOException;
 
 /**
  * Servlet for redirecting to the index of the user.
  */
 @WebServlet("/utente/")
-public final class IndexUtenteServlet extends HttpServlet {
+public final class IndexUtenteServlet extends BasicServlet {
     /**
      *
      */
-    @Override protected void doGet(final HttpServletRequest req,
+    @Override
+    protected void doGet(final HttpServletRequest req,
             final HttpServletResponse resp)
             throws ServletException, IOException {
-        super.doGet(req, resp);
+
+        if (isUtenteLoggato(req, resp)) {
+            RequestDispatcher dispatcher = getServletContext()
+                    .getRequestDispatcher("/utente/index.jsp");
+            dispatcher.forward(req, resp);
+        }
     }
 
     /**
      *
      */
-    @Override protected void doPost(final HttpServletRequest req,
+    @Override
+    protected void doPost(final HttpServletRequest req,
             final HttpServletResponse resp)
             throws ServletException, IOException {
-        super.doPost(req, resp);
+        doPost(req, resp);
     }
 }
