@@ -648,12 +648,13 @@ public final class SegnalazioneBLTest {
      */
     @Test
     public void testInoltraSegnalazione3() throws Exception {
+        System.out.println(" ### Test - testInoltraSegnalazione3 ");
         segnalazioneAperta.setTitolo("URGENTE : si è guastato il termosifone ");
         segnalazioneAperta.setDescrizione("ciao ciao ciao muovetevi");
         final int aCod = SEGNALAZIONE_APERTA;
         final int aIdTecnico = TECNICO_ESISTENTE;
         final Boolean res = manager.inoltraSegnalazione(aCod, aIdTecnico);
-        System.out.println(" ### Test - testInoltraSegnalazione3 \n\tInoltro : tecnico inesistente =" + aIdTecnico+ "Segnalazione "+ aCod+ "\n\tresult: " + res );
+        System.out.println("\tInoltro : tecnico esistente =" + aIdTecnico+ "\tSegnalazione n. "+ aCod+ "\n\tresult: " + res );
 
         assertTrue(res);
     }
