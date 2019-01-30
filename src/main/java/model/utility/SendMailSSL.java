@@ -22,25 +22,36 @@ public final class SendMailSSL {
 
     }
 
-    final static Properties props = new Properties();
+    /**
+     * The Constant props.
+     */
+    private static final Properties PROPS = new Properties();
 
-
-    final static Session session = Session.getDefaultInstance(props,
+    /**
+     * The Constant session.
+     */
+    private static final Session SESSION = Session.getDefaultInstance(PROPS,
             new javax.mail.Authenticator() {
-                /* (non-Javadoc)
+                /**
+                 * (non-Javadoc)
+                 *
                  * @see javax.mail.Authenticator#getPasswordAuthentication()
                  */
                 @Override
-                protected PasswordAuthentication
-                getPasswordAuthentication() {
-                    return new PasswordAuthentication(username, password);
+                protected PasswordAuthentication getPasswordAuthentication() {
+                    return new PasswordAuthentication(USERNAME, PASSWORD);
                 }
             });
 
-    final static String username = "myassistance.teamC@gmail.com";
-    final static String password = "myassistance";
+    /**
+     * The Constant username.
+     */
+    private static final String USERNAME = "myassistance.teamC@gmail.com";
 
-
+    /**
+     * The Constant password.
+     */
+    private static final String PASSWORD = "myassistance";
 
     /**
      * The main method.
@@ -49,13 +60,13 @@ public final class SendMailSSL {
      */
     public static void main(final String[] args) {
         try {
-            props.put("mail.smtp.host", "smtp.gmail.com");
-            props.put("mail.smtp.socketFactory.port", "465");
-            props.put("mail.smtp.socketFactory.class",
+            PROPS.put("mail.smtp.host", "smtp.gmail.com");
+            PROPS.put("mail.smtp.socketFactory.port", "465");
+            PROPS.put("mail.smtp.socketFactory.class",
                     "javax.net.ssl.SSLSocketFactory");
-            props.put("mail.smtp.auth", "true");
-            props.put("mail.smtp.port", "465");
-            final Message message = new MimeMessage(session);
+            PROPS.put("mail.smtp.auth", "true");
+            PROPS.put("mail.smtp.port", "465");
+            final Message message = new MimeMessage(SESSION);
             message.setFrom(
                     new InternetAddress("myassistance.teamC@gmail.com"));
             message.setRecipients(Message.RecipientType.TO,
@@ -74,19 +85,25 @@ public final class SendMailSSL {
 
     }
 
-
-    public static void sendEmail(String recipient,String subject,String msg){
+    /**
+     * Send email.
+     *
+     * @param recipient the recipient
+     * @param subject   the subject
+     * @param msg       the msg
+     */
+    public static void sendEmail(final String recipient, final String subject,
+            final String msg) {
 
         try {
-            props.put("mail.smtp.host", "smtp.gmail.com");
-            props.put("mail.smtp.socketFactory.port", "465");
-            props.put("mail.smtp.socketFactory.class",
+            PROPS.put("mail.smtp.host", "smtp.gmail.com");
+            PROPS.put("mail.smtp.socketFactory.port", "465");
+            PROPS.put("mail.smtp.socketFactory.class",
                     "javax.net.ssl.SSLSocketFactory");
-            props.put("mail.smtp.auth", "true");
-            props.put("mail.smtp.port", "465");
-            final Message message = new MimeMessage(session);
-            message.setFrom(
-                    new InternetAddress(username));
+            PROPS.put("mail.smtp.auth", "true");
+            PROPS.put("mail.smtp.port", "465");
+            final Message message = new MimeMessage(SESSION);
+            message.setFrom(new InternetAddress(USERNAME));
             message.setRecipients(Message.RecipientType.TO,
                     InternetAddress.parse(recipient));
             message.setSubject(subject);
@@ -94,9 +111,8 @@ public final class SendMailSSL {
 
             Transport.send(message);
 
-            System.out.println("email inviata a\n destinatario : "+ recipient
-                    + "\noggetto :" + subject
-                    + "\nmessaggio : "+ msg);
+            System.out.println("email inviata a\n destinatario : " + recipient
+                    + "\noggetto :" + subject + "\nmessaggio : " + msg);
 
         } catch (final MessagingException e) {
             throw new RuntimeException(e);
