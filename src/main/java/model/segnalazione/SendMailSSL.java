@@ -54,38 +54,6 @@ public final class SendMailSSL {
     private static final String PASSWORD = "myassistance";
 
     /**
-     * The main method.
-     *
-     * @param args the arguments
-     */
-    public static void main(final String[] args) {
-        try {
-            PROPS.put("mail.smtp.host", "smtp.gmail.com");
-            PROPS.put("mail.smtp.socketFactory.port", "465");
-            PROPS.put("mail.smtp.socketFactory.class",
-                    "javax.net.ssl.SSLSocketFactory");
-            PROPS.put("mail.smtp.auth", "true");
-            PROPS.put("mail.smtp.port", "465");
-            final Message message = new MimeMessage(SESSION);
-            message.setFrom(
-                    new InternetAddress("myassistance.teamC@gmail.com"));
-            message.setRecipients(Message.RecipientType.TO,
-                    InternetAddress.parse("myassistance.teamC@gmail.com"));
-            message.setSubject("Testing Subject");
-            message.setText(
-                    "Dear Mail Crawler," + "\n\n No spam to my email, please!");
-
-            Transport.send(message);
-
-            System.out.println("Done");
-
-        } catch (final MessagingException e) {
-            throw new RuntimeException(e);
-        }
-
-    }
-
-    /**
      * Send email.
      *
      * @param recipient the recipient
