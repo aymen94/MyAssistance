@@ -30,7 +30,9 @@ public final class UfficioTecnicoDB implements UfficioTecnicoDBInterface {
     }
 
     /**
-     * Instantiates a new ufficio tecnico DB.
+     * Instantiates a new ufficio tecnico DB.<br>
+     * This should be used only for testing, for others purpose use
+     * {@link #UfficioTecnicoDB()} instead.
      *
      * @param aConnectionManager the connection manager
      */

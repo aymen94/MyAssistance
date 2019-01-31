@@ -29,7 +29,14 @@ public class SegnalazioneBL {
     private final SegnalazioneDBInterface segnalazioneDB;
 
     /**
-     * Instantiates a new segnalazione BL.
+     * The tecnico DB.
+     */
+    private final UfficioTecnicoDBInterface tecnicoDB;
+
+    /**
+     * Instantiates a new segnalazione BL.<br>
+     * This should be used only for testing, for others purpose use
+     * {@link #SegnalazioneBL()} instead.
      *
      * @param aSegnalazioneDB the segnalazione DB
      * @param aTecnicoDB      the tecnico DB
@@ -211,8 +218,7 @@ public class SegnalazioneBL {
      * @param segnalazione the segnalazione
      * @return true, if successful
      */
-    private boolean validateSegnalazione(
-            final Segnalazione segnalazione) {
+    private boolean validateSegnalazione(final Segnalazione segnalazione) {
         if (segnalazione != null && segnalazione.getTitolo() != null
                 && segnalazione.getTitolo().length() > 0
                 && segnalazione.getTitolo().length() <= MAX_TITLE_LENGTH

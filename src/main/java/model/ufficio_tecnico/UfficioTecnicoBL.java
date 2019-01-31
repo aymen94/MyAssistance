@@ -59,7 +59,9 @@ public class UfficioTecnicoBL {
     }
 
     /**
-     * Instantiates a new ufficio tecnico BL.
+     * Instantiates a new ufficio tecnico BL.<br>
+     * This should be used only for testing,
+     * for others purpose use {@link #UfficioTecnicoBL()} instead.
      *
      * @param db it's database manager
      */

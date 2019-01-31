@@ -81,9 +81,11 @@ public class UtenteBL {
     private final UtenteDBInterface utenteDB;
 
     /**
-     * Instantiates a new utente BL.
+     * Instantiates a new utente BL.<br>
+     * This should be used only for testing, for others purpose use
+     * {@link #UtenteBL()} instead.
      *
-     * @param aUtenteDB the utente DB
+     * @param aUtenteDB the db manager
      */
     public UtenteBL(final UtenteDBInterface aUtenteDB) {
         utenteDB = aUtenteDB;
@@ -203,8 +205,8 @@ public class UtenteBL {
      * @param regex     the regex
      * @return true, if successful
      */
-    private boolean validateLengthRegex(final String text,
-            final int minLength, final int maxLength, final String regex) {
+    private boolean validateLengthRegex(final String text, final int minLength,
+            final int maxLength, final String regex) {
         return text.length() >= minLength && text.length() <= maxLength
                 && text.matches(regex);
     }
@@ -217,8 +219,8 @@ public class UtenteBL {
      * @return the utente
      * @throws Exception the exception
      */
-    private Utente autenticazione(final String username,
-            final String password) throws Exception {
+    private Utente autenticazione(final String username, final String password)
+            throws Exception {
         final Utente utente = utenteDB.getByUserName(username);
         if (PasswordHash.validatePassword(password, utente.getPassword())) {
             return utente;

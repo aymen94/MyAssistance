@@ -102,7 +102,9 @@ public final class SegnalazioneDB implements SegnalazioneDBInterface {
     }
 
     /**
-     * Instantiates a new segnalazione DB.
+     * Instantiates a new segnalazione DB.<br>
+     * This should be used only for testing, for others purpose use
+     * {@link #SegnalazioneDB()} instead.
      *
      * @param aTecnicoDB         the tecnico DB
      * @param aTipologiaDB       the tipologia DB
