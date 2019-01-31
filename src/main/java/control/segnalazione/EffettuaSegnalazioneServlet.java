@@ -61,7 +61,7 @@ public final class EffettuaSegnalazioneServlet extends BasicServlet {
 
         if (isUtenteLoggato(req, resp)) {
             SegnalazioneDB sdb = new SegnalazioneDB();
-            SegnalazioneBL sbl = new SegnalazioneBL(sdb);
+            SegnalazioneBL sbl = new SegnalazioneBL();
 
             Tipologia tipologia = new Tipologia();
             tipologia.setId(Integer.parseInt(req.getParameter("field-type")));

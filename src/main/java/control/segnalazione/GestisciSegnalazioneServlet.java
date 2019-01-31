@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import model.segnalazione.SegnalazioneBL;
-import model.segnalazione.SegnalazioneDB;
 import model.utente.Gestore;
 import model.utente.Utente;
 
@@ -41,8 +40,7 @@ public final class GestisciSegnalazioneServlet extends HttpServlet {
                             "/gestore/segnalazioni.jsp");
             dispatcher.forward(req, resp);
         } else if (rUser instanceof Gestore) {
-            SegnalazioneDB sdb = new SegnalazioneDB();
-            SegnalazioneBL sbl = new SegnalazioneBL(sdb);
+            SegnalazioneBL sbl = new SegnalazioneBL();
             String operation = null, motivation;
             int codiceSegnalazione, idTecnico;
             operation = req.getParameter("op");
