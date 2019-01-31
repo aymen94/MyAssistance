@@ -15,6 +15,8 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
+import model.ufficio_tecnico.UfficioTecnico;
+import model.ufficio_tecnico.UfficioTecnicoDBInterface;
 import model.utente.CSU;
 import model.utente.Gestore;
 import model.utente.Utente;
@@ -109,6 +111,8 @@ public final class SegnalazioneBLTest {
      */
     private Tipologia tipologiaTest;
 
+    private UfficioTecnicoDBInterface tecnicoDB;
+
     /**
      * Instantiates a new segnalazione BL test.
      */
@@ -165,8 +169,13 @@ public final class SegnalazioneBLTest {
         when(segnalazioneDB.getByAutore(any(Integer.class)))
                 .thenReturn(listaSegnalazioni);
         when(segnalazioneDB.getByAutore(0)).thenReturn(null);
-
-        manager = new SegnalazioneBL(segnalazioneDB);
+        UfficioTecnico tecnico=new UfficioTecnico();
+        tecnico.setEmail("myassistance.teamC@gmail.com");
+        tecnico.setId(TECNICO_ESISTENTE);
+        tecnico.setNome("Tizio");
+        tecnicoDB = mock(UfficioTecnicoDBInterface.class);
+        when(tecnicoDB.getById(TECNICO_ESISTENTE)).thenReturn(tecnico);
+        manager = new SegnalazioneBL(segnalazioneDB,tecnicoDB);
 
     }
 

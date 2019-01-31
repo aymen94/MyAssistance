@@ -9,6 +9,8 @@ import java.time.LocalDate;
 import java.util.List;
 
 import model.ufficio_tecnico.UfficioTecnico;
+import model.ufficio_tecnico.UfficioTecnicoDB;
+import model.ufficio_tecnico.UfficioTecnicoDBInterface;
 import model.utente.Utente;
 
 /**
@@ -30,9 +32,12 @@ public class SegnalazioneBL {
      * Instantiates a new segnalazione BL.
      *
      * @param aSegnalazioneDB the segnalazione DB
+     * @param aTecnicoDB      the tecnico DB
      */
-    public SegnalazioneBL(final SegnalazioneDBInterface aSegnalazioneDB) {
+    public SegnalazioneBL(final SegnalazioneDBInterface aSegnalazioneDB,
+            final UfficioTecnicoDBInterface aTecnicoDB) {
         segnalazioneDB = aSegnalazioneDB;
+        tecnicoDB = aTecnicoDB;
     }
 
     /**
@@ -40,7 +45,7 @@ public class SegnalazioneBL {
      *
      */
     public SegnalazioneBL() {
-        this(new SegnalazioneDB());
+        this(new SegnalazioneDB(), new UfficioTecnicoDB());
     }
 
     /**
@@ -134,11 +139,16 @@ public class SegnalazioneBL {
         aSegnalazione = segnalazioneDB.getByCod(aCod);
         if (aSegnalazione != null
                 && aSegnalazione.getStato() == Segnalazione.STATO_APERTO) {
-            final UfficioTecnico tecnico = new UfficioTecnico();
-            tecnico.setId(aIdTecnico);
+            aSegnalazione.setDataAssegnazione(LocalDate.now());
+            final UfficioTecnico tecnico = tecnicoDB.getById(aIdTecnico);
             aSegnalazione.setTecnico(tecnico);
             aSegnalazione.setDataAssegnazione(LocalDate.now());
-            return segnalazioneDB.update(aSegnalazione);
+            if (segnalazioneDB.update(aSegnalazione)) {
+                SendMailSSL.sendEmail(tecnico.getEmail(),
+                        aSegnalazione.getTitolo(),
+                        aSegnalazione.getDescrizione());
+            }
+            return true;
         }
         return false;
     }
