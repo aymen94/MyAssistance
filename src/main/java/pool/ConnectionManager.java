@@ -14,10 +14,28 @@ import javax.servlet.annotation.WebListener;
  * @author Andrea Mennillo
  */
 @WebListener
-public class Database implements ServletContextListener {
+public final class ConnectionManager
+        implements ServletContextListener, ConnectionManagerInterface {
+
+    /**
+     * The instance.
+     */
+    private static ConnectionManager instance;
+
+    /**
+     * Gets the instance.
+     *
+     * @return the instance
+     */
+    public static ConnectionManager getInstance() {
+        if (instance == null) {
+            instance = new ConnectionManager();
+        }
+        return instance;
+    }
 
     /** Il pool. */
-    private static JDBCConnectionPool pool;
+    private JDBCConnectionPool pool;
 
     /**
      * Inizializza un JDBCConnectionPool all'avvio del container.
@@ -27,7 +45,7 @@ public class Database implements ServletContextListener {
      *      javax.servlet.ServletContextEvent)
      */
     @Override
-    public final void contextInitialized(final ServletContextEvent sce) {
+    public void contextInitialized(final ServletContextEvent sce) {
         System.out.println("### run ###");
         initializePool("databases.xml", "Production");
     }
@@ -39,7 +57,7 @@ public class Database implements ServletContextListener {
      * @param configName the config name
      * @throws RuntimeException the runtime exception
      */
-    public static synchronized void initializePool(final String configFile,
+    public synchronized void initializePool(final String configFile,
             final String configName) throws RuntimeException {
 
         try {
@@ -76,14 +94,14 @@ public class Database implements ServletContextListener {
      * ServletContextEvent)
      */
     @Override
-    public final void contextDestroyed(final ServletContextEvent sce) {
+    public void contextDestroyed(final ServletContextEvent sce) {
         destroyPool();
     }
 
     /**
      * Destroy pool.
      */
-    public static synchronized void destroyPool() {
+    public synchronized void destroyPool() {
         if (pool != null) {
             pool.destroyUnlocked();
             pool = null;
@@ -95,7 +113,7 @@ public class Database implements ServletContextListener {
      *
      * @return the connection
      */
-    public static synchronized Connection getConnection() {
+    public synchronized Connection getConnection() {
         return pool.takeOut();
     }
 
@@ -104,8 +122,7 @@ public class Database implements ServletContextListener {
      *
      * @param connection the connection
      */
-    public static synchronized void freeConnection(
-            final Connection connection) {
+    public synchronized void freeConnection(final Connection connection) {
         pool.takeIn(connection);
     }
 
@@ -114,7 +131,7 @@ public class Database implements ServletContextListener {
      *
      * @return pool to null a pull
      */
-    public static boolean isInitialized() {
+    public boolean isInitialized() {
         return pool != null;
     }
 }

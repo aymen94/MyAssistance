@@ -12,17 +12,39 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import pool.Database;
+import pool.ConnectionManager;
 
 /**
  * The Class TipologiaDB.
  */
-public final class TipologiaDB {
+public final class TipologiaDB implements TipologiaDBInterface {
+
+    /**
+     * The connection manager.
+     */
+    private ConnectionManager connectionManager;
 
     /**
      * The Constant TABLE_NAME.
      */
     private static final String TABLE_NAME = "tipologia";
+
+    /**
+     * Instantiates a new tipologia DB.
+     * Use the default connection Manager
+     */
+    public TipologiaDB() {
+        this(ConnectionManager.getInstance());
+    }
+
+    /**
+     * Instantiates a new tipologia DB.
+     *
+     * @param aConnectionManager the connection manager
+     */
+    public TipologiaDB(final ConnectionManager aConnectionManager) {
+        connectionManager = aConnectionManager;
+    }
 
     /**
      * The Constant INSERT_TIPOLOGIA.
@@ -49,7 +71,7 @@ public final class TipologiaDB {
      * @throws SQLException the SQL exception
      */
     public int insert(final Tipologia aTipologia) throws SQLException {
-        final Connection connection = Database.getConnection();
+        final Connection connection = connectionManager.getConnection();
         try {
             final PreparedStatement preparedStatement = connection
                     .prepareStatement(INSERT_TIPOLOGIA);
@@ -57,7 +79,7 @@ public final class TipologiaDB {
             preparedStatement.setShort(2, aTipologia.getPriorita());
             return preparedStatement.executeUpdate();
         } finally {
-            Database.freeConnection(connection);
+            connectionManager.freeConnection(connection);
         }
     }
 
@@ -78,7 +100,7 @@ public final class TipologiaDB {
      * @return the by id
      * @throws SQLException the SQL exception
      */
-    public Tipologia getById(final short aId) throws SQLException {
+    public Tipologia getById(final int aId) throws SQLException {
         final List<Tipologia> tipologiaList = genericGet(SELECT_BY_ID, aId);
         if (tipologiaList.size() > 0) {
             return tipologiaList.get(0);
@@ -97,7 +119,7 @@ public final class TipologiaDB {
      */
     private List<Tipologia> genericGet(final String aQuery,
             final int aParameter) throws SQLException {
-        final Connection connection = Database.getConnection();
+        final Connection connection = connectionManager.getConnection();
         final List<Tipologia> tipologiaList = new ArrayList<Tipologia>();
         try {
 
@@ -117,7 +139,7 @@ public final class TipologiaDB {
             }
             return tipologiaList;
         } finally {
-            Database.freeConnection(connection);
+            connectionManager.freeConnection(connection);
         }
     }
 }

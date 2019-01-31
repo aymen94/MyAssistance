@@ -16,19 +16,19 @@ import java.time.LocalDate;
 import java.util.List;
 
 import org.junit.runners.MethodSorters;
-import pool.Database;
+import pool.ConnectionManager;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING) public final class UtenteDBTest {
     @BeforeClass public static void setUpClass() throws SQLException {
-        Database.initializePool("databases.xml", "Test");
-        final Connection conn = Database.getConnection();
+        ConnectionManager.getInstance().initializePool("databases.xml", "Test");
+        final Connection conn = ConnectionManager.getInstance().getConnection();
         conn.prepareStatement(
                 "ALTER TABLE my_assistance.utente AUTO_INCREMENT = 1")
                 .executeUpdate();
 
         // disable foreign key checks
         conn.prepareStatement("SET FOREIGN_KEY_CHECKS=0;").executeUpdate();
-        Database.freeConnection(conn);
+        ConnectionManager.getInstance().freeConnection(conn);
     }
 
     /**
@@ -38,11 +38,11 @@ import pool.Database;
      */
     @AfterClass
     public static void tearDownClass() throws SQLException {
-        final Connection conn = Database.getConnection();
+        final Connection conn = ConnectionManager.getInstance().getConnection();
         // enable foreign key checks
         conn.prepareStatement("SET FOREIGN_KEY_CHECKS=1;").executeUpdate();
-        Database.freeConnection(conn);
-        Database.destroyPool();
+        ConnectionManager.getInstance().freeConnection(conn);
+        ConnectionManager.getInstance().destroyPool();
     }
 
     @Test public void testAInsert1() throws SQLException {
