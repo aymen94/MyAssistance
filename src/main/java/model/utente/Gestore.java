@@ -10,7 +10,7 @@ import java.time.LocalDate;
 /**
  * The Class Gestore.
  */
-public final class Gestore extends Utente {
+public class Gestore extends Utente {
     /**
      * Instantiates a new gestore.
      */
@@ -42,7 +42,7 @@ public final class Gestore extends Utente {
      * @see model.utente.Utente#isGestore()
      */
     @Override
-    public Boolean isGestore() {
+    public final Boolean isGestore() {
         return true;
     }
 }

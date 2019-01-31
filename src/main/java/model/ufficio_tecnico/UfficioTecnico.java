@@ -5,7 +5,7 @@ import java.util.Objects;
 /**
  * The Class UfficioTecnico.
  */
-public final class UfficioTecnico {
+public class UfficioTecnico {
 
     /**
      * The id.
@@ -43,7 +43,7 @@ public final class UfficioTecnico {
      *
      * @return id get the id of UfficioTecnico
      */
-    public int getId() {
+    public final int getId() {
         return id;
     }
 
@@ -52,7 +52,7 @@ public final class UfficioTecnico {
      *
      * @param aId setta identificatore dell'ufficio tecnico
      */
-    public void setId(final int aId) {
+    public final void setId(final int aId) {
         this.id = aId;
     }
 
@@ -61,7 +61,7 @@ public final class UfficioTecnico {
      *
      * @return nome get the name of UfficioTecnico
      */
-    public String getNome() {
+    public final String getNome() {
         return nome;
     }
 
@@ -70,7 +70,7 @@ public final class UfficioTecnico {
      *
      * @param aNome set nome of UfficioTecnico
      */
-    public void setNome(final String aNome) {
+    public final void setNome(final String aNome) {
         this.nome = aNome;
     }
 
@@ -79,7 +79,7 @@ public final class UfficioTecnico {
      *
      * @return get telefono of UfficioTecnico
      */
-    public String getTel() {
+    public final String getTel() {
         return tel;
     }
 
@@ -88,7 +88,7 @@ public final class UfficioTecnico {
      *
      * @param aTel set numero of UfficioTecnico
      */
-    public void setTel(final String aTel) {
+    public final void setTel(final String aTel) {
         this.tel = aTel;
     }
 
@@ -97,7 +97,7 @@ public final class UfficioTecnico {
      *
      * @return get emailof UfficioTecnico
      */
-    public String getEmail() {
+    public final String getEmail() {
         return email;
     }
 
@@ -106,7 +106,7 @@ public final class UfficioTecnico {
      *
      * @param aEmail set email of UfficioTecnico
      */
-    public void setEmail(final String aEmail) {
+    public final void setEmail(final String aEmail) {
         this.email = aEmail;
     }
 
@@ -115,7 +115,7 @@ public final class UfficioTecnico {
      *
      * @return get ubicazione dell'uffico tecnico
      */
-    public String getUbicazione() {
+    public final String getUbicazione() {
         return ubicazione;
     }
 
@@ -124,7 +124,7 @@ public final class UfficioTecnico {
      *
      * @param aUbicazione set ubicazione of UfficioTecnico
      */
-    public void setUbicazione(final String aUbicazione) {
+    public final void setUbicazione(final String aUbicazione) {
         this.ubicazione = aUbicazione;
     }
 
@@ -134,7 +134,7 @@ public final class UfficioTecnico {
      * @return return rappresentation of class
      */
     @Override
-    public String toString() {
+    public final String toString() {
         return "UfficioTecnico{" + "id=" + id + ", nome='" + nome + '\''
                 + ", tel='" + tel + '\'' + ", email='" + email + '\''
                 + ", ubicazione='" + ubicazione + '\'' + '}';
@@ -147,7 +147,7 @@ public final class UfficioTecnico {
      * @return result of equals
      */
     @Override
-    public boolean equals(final Object obj) {
+    public final boolean equals(final Object obj) {
         if (this == obj) {
             return true;
         }
@@ -171,7 +171,7 @@ public final class UfficioTecnico {
      * @return result
      */
     @Override
-    public int hashCode() {
+    public final int hashCode() {
         return Objects.hash(nome, ubicazione, email, tel);
     }
 

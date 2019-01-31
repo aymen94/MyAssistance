@@ -10,7 +10,7 @@ import java.time.LocalDate;
 /**
  * The Class CSU.
  */
-public final class CSU extends Utente {
+public class CSU extends Utente {
 
     /**
      * LocalDate dataSospensione.
@@ -47,7 +47,7 @@ public final class CSU extends Utente {
      *
      * @return dataSospensione ottieni la data di sospensione dell'utente.
      */
-    public LocalDate getDataSospensione() {
+    public final LocalDate getDataSospensione() {
 
         return dataSospensione;
     }
@@ -57,7 +57,7 @@ public final class CSU extends Utente {
      *
      * @param aDataSospensione imposta la data di sospensione dell'utente.
      */
-    public void setDataSospensione(final LocalDate aDataSospensione) {
+    public final void setDataSospensione(final LocalDate aDataSospensione) {
         dataSospensione = aDataSospensione;
     }
 
@@ -65,7 +65,7 @@ public final class CSU extends Utente {
      * @return false because is CSU.
      */
     @Override
-    public Boolean isGestore() {
+    public final Boolean isGestore() {
         return false;
     }
 

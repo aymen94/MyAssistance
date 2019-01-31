@@ -1,4 +1,4 @@
-package model.utility;
+package model.segnalazione;
 
 import java.util.Properties;
 

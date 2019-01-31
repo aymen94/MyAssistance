@@ -13,7 +13,7 @@ import java.util.Locale;
 /**
  * The Class UtenteBL.
  */
-public final class UtenteBL {
+public class UtenteBL {
 
     /**
      * The Constant NAME_REGEX.
@@ -110,7 +110,7 @@ public final class UtenteBL {
      * @return true, if successful
      * @throws Exception the exception
      */
-    public boolean effettuaRegistrazione(final String aUserName,
+    public final boolean effettuaRegistrazione(final String aUserName,
             final String aPassword, final String aEmail, final String aNome,
             final String aCognome, final String aDataDiNascita,
             final int aSesso) throws Exception {
@@ -153,7 +153,7 @@ public final class UtenteBL {
      * @return true, if successful
      * @throws Exception the exception
      */
-    public boolean sospendiUtente(final CSU aCSU) throws Exception {
+    public final boolean sospendiUtente(final CSU aCSU) throws Exception {
         return utenteDB.update(aCSU) > 0;
     }
 
@@ -165,8 +165,8 @@ public final class UtenteBL {
      * @return the csu
      * @throws Exception the exception
      */
-    public CSU autenticazioneCSU(final String aUserName, final String aPass)
-            throws Exception {
+    public final CSU autenticazioneCSU(final String aUserName,
+            final String aPass) throws Exception {
         return (CSU) autenticazione(aUserName, aPass);
     }
 
@@ -178,7 +178,7 @@ public final class UtenteBL {
      * @return the gestore
      * @throws Exception the exception
      */
-    public Gestore autenticazioneGestore(final String aUserName,
+    public final Gestore autenticazioneGestore(final String aUserName,
             final String aPass) throws Exception {
         return (Gestore) autenticazione(aUserName, aPass);
     }
@@ -189,7 +189,7 @@ public final class UtenteBL {
      * @return the utenti registrati
      * @throws Exception the exception
      */
-    public List<Utente> getUtentiRegistrati() throws Exception {
+    public final List<Utente> getUtentiRegistrati() throws Exception {
         return utenteDB.getAll();
 
     }
@@ -203,8 +203,8 @@ public final class UtenteBL {
      * @param regex     the regex
      * @return true, if successful
      */
-    private boolean validateLengthRegex(final String text, final int minLength,
-            final int maxLength, final String regex) {
+    private boolean validateLengthRegex(final String text,
+            final int minLength, final int maxLength, final String regex) {
         return text.length() >= minLength && text.length() <= maxLength
                 && text.matches(regex);
     }
@@ -217,8 +217,8 @@ public final class UtenteBL {
      * @return the utente
      * @throws Exception the exception
      */
-    private Utente autenticazione(final String username, final String password)
-            throws Exception {
+    private Utente autenticazione(final String username,
+            final String password) throws Exception {
         final Utente utente = utenteDB.getByUserName(username);
         if (PasswordHash.validatePassword(password, utente.getPassword())) {
             return utente;
