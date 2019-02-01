@@ -58,8 +58,7 @@ public final class ModificaSegnalazioneServlet extends BasicServlet {
             final HttpServletResponse resp)
             throws ServletException, IOException {
 
-        SegnalazioneDB sdb = new SegnalazioneDB();
-        SegnalazioneBL sbl = new SegnalazioneBL(sdb);
+        SegnalazioneBL sbl = new SegnalazioneBL();
 
         Tipologia tipologia = new Tipologia();
         tipologia.setId(Integer.parseInt(req.getParameter("field-type")));

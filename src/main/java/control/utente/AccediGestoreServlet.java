@@ -11,32 +11,59 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import model.utente.Gestore;
+import model.utente.UtenteBL;
+
 import java.io.IOException;
 
 /**
- *
- * Servlet per accesso gestore.
+ * Servlet for accessing manager.
  */
 @WebServlet("/gestore/accedi")
 public final class AccediGestoreServlet extends HttpServlet {
     /**
-     *
+     * doGet method.
      */
     @Override protected void doGet(final HttpServletRequest req,
             final HttpServletResponse resp)
             throws ServletException, IOException {
-        RequestDispatcher dispatcher =
-                getServletContext().getRequestDispatcher(
-                        "/gestore/accedi.jsp");
-        dispatcher.forward(req, resp);
+        if (req.getSession().getAttribute("utente") != null) {
+            resp.sendRedirect("../");
+        } else {
+            RequestDispatcher dispatcher = getServletContext()
+                    .getRequestDispatcher("/gestore/accedi.jsp");
+            dispatcher.forward(req, resp);
+        }
     }
 
     /**
-     *
+     * doPost method.
      */
     @Override protected void doPost(final HttpServletRequest req,
             final HttpServletResponse resp)
             throws ServletException, IOException {
+        String username = (String) req.getParameter("username");
+        String password = (String) req.getParameter("password");
+        if (username != null && password != null) {
+            UtenteBL u = new UtenteBL();
+            try {
+                Gestore gestore = u.autenticazioneGestore(username, password);
+                if (gestore != null) {
+                    req.getSession(true).setAttribute("utente", gestore);
+                } else {
+                    throw new RuntimeException(
+                            "Combinazione username / password errata.");
+                }
+            } catch (Exception e) {
+                if (e.getMessage() != null) {
+                    req.setAttribute("errore", e.getMessage());
+                } else {
+                    req.setAttribute("errore", "Utente non esistente.");
+                }
+            }
+        }
+
         doGet(req, resp);
     }
 }
