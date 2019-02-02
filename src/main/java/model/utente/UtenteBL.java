@@ -221,7 +221,7 @@ public class UtenteBL {
      */
     private Utente autenticazione(final String username, final String password)
             throws Exception {
-        final Utente utente = utenteDB.getByUserName(username);
+        final Utente utente = utenteDB.getByUserName(username.toLowerCase());
         if (PasswordHash.validatePassword(password, utente.getPassword())) {
             return utente;
         } else {
