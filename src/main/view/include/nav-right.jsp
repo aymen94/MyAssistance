@@ -11,15 +11,16 @@
 			src="${pageContext.servletContext.contextPath}/assets/images/user.png"
 			alt="User">
 		<div class="card-body">
+			Sei loggato come utente
 			<c:choose>
 				<c:when test="${sessionScope.utente == null}">
-					Non sei loggato nella piattaforma.
+					<b>Guest</b>.
 				</c:when>
 				<c:when test="${sessionScope.utente.isGestore()}">
-					Sei loggato come utente <b>Gestore</b>.
+					<b>Gestore</b>.
 				</c:when>
 				<c:otherwise>
-					Sei loggato come utente <b>CSU</b>.
+					<b>CSU</b>.
 				</c:otherwise>
 			</c:choose>
 		</div>

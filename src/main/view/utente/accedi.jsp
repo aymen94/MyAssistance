@@ -31,7 +31,6 @@
 								<h3 class="mb-0">Università degli Studi di Salerno</h3>
 							</div>
 							<c:if test="${errore != null}">
-								<br>
 								<div class="alert alert-danger">
 									<strong>Errore!</strong>
 									<c:out value="${errore}" />
