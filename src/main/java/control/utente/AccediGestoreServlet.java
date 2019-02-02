@@ -25,9 +25,10 @@ public final class AccediGestoreServlet extends HttpServlet {
     /**
      * doGet method.
      */
-    @Override protected void doGet(final HttpServletRequest req,
+    @Override
+    protected void doGet(final HttpServletRequest req,
             final HttpServletResponse resp)
-            throws ServletException, IOException {
+                throws ServletException, IOException {
         if (req.getSession().getAttribute("utente") != null) {
             resp.sendRedirect("../");
         } else {
@@ -40,7 +41,8 @@ public final class AccediGestoreServlet extends HttpServlet {
     /**
      * doPost method.
      */
-    @Override protected void doPost(final HttpServletRequest req,
+    @Override
+    protected void doPost(final HttpServletRequest req,
             final HttpServletResponse resp)
             throws ServletException, IOException {
         String username = (String) req.getParameter("username");
@@ -48,9 +50,9 @@ public final class AccediGestoreServlet extends HttpServlet {
         if (username != null && password != null) {
             UtenteBL u = new UtenteBL();
             try {
-                Gestore gestore = u.autenticazioneGestore(username, password);
-                if (gestore != null) {
-                    req.getSession(true).setAttribute("utente", gestore);
+                Gestore csu = u.autenticazioneGestore(username, password);
+                if (csu != null) {
+                    req.getSession(true).setAttribute("utente", csu);
                 } else {
                     throw new RuntimeException(
                             "Combinazione username / password errata.");
