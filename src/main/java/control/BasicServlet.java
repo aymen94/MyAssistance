@@ -46,6 +46,9 @@ public abstract class BasicServlet extends HttpServlet {
         req.setAttribute("STATO_ASSEGNATO", Segnalazione.STATO_ASSEGNATO);
         req.setAttribute("STATO_RIFIUTATO", Segnalazione.STATO_RIFIUTATO);
         req.setAttribute("STATO_RISOLTO", Segnalazione.STATO_RISOLTO);
+        req.setAttribute("SESSO_ALTRO", Utente.SESSO_ALTRO);
+        req.setAttribute("SESSO_MASCHILE", Utente.SESSO_MASCHILE);
+        req.setAttribute("SESSO_FEMMINILE", Utente.SESSO_FEMMINILE);
 
         return true;
     }
