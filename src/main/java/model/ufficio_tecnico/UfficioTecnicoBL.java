@@ -5,7 +5,7 @@ import java.util.List;
 /**
  * The Class UfficioTecnicoBL.
  */
-public final class UfficioTecnicoBL {
+public class UfficioTecnicoBL {
 
     /**
      * The Constant MAX_TITLE_LENGTH.
@@ -59,7 +59,9 @@ public final class UfficioTecnicoBL {
     }
 
     /**
-     * Instantiates a new ufficio tecnico BL.
+     * Instantiates a new ufficio tecnico BL.<br>
+     * This should be used only for testing,
+     * for others purpose use {@link #UfficioTecnicoBL()} instead.
      *
      * @param db it's database manager
      */
@@ -74,7 +76,7 @@ public final class UfficioTecnicoBL {
      * @return true, if successful
      * @throws Exception the exception
      */
-    public boolean insertUfficioTecnico(final UfficioTecnico uff)
+    public final boolean insertUfficioTecnico(final UfficioTecnico uff)
             throws Exception {
         if (validateLengthRegex(uff.getNome(),
                 1,
@@ -104,7 +106,7 @@ public final class UfficioTecnicoBL {
      * @return true, if successful.
      * @throws Exception the exception
      */
-    public List<UfficioTecnico> getUfficiTecnici() throws Exception {
+    public final List<UfficioTecnico> getUfficiTecnici() throws Exception {
         return database.getAll();
     }
 
@@ -115,7 +117,7 @@ public final class UfficioTecnicoBL {
      * @return the ufficio tecnico
      * @throws Exception the exception
      */
-    public UfficioTecnico ottieniUfficio(final int aId) throws Exception {
+    public final UfficioTecnico ottieniUfficio(final int aId) throws Exception {
         return database.getById(aId);
     }
 
@@ -128,8 +130,8 @@ public final class UfficioTecnicoBL {
      * @param regex     the regex
      * @return true, if successful
      */
-    private boolean validateLengthRegex(final String text, final int minLength,
-            final int maxLength, final String regex) {
+    private boolean validateLengthRegex(final String text,
+            final int minLength, final int maxLength, final String regex) {
         return text.length() >= minLength && text.length() <= maxLength
                 && text.matches(regex);
     }

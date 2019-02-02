@@ -86,7 +86,9 @@ public final class UtenteDB implements UtenteDBInterface {
     }
 
     /**
-     * Instantiates a new utente DB.
+     * Instantiates a new utente DB.<br>
+     * This should be used only for testing, for others purpose use
+     * {@link #UtenteDB()} instead.
      *
      * @param aConnectionManager the connection manager
      */

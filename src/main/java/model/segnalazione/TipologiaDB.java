@@ -30,19 +30,20 @@ public final class TipologiaDB implements TipologiaDBInterface {
     private static final String TABLE_NAME = "tipologia";
 
     /**
-     * Instantiates a new tipologia DB.
-     * Use the default connection Manager
+     * Instantiates a new tipologia DB. Use the default connection Manager
      */
     public TipologiaDB() {
         this(ConnectionManager.getInstance());
     }
 
     /**
-     * Instantiates a new tipologia DB.
+     * Instantiates a new tipologia DB.<br>
+     * This should be used only for testing, for others purpose use
+     * {@link #TipologiaDB()} instead.
      *
      * @param aConnectionManager the connection manager
      */
-    public TipologiaDB(final ConnectionManager aConnectionManager) {
+    private TipologiaDB(final ConnectionManager aConnectionManager) {
         connectionManager = aConnectionManager;
     }
 

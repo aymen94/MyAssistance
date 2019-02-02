@@ -9,12 +9,14 @@ import java.time.LocalDate;
 import java.util.List;
 
 import model.ufficio_tecnico.UfficioTecnico;
+import model.ufficio_tecnico.UfficioTecnicoDB;
+import model.ufficio_tecnico.UfficioTecnicoDBInterface;
 import model.utente.Utente;
 
 /**
  * The Class SegnalazioneBL.
  */
-public final class SegnalazioneBL {
+public class SegnalazioneBL {
 
     /**
      * The Constant MAX_TITLE_LENGTH.
@@ -27,12 +29,22 @@ public final class SegnalazioneBL {
     private final SegnalazioneDBInterface segnalazioneDB;
 
     /**
-     * Instantiates a new segnalazione BL.
+     * The tecnico DB.
+     */
+    private final UfficioTecnicoDBInterface tecnicoDB;
+
+    /**
+     * Instantiates a new segnalazione BL.<br>
+     * This should be used only for testing, for others purpose use
+     * {@link #SegnalazioneBL()} instead.
      *
      * @param aSegnalazioneDB the segnalazione DB
+     * @param aTecnicoDB      the tecnico DB
      */
-    public SegnalazioneBL(final SegnalazioneDBInterface aSegnalazioneDB) {
+    public SegnalazioneBL(final SegnalazioneDBInterface aSegnalazioneDB,
+            final UfficioTecnicoDBInterface aTecnicoDB) {
         segnalazioneDB = aSegnalazioneDB;
+        tecnicoDB = aTecnicoDB;
     }
 
     /**
@@ -40,7 +52,7 @@ public final class SegnalazioneBL {
      *
      */
     public SegnalazioneBL() {
-        this(new SegnalazioneDB());
+        this(new SegnalazioneDB(), new UfficioTecnicoDB());
     }
 
     /**
@@ -50,7 +62,7 @@ public final class SegnalazioneBL {
      * @return true, if successful
      * @throws Exception the exception
      */
-    public boolean insertSegnalazione(final Segnalazione segnalazione)
+    public final boolean insertSegnalazione(final Segnalazione segnalazione)
             throws Exception {
 
         if (validateSegnalazione(segnalazione)) {
@@ -68,8 +80,8 @@ public final class SegnalazioneBL {
      * @return the list
      * @throws Exception the exception
      */
-    public List<Segnalazione> getSegnalazioniEffettuate(final Utente aUtente)
-            throws Exception {
+    public final List<Segnalazione> getSegnalazioniEffettuate(
+            final Utente aUtente) throws Exception {
         return segnalazioneDB.getByAutore(aUtente.getId());
     }
 
@@ -80,7 +92,7 @@ public final class SegnalazioneBL {
      * @return true, if successful
      * @throws Exception the exception
      */
-    public boolean updateSegnalazione(final Segnalazione segnalazione)
+    public final boolean updateSegnalazione(final Segnalazione segnalazione)
             throws Exception {
 
         if (validateSegnalazione(segnalazione)) {
@@ -108,8 +120,8 @@ public final class SegnalazioneBL {
      * @return true, if successful
      * @throws Exception the exception
      */
-    public boolean deleteSegnalazione(final int aCod, final Utente aUtente)
-            throws Exception {
+    public final boolean deleteSegnalazione(final int aCod,
+            final Utente aUtente) throws Exception {
         final Segnalazione aSegnalazione = segnalazioneDB.getByCod(aCod);
         if (aSegnalazione != null
                 && aSegnalazione.getStato() == Segnalazione.STATO_APERTO
@@ -128,17 +140,22 @@ public final class SegnalazioneBL {
      * @return true, if successful
      * @throws Exception the exception
      */
-    public boolean inoltraSegnalazione(final int aCod, final int aIdTecnico)
-            throws Exception {
+    public final boolean inoltraSegnalazione(final int aCod,
+            final int aIdTecnico) throws Exception {
         Segnalazione aSegnalazione;
         aSegnalazione = segnalazioneDB.getByCod(aCod);
         if (aSegnalazione != null
                 && aSegnalazione.getStato() == Segnalazione.STATO_APERTO) {
-            final UfficioTecnico tecnico = new UfficioTecnico();
-            tecnico.setId(aIdTecnico);
+            aSegnalazione.setDataAssegnazione(LocalDate.now());
+            final UfficioTecnico tecnico = tecnicoDB.getById(aIdTecnico);
             aSegnalazione.setTecnico(tecnico);
             aSegnalazione.setDataAssegnazione(LocalDate.now());
-            return segnalazioneDB.update(aSegnalazione);
+            if (segnalazioneDB.update(aSegnalazione)) {
+                SendMailSSL.sendEmail(tecnico.getEmail(),
+                        aSegnalazione.getTitolo(),
+                        aSegnalazione.getDescrizione());
+            }
+            return true;
         }
         return false;
     }
@@ -149,7 +166,7 @@ public final class SegnalazioneBL {
      * @return the list
      * @throws Exception the exception
      */
-    public List<Segnalazione> getSegnalazioniRicevute() throws Exception {
+    public final List<Segnalazione> getSegnalazioniRicevute() throws Exception {
         return segnalazioneDB.getAll();
 
     }
@@ -162,7 +179,7 @@ public final class SegnalazioneBL {
      * @return true, if successful
      * @throws Exception the exception
      */
-    public boolean rifiutaSegnalazione(final int aCod,
+    public final boolean rifiutaSegnalazione(final int aCod,
             final String aMotivazioneRifiuto) throws Exception {
 
         final Segnalazione aSegnalazione = segnalazioneDB.getByCod(aCod);
@@ -185,7 +202,7 @@ public final class SegnalazioneBL {
      * @return true, if successful
      * @throws Exception the SQL exception
      */
-    public boolean segnaRisolta(final int aCod) throws Exception {
+    public final boolean segnaRisolta(final int aCod) throws Exception {
         final Segnalazione aSegnalazione = segnalazioneDB.getByCod(aCod);
         if (aSegnalazione != null
                 && aSegnalazione.getStato() == Segnalazione.STATO_ASSEGNATO) {

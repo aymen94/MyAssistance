@@ -14,7 +14,7 @@ import model.utente.Utente;
 /**
  * The Class Segnalazione.
  */
-public final class Segnalazione {
+public class Segnalazione {
 
     /**
      * The cod.
@@ -107,7 +107,7 @@ public final class Segnalazione {
      *
      * @return the cod
      */
-    public int getCod() {
+    public final int getCod() {
         return cod;
     }
 
@@ -116,7 +116,7 @@ public final class Segnalazione {
      *
      * @param aCod the cod to set
      */
-    public void setCod(final int aCod) {
+    public final void setCod(final int aCod) {
         cod = aCod;
     }
 
@@ -125,7 +125,7 @@ public final class Segnalazione {
      *
      * @return the titolo
      */
-    public String getTitolo() {
+    public final String getTitolo() {
         return titolo;
     }
 
@@ -134,21 +134,21 @@ public final class Segnalazione {
      *
      * @param aTitolo the titolo to set
      */
-    public void setTitolo(final String aTitolo) {
+    public final void setTitolo(final String aTitolo) {
         titolo = aTitolo;
     }
 
     /**
      * @return the descrizione
      */
-    public String getDescrizione() {
+    public final String getDescrizione() {
         return descrizione;
     }
 
     /**
      * @param aDescrizione the descrizione to set
      */
-    public void setDescrizione(final String aDescrizione) {
+    public final void setDescrizione(final String aDescrizione) {
         descrizione = aDescrizione;
     }
 
@@ -157,7 +157,7 @@ public final class Segnalazione {
      *
      * @return the stato
      */
-    public short getStato() {
+    public final short getStato() {
         return stato;
     }
 
@@ -166,7 +166,7 @@ public final class Segnalazione {
      *
      * @param aStato the stato to set
      */
-    public void setStato(final short aStato) {
+    public final void setStato(final short aStato) {
         stato = aStato;
     }
 
@@ -175,7 +175,7 @@ public final class Segnalazione {
      *
      * @return the dataSegnalazione
      */
-    public LocalDate getDataSegnalazione() {
+    public final LocalDate getDataSegnalazione() {
         return dataSegnalazione;
     }
 
@@ -184,7 +184,7 @@ public final class Segnalazione {
      *
      * @param aDataSegnalazione the dataSegnalazione to set
      */
-    public void setDataSegnalazione(final LocalDate aDataSegnalazione) {
+    public final void setDataSegnalazione(final LocalDate aDataSegnalazione) {
         dataSegnalazione = aDataSegnalazione;
     }
 
@@ -193,7 +193,7 @@ public final class Segnalazione {
      *
      * @return the dataRifiuto
      */
-    public LocalDate getDataRifiuto() {
+    public final LocalDate getDataRifiuto() {
         return dataRifiuto;
     }
 
@@ -202,21 +202,21 @@ public final class Segnalazione {
      *
      * @param aDataRifiuto the dataRifiuto to set
      */
-    public void setDataRifiuto(final LocalDate aDataRifiuto) {
+    public final void setDataRifiuto(final LocalDate aDataRifiuto) {
         dataRifiuto = aDataRifiuto;
     }
 
     /**
      * @return the dataAssegnazione
      */
-    public LocalDate getDataAssegnazione() {
+    public final LocalDate getDataAssegnazione() {
         return dataAssegnazione;
     }
 
     /**
      * @param aDataAssegnazione the dataAssegnazione to set
      */
-    public void setDataAssegnazione(final LocalDate aDataAssegnazione) {
+    public final void setDataAssegnazione(final LocalDate aDataAssegnazione) {
         dataAssegnazione = aDataAssegnazione;
     }
 
@@ -225,7 +225,7 @@ public final class Segnalazione {
      *
      * @return the dataRisoluzione
      */
-    public LocalDate getDataRisoluzione() {
+    public final LocalDate getDataRisoluzione() {
         return dataRisoluzione;
     }
 
@@ -234,7 +234,7 @@ public final class Segnalazione {
      *
      * @param aDataRisoluzione the dataRisoluzione to set
      */
-    public void setDataRisoluzione(final LocalDate aDataRisoluzione) {
+    public final void setDataRisoluzione(final LocalDate aDataRisoluzione) {
         dataRisoluzione = aDataRisoluzione;
     }
 
@@ -243,7 +243,7 @@ public final class Segnalazione {
      *
      * @return the motivazioneRifiuto
      */
-    public String getMotivazioneRifiuto() {
+    public final String getMotivazioneRifiuto() {
         return motivazioneRifiuto;
     }
 
@@ -252,7 +252,7 @@ public final class Segnalazione {
      *
      * @param aMotivazioneRifiuto the motivazioneRifiuto to set
      */
-    public void setMotivazioneRifiuto(final String aMotivazioneRifiuto) {
+    public final void setMotivazioneRifiuto(final String aMotivazioneRifiuto) {
         motivazioneRifiuto = aMotivazioneRifiuto;
     }
 
@@ -261,7 +261,7 @@ public final class Segnalazione {
      *
      * @return the tipologia
      */
-    public Tipologia getTipologia() {
+    public final Tipologia getTipologia() {
         return tipologia;
     }
 
@@ -270,7 +270,7 @@ public final class Segnalazione {
      *
      * @param aTipologia the tipologia to set
      */
-    public void setTipologia(final Tipologia aTipologia) {
+    public final void setTipologia(final Tipologia aTipologia) {
         tipologia = aTipologia;
     }
 
@@ -279,7 +279,7 @@ public final class Segnalazione {
      *
      * @return the autore
      */
-    public Utente getAutore() {
+    public final Utente getAutore() {
         return autore;
     }
 
@@ -288,7 +288,7 @@ public final class Segnalazione {
      *
      * @param aAutore the autore to set
      */
-    public void setAutore(final Utente aAutore) {
+    public final void setAutore(final Utente aAutore) {
         autore = aAutore;
     }
 
@@ -297,7 +297,7 @@ public final class Segnalazione {
      *
      * @return the tecnico
      */
-    public UfficioTecnico getTecnico() {
+    public final UfficioTecnico getTecnico() {
         return tecnico;
     }
 
@@ -306,7 +306,7 @@ public final class Segnalazione {
      *
      * @param aTecnico the tecnico to set
      */
-    public void setTecnico(final UfficioTecnico aTecnico) {
+    public final void setTecnico(final UfficioTecnico aTecnico) {
         tecnico = aTecnico;
     }
 
@@ -317,7 +317,7 @@ public final class Segnalazione {
      * @see java.lang.Object#hashCode()
      */
     @Override
-    public int hashCode() {
+    public final int hashCode() {
         return Objects.hash(autore,
                 dataAssegnazione,
                 dataRifiuto,
@@ -338,7 +338,7 @@ public final class Segnalazione {
      * @see java.lang.Object#equals(java.lang.Object)
      */
     @Override
-    public boolean equals(final Object obj) {
+    public final boolean equals(final Object obj) {
         if (this == obj) {
             return true;
         }
@@ -368,7 +368,7 @@ public final class Segnalazione {
      * @see java.lang.Object#toString()
      */
     @Override
-    public String toString() {
+    public final String toString() {
         return "Segnalazione [cod=" + cod + ", titolo=" + titolo
                 + ", descrizione=" + descrizione + ", stato=" + stato
                 + ", dataSegnalazione=" + dataSegnalazione + ", dataRifiuto="
