@@ -25,7 +25,8 @@ public final class SospendiUtenteServlet extends BasicServlet {
     /**
      * doGet method.
      */
-    @Override protected void doGet(final HttpServletRequest req,
+    @Override
+    protected void doGet(final HttpServletRequest req,
             final HttpServletResponse resp)
             throws ServletException, IOException {
 
@@ -38,21 +39,28 @@ public final class SospendiUtenteServlet extends BasicServlet {
 
                 int id = Integer.parseInt(req.getParameter("id"));
 
-                CSU csu = null;
+                CSU csu = new CSU();
+                csu.setId(id);
                 UtenteBL ubl = new UtenteBL();
 
-                csu = ubl.getById(id);
-                boolean res = ubl.sospendiUtente(csu);
+                boolean res;
+                try {
+                    res = ubl.sospendiUtente(csu);
 
-                if(res) {
-                    //TODO reindirizzamento a pagina che indica l'avvenuta sospensione
-                } else {
-                    String msgError = "Si e' verificato un errore.";
-                    req.setAttribute("msgError", msgError);
-                    RequestDispatcher dispatcher =
-                            getServletContext().getRequestDispatcher(
-                                    "/error.jsp");
-                    dispatcher.forward(req, resp);
+                    if (res) {
+                        new String();
+                        // TODO reindirizzamento a pagina che indica l'avvenuta
+                        // sospensione
+                    } else {
+                        String msgError = "Si e' verificato un errore.";
+                        req.setAttribute("msgError", msgError);
+                        RequestDispatcher dispatcher = getServletContext()
+                                .getRequestDispatcher("/error.jsp");
+                        dispatcher.forward(req, resp);
+                    }
+                } catch (Exception e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
                 }
 
             } else {
@@ -65,7 +73,8 @@ public final class SospendiUtenteServlet extends BasicServlet {
     /**
      * doPost method.
      */
-    @Override protected void doPost(final HttpServletRequest req,
+    @Override
+    protected void doPost(final HttpServletRequest req,
             final HttpServletResponse resp)
             throws ServletException, IOException {
         doGet(req, resp);

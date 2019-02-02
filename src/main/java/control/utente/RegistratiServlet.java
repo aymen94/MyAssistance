@@ -22,15 +22,15 @@ public final class RegistratiServlet extends HttpServlet {
     /**
      * doGet method.
      */
-    @Override protected void doGet(final HttpServletRequest req,
+    @Override
+    protected void doGet(final HttpServletRequest req,
             final HttpServletResponse resp)
             throws ServletException, IOException {
         if (req.getSession().getAttribute("utente") != null) {
             resp.sendRedirect("../");
         } else {
-            RequestDispatcher dispatcher =
-                    getServletContext().getRequestDispatcher(
-                            "/utente/registrati.jsp");
+            RequestDispatcher dispatcher = getServletContext()
+                    .getRequestDispatcher("/utente/registrati.jsp");
             dispatcher.forward(req, resp);
         }
     }
@@ -38,7 +38,8 @@ public final class RegistratiServlet extends HttpServlet {
     /**
      * doPost method.
      */
-    @Override protected void doPost(final HttpServletRequest req,
+    @Override
+    protected void doPost(final HttpServletRequest req,
             final HttpServletResponse resp)
             throws ServletException, IOException {
         String username, password, email, name, surname, birthday;
@@ -55,10 +56,17 @@ public final class RegistratiServlet extends HttpServlet {
         UtenteBL ubl = new UtenteBL();
 
         try {
-            boolean res = ubl.effettuaRegistrazione(
-                    username, password, email, name, surname, birthday, gender);
+            boolean res = ubl.effettuaRegistrazione(username,
+                    password,
+                    email,
+                    name,
+                    surname,
+                    birthday,
+                    gender);
             if (res) {
-                //TODO reindirizzamento ad una pagina che comunica l'avvenuta registrazione
+                new String();
+                // TODO reindirizzamento ad una pagina che comunica l'avvenuta
+                // registrazione
             } else {
                 throw new RuntimeException(
                         "Errore nella compilazione del form.");
@@ -66,9 +74,8 @@ public final class RegistratiServlet extends HttpServlet {
         } catch (Exception e) {
             String msgError = "Si e' verificato un errore.";
             req.setAttribute("msgError", msgError);
-            RequestDispatcher dispatcher =
-                    getServletContext().getRequestDispatcher(
-                            "/error.jsp");
+            RequestDispatcher dispatcher = getServletContext()
+                    .getRequestDispatcher("/error.jsp");
             dispatcher.forward(req, resp);
         }
     }
