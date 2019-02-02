@@ -7,5 +7,5 @@
 <div class="side">
 	<h4>Funzionalità</h4>
 	<a href="./utente/accedi" class="btn">Login CSU</a>
-	<a href="./gestore/accedi" class="btn">Login Gestores</a>
+	<a href="./gestore/accedi" class="btn">Login Gestore</a>
 </div>

@@ -34,8 +34,7 @@
 					<c:forEach items="${segnalazioni}" var="segnalazione"
 						varStatus="count">
 						<form class="card" method="post">
-							<input type="hidden" name="op" value="modifica-segnalazione">
-							<input type="hidden" name="id" value="${segnalazione.cod}">
+							<input type="hidden" name="cod" value="${segnalazione.cod}">
 							<c:choose>
 								<c:when test="${segnalazione.stato == STATO_APERTO}">
 									<img src="../assets/images/alert-open.png"
