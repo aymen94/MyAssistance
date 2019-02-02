@@ -11,7 +11,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import model.utente.Utente;
 import model.utente.UtenteBL;
+
 import java.io.IOException;
 
 /**
@@ -51,7 +54,14 @@ public final class RegistratiServlet extends HttpServlet {
         name = req.getParameter("field-name");
         surname = req.getParameter("field-surname");
         birthday = req.getParameter("field-birthday");
-        gender = Integer.parseInt(req.getParameter("field-gender"));
+        if (req.getParameter("field-gender").equalsIgnoreCase("male")) {
+            gender = Utente.SESSO_MASCHILE;
+        } else if (req.getParameter("field-gender")
+                .equalsIgnoreCase("female")) {
+            gender = Utente.SESSO_FEMMINILE;
+        } else {
+            gender = Utente.SESSO_ALTRO;
+        }
 
         UtenteBL ubl = new UtenteBL();
 
@@ -64,19 +74,21 @@ public final class RegistratiServlet extends HttpServlet {
                     birthday,
                     gender);
             if (res) {
-                new String();
-                // TODO reindirizzamento ad una pagina che comunica l'avvenuta
-                // registrazione
+                req.setAttribute("successo", true);
             } else {
                 throw new RuntimeException(
                         "Errore nella compilazione del form.");
             }
         } catch (Exception e) {
-            String msgError = "Si e' verificato un errore.";
-            req.setAttribute("msgError", msgError);
-            RequestDispatcher dispatcher = getServletContext()
-                    .getRequestDispatcher("/error.jsp");
-            dispatcher.forward(req, resp);
+            if (e.getMessage() != null) {
+                req.setAttribute("errore", e.getMessage());
+            } else {
+                req.setAttribute("errore", "Si è verificato un errore.");
+            }
         }
+
+        RequestDispatcher dispatcher = getServletContext()
+                .getRequestDispatcher("/utente/registrati.jsp");
+        dispatcher.forward(req, resp);
     }
 }

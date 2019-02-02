@@ -28,7 +28,7 @@ public final class IndexGestoreServlet extends BasicServlet {
             throws ServletException, IOException {
         if (isUtenteLoggato(req, resp)) {
             RequestDispatcher dispatcher = getServletContext()
-                    .getRequestDispatcher("/utente/index.jsp");
+                    .getRequestDispatcher("/gestore/index.jsp");
             dispatcher.forward(req, resp);
         }
     }
