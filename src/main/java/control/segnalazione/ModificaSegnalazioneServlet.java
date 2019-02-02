@@ -14,7 +14,6 @@ import javax.servlet.http.HttpServletResponse;
 import control.BasicServlet;
 import model.segnalazione.Segnalazione;
 import model.segnalazione.SegnalazioneBL;
-import model.segnalazione.SegnalazioneDB;
 import model.segnalazione.Tipologia;
 import model.utente.Utente;
 
@@ -36,9 +35,12 @@ public final class ModificaSegnalazioneServlet extends BasicServlet {
             throws ServletException, IOException {
 
         if (isUtenteLoggato(req, resp)) {
-            SegnalazioneDB sdb = new SegnalazioneDB();
+            SegnalazioneBL sbl = new SegnalazioneBL();
             try {
-                List<Segnalazione> segnalazioni = sdb.getAll();
+                Utente utente = ((Utente) req.getSession()
+                        .getAttribute("utente"));
+                List<Segnalazione> segnalazioni = sbl
+                        .getSegnalazioniEffettuate(utente);
                 req.setAttribute("segnalazioni", segnalazioni);
             } catch (Exception e) {
                 req.setAttribute("segnalazioni", new ArrayList<Segnalazione>());
@@ -72,6 +74,7 @@ public final class ModificaSegnalazioneServlet extends BasicServlet {
 
         try {
             boolean res = sbl.updateSegnalazione(segnalazione);
+            //TODO Aggiungere controllo risultato res
         } catch (Exception e) {
             String msgError = "Si e' verificato un errore.";
             req.setAttribute("msgError", msgError);
