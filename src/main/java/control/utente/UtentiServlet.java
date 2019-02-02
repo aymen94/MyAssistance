@@ -44,7 +44,7 @@ public final class UtentiServlet extends BasicServlet {
                 try {
                     users = ubl.getUtentiRegistrati();
                 } catch (Exception e) {
-                    String msgError = "Si è verificato un errore.";
+                    String msgError = "Si e' verificato un errore.";
                     req.setAttribute("msgError", msgError);
                     RequestDispatcher dispatcher =
                             getServletContext().getRequestDispatcher(
