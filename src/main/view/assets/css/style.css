@@ -121,18 +121,18 @@
 	border: 1px solid #e0e0e0;
 	border-radius: 8px
 }
-.alert-list > form {
+.alert-list > div {
 	display: flex;
 	align-center: center;
 	flex-direction: row;
 	padding: 16px
 }
-.alert-list > form:not(:first-child) {
+.alert-list > div:not(:first-child) {
 	border-color: #e0e0e0;
 	border-style: solid;
 	border-width: 1px 0 0 0
 }
-.alert-list > form textarea {
+.alert-list > div textarea {
 	transition: box-shadow 0.25s linear;
 	margin: 8px 0 16px 0;
     width: 100%;
@@ -142,7 +142,7 @@
     border-radius: 8px;
 	box-shadow: 0 0 0px rgba(0, 0, 0, 0.25)
 }
-.alert-list > form textarea:focus {
+.alert-list > div textarea:focus {
 	box-shadow: 0 0 16px rgba(0, 0, 0, 0.25)
 }
 .alert-list input[type=text] {
