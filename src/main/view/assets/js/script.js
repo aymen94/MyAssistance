@@ -26,7 +26,7 @@ var utilities =
 					if (errorDialog !== null)
 					{
 						var label = form.querySelector('label[for="' + d[i].getAttribute("id") + '"]');
-						this.showDialog(errorDialog, "Errore Registrazione", "Il campo " + label.innerHTML + " non ? stato compilato in modo corretto.");
+						this.showDialog(errorDialog, "Errore Registrazione", "Il campo " + label.innerHTML + " non é stato compilato in modo corretto.");
 					}
 					return false;
 				}
