@@ -47,7 +47,8 @@ public final class ConnectionManager
     @Override
     public void contextInitialized(final ServletContextEvent sce) {
         System.out.println("### run ###");
-        initializePool("databases.xml", "Production");
+        ConnectionManager manager = ConnectionManager.getInstance();
+        manager.initializePool("databases.xml", "Production");
     }
 
     /**
@@ -127,7 +128,7 @@ public final class ConnectionManager
     }
 
     /**
-     *Control if inialized.
+     * Control if inialized.
      *
      * @return pool to null a pull
      */
