@@ -33,7 +33,9 @@
 				<div class="alert-list accordion" id="accordion_parent">
 					<c:forEach items="${segnalazioni}" var="segnalazione"
 						varStatus="count">
-						<div class="card">
+						<form class="card" method="post">
+							<input type="hidden" name="op" value="modifica-segnalazione">
+							<input type="hidden" name="id" value="${segnalazione.cod}">
 							<c:choose>
 								<c:when test="${segnalazione.stato == STATO_APERTO}">
 									<img src="../assets/images/alert-open.png"
@@ -59,17 +61,17 @@
 								</h5>
 								<div id="collapse_${count.count}" class="collapse"
 									data-parent="#accordion_parent">
-									<textarea>${segnalazione.descrizione}</textarea>
+									<textarea name="descrizione">${segnalazione.descrizione}</textarea>
 									<c:if test="${segnalazione.stato == STATO_APERTO}">
 										<div>
-											<button type="button" class="btn btn-light">Applica
+											<button type="submit" class="btn btn-light">Applica
 												Modifiche</button>
 											<button type="button" class="btn btn-danger">Elimina</button>
 										</div>
 									</c:if>
 								</div>
 							</div>
-						</div>
+						</form>
 					</c:forEach>
 				</div>
 			</div>
