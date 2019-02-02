@@ -14,7 +14,6 @@ import javax.servlet.http.HttpServletResponse;
 import control.BasicServlet;
 import model.segnalazione.Segnalazione;
 import model.segnalazione.SegnalazioneBL;
-import model.segnalazione.SegnalazioneDB;
 import model.segnalazione.Tipologia;
 import model.segnalazione.TipologiaDB;
 import model.utente.Utente;
@@ -60,7 +59,6 @@ public final class EffettuaSegnalazioneServlet extends BasicServlet {
             throws ServletException, IOException {
 
         if (isUtenteLoggato(req, resp)) {
-            SegnalazioneDB sdb = new SegnalazioneDB();
             SegnalazioneBL sbl = new SegnalazioneBL();
 
             Tipologia tipologia = new Tipologia();

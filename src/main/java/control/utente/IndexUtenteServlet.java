@@ -21,7 +21,7 @@ import java.io.IOException;
 @WebServlet("/utente/")
 public final class IndexUtenteServlet extends BasicServlet {
     /**
-     *
+     * doGet method.
      */
     @Override
     protected void doGet(final HttpServletRequest req,
@@ -36,12 +36,12 @@ public final class IndexUtenteServlet extends BasicServlet {
     }
 
     /**
-     *
+     * doPost method.
      */
     @Override
     protected void doPost(final HttpServletRequest req,
             final HttpServletResponse resp)
             throws ServletException, IOException {
-        doPost(req, resp);
+        doGet(req, resp);
     }
 }

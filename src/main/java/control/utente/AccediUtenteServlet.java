@@ -18,12 +18,12 @@ import model.utente.UtenteBL;
 import java.io.IOException;
 
 /**
- * Servlet per accesso utente(CSU).
+ * Servlet for accessing CSU.
  */
 @WebServlet("/utente/accedi")
 public final class AccediUtenteServlet extends HttpServlet {
     /**
-     *
+     * doGet method.
      */
     @Override
     protected void doGet(final HttpServletRequest req,
@@ -39,7 +39,7 @@ public final class AccediUtenteServlet extends HttpServlet {
     }
 
     /**
-     *
+     * doPost method.
      */
     @Override
     protected void doPost(final HttpServletRequest req,
