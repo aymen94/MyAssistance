@@ -38,7 +38,7 @@ public abstract class BasicServlet extends HttpServlet {
 
         if (rUser == null) {
             req.getSession().invalidate();
-            resp.sendRedirect(getServletContext().getContextPath() + "/index");
+            resp.sendRedirect(getServletContext().getContextPath() + "/");
             return false;
         }
 
