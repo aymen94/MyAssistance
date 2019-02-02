@@ -8,7 +8,6 @@ package control.segnalazione;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -16,7 +15,6 @@ import control.BasicServlet;
 import model.segnalazione.Segnalazione;
 import model.segnalazione.SegnalazioneBL;
 import model.segnalazione.SegnalazioneDB;
-import model.segnalazione.Tipologia;
 import model.utente.Utente;
 
 import java.io.IOException;
@@ -37,9 +35,10 @@ public final class ModificaSegnalazioneServlet extends BasicServlet {
             throws ServletException, IOException {
 
         if (isUtenteLoggato(req, resp)) {
-            SegnalazioneDB sdb = new SegnalazioneDB();
+            SegnalazioneBL sbl = new SegnalazioneBL();
             try {
-                List<Segnalazione> segnalazioni = sdb.getAll();
+                List<Segnalazione> segnalazioni = sbl.getSegnalazioniEffettuate(
+                        (Utente) req.getSession().getAttribute("utente"));
                 req.setAttribute("segnalazioni", segnalazioni);
             } catch (Exception e) {
                 req.setAttribute("segnalazioni", new ArrayList<Segnalazione>());
@@ -59,27 +58,29 @@ public final class ModificaSegnalazioneServlet extends BasicServlet {
             final HttpServletResponse resp)
             throws ServletException, IOException {
 
-        SegnalazioneDB sdb = new SegnalazioneDB();
-        SegnalazioneBL sbl = new SegnalazioneBL(sdb);
+        String cod = (String) req.getParameter("cod");
+        String descrizione = (String) req.getParameter("descrizione");
 
-        Tipologia tipologia = new Tipologia();
-        tipologia.setId(Integer.parseInt(req.getParameter("field-type")));
+        if (cod != null && descrizione != null) {
+            SegnalazioneBL sbl = new SegnalazioneBL();
+            try {
+                Segnalazione segnalazione = new SegnalazioneDB()
+                        .getByCod(Integer.parseInt(cod));
+                segnalazione.setDescrizione(descrizione);
 
-        Segnalazione segnalazione = new Segnalazione();
-        segnalazione.setTitolo(req.getParameter("field-title"));
-        segnalazione.setDescrizione(req.getParameter("field-descr"));
-        segnalazione.setTipologia(tipologia);
-        segnalazione
-                .setAutore((Utente) req.getSession().getAttribute("utente"));
-
-        try {
-            boolean res = sbl.updateSegnalazione(segnalazione);
-        } catch (Exception e) {
-            String msgError = "Si e' verificato un errore.";
-            req.setAttribute("msgError", msgError);
-            RequestDispatcher dispatcher = getServletContext()
-                    .getRequestDispatcher("/error.jsp");
-            dispatcher.forward(req, resp);
+                boolean res = sbl.updateSegnalazione(segnalazione);
+                if (res) {
+                    resp.sendRedirect("./");
+                } else {
+                    throw new RuntimeException();
+                }
+            } catch (Exception e) {
+                String msgError = "Si è verificato un errore.";
+                req.setAttribute("msgError", msgError);
+                RequestDispatcher dispatcher = getServletContext()
+                        .getRequestDispatcher("/error.jsp");
+                dispatcher.forward(req, resp);
+            }
         }
     }
 }

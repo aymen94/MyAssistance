@@ -5,31 +5,78 @@
 */
 package control.utente;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import control.BasicServlet;
+import model.utente.CSU;
+import model.utente.Gestore;
+import model.utente.Utente;
+import model.utente.UtenteBL;
+
 import java.io.IOException;
 
 /**
- * Servlet per sospendere utente.
+ * Servlet for suspending an user.
  */
-public final class SospendiUtenteServlet extends HttpServlet {
+public final class SospendiUtenteServlet extends BasicServlet {
     /**
-     *
+     * doGet method.
      */
-    @Override protected void doGet(final HttpServletRequest req,
+    @Override
+    protected void doGet(final HttpServletRequest req,
             final HttpServletResponse resp)
             throws ServletException, IOException {
-        super.doGet(req, resp);
+
+        if (isUtenteLoggato(req, resp)) {
+
+            Utente rUser;
+            rUser = (Utente) req.getSession().getAttribute("utente");
+
+            if (rUser instanceof Gestore) {
+
+                int id = Integer.parseInt(req.getParameter("id"));
+
+                CSU csu = new CSU();
+                csu.setId(id);
+                UtenteBL ubl = new UtenteBL();
+
+                boolean res;
+                try {
+                    res = ubl.sospendiUtente(csu);
+
+                    if (res) {
+                        new String();
+                        // TODO reindirizzamento a pagina che indica l'avvenuta
+                        // sospensione
+                    } else {
+                        String msgError = "Si e' verificato un errore.";
+                        req.setAttribute("msgError", msgError);
+                        RequestDispatcher dispatcher = getServletContext()
+                                .getRequestDispatcher("/error.jsp");
+                        dispatcher.forward(req, resp);
+                    }
+                } catch (Exception e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+
+            } else {
+                resp.sendRedirect("../");
+            }
+
+        }
     }
 
     /**
-     *
+     * doPost method.
      */
-    @Override protected void doPost(final HttpServletRequest req,
+    @Override
+    protected void doPost(final HttpServletRequest req,
             final HttpServletResponse resp)
             throws ServletException, IOException {
-        super.doPost(req, resp);
+        doGet(req, resp);
     }
 }

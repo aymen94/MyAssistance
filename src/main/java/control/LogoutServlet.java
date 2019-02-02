@@ -1,25 +1,23 @@
 /*
   Project: MyAssistance
-  Author: TeamC
+  Author: Aymen
   Date: 05/01/2019
 */
-package control.utente;
+package control;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import control.BasicServlet;
 
 import java.io.IOException;
 
 /**
- * Servlet for redirecting to the index of the user.
+ * Servlet for redirecting to various index.
  */
-@WebServlet("/utente/")
-public final class IndexUtenteServlet extends BasicServlet {
+@WebServlet("/logout")
+public final class LogoutServlet extends HttpServlet {
     /**
      * doGet method.
      */
@@ -27,12 +25,8 @@ public final class IndexUtenteServlet extends BasicServlet {
     protected void doGet(final HttpServletRequest req,
             final HttpServletResponse resp)
             throws ServletException, IOException {
-
-        if (isUtenteLoggato(req, resp)) {
-            RequestDispatcher dispatcher = getServletContext()
-                    .getRequestDispatcher("/utente/index.jsp");
-            dispatcher.forward(req, resp);
-        }
+        req.getSession(true).invalidate();
+        resp.sendRedirect(getServletContext().getContextPath());
     }
 
     /**
