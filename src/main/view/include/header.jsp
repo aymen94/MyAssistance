@@ -8,9 +8,14 @@
 <div class="header sticky-top">
 	<div>Università Degli Studi Di Salerno</div>
 	<div>
-		<c:if test="${sessionScope.utente == null}">
-			<a href="./utente/accedi" class="btn btn-light">Accedi</a>
-			<a href="./utente/registrati" class="btn btn-light">Registrati</a>
-		</c:if>
+		<c:choose>
+			<c:when test="${sessionScope.utente == null}">
+				<a href="./utente/accedi" class="btn btn-light">Accedi</a>
+				<a href="./utente/registrati" class="btn btn-light">Registrati</a>
+			</c:when>
+			<c:otherwise>
+				<a href="${pageContext.servletContext.contextPath}/logout" class="btn btn-light">Logout</a>
+			</c:otherwise>
+		</c:choose>
 	</div>
 </div>
