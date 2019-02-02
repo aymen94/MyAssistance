@@ -96,7 +96,7 @@ public final class ConnectionManager
      */
     @Override
     public void contextDestroyed(final ServletContextEvent sce) {
-        destroyPool();
+        ConnectionManager.getInstance().destroyPool();
     }
 
     /**
