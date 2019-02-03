@@ -42,7 +42,7 @@
 								<label for="field-username">Username</label> <input type="text"
 									class="form-control" name="field-username" id="field-username"
 									aria-describedby="field-password-username"
-									placeholder="mariorossi" pattern="^[a-zA-Z0-9]+$"> <small
+									placeholder="mariorossi" pattern="^[a-zA-Z0-9]{3,10}$"> <small
 									id="field-username-hint" class="form-text text-muted">Questa
 									è l'username che userai per accedere.</small>
 							</div>
@@ -69,7 +69,7 @@
 									class="form-control" name="field-email" id="field-email"
 									aria-describedby="field-email-hint"
 									placeholder="mario@unisa.it"
-									pattern="^[a-zA-Z0-9.!#$%&’*+/=?^_`{}~-]+@(?:[a-zA-Z0-9-]+\.)*unisa\.it$"> <small
+									pattern="^([a-zA-Z0-9.!#$%&’*+/=?^_`{}~-]+@(?:[a-zA-Z0-9-]+\.)*unisa\.it){7,254}$"> <small
 									id="field-email-hint" class="form-text text-muted">Inserisci
 									qui l'email per inviarti eventuali comunicazioni.</small>
 							</div>
@@ -77,7 +77,7 @@
 								<label for="field-name">Nome</label> <input type="text"
 									class="form-control" name="field-name" id="field-name"
 									aria-describedby="field-name-username" placeholder="Mario"
-									pattern="^[\w'\-,.][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{1,50}$"> <small id="field-name-hint"
+									pattern="^[\w'\-,.][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{2,50}$"> <small id="field-name-hint"
 									class="form-text text-muted">Devi inserire il tuo nome
 									reale.</small>
 							</div>
@@ -85,7 +85,7 @@
 								<label for="field-surname">Cognome</label> <input type="text"
 									class="form-control" name="field-surname" id="field-surname"
 									aria-describedby="field-surname-username" placeholder="Rossi"
-									pattern="^[\w'\-,.][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{1,50}$"> <small id="field-surname-hint"
+									pattern="^[\w'\-,.][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{2,50}$"> <small id="field-surname-hint"
 									class="form-text text-muted">Devi inserire il tuo
 									cognome reale.</small>
 							</div>
@@ -97,7 +97,7 @@
 								<small id="field-birthday-hint" class="form-text text-muted">Devi
 									inserire la tua data di nascita.</small>
 							</div>
-							<div>
+                            <div>
                                 <div class="form-group">
                                     <label class="control-label required"
                                         for="field-gender">Sesso </label>
@@ -133,7 +133,7 @@
                                     </div>
                                 </div>
                             </div>
-							<br>
+                            <br>
 							<div
 								style="margin: 0 auto; max-width: 240px; text-align: justify">
 								<button type="submit" class="btn btn-success">Registrati</button>
