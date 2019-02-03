@@ -7,6 +7,7 @@ package control.utente;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -21,6 +22,7 @@ import java.io.IOException;
 /**
  * Servlet for suspending an user.
  */
+@WebServlet("/gestore/sospendiUtente")
 public final class SospendiUtenteServlet extends BasicServlet {
     /**
      * doGet method.
@@ -29,8 +31,18 @@ public final class SospendiUtenteServlet extends BasicServlet {
     protected void doGet(final HttpServletRequest req,
             final HttpServletResponse resp)
             throws ServletException, IOException {
+        resp.sendRedirect("./");
+    }
 
-        if (isUtenteLoggato(req, resp)) {
+    /**
+     * doPost method.
+     */
+    @Override
+    protected void doPost(final HttpServletRequest req,
+            final HttpServletResponse resp)
+            throws ServletException, IOException {
+
+        if (isUtenteLoggato(req, resp, true)) {
 
             Utente rUser;
             rUser = (Utente) req.getSession().getAttribute("utente");
@@ -68,15 +80,5 @@ public final class SospendiUtenteServlet extends BasicServlet {
             }
 
         }
-    }
-
-    /**
-     * doPost method.
-     */
-    @Override
-    protected void doPost(final HttpServletRequest req,
-            final HttpServletResponse resp)
-            throws ServletException, IOException {
-        doGet(req, resp);
     }
 }
