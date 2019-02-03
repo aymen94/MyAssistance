@@ -61,6 +61,13 @@
 			<version>1.4.7</version>
 		</dependency>
 
+		<!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
+		<dependency>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-java</artifactId>
+			<version>3.141.59</version>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 	<build>
 		<finalName>myassistance</finalName>
@@ -112,16 +119,11 @@
 						</goals>
 					</execution>
 					<execution>
-						<id>default-prepare-agent-integration</id>
-						<goals>
-							<goal>prepare-agent-integration</goal>
-						</goals>
-					</execution>
-					<execution>
 						<id>default-report</id>
 						<goals>
 							<goal>report</goal>
 						</goals>
+						<phase>test</phase>
 					</execution>
 					<execution>
 						<id>default-report-integration</id>
@@ -183,6 +185,26 @@
 						</goals>
 					</execution>
 				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.8.0</version>
+				<configuration>
+					<debug>true</debug>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.tomcat.maven</groupId>
+				<artifactId>tomcat7-maven-plugin</artifactId>
+				<version>2.2</version>
+				<configuration>
+					<url>http://localhost:8080/manager/text</url>
+					<server>TomcatServer</server>
+					<username>admin</username>
+					<password>password</password>
+					<path>/myassistance</path>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>

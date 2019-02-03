@@ -52,7 +52,7 @@
 									<button type="submit" class="btn btn-success btn-lg btn-block"
 										id="btnLogin">Accedi</button>
 									<div class="text-center m-4">
-										Se sei un gestore <a href="../gestore/accedi.jsp">clicca
+										Se sei un gestore <a href="../gestore/accedi">clicca
 											qui</a>
 									</div>
 								</form>

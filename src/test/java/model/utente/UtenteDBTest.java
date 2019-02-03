@@ -7,6 +7,7 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.BeforeClass;
 import org.junit.AfterClass;
+import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 
@@ -18,8 +19,10 @@ import java.util.List;
 import org.junit.runners.MethodSorters;
 import pool.ConnectionManager;
 
-@FixMethodOrder(MethodSorters.NAME_ASCENDING) public final class UtenteDBTest {
-    @BeforeClass public static void setUpClass() throws SQLException {
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+public final class UtenteDBTest {
+    @BeforeClass
+    public static void setUpClass() throws SQLException {
         ConnectionManager.getInstance().initializePool("databases.xml", "Test");
         final Connection conn = ConnectionManager.getInstance().getConnection();
         conn.prepareStatement(
@@ -45,7 +48,20 @@ import pool.ConnectionManager;
         ConnectionManager.getInstance().destroyPool();
     }
 
-    @Test public void testAInsert1() throws SQLException {
+    /**
+     * Clear db.
+     *
+     * @throws SQLException the SQL exception
+     */
+    @BeforeClass
+    public static void clearDb() throws SQLException {
+        final Connection conn = ConnectionManager.getInstance().getConnection();
+        conn.prepareStatement("TRUNCATE TABLE utente").executeUpdate();
+        ConnectionManager.getInstance().freeConnection(conn);
+    }
+
+    @Test
+    public void testAInsert1() throws SQLException {
         Utente test1 = new CSU();
         test1.setNome("test1");
         test1.setCognome("test1");
@@ -59,7 +75,8 @@ import pool.ConnectionManager;
         assertEquals(1, result);
     }
 
-    @Test public void testAInsert2() throws SQLException {
+    @Test
+    public void testAInsert2() throws SQLException {
         Utente test2 = new CSU();
         test2.setNome("test2");
         test2.setCognome("test2");
@@ -68,13 +85,14 @@ import pool.ConnectionManager;
         test2.setEmail("test2@test.com");
         test2.setSesso(0);
         test2.setDataDiNascita(LocalDate.of(2000, 1, 20));
-        ((CSU) test2).setDataSospensione(LocalDate.of(2018,9,2));
+        ((CSU) test2).setDataSospensione(LocalDate.of(2018, 9, 2));
         UtenteDB utenteDBTest = new UtenteDB();
         final boolean result = utenteDBTest.insert(test2) == 1;
         assertTrue(result);
     }
 
-    @Test public void testAInsert3() throws SQLException {
+    @Test
+    public void testAInsert3() throws SQLException {
         Utente test3 = new Gestore();
         test3.setNome("test3");
         test3.setCognome("test3");
@@ -88,46 +106,53 @@ import pool.ConnectionManager;
         assertTrue(result);
     }
 
-    @Test public void testBGetById1() throws SQLException {
+    @Test
+    public void testBGetById1() throws SQLException {
         UtenteDB utenteDBTest = new UtenteDB();
         Utente utente = utenteDBTest.getById(1);
         final int result = utente.getId();
         assertEquals(1, result);
     }
 
-    @Test public void testBGetById2() throws SQLException {
+    @Test
+    public void testBGetById2() throws SQLException {
         UtenteDB utenteDBTest = new UtenteDB();
         Utente utente = utenteDBTest.getById(10);
         assertNull(utente);
     }
 
-    @Test public void testCGetAll1() throws SQLException {
+    @Test
+    public void testCGetAll1() throws SQLException {
         UtenteDB utenteDBTest = new UtenteDB();
         List<Utente> list = utenteDBTest.getAll();
         final int result = list.size();
         assertEquals(3, result);
     }
 
-    @Test public void testCGetAll2() throws SQLException {
+    @Test
+    public void testCGetAll2() throws SQLException {
         UtenteDB utenteDBTest = new UtenteDB();
         List<Utente> list = utenteDBTest.getAll();
         assertNotNull(list);
     }
 
-    @Test public void testDGetByEmail1() throws SQLException {
+    @Test
+    public void testDGetByEmail1() throws SQLException {
         UtenteDB utenteDBTest = new UtenteDB();
         Utente utente = utenteDBTest.getByUserName("test11");
         final String result = utente.getUserName();
         assertEquals("test11", result);
     }
 
-    @Test public void testDGetByEmail2() throws SQLException {
+    @Test
+    public void testDGetByEmail2() throws SQLException {
         UtenteDB utenteDBTest = new UtenteDB();
         Utente utente = utenteDBTest.getByUserName("abc@test.com");
         assertNull(utente);
     }
 
-    @Test public void testCUpdate() throws SQLException {
+    @Test
+    public void testCUpdate() throws SQLException {
         UtenteDB utenteDBTest = new UtenteDB();
         CSU test1 = (CSU) utenteDBTest.getById(1);
         test1.setDataSospensione(LocalDate.of(2019, 8, 2));
@@ -135,19 +160,22 @@ import pool.ConnectionManager;
         assertNotNull(test1);
     }
 
-    @Test public void testEDelete1() throws SQLException {
+    @Test
+    public void testEDelete1() throws SQLException {
         UtenteDB utenteDBTest = new UtenteDB();
         final int result = utenteDBTest.delete("test@test.com");
         assertEquals(1, result);
     }
 
-    @Test public void testEDelete2() throws SQLException {
+    @Test
+    public void testEDelete2() throws SQLException {
         UtenteDB utenteDBTest = new UtenteDB();
         final int result = utenteDBTest.delete("test2@test.com");
         assertEquals(1, result);
     }
 
-    @Test public void testEDelete3() throws SQLException {
+    @Test
+    public void testEDelete3() throws SQLException {
         UtenteDB utenteDBTest = new UtenteDB();
         final int result = utenteDBTest.delete("test3@test.com");
         assertEquals(1, result);

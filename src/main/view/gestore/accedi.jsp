@@ -50,7 +50,7 @@
 									<button type="submit" class="btn btn-success btn-lg btn-block"
 										id="btnLogin">Accedi</button>
 									<div class="text-center m-4">
-										Se sei un utente <a href="../utente/accedi.jsp">clicca qui</a>
+										Se sei un utente <a href="../utente/accedi">clicca qui</a>
 									</div>
 								</form>
 							</div>

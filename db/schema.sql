@@ -1,4 +1,4 @@
-CREATE SCHEMA my_assistance;
+CREATE SCHEMA my_assistance CHARACTER SET utf8 COLLATE utf8_general_ci;
 
 CREATE TABLE my_assistance.utente
 (
@@ -12,7 +12,7 @@ CREATE TABLE my_assistance.utente
   data_di_nascita  DATE               NOT NULL,
   data_sospensione DATE,
   is_gestore       BOOLEAN DEFAULT FALSE
-);
+)AUTO_INCREMENT = 1;
 
 CREATE TABLE my_assistance.ufficio_tecnico
 (
@@ -21,14 +21,16 @@ CREATE TABLE my_assistance.ufficio_tecnico
   tel        CHAR(15),
   email      VARCHAR(55)        NOT NULL,
   ubicazione VARCHAR(50)
-);
+)AUTO_INCREMENT = 1;
+
 
 CREATE TABLE my_assistance.tipologia
 (
   id       INT PRIMARY KEY AUTO_INCREMENT,
   nome     VARCHAR(20) UNIQUE NOT NULL,
   priorita TINYINT            NOT NULL --  da 1 (priorità bassa) a 10 (priorità alta)
-);
+)AUTO_INCREMENT = 1;
+
 
 CREATE TABLE my_assistance.segnalazione
 (
@@ -47,4 +49,4 @@ CREATE TABLE my_assistance.segnalazione
   FOREIGN KEY (autore) REFERENCES my_assistance.utente (id) ON DELETE CASCADE ON UPDATE CASCADE,
   tecnico             INT,
   FOREIGN KEY (tecnico) REFERENCES my_assistance.ufficio_tecnico (id) ON DELETE CASCADE ON UPDATE CASCADE
-);
+)AUTO_INCREMENT = 1;
