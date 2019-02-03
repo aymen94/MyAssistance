@@ -30,7 +30,7 @@
             <%@include file="../include/nav-left-csu.jsp"%>
             <div>
                 <h3>
-                    <a id="greet">Ciao<a>, <a class="text-capitalize">${sessionScope.utente.nome}</a>.<br>
+                    <a id="greet">Ciao</a>, <a class="text-capitalize">${sessionScope.utente.nome}</a>.<br>
                     <c:choose>
                         <c:when
                             test="utente.sesso==SESSO_FEMMINILE">Benvenuta
