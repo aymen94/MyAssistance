@@ -21,6 +21,9 @@ public class UtenteBL {
     private static final String NAME_REGEX = "^[\\w'\\-,.][^0-9_!¡?÷?¿/\\\\+"
             + "=@#$%ˆ&*(){}|~<>;:\\[\\]]+$";
 
+    /** The Constant USERNAME_REGEX. */
+    private static final String USERNAME_REGEX = "^[a-zA-Z0-9]+$";
+
     /**
      * The Constant DATE_REGEX.
      */
@@ -35,10 +38,8 @@ public class UtenteBL {
     /**
      * The Constant EMAIL_REGEX.
      */
-    private static final String EMAIL_REGEX = "^(([^<>()\\[\\]\\\\.,;:\\s@\"]+"
-            + "(\\.[^<>()\\[\\]\\\\.,;:\\s@\"]+)*)|(\".+\"))@((\\[[0-9]{1,3}\\"
-            + ".[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}])|(([a-zA-Z\\-0-9]+\\.)"
-            + "*unisa\\.it))$";
+    private static final String EMAIL_REGEX = "[a-zA-Z0-9.!#$%&’*+/=?^_`{}~-]+"
+            + "@(?:[a-zA-Z0-9-]+\\.)*unisa\\.it";
 
     /**
      * The Constant NAME_MAXLENGTH.
@@ -130,7 +131,7 @@ public class UtenteBL {
                 && validateLengthRegex(aUserName,
                         USERNAME_MINLENGTH,
                         USERNAME_MAXLENGTH,
-                        "^[\\w]+$")
+                        USERNAME_REGEX)
                 && aDataDiNascita.matches(DATE_REGEX)
                 && aPassword.length() >= PASSWORD_MAXLENGTH
                 && validateLengthRegex(aEmail,
