@@ -29,12 +29,19 @@
 			<div>
 				<h3>Lista Utenti</h3>
 				<br>
-				<ul class="list-group">
+				<div class="container">
 					<c:forEach items="${users}" var="user">
-						<li class="list-group-item"><b>${user.userName}</b> -
-							${user.nome} ${user.cognome}</li>
+						<div class="row pt-3 pb-3 border">
+							<div class="col">
+								<b>${user.userName}</b> - ${user.nome} ${user.cognome}
+							</div>
+							<form class="col-md-auto" action="./sospendiUtente" method="post">
+								<input type="hidden" name="id" value="${user.id}">
+								<button type="submit" class="btn badge badge-warning">Sospendi</button>
+							</form>
+						</div>
 					</c:forEach>
-				</ul>
+				</div>
 			</div>
 			<%@include file="../include/nav-right.jsp"%>
 		</div>
