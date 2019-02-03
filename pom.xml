@@ -119,16 +119,11 @@
 						</goals>
 					</execution>
 					<execution>
-						<id>default-prepare-agent-integration</id>
-						<goals>
-							<goal>prepare-agent-integration</goal>
-						</goals>
-					</execution>
-					<execution>
 						<id>default-report</id>
 						<goals>
 							<goal>report</goal>
 						</goals>
+						<phase>test</phase>
 					</execution>
 					<execution>
 						<id>default-report-integration</id>
@@ -190,6 +185,14 @@
 						</goals>
 					</execution>
 				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.8.0</version>
+				<configuration>
+					<debug>true</debug>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
