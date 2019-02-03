@@ -20,6 +20,8 @@
 
 <link rel="stylesheet" href="../assets/css/style.css">
 <script src="../assets/js/script.js"></script>
+<script src="../assets/js/index.js"></script>
+
 </head>
 <body>
     <div class="page">
@@ -28,7 +30,7 @@
             <%@include file="../include/nav-left-csu.jsp"%>
             <div>
                 <h3>
-                    Ciao, <a class="text-capitalize">${sessionScope.utente.nome}</a>.<br>
+                    <a id="greet">Ciao<a>, <a class="text-capitalize">${sessionScope.utente.nome}</a>.<br>
                     <c:choose>
                         <c:when
                             test="utente.sesso==SESSO_FEMMINILE">Benvenuta
