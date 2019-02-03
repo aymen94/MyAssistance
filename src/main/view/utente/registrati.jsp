@@ -42,7 +42,7 @@
 								<label for="field-username">Username</label> <input type="text"
 									class="form-control" name="field-username" id="field-username"
 									aria-describedby="field-password-username"
-									placeholder="mario.rossi" pattern="^\S{1,20}$"> <small
+									placeholder="mariorossi" pattern="^[a-zA-Z0-9]+$"> <small
 									id="field-username-hint" class="form-text text-muted">Questa
 									è l'username che userai per accedere.</small>
 							</div>
@@ -51,7 +51,7 @@
 									type="password" class="form-control" name="field-password"
 									id="field-password" aria-describedby="field-password-hint"
 									placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;"
-									pattern="^.{1,100}$" data-same-first="1"> <small
+									pattern="^.{8,}$" data-same-first="1"> <small
 									id="field-password-hint" class="form-text text-muted">Questa
 									è la password che userai per accedere.</small>
 							</div>
@@ -60,16 +60,16 @@
 									type="password" class="form-control" id="field-repeat"
 									aria-describedby="field-repeat-hint"
 									placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;"
-									pattern="^.{1,100}$" data-same-second="1"> <small
+									pattern="^.{8,}$" data-same-second="1"> <small
 									id="field-repeat-hint" class="form-text text-muted">Devi
 									ripetere la password per motivi di sicurezza.</small>
 							</div>
 							<div class="form-group">
-								<label for="field-email">Email</label> <input type="text"
+								<label for="field-email">Email</label> <input type=email
 									class="form-control" name="field-email" id="field-email"
 									aria-describedby="field-email-hint"
-									placeholder="mario@rossi.it"
-									pattern="^[^@]{1,}@[^\.]{1,}(\.[^\.]{1,}){1,}$"> <small
+									placeholder="mario@unisa.it"
+									pattern="^[a-zA-Z0-9.!#$%&’*+/=?^_`{}~-]+@(?:[a-zA-Z0-9-]+\.)*unisa\.it$"> <small
 									id="field-email-hint" class="form-text text-muted">Inserisci
 									qui l'email per inviarti eventuali comunicazioni.</small>
 							</div>
@@ -77,7 +77,7 @@
 								<label for="field-name">Nome</label> <input type="text"
 									class="form-control" name="field-name" id="field-name"
 									aria-describedby="field-name-username" placeholder="Mario"
-									pattern="^.{1,50}$"> <small id="field-name-hint"
+									pattern="^[\w'\-,.][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{1,50}$"> <small id="field-name-hint"
 									class="form-text text-muted">Devi inserire il tuo nome
 									reale.</small>
 							</div>
@@ -85,7 +85,7 @@
 								<label for="field-surname">Cognome</label> <input type="text"
 									class="form-control" name="field-surname" id="field-surname"
 									aria-describedby="field-surname-username" placeholder="Rossi"
-									pattern="^.{1,50}$"> <small id="field-surname-hint"
+									pattern="^[\w'\-,.][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{1,50}$"> <small id="field-surname-hint"
 									class="form-text text-muted">Devi inserire il tuo
 									cognome reale.</small>
 							</div>
@@ -93,7 +93,7 @@
 								<label for="field-name">Data Di Nascita</label> <input
 									type="text" class="form-control" name="field-birthday"
 									id="field-birthday" aria-describedby="field-birthday-username"
-									placeholder="30/10/1980" pattern="^\d{2}\/\d{2}\/\d{4}$">
+									placeholder="30/10/1980" pattern="^(([0-2]\d)|(3[0-1]))[\/.-]((0\d)|(1[0-2]))[\/.-]\d{4}$">
 								<small id="field-birthday-hint" class="form-text text-muted">Devi
 									inserire la tua data di nascita.</small>
 							</div>
