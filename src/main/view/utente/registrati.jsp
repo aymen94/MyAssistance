@@ -98,16 +98,41 @@
 									inserire la tua data di nascita.</small>
 							</div>
 							<div>
-								<label>Sesso</label>
-								<div class="form-check">
-									<input class="form-check-input" type="radio" value="male"
-										id="field-gender-male" name="field-gender"> <label
-										class="form-check-label" for="field-gender-male">Uomo</label>
-									<br> <input class="form-check-input" type="radio"
-										value="female" id="field-gender-female" name="field-gender">
-									<label class="form-check-label" for="field-gender-female">Donna</label>
-								</div>
-							</div>
+                                <div class="form-group">
+                                    <label class="control-label required"
+                                        for="field-gender">Sesso </label>
+                                    <div class="row-radio">
+                                        <div
+                                            class="form-check form-check-inline">
+                                            <input class="form-check-input"
+                                                type="radio" value="other"
+                                                checked id="field-gender-other"
+                                                name="field-gender"><label
+                                                class="form-check-label"
+                                                for="field-gender-other">Non
+                                                specificare</label>
+                                        </div>
+                                        <div
+                                            class="form-check form-check-inline">
+                                            <input class="form-check-input"
+                                                type="radio" value="male"
+                                                id="field-gender-male"
+                                                name="field-gender"> <label
+                                                class="form-check-label"
+                                                for="field-gender-male">Uomo</label>
+                                        </div>
+                                        <div
+                                            class="form-check form-check-inline">
+                                            <input class="form-check-input"
+                                                type="radio" value="female"
+                                                id="field-gender-female"
+                                                name="field-gender"> <label
+                                                class="form-check-label"
+                                                for="field-gender-female">Donna</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 							<br>
 							<div
 								style="margin: 0 auto; max-width: 240px; text-align: justify">
