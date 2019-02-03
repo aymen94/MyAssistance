@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import model.segnalazione.Segnalazione;
+import model.utente.Gestore;
 import model.utente.Utente;
 
 import java.io.IOException;
@@ -18,8 +19,9 @@ import java.io.IOException;
  * Basic servlet to manage login.
  */
 public abstract class BasicServlet extends HttpServlet {
+
     /**
-     * Checks wheter user is present into session.
+     * Checks wheter user is logged as CSU.
      *
      * @param req  the HTTP request object from actual servlet.
      *
@@ -31,12 +33,31 @@ public abstract class BasicServlet extends HttpServlet {
      */
     protected final boolean isUtenteLoggato(final HttpServletRequest req,
             final HttpServletResponse resp) throws IOException {
+        return isUtenteLoggato(req, resp, false);
+    }
+
+    /**
+     * Checks wheter user is present into session.
+     *
+     * @param req       the HTTP request object from actual servlet.
+     *
+     * @param resp      the HTTP response object from actual servlet.
+     *
+     * @param asGestore check if user has logged as Gestore.
+     *
+     * @return true is user is logged, false if it's not.
+     *
+     * @throws IOException from sendRedirect
+     */
+    protected final boolean isUtenteLoggato(final HttpServletRequest req,
+            final HttpServletResponse resp, final boolean asGestore)
+            throws IOException {
 
         Utente rUser;
 
         rUser = (Utente) req.getSession().getAttribute("utente");
 
-        if (rUser == null) {
+        if (rUser == null || (asGestore && !(rUser instanceof Gestore))) {
             req.getSession().invalidate();
             resp.sendRedirect(getServletContext().getContextPath() + "/");
             return false;
