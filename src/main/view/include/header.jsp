@@ -6,7 +6,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <div class="header sticky-top">
-    <div>Università Degli Studi Di Salerno</div>
+    <div>MyAssistance</div>
     <div>
         <c:choose>
             <c:when test="${sessionScope.utente == null}">
