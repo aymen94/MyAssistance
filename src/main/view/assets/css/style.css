@@ -170,3 +170,9 @@
 		flex-direction: column;
 		padding: 12px 8px
 	}
+}
+
+/* Reduce the opacity of placeholders */
+.form-control::placeholder {
+    opacity: 0.5;
+}
