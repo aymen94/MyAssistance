@@ -165,7 +165,9 @@ public class UfficioTecnicoBLTest {
         ufficioTecnicoTest.setNome("Uffico di riparazione caloriferi");
         ufficioTecnicoTest.setEmail("hm@ufficio.it");
         ufficioTecnicoTest.setTel("+34566798923");
-        ufficioTecnicoTest.setUbicazione("");
+        ufficioTecnicoTest.setUbicazione("Ci siamo Trasferiti a via XYZCi siamo"
+                + " Trasferiti a via XYZCi siamo Trasferiti a via XYZCi"
+                + " siamo Trasferiti a via XYZCi siamo Trasferiti a via XYZ");
         boolean res = manager.insertUfficioTecnico(ufficioTecnicoTest);
         assertFalse(res);
     }
