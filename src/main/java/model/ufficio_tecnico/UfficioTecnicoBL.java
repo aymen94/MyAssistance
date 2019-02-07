@@ -60,8 +60,8 @@ public class UfficioTecnicoBL {
 
     /**
      * Instantiates a new ufficio tecnico BL.<br>
-     * This should be used only for testing,
-     * for others purpose use {@link #UfficioTecnicoBL()} instead.
+     * This should be used only for testing, for others purpose use
+     * {@link #UfficioTecnicoBL()} instead.
      *
      * @param db it's database manager
      */
@@ -82,15 +82,16 @@ public class UfficioTecnicoBL {
                 1,
                 MAX_NOME_LENGTH,
                 "^[\\w\\h]+$")
-                && (uff.getTel() == null || validateLengthRegex(uff.getTel(),
-                        MIN_TEL_LENGTH,
-                        MAX_TEL_LENGTH,
-                        "^(\\+){0,1}[0-9]*$"))
+                && (uff.getTel().length() == 0
+                        || validateLengthRegex(uff.getTel(),
+                                MIN_TEL_LENGTH,
+                                MAX_TEL_LENGTH,
+                                "^(\\+){0,1}[0-9]*$"))
                 && validateLengthRegex(uff.getEmail(),
                         MIN_EMAIL_LENGTH,
                         MAX_EMAIL_LENGTH,
                         REGEX_EMAIL)
-                && (uff.getUbicazione() == null
+                && (uff.getUbicazione().length() == 0
                         || (uff.getUbicazione().length() > 0
                                 && uff.getUbicazione()
                                         .length() <= MAX_UBICAZIONE_LENGTH))) {
@@ -130,8 +131,8 @@ public class UfficioTecnicoBL {
      * @param regex     the regex
      * @return true, if successful
      */
-    private boolean validateLengthRegex(final String text,
-            final int minLength, final int maxLength, final String regex) {
+    private boolean validateLengthRegex(final String text, final int minLength,
+            final int maxLength, final String regex) {
         return text.length() >= minLength && text.length() <= maxLength
                 && text.matches(regex);
     }
