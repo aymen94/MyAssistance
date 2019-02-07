@@ -100,7 +100,7 @@
 								</h5>
 								<div id="collapse_${count.count}" class="collapse"
 									data-parent="#accordion_parent">
-									<input type="hidden" name="field-id" value="1"> <br>
+									<input type="hidden" name="field-id" value="${ufficio.id}"> <br>
 									<div class="input-group mb-3">
 										<div class="input-group-prepend">
 											<span class="input-group-text">Telefono</span>
