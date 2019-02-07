@@ -82,8 +82,8 @@ public class UfficioTecnicoBL {
                 1,
                 MAX_NOME_LENGTH,
                 "^[\\w\\h]+$")
-                && (uff.getTel().length() == 0
-                        || validateLengthRegex(uff.getTel(),
+                && (uff.getTel() == null
+                        || validateLengthRegexCanBeEmpty(uff.getTel(),
                                 MIN_TEL_LENGTH,
                                 MAX_TEL_LENGTH,
                                 "^(\\+){0,1}[0-9]*$"))
@@ -91,10 +91,8 @@ public class UfficioTecnicoBL {
                         MIN_EMAIL_LENGTH,
                         MAX_EMAIL_LENGTH,
                         REGEX_EMAIL)
-                && (uff.getUbicazione().length() == 0
-                        || (uff.getUbicazione().length() > 0
-                                && uff.getUbicazione()
-                                        .length() <= MAX_UBICAZIONE_LENGTH))) {
+                && (uff.getUbicazione() == null || uff.getUbicazione()
+                        .length() <= MAX_UBICAZIONE_LENGTH)) {
 
             return database.insert(uff) > 0;
         }
@@ -135,5 +133,20 @@ public class UfficioTecnicoBL {
             final int maxLength, final String regex) {
         return text.length() >= minLength && text.length() <= maxLength
                 && text.matches(regex);
+    }
+
+    /**
+     * Validate length and regex.
+     *
+     * @param text      the text
+     * @param minLength the min length
+     * @param maxLength the max length
+     * @param regex     the regex
+     * @return true, if successful or string is empty
+     */
+    private boolean validateLengthRegexCanBeEmpty(final String text,
+            final int minLength, final int maxLength, final String regex) {
+        return text.length() == 0
+                || validateLengthRegex(text, minLength, maxLength, regex);
     }
 }
