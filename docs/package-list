@@ -1,0 +1,8 @@
+control
+control.segnalazione
+control.ufficio_tecnico
+control.utente
+model.segnalazione
+model.ufficio_tecnico
+model.utente
+pool
