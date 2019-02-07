@@ -49,6 +49,13 @@ public final class GestisciSegnalazioneServlet extends BasicServlet {
                 segnalazioni = new ArrayList<>();
                 uffici = new ArrayList<>();
             }
+
+            // Aggiungi ufficio vuoto
+            UfficioTecnico ut = new UfficioTecnico();
+            ut.setId(-1);
+            ut.setNome("&lt;Non Selezionato&gt;");
+            uffici.add(0, ut);
+
             req.setAttribute("segnalazioni", segnalazioni);
             req.setAttribute("uffici", uffici);
             RequestDispatcher dispatcher = getServletContext()
@@ -82,8 +89,10 @@ public final class GestisciSegnalazioneServlet extends BasicServlet {
                             idTecnico = Integer
                                     .parseInt(req.getParameter("ufficio"));
 
-                            sbl.inoltraSegnalazione(codiceSegnalazione,
-                                    idTecnico);
+                            if (sbl.inoltraSegnalazione(codiceSegnalazione,
+                                    idTecnico)) {
+                                resp.sendRedirect("./segnalazioni");
+                            }
                         } catch (Exception e) {
                             String msgError = "Si è verificato un errore.";
                             req.setAttribute("msgError", msgError);
@@ -97,8 +106,10 @@ public final class GestisciSegnalazioneServlet extends BasicServlet {
                                     .parseInt(req.getParameter("codice"));
                             motivation = req.getParameter("motivation");
 
-                            sbl.rifiutaSegnalazione(codiceSegnalazione,
-                                    motivation);
+                            if (sbl.rifiutaSegnalazione(codiceSegnalazione,
+                                    motivation)) {
+                                resp.sendRedirect("./segnalazioni");
+                            }
                         } catch (Exception e) {
                             String msgError = "Si e' verificato un errore.";
                             req.setAttribute("msgError", msgError);
@@ -111,7 +122,9 @@ public final class GestisciSegnalazioneServlet extends BasicServlet {
                             codiceSegnalazione = Integer
                                     .parseInt(req.getParameter("codice"));
 
-                            sbl.segnaRisolta(codiceSegnalazione);
+                            if (sbl.segnaRisolta(codiceSegnalazione)) {
+                                resp.sendRedirect("./segnalazioni");
+                            }
                         } catch (Exception e) {
                             String msgError = "Si e' verificato un errore.";
                             req.setAttribute("msgError", msgError);
