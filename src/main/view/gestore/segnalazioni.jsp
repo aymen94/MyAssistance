@@ -107,7 +107,7 @@
 			<div class="form-group">
 				<label for="rifiuta-motivation" style="display: none">Motivazione</label>
 				<textarea class="form-control" id="rifiuta-motivation"
-					class="motivation"
+					class="motivation" name="motivation"
 					placeholder="Inserisci qui la motivazione del rifiuto"
 					style="min-height: 128px"></textarea>
 			</div>
