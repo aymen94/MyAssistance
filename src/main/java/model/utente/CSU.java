@@ -27,7 +27,7 @@ public class CSU extends Utente {
     /**
      * Instantiates a new csu.
      *
-     * @param aUserName      the user name
+     * @param aUserName      the username
      * @param aPassword      the password
      * @param aEmail         the email
      * @param aNome          the nome
@@ -43,9 +43,9 @@ public class CSU extends Utente {
     }
 
     /**
-     * Ottieni la data sospensione.
+     * Get the suspension date.
      *
-     * @return dataSospensione ottieni la data di sospensione dell'utente.
+     * @return dataSospensione get the user's suspension date.
      */
     public final LocalDate getDataSospensione() {
 
@@ -53,9 +53,9 @@ public class CSU extends Utente {
     }
 
     /**
-     * Imposta la data sospensione.
+     * Set the suspension date.
      *
-     * @param aDataSospensione imposta la data di sospensione dell'utente.
+     * @param aDataSospensione set the user's suspension date.
      */
     public final void setDataSospensione(final LocalDate aDataSospensione) {
         dataSospensione = aDataSospensione;

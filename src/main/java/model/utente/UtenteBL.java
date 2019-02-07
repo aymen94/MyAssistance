@@ -150,7 +150,7 @@ public class UtenteBL {
     }
 
     /**
-     * Sospendi utente.
+     * Suspend user.
      *
      * @param aCSU the CSU
      * @return true, if successful
@@ -162,7 +162,7 @@ public class UtenteBL {
     }
 
     /**
-     * Autenticazione CSU.
+     * Autentication CSU.
      *
      * @param aUserName the user name
      * @param aPass     the pass
@@ -181,7 +181,7 @@ public class UtenteBL {
     }
 
     /**
-     * Autenticazione gestore.
+     * Autentication gestore.
      *
      * @param aUserName the user name
      * @param aPass     the pass
@@ -194,7 +194,7 @@ public class UtenteBL {
     }
 
     /**
-     * Gets the utenti registrati.
+     * Gets the registered users.
      *
      * @return the utenti registrati
      * @throws Exception the exception
@@ -220,7 +220,7 @@ public class UtenteBL {
     }
 
     /**
-     * Autenticazione.
+     * Autentication.
      *
      * @param username the username
      * @param password the password

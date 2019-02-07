@@ -98,7 +98,7 @@ public abstract class Utente {
     }
 
     /**
-     * Effetuare Ovveride.
+     * Make Ovveride.
      *
      * @return Boolean
      */
@@ -107,7 +107,7 @@ public abstract class Utente {
     /**
      * Gets the id.
      *
-     * @return id ottienti l'identificatore dell'utente.
+     * @return id obtain the user identifier.
      */
     public final Integer getId() {
         return id;
@@ -116,104 +116,104 @@ public abstract class Utente {
     /**
      * Sets the id.
      *
-     * @param aId imposta il valore id dell'utente.
+     * @param aId set the user's id value.
      */
     public final void setId(final int aId) {
         id = aId;
     }
 
     /**
-     * Ottieni l' username.
+     * Get username.
      *
-     * @return username Ottieni l'username dell'utente.
+     * @return username Get the user's username.
      */
     public final String getUserName() {
         return userName;
     }
 
     /**
-     * imposta l'username.
+     * Sets l'username.
      *
-     * @param aUserName imposta il valore di username.
+     * @param aUserName set the value of username.
      */
     public final void setUserName(final String aUserName) {
         userName = aUserName;
     }
 
     /**
-     * Ottieni the password.
+     * Get the password.
      *
-     * @return password ottieni la passoword dell'utente.
+     * @return password get the user passoword.
      */
     public final String getPassword() {
         return password;
     }
 
     /**
-     * Imposta la password.
+     * Sets the password.
      *
-     * @param aPassword imposta la password dell'utente.
+     * @param aPassword set the user password.
      */
     public final void setPassword(final String aPassword) {
         password = aPassword;
     }
 
     /**
-     * Ottieni le email.
+     * Get le email.
      *
-     * @return email ottieni l'email dell'utente.
+     * @return email get the user's email.
      */
     public final String getEmail() {
         return email;
     }
 
     /**
-     * Imposta la email.
+     * Sets the email.
      *
-     * @param aEmail imposta l'emaio dell'utente.
+     * @param aEmail sets the user's email.
      */
     public final void setEmail(final String aEmail) {
         email = aEmail;
     }
 
     /**
-     * Ottieni il nome.
+     * Gets the nome.
      *
-     * @return nome ottieni il nome dell'utente.
+     * @return nome ottieni the user's name.
      */
     public final String getNome() {
         return nome;
     }
 
     /**
-     * Imposta il nome.
+     * Sets the nome.
      *
-     * @param aNome imposta il nome dell'utente.
+     * @param aNome set the user's name.
      */
     public final void setNome(final String aNome) {
         this.nome = aNome;
     }
 
     /**
-     * Ottieni il cognome.
+     * Get the cognome.
      *
-     * @return cognome ottieni il cognome dell'utente.
+     * @return cognome get the user's last name.
      */
     public final String getCognome() {
         return cognome;
     }
 
     /**
-     * Imposta il cognome.
+     * Sets the cognome.
      *
-     * @param aCognogme imposta il cognome dell'utente.
+     * @param aCognogme set the user's last name.
      */
     public final void setCognome(final String aCognogme) {
         cognome = aCognogme;
     }
 
     /**
-     * Ottieni il sesso dell'utente.
+     * Get the user's sex.
      *
      * @return sesso
      */
@@ -222,16 +222,16 @@ public abstract class Utente {
     }
 
     /**
-     * Impsti sesso dell'utente.
+     * Set up the user's gender.
      *
-     * @param aSesso imposta il valore sesso dell'utente.
+     * @param aSesso sets the gender value of the user.
      */
     public final void setSesso(final int aSesso) {
         sesso = aSesso;
     }
 
     /**
-     * Ottieni la data di nascità dell'utente.
+     * Get the date of the user's birth.
      *
      * @return Date
      */
@@ -240,16 +240,16 @@ public abstract class Utente {
     }
 
     /**
-     * Impsti la data di nascità dell'utente.
+     * Set the date of the user's birth.
      *
-     * @param aData imposta il valore sesso dell'utente.
+     * @param aData sets the gender value of the user.
      */
     public final void setDataDiNascita(final LocalDate aData) {
         dataDiNascita = aData;
     }
 
     /**
-     * Confronta se due utenti sono identici.
+     * Compare if two users are identical.
      *
      * @return boolean
      */
@@ -270,7 +270,7 @@ public abstract class Utente {
     }
 
     /**
-     * Genera un intero per la tabella hash.
+     * It generates an integer for the hash table.
      *
      * @return int Utente
      */
@@ -280,7 +280,7 @@ public abstract class Utente {
     }
 
     /**
-     * ritorna tutti i valori istanziati.
+     * returns all instantiated values.
      *
      * @return String
      */
