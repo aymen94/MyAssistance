@@ -150,6 +150,7 @@ public class SegnalazioneBL {
             final UfficioTecnico tecnico = tecnicoDB.getById(aIdTecnico);
             aSegnalazione.setTecnico(tecnico);
             aSegnalazione.setDataAssegnazione(LocalDate.now());
+            aSegnalazione.setStato(Segnalazione.STATO_ASSEGNATO);
             if (segnalazioneDB.update(aSegnalazione)) {
                 SendMailSSL.sendEmail(tecnico.getEmail(),
                         aSegnalazione.getTitolo(),
@@ -207,6 +208,7 @@ public class SegnalazioneBL {
         if (aSegnalazione != null
                 && aSegnalazione.getStato() == Segnalazione.STATO_ASSEGNATO) {
             aSegnalazione.setStato(Segnalazione.STATO_RISOLTO);
+            aSegnalazione.setDataRisoluzione(LocalDate.now());
             return segnalazioneDB.update(aSegnalazione);
         }
         return false;
