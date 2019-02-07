@@ -92,6 +92,8 @@ public final class GestisciSegnalazioneServlet extends BasicServlet {
                             if (sbl.inoltraSegnalazione(codiceSegnalazione,
                                     idTecnico)) {
                                 resp.sendRedirect("./segnalazioni");
+                            } else {
+                                throw new RuntimeException();
                             }
                         } catch (Exception e) {
                             String msgError = "Si è verificato un errore.";
@@ -109,6 +111,8 @@ public final class GestisciSegnalazioneServlet extends BasicServlet {
                             if (sbl.rifiutaSegnalazione(codiceSegnalazione,
                                     motivation)) {
                                 resp.sendRedirect("./segnalazioni");
+                            } else {
+                                throw new RuntimeException();
                             }
                         } catch (Exception e) {
                             String msgError = "Si e' verificato un errore.";
@@ -124,6 +128,8 @@ public final class GestisciSegnalazioneServlet extends BasicServlet {
 
                             if (sbl.segnaRisolta(codiceSegnalazione)) {
                                 resp.sendRedirect("./segnalazioni");
+                            } else {
+                                throw new RuntimeException();
                             }
                         } catch (Exception e) {
                             String msgError = "Si e' verificato un errore.";
