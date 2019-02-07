@@ -11,8 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import model.utente.CSU;
+import model.utente.Utente;
 import model.utente.UtenteBL;
 
 import java.io.IOException;
@@ -50,9 +49,9 @@ public final class AccediUtenteServlet extends HttpServlet {
         if (username != null && password != null) {
             UtenteBL u = new UtenteBL();
             try {
-                CSU csu = u.autenticazioneCSU(username, password);
-                if (csu != null) {
-                    req.getSession(true).setAttribute("utente", csu);
+                Utente utente = u.autenticazioneCSU(username, password);
+                if (utente != null) {
+                    req.getSession(true).setAttribute("utente", utente);
                 } else {
                     throw new RuntimeException(
                             "Combinazione username / password errata.");

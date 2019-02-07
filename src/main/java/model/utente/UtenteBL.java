@@ -157,6 +157,7 @@ public class UtenteBL {
      * @throws Exception the exception
      */
     public final boolean sospendiUtente(final CSU aCSU) throws Exception {
+        aCSU.setDataSospensione(LocalDate.now());
         return utenteDB.update(aCSU) > 0;
     }
 
@@ -168,9 +169,15 @@ public class UtenteBL {
      * @return the csu
      * @throws Exception the exception
      */
-    public final CSU autenticazioneCSU(final String aUserName,
+    public final Utente autenticazioneCSU(final String aUserName,
             final String aPass) throws Exception {
-        return (CSU) autenticazione(aUserName, aPass);
+        Utente u = autenticazione(aUserName, aPass);
+        if (u != null && u instanceof CSU
+                && ((CSU) u).getDataSospensione() != null) {
+            return null;
+        } else {
+            return u;
+        }
     }
 
     /**

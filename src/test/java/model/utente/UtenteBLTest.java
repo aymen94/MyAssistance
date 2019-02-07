@@ -111,7 +111,7 @@ public class UtenteBLTest {
         final String username = "marissi";
         final String password = "chiave";
 
-        final CSU utente = manager.autenticazioneCSU(username, password);
+        final Utente utente = manager.autenticazioneCSU(username, password);
         assertNull(utente);
     }
 
@@ -125,7 +125,7 @@ public class UtenteBLTest {
         final String username = "marissi";
         final String password = "Chiave12345";
 
-        final CSU utente = manager.autenticazioneCSU(username, password);
+        final Utente utente = manager.autenticazioneCSU(username, password);
         assertEquals(utenteTest, utente);
     }
 
