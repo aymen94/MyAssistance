@@ -4,7 +4,7 @@
   Date: 05/01/2019
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<form id="submit-dialog" class="modal fade" tabindex="-1" role="dialog" method="post">
+<form id="submit-dialog" class="modal fade" tabindex="-1" role="dialog" method="post" onsubmit="return utilities.validate(this)">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
