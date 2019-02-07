@@ -40,33 +40,37 @@
 								<input type="hidden" name="field-id" value="-1"> <br>
 								<div class="input-group mb-3">
 									<div class="input-group-prepend">
-										<span class="input-group-text">Nome</span>
+										<label class="input-group-text" for="f1">Nome</label>
 									</div>
-									<input type="text" name="field-name" class="form-control"
+									<input id="f1" type="text" name="field-name"
+										class="form-control"
 										placeholder="Inserire qui il nome dell'ufficio tecnico"
 										pattern="^.{3,}$">
 								</div>
 								<div class="input-group mb-3">
 									<div class="input-group-prepend">
-										<span class="input-group-text">Telefono</span>
+										<label class="input-group-text" for="f2">Telefono</label>
 									</div>
-									<input type="text" name="field-tel" class="form-control"
+									<input id="f2" type="text" name="field-tel"
+										class="form-control"
 										placeholder="Inserire qui il contatto telefonico dell'ufficio in questione"
 										pattern="^\+{0,1}\d{3,}$">
 								</div>
 								<div class="input-group mb-3">
 									<div class="input-group-prepend">
-										<span class="input-group-text">Email</span>
+										<label class="input-group-text" for="f3">Email</label>
 									</div>
-									<input type="text" name="field-email" class="form-control"
+									<input id="f3" type="text" name="field-email"
+										class="form-control"
 										placeholder="Inserire qui l'email dell'ufficio in questione"
 										pattern="^[^@]{1,}@[^\.]{1,}(\.[^\.]{1,}){1,}$">
 								</div>
 								<div class="input-group mb-3">
 									<div class="input-group-prepend">
-										<span class="input-group-text">Ubicazione</span>
+										<label class="input-group-text" for="f4">Ubicazione</label>
 									</div>
-									<input type="text" name="field-location" class="form-control"
+									<input id="f4" type="text" name="field-location"
+										class="form-control"
 										placeholder="Inserire qui l'ubicazione dell'ufficio in questione"
 										pattern="^.{3,}$">
 								</div>
@@ -84,7 +88,7 @@
 				<c:if test="${successo != null}">
 					<div class="alert alert-success" role="alert">L'Ufficio
 						Tecnico è stato inserito con successo.</div>
-						<br>
+					<br>
 				</c:if>
 				<div class="alert-list accordion" id="accordion_parent">
 					<c:forEach items="${uffici}" var="ufficio" varStatus="count">
