@@ -52,7 +52,6 @@ public class UfficioTecnicoBL {
 
     /**
      * Instantiates a new ufficio tecnico BL. Using the default db manager
-     *
      */
     public UfficioTecnicoBL() {
         this(new UfficioTecnicoDB());

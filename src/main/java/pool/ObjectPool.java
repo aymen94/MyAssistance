@@ -4,18 +4,20 @@ import java.util.Enumeration;
 import java.util.Hashtable;
 
 // TODO Auto-generated Javadoc
+
 /**
  * Object Pool Design Pattern Questa è una classe astratta che definisce
  * l'interfaccia di un ObjectPool. Vanno implementati i metodi {@link #create()}
  * e {@link #destroy(Object)}
  *
- * @author Andrea Mennillo
- *
  * @param <T> È la classe dell'oggetto di cui si vuole realizzare un pool
+ * @author Andrea Mennillo
  */
 public abstract class ObjectPool<T> {
 
-    /** The Constant DEFAULT_DEADTIME. */
+    /**
+     * The Constant DEFAULT_DEADTIME.
+     */
     public static final long DEFAULT_DEADTIME = 50000;
 
     /** The dead time. */

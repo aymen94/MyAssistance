@@ -11,31 +11,44 @@ import java.security.spec.InvalidKeySpecException;
  * PBKDF2 salted password hashing.
  *
  * @author havoc AT defuse.ca
- * @see <a href="http://crackstation.net/hashing-security.htm">Original
- *      website</a>
+ * @see <a href="http://crackstation.net/hashing-security.htm">Original      website</a>
  */
 public final class PasswordHash {
 
-    /** The Constant PBKDF2_ALGORITHM. */
+    /**
+     * The Constant PBKDF2_ALGORITHM.
+     */
     public static final String PBKDF2_ALGORITHM = "PBKDF2WithHmacSHA256";
 
-    /** The Constant SALT_BYTES. */
+    /**
+     * The Constant SALT_BYTES.
+     */
     // The following constants may be changed without breaking existing hashes.
     public static final int SALT_BYTES = 1;
 
-    /** The Constant HASH_BYTES. */
+    /**
+     * The Constant HASH_BYTES.
+     */
     public static final int HASH_BYTES = 45;
 
-    /** The Constant PBKDF2_ITERATIONS. */
+    /**
+     * The Constant PBKDF2_ITERATIONS.
+     */
     public static final int PBKDF2_ITERATIONS = 2;
 
-    /** The Constant ITERATION_INDEX. */
+    /**
+     * The Constant ITERATION_INDEX.
+     */
     public static final int ITERATION_INDEX = 0;
 
-    /** The Constant SALT_INDEX. */
+    /**
+     * The Constant SALT_INDEX.
+     */
     public static final int SALT_INDEX = 1;
 
-    /** The Constant PBKDF2_INDEX. */
+    /**
+     * The Constant PBKDF2_INDEX.
+     */
     public static final int PBKDF2_INDEX = 2;
 
     /** The hexadecimal. */

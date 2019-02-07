@@ -49,7 +49,6 @@ public class SegnalazioneBL {
 
     /**
      * Instantiates a new segnalazione BL. Using the default db manager
-     *
      */
     public SegnalazioneBL() {
         this(new SegnalazioneDB(), new UfficioTecnicoDB());

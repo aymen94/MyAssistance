@@ -100,7 +100,7 @@ public abstract class Utente {
     /**
      * Make Ovveride.
      *
-     * @return Boolean
+     * @return Boolean boolean
      */
     public abstract Boolean isGestore();
 
@@ -215,7 +215,7 @@ public abstract class Utente {
     /**
      * Get the user's sex.
      *
-     * @return sesso
+     * @return sesso sesso
      */
     public final int getSesso() {
         return sesso;
@@ -233,7 +233,7 @@ public abstract class Utente {
     /**
      * Get the date of the user's birth.
      *
-     * @return Date
+     * @return Date data di nascita
      */
     public final LocalDate getDataDiNascita() {
         return dataDiNascita;

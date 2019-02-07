@@ -139,6 +139,8 @@ public class Segnalazione {
     }
 
     /**
+     * Gets descrizione.
+     *
      * @return the descrizione
      */
     public final String getDescrizione() {
@@ -146,6 +148,8 @@ public class Segnalazione {
     }
 
     /**
+     * Sets descrizione.
+     *
      * @param aDescrizione the descrizione to set
      */
     public final void setDescrizione(final String aDescrizione) {
@@ -207,6 +211,8 @@ public class Segnalazione {
     }
 
     /**
+     * Gets data assegnazione.
+     *
      * @return the dataAssegnazione
      */
     public final LocalDate getDataAssegnazione() {
@@ -214,6 +220,8 @@ public class Segnalazione {
     }
 
     /**
+     * Sets data assegnazione.
+     *
      * @param aDataAssegnazione the dataAssegnazione to set
      */
     public final void setDataAssegnazione(final LocalDate aDataAssegnazione) {

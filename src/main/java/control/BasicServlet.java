@@ -24,11 +24,8 @@ public abstract class BasicServlet extends HttpServlet {
      * Checks wheter user is logged as CSU.
      *
      * @param req  the HTTP request object from actual servlet.
-     *
      * @param resp the HTTP response object from actual servlet.
-     *
      * @return true is user is logged, false if it's not.
-     *
      * @throws IOException from sendRedirect
      */
     protected final boolean isUtenteLoggato(final HttpServletRequest req,
@@ -40,13 +37,9 @@ public abstract class BasicServlet extends HttpServlet {
      * Checks wheter user is present into session.
      *
      * @param req       the HTTP request object from actual servlet.
-     *
      * @param resp      the HTTP response object from actual servlet.
-     *
      * @param asGestore check if user has logged as Gestore.
-     *
      * @return true is user is logged, false if it's not.
-     *
      * @throws IOException from sendRedirect
      */
     protected final boolean isUtenteLoggato(final HttpServletRequest req,

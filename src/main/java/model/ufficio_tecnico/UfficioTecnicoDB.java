@@ -14,7 +14,6 @@ import pool.ConnectionManagerInterface;
  * This class allows the management of persistent data relating to offices.
  * technicians
  */
-
 public final class UfficioTecnicoDB implements UfficioTecnicoDBInterface {
 
     /**
