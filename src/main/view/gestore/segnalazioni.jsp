@@ -85,13 +85,16 @@
 		</div>
 		<%@include file="../include/footer.jsp"%>
 	</div>
+	<%@include file="../include/error-dialog.jsp"%>
 	<%@include file="../include/submit-dialog.jsp"%>
 	<div style="display: none">
 		<div id="inoltra-segnalazione">
 			Scegli l'ufficio tecnico a cui vuoi assegnare la risoluzione di
 			questa segnalazione ricevuta. <input type="hidden" name="codice">
-			<input type="hidden" name="op" value="inoltra"> <select
-				name="ufficio" class="custom-select" style="margin-top: 16px">
+			<label for="ufficio-select" style="display: none">Ufficio
+				Tecnico</label> <input type="hidden" name="op" value="inoltra"> <select
+				id="ufficio-select" name="ufficio" class="custom-select"
+				style="margin-top: 16px">
 				<c:forEach items="${uffici}" var="ufficio" varStatus="count">
 					<option value="${ufficio.id}">${ufficio.nome}</option>
 				</c:forEach>
@@ -102,6 +105,7 @@
 			irreversibile! <input type="hidden" name="codice"> <input
 				type="hidden" name="op" value="rifiuta">
 			<div class="form-group">
+				<label for="rifiuta-motivation" style="display: none">Motivazione</label>
 				<textarea class="form-control" id="rifiuta-motivation"
 					class="motivation"
 					placeholder="Inserisci qui la motivazione del rifiuto"
