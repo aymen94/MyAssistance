@@ -16,12 +16,14 @@ var utilities =
 			var errorDialog = document.getElementById("error-dialog");
 
 			// Get all input fields with pattern
-			var d = form.querySelectorAll("input[pattern], textarea[pattern]");
+			var d = form.querySelectorAll("input[pattern], textarea[pattern], select");
 
 			// Validate them
 			for (var i = 0; i < d.length; ++i)
 			{
-				if (!d[i].value.length || !d[i].checkValidity())
+				let c1 = d[i].tagName.toLowerCase() === "select" && d[i].value == -1;
+				let c2 = d[i].tagName.toLowerCase() !== "select" && (!d[i].value.length || !d[i].checkValidity());
+				if (c1 || c2)
 				{
 					if (errorDialog !== null)
 					{
@@ -84,6 +86,13 @@ var utilities =
 		 */
 		showDialog: function(dialog, title, message)
 		{
+			// Close submit dialog, if possible
+			var sd = document.getElementById("submit-dialog");
+			if (sd !== null)
+			{
+				$('#' + sd.getAttribute("id")).modal('hide');
+			}
+
 			// Set title, if requested
 			if (title !== null)
 			{
