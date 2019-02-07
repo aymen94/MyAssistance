@@ -50,7 +50,7 @@ public class UfficioTecnico {
     /**
      * Sets the id.
      *
-     * @param aId setta identificatore dell'ufficio tecnico
+     * @param aId set technical office identifier
      */
     public final void setId(final int aId) {
         this.id = aId;
