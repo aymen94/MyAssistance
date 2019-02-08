@@ -60,6 +60,7 @@ public final class ModificaSegnalazioneServlet extends BasicServlet {
 
         String cod = (String) req.getParameter("cod");
         String descrizione = (String) req.getParameter("descrizione");
+        String elimina = (String) req.getParameter("elimina");
 
         if (cod != null && descrizione != null) {
             SegnalazioneBL sbl = new SegnalazioneBL();
@@ -76,6 +77,22 @@ public final class ModificaSegnalazioneServlet extends BasicServlet {
                 }
             } catch (Exception e) {
                 String msgError = "Si è verificato un errore.";
+                req.setAttribute("msgError", msgError);
+                RequestDispatcher dispatcher = getServletContext()
+                        .getRequestDispatcher("/error.jsp");
+                dispatcher.forward(req, resp);
+            }
+        } else if (elimina != null) {
+            try {
+                if (new SegnalazioneBL().deleteSegnalazione(
+                        Integer.parseInt(elimina),
+                        (Utente) req.getSession().getAttribute("utente"))) {
+                    resp.sendRedirect("./segnalazioni");
+                } else {
+                    throw new RuntimeException();
+                }
+            } catch (Exception e) {
+                String msgError = "Si e' verificato un errore.";
                 req.setAttribute("msgError", msgError);
                 RequestDispatcher dispatcher = getServletContext()
                         .getRequestDispatcher("/error.jsp");
