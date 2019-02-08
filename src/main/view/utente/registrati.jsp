@@ -25,7 +25,7 @@
 	<div class="page">
 		<%@include file="../include/header.jsp"%>
 		<div class="content">
-			<%@include file="../include/nav-left-csu.jsp"%>
+			<%@include file="../include/nav-left.jsp"%>
 			<div>
 				<h3>Registrazione Utente</h3>
 				<br>
