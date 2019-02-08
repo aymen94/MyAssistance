@@ -65,7 +65,8 @@
 										<div>
 											<button type="submit" class="btn btn-light">Applica
 												Modifiche</button>
-											<button type="button" class="btn btn-danger">Elimina</button>
+											<button type="button" class="btn btn-danger"
+												onclick="segnalazioni.elimina('submit-dialog', ${segnalazione.cod})">Elimina</button>
 										</div>
 									</c:if>
 								</div>
@@ -77,6 +78,13 @@
 			<%@include file="../include/nav-right.jsp"%>
 		</div>
 		<%@include file="../include/footer.jsp"%>
+	</div>
+	<%@include file="../include/submit-dialog.jsp"%>
+	<div style="display: none">
+		<div id="elimina">
+			Sei sicuro di voler eliminare questa segnalazione? Questa azione è
+			irreversibile! <input type="hidden" name="elimina">
+		</div>
 	</div>
 </body>
 </html>
