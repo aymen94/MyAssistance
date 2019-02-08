@@ -6,6 +6,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <div class="side">
 	<h4>Funzionalità</h4>
-	<a href="./utente/accedi" class="btn">Login CSU</a>
-	<a href="./gestore/accedi" class="btn">Login Gestore</a>
+	<a href="${pageContext.servletContext.contextPath}/utente/accedi" class="btn">Login CSU</a>
+	<a href="${pageContext.servletContext.contextPath}/gestore/accedi" class="btn">Login Gestore</a>
 </div>
