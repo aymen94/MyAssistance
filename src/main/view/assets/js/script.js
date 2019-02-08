@@ -158,6 +158,21 @@ var segnalazioni =
 			var form = document.getElementById("segna-risolta");
 			form.querySelector("input").value = id;
 			utilities.showDialog(document.getElementById(dialogId), "Segna Come Risolta", form.outerHTML);
+		},
+
+		/**
+		 * This method shows a bootstrap modal dialog, containing the form elements to be
+		 * added to the dialog's form, in order to delete the report.
+		 *
+		 * @param dialog the dialog element's id, which must already exist in the DOM.
+		 * @param id the report id.
+		 */
+		elimina: function(dialogId, id)
+		{
+			// Show dialog to the browser
+			var form = document.getElementById("elimina");
+			form.querySelector("input").value = id;
+			utilities.showDialog(document.getElementById(dialogId), "Elimina Segnalazione", form.outerHTML);
 		}
 };
 
