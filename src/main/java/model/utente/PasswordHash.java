@@ -11,7 +11,6 @@ import java.security.spec.InvalidKeySpecException;
  * PBKDF2 salted password hashing.
  *
  * @author havoc AT defuse.ca
- * @see <a href="http://crackstation.net/hashing-security.htm">Original      website</a>
  */
 public final class PasswordHash {
 
