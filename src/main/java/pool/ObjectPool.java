@@ -18,7 +18,7 @@ public abstract class ObjectPool<T> {
     /**
      * The Constant DEFAULT_DEADTIME.
      */
-    public static final long DEFAULT_DEADTIME = 50000;
+    public static final long DEFAULT_DEADTIME = 120000;
 
     /** The dead time. */
     private long deadTime;
