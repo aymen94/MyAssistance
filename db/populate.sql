@@ -1,9 +1,9 @@
 INSERT INTO my_assistance.utente (username, pass, email, nome, cognome, sesso, data_di_nascita, is_gestore) -- pass: 1234
-VALUES ('a.naghmouchi', '2:0f:29157d97fa6a6d8cbe13eba297c27275718cf47a854a6a1ee3a6fe16f646782acd259ef350cb2f09331bec7c0b', 'a.naghmouchi@test.it', 'aymen', 'naghmouchi', 1,'1990-01-01', 0),
-       ('a.pauciello', '2:0f:29157d97fa6a6d8cbe13eba297c27275718cf47a854a6a1ee3a6fe16f646782acd259ef350cb2f09331bec7c0b', 'a.pauciello3@test.it', 'alfonso', 'pauciello', 1,'1990-01-01', 0),
-       ('a.mennillo', '2:0f:29157d97fa6a6d8cbe13eba297c27275718cf47a854a6a1ee3a6fe16f646782acd259ef350cb2f09331bec7c0b', 'a.mennillo1@test.it', 'andrea', 'mennillo', 1,'1990-01-01', 0),
-       ('g.albanese', '2:0f:29157d97fa6a6d8cbe13eba297c27275718cf47a854a6a1ee3a6fe16f646782acd259ef350cb2f09331bec7c0b', 'g.albanese11@test.it', 'gaetano', 'albanese', 1,'1990-01-01', 0),
-       ('p.dauria', '2:0f:29157d97fa6a6d8cbe13eba297c27275718cf47a854a6a1ee3a6fe16f646782acd259ef350cb2f09331bec7c0b', 'a.dauria@test.it', 'pio', 'd auria ', 1,'1990-01-01', 0);
+VALUES ('naghmouchi', '2:0f:29157d97fa6a6d8cbe13eba297c27275718cf47a854a6a1ee3a6fe16f646782acd259ef350cb2f09331bec7c0b', 'a.naghmouchi@test.it', 'aymen', 'naghmouchi', 1,'1990-01-01', 0),
+       ('apauciello', '2:0f:29157d97fa6a6d8cbe13eba297c27275718cf47a854a6a1ee3a6fe16f646782acd259ef350cb2f09331bec7c0b', 'a.pauciello3@test.it', 'alfonso', 'pauciello', 1,'1990-01-01', 0),
+       ('amennillo', '2:0f:29157d97fa6a6d8cbe13eba297c27275718cf47a854a6a1ee3a6fe16f646782acd259ef350cb2f09331bec7c0b', 'a.mennillo1@test.it', 'andrea', 'mennillo', 1,'1990-01-01', 0),
+       ('galbanese', '2:0f:29157d97fa6a6d8cbe13eba297c27275718cf47a854a6a1ee3a6fe16f646782acd259ef350cb2f09331bec7c0b', 'g.albanese11@test.it', 'gaetano', 'albanese', 1,'1990-01-01', 0),
+       ('pdauria', '2:0f:29157d97fa6a6d8cbe13eba297c27275718cf47a854a6a1ee3a6fe16f646782acd259ef350cb2f09331bec7c0b', 'a.dauria@test.it', 'pio', 'd auria ', 1,'1990-01-01', 0);
 
 INSERT INTO my_assistance.ufficio_tecnico (nome, tel, email, ubicazione)
 VALUES (' Ifix ', ' 1112223334', ' assistenza@ifix.it ', ' Via della Biblioteca, 84084 Fisciano SA '),

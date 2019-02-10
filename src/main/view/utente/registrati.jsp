@@ -69,7 +69,7 @@
 									class="form-control" name="field-email" id="field-email"
 									aria-describedby="field-email-hint"
 									placeholder="mario@unisa.it"
-									pattern="^([a-zA-Z0-9.!#$%&’*+/=?^_`{}~-]+@(?:[a-zA-Z0-9-]+\.)*unisa\.it){7,254}$"> <small
+									pattern="^([a-zA-Z0-9.!#$%&’*+/=?^_`{}~-]+@(?:[a-zA-Z0-9-]+\.)*unisa\.it)|.{7,254}$"> <small
 									id="field-email-hint" class="form-text text-muted">Inserisci
 									qui l'email per inviarti eventuali comunicazioni.</small>
 							</div>
