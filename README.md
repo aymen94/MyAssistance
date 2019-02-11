@@ -4,6 +4,10 @@ Progetto di ingegneria del software
 
 <h2>Core Team</h2>
 
+### Documentation: <a href="https://1drv.ms/f/s!AmgzKXSCdwCzh40A8FuIqmbApO7NZg">MyAssistance</a>
+
+### Javadoc: <a href="http://www.myassistance.ga">MyAssistance</a>
+
 <table>
   <tbody>
     <tr>
