@@ -60,19 +60,18 @@ public final class SospendiUtenteServlet extends BasicServlet {
                     res = ubl.sospendiUtente(csu);
 
                     if (res) {
-                        new String();
-                        // TODO reindirizzamento a pagina che indica l'avvenuta
-                        // sospensione
+                        resp.sendRedirect("./utenti");
+                        return;
                     } else {
-                        String msgError = "Si e' verificato un errore.";
-                        req.setAttribute("msgError", msgError);
-                        RequestDispatcher dispatcher = getServletContext()
-                                .getRequestDispatcher("/error.jsp");
-                        dispatcher.forward(req, resp);
+                        throw new RuntimeException();
                     }
                 } catch (Exception e) {
-                    // TODO Auto-generated catch block
                     e.printStackTrace();
+                    String msgError = "Si è verificato un errore.";
+                    req.setAttribute("msgError", msgError);
+                    RequestDispatcher dispatcher = getServletContext()
+                            .getRequestDispatcher("/error.jsp");
+                    dispatcher.forward(req, resp);
                 }
 
             } else {
