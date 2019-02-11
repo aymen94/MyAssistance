@@ -10,6 +10,7 @@ before_install:
 script:
   - mvn test
   - bash surefire-output.sh
+  - mvn verify
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
