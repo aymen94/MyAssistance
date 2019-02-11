@@ -11,7 +11,7 @@ import javax.servlet.annotation.WebListener;
  * connessione e per liberarla, infine distrugge tale pool quando il container
  * viene distrutto.
  *
- * @author Andrea Mennillo
+ * @author TeamC
  */
 @WebListener
 public final class ConnectionManager
