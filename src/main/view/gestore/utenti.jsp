@@ -35,10 +35,29 @@
 							<div class="col">
 								<b>${user.userName}</b> - ${user.nome} ${user.cognome}
 							</div>
-							<form class="col-md-auto" action="./sospendiUtente" method="post">
-								<input type="hidden" name="id" value="${user.id}">
-								<button type="submit" class="btn badge badge-warning">Sospendi</button>
-							</form>
+							<c:choose>
+								<c:when test="${user.isGestore()}">
+									<div class="col-md-auto">
+										<span class="btn badge badge-info">Gestore</span>
+									</div>
+								</c:when>
+								<c:otherwise>
+									<c:choose>
+										<c:when test="${user.dataSospensione != null}">
+											<div class="col-md-auto">
+												<span class="btn badge badge-secondary">Sospeso</span>
+											</div>
+										</c:when>
+										<c:otherwise>
+											<form class="col-md-auto" action="./sospendiUtente"
+												method="post">
+												<input type="hidden" name="id" value="${user.id}">
+												<button type="submit" class="btn badge badge-warning">Sospendi</button>
+											</form>
+										</c:otherwise>
+									</c:choose>
+								</c:otherwise>
+							</c:choose>
 						</div>
 					</c:forEach>
 				</div>
