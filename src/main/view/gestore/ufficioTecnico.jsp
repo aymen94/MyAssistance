@@ -31,7 +31,7 @@
 					<div class="card">
 						<div class="media-body">
 							<h5 class="mt-0 mb-1">
-								<a href="#" data-toggle="collapse" data-target="#collapse_new">&#43;
+								<a href="#" id="newUfficio" data-toggle="collapse" data-target="#collapse_new">&#43;
 									Aggiungi Nuovo Ufficio Tecnico</a>
 							</h5>
 							<form novalidate onsubmit="return utilities.validate(this)"

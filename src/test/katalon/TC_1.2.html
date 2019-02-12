@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta content="text/html; charset=UTF-8" http-equiv="content-type" />
+	<title>TC_1.2</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">login</td></tr>
+</thead>
+<tbody>
+<tr><td>open</td><td>http://localhost:8080/myassistance/logout<datalist><option>http://localhost:8080/myassistance/logout</option><option>http://localhost:8080/myassistance/utente/accedi</option><option>http://localhost:8080/myassistance/utente/logout</option></datalist></td><td></td>
+</tr>
+<tr><td>open</td><td>http://localhost:8080/myassistance/utente/accedi<datalist><option>http://localhost:8080/myassistance/utente/accedi</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>id=usr<datalist><option>id=usr</option><option>name=username</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Username'])[1]/following::input[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Università degli Studi di Salerno'])[1]/following::input[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Password'])[1]/preceding::input[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Accedi'])[1]/preceding::input[2]</option><option>//input[@id='usr']</option><option>//form[@id='formLogin']/div/input</option><option>//input</option><option>css=#usr</option></datalist></td><td></td>
+</tr>
+<tr><td>type</td><td>id=usr<datalist><option>id=usr</option><option>name=username</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Username'])[1]/following::input[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Università degli Studi di Salerno'])[1]/following::input[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Password'])[1]/preceding::input[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Accedi'])[1]/preceding::input[2]</option><option>//input[@id='usr']</option><option>//form[@id='formLogin']/div/input</option><option>//input</option><option>css=#usr</option></datalist></td><td>anaghmouchi</td>
+</tr>
+<tr><td>type</td><td>id=pwd<datalist><option>id=pwd</option><option>name=password</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Password'])[1]/following::input[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Username'])[1]/following::input[2]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Accedi'])[1]/preceding::input[1]</option><option>//input[@id='pwd']</option><option>//form[@id='formLogin']/div[2]/input</option><option>//div[2]/input</option><option>css=#pwd</option></datalist></td><td>1234</td>
+</tr>
+<tr><td>click</td><td>id=btnLogin<datalist><option>id=btnLogin</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Password'])[1]/following::button[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Username'])[1]/following::button[1]</option><option>//button[@id='btnLogin']</option><option>//form[@id='formLogin']/button</option><option>//button</option><option>css=#btnLogin</option></datalist></td><td></td>
+</tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">TC_1.2_03</td></tr>
+</thead>
+<tbody>
+<tr><td>open</td><td>http://localhost:8080/myassistance/utente/<datalist><option>http://localhost:8080/myassistance/utente/</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>link=Segnalazioni Effettuate<datalist><option>link=Segnalazioni Effettuate</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Effettua Segnalazione'])[1]/following::a[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Home'])[1]/following::a[2]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='aymen'])[1]/preceding::a[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='My Assistance'])[1]/preceding::a[2]</option><option>//a[contains(text(),'Segnalazioni Effettuate')]</option><option>//a[contains(@href, '/myassistance/utente/segnalazioni')]</option><option>//a[3]</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>link=Si è guastato il calorifero.<datalist><option>link=Si è guastato il calorifero.</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Elimina'])[1]/following::a[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Il calorifero vicino all’entrata dell’aula F8 emana aria fredda.'])[1]/preceding::a[1]</option><option>//a[contains(text(),'Si è guastato il calorifero.')]</option><option>//div[@id='accordion_parent']/form[3]/div/h5/a</option><option>xpath=(//a[contains(@href, '#')])[3]</option><option>//form[3]/div/h5/a</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Il calorifero vicino all’entrata dell’aula F8 emana aria fredda.'])[1]/following::button[2]<datalist><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Il calorifero vicino all’entrata dell’aula F8 emana aria fredda.'])[1]/following::button[2]</option><option>xpath=(//button[@type='button'])[2]</option><option>//div[@id='collapse_3']/div/button[2]</option><option>//form[3]/div/div/div/button[2]</option><option>css=#collapse_3 &gt; div &gt; button.btn.btn-danger</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Annulla'])[1]/following::button[1]<datalist><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Annulla'])[1]/following::button[1]</option><option>xpath=(//button[@type='submit'])[3]</option><option>//form[@id='submit-dialog']/div/div/div[3]/button[2]</option><option>//div[3]/button[2]</option><option>css=button.btn.btn-primary.confirm</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Elimina'])[1]/following::textarea[1]<datalist><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Elimina'])[1]/following::textarea[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Elimina'])[2]/preceding::textarea[1]</option><option>xpath=(//textarea[@name='descrizione'])[3]</option><option>//div[@id='collapse_3']/textarea</option><option>//form[3]/div/div/textarea</option><option>css=#collapse_3 &gt; textarea[name="descrizione"]</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Elimina'])[1]/following::textarea[1]<datalist><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Elimina'])[1]/following::textarea[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Elimina'])[2]/preceding::textarea[1]</option><option>xpath=(//textarea[@name='descrizione'])[3]</option><option>//div[@id='collapse_3']/textarea</option><option>//form[3]/div/div/textarea</option><option>css=#collapse_3 &gt; textarea[name="descrizione"]</option></datalist></td><td></td>
+</tr>
+<tr><td>doubleClick</td><td>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Elimina'])[1]/following::textarea[1]<datalist><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Elimina'])[1]/following::textarea[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Elimina'])[2]/preceding::textarea[1]</option><option>xpath=(//textarea[@name='descrizione'])[3]</option><option>//div[@id='collapse_3']/textarea</option><option>//form[3]/div/div/textarea</option><option>css=#collapse_3 &gt; textarea[name="descrizione"]</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Elimina'])[1]/following::textarea[1]<datalist><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Elimina'])[1]/following::textarea[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Elimina'])[2]/preceding::textarea[1]</option><option>xpath=(//textarea[@name='descrizione'])[3]</option><option>//div[@id='collapse_3']/textarea</option><option>//form[3]/div/div/textarea</option><option>css=#collapse_3 &gt; textarea[name="descrizione"]</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Elimina'])[1]/following::textarea[1]<datalist><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Elimina'])[1]/following::textarea[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Elimina'])[2]/preceding::textarea[1]</option><option>xpath=(//textarea[@name='descrizione'])[3]</option><option>//div[@id='collapse_3']/textarea</option><option>//form[3]/div/div/textarea</option><option>css=#collapse_3 &gt; textarea[name="descrizione"]</option></datalist></td><td></td>
+</tr>
+<tr><td>type</td><td>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Elimina'])[1]/following::textarea[1]<datalist><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Elimina'])[1]/following::textarea[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Elimina'])[2]/preceding::textarea[1]</option><option>xpath=(//textarea[@name='descrizione'])[3]</option><option>//div[@id='collapse_3']/textarea</option><option>//form[3]/div/div/textarea</option><option>css=#collapse_3 &gt; textarea[name="descrizione"]</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Il calorifero vicino all’entrata dell’aula F8 emana aria fredda.'])[1]/following::button[1]<datalist><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Il calorifero vicino all’entrata dell’aula F8 emana aria fredda.'])[1]/following::button[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Elimina'])[1]/following::button[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Elimina'])[2]/preceding::button[1]</option><option>xpath=(//button[@type='submit'])[2]</option><option>//div[@id='collapse_3']/div/button</option><option>//form[3]/div/div/div/button</option><option>css=#collapse_3 &gt; div &gt; button.btn.btn-light</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Si è verificato un errore.'])[1]/following::a[1]<datalist><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Si è verificato un errore.'])[1]/following::a[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Errore Riscontrato'])[1]/following::a[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Università degli Studi di Salerno - Via Giovanni Paolo II, 132 - 84084 - Fisciano (SA)'])[1]/preceding::a[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='P.IVA 00851300657 - C.F. 80018670655'])[1]/preceding::a[1]</option><option>//a[contains(text(),'Torna alla
+                pagina precedente.')]</option><option>//a[contains(@href, 'javascript:window.history.back();')]</option><option>//div[2]/a</option><option>css=div.content &gt; a</option></datalist></td><td></td>
+</tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">TC_1.2_04</td></tr>
+</thead>
+<tbody>
+<tr><td>open</td><td>http://localhost:8080/myassistance/utente/<datalist><option>http://localhost:8080/myassistance/utente/</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>link=Segnalazioni Effettuate<datalist><option>link=Segnalazioni Effettuate</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Effettua Segnalazione'])[1]/following::a[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Home'])[1]/following::a[2]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='aymen'])[1]/preceding::a[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='My Assistance'])[1]/preceding::a[2]</option><option>//a[contains(text(),'Segnalazioni Effettuate')]</option><option>//a[contains(@href, '/myassistance/utente/segnalazioni')]</option><option>//a[3]</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>link=Si è guastato il calorifero.<datalist><option>link=Si è guastato il calorifero.</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Elimina'])[1]/following::a[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Il calorifero vicino all’entrata dell’aula F8 emana aria fredda'])[1]/preceding::a[1]</option><option>//a[contains(text(),'Si è guastato il calorifero.')]</option><option>//div[@id='accordion_parent']/form[3]/div/h5/a</option><option>xpath=(//a[contains(@href, '#')])[3]</option><option>//form[3]/div/h5/a</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Elimina'])[1]/following::textarea[1]<datalist><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Elimina'])[1]/following::textarea[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Elimina'])[2]/preceding::textarea[1]</option><option>xpath=(//textarea[@name='descrizione'])[3]</option><option>//div[@id='collapse_3']/textarea</option><option>//form[3]/div/div/textarea</option><option>css=#collapse_3 &gt; textarea[name="descrizione"]</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Elimina'])[1]/following::textarea[1]<datalist><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Elimina'])[1]/following::textarea[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Elimina'])[2]/preceding::textarea[1]</option><option>xpath=(//textarea[@name='descrizione'])[3]</option><option>//div[@id='collapse_3']/textarea</option><option>//form[3]/div/div/textarea</option><option>css=#collapse_3 &gt; textarea[name="descrizione"]</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Il calorifero vicino all’entrata dell’aula F8 emana aria fredda'])[1]/following::button[1]<datalist><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Il calorifero vicino all’entrata dell’aula F8 emana aria fredda'])[1]/following::button[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Elimina'])[1]/following::button[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Elimina'])[2]/preceding::button[1]</option><option>xpath=(//button[@type='submit'])[2]</option><option>//div[@id='collapse_3']/div/button</option><option>//form[3]/div/div/div/button</option><option>css=#collapse_3 &gt; div &gt; button.btn.btn-light</option></datalist></td><td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

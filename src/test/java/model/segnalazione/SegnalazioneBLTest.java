@@ -8,6 +8,7 @@ import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -168,7 +169,7 @@ public final class SegnalazioneBLTest {
         when(segnalazioneDB.deleteById(any(Integer.class))).thenReturn(true);
         when(segnalazioneDB.getByAutore(any(Integer.class)))
                 .thenReturn(listaSegnalazioni);
-        when(segnalazioneDB.getByAutore(0)).thenReturn(null);
+        when(segnalazioneDB.getByAutore(0)).thenReturn(new ArrayList<Segnalazione>());
         UfficioTecnico tecnico=new UfficioTecnico();
         tecnico.setEmail("myassistance.teamC@gmail.com");
         tecnico.setId(TECNICO_ESISTENTE);
@@ -180,17 +181,17 @@ public final class SegnalazioneBLTest {
     }
 
     /**
-     * Test insert segnalazione 1.
+     * Test insert segnalazione 10.
      *
      * @throws Exception the SQL exception
      */
     @Test
-    public void testInsertSegnalazione1() throws Exception {
+    public void testInsertSegnalazione10() throws Exception {
         segnalazioneAperta = null;
         final Boolean res = manager.insertSegnalazione(segnalazioneAperta);
-        System.out.println(" ### Test - testInsertSegnalazione1 \n\tinserimento: " + segnalazioneAperta + "\n\tresult: " + res );
+        System.out.println(" ### Test - testInsertSegnalazione1 \n\tinserimento:"
+                + " " + segnalazioneAperta + "\n\tresult: " + res );
         assertFalse(res);
-
     }
 
     /**
@@ -199,7 +200,7 @@ public final class SegnalazioneBLTest {
      * @throws Exception the exception
      */
     @Test
-    public void testInsertSegnalazione2() throws Exception {
+    public void testInsertSegnalazione0() throws Exception {
         final String aTitolo = null;
 
         segnalazioneAperta.setTitolo(aTitolo);
@@ -214,7 +215,7 @@ public final class SegnalazioneBLTest {
      * @throws Exception the exception
      */
     @Test
-    public void testInsertSegnalazione3() throws Exception {
+    public void testInsertSegnalazione1() throws Exception {
         final String aTitolo = "";
 
         segnalazioneAperta.setTitolo(aTitolo);
@@ -300,12 +301,12 @@ public final class SegnalazioneBLTest {
     }
 
     /**
-     * Test insert segnalazione 8.
+     * Test insert segnalazione 3.
      *
      * @throws Exception the exception
      */
     @Test
-    public void testInsertSegnalazione8() throws Exception {
+    public void testInsertSegnalazione3() throws Exception {
         final String aTitolo = "Si è guastato il calorifero";
         final String aDescrizione = "Il calorifero vicino all’entrata dell’aula"
                 + " F8 emana aria fredda.";
@@ -317,8 +318,8 @@ public final class SegnalazioneBLTest {
         segnalazioneAperta.setTipologia(tipologia);
         segnalazioneAperta.setAutore(autore);
         final Boolean res = manager.insertSegnalazione(segnalazioneAperta);
-        System.out.println(" ### Test - testInsertSegnalazione8 \n\tinserimento:" + segnalazioneAperta + "\n\tresult: " + res );
-
+        System.out.println(" ### Test - testInsertSegnalazione8 \n\tinserimento:"
+                + "" + segnalazioneAperta + "\n\tresult: " + res );
         assertTrue(res);
     }
 
@@ -880,7 +881,7 @@ public final class SegnalazioneBLTest {
         final List<Segnalazione> res = manager
                 .getSegnalazioniEffettuate(aUtente);
         System.out.println(" ### Test - testGetSegnalazioniEffettuate \n res: "+ res);
-        assertNull(res);
+        assertEquals(res.size(),0);
     }
 
     /**

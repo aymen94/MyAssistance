@@ -3,9 +3,17 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
 	<meta content="text/html; charset=UTF-8" http-equiv="content-type" />
-	<title>TC_2.1_01</title>
+	<title>TC_2.1</title>
 </head>
 <body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">logout</td></tr>
+</thead>
+<tbody>
+<tr><td>open</td><td>http://localhost:8080/myassistance/logout<datalist><option>http://localhost:8080/myassistance/logout</option><option>http://localhost:8080/myassistance/gestore/</option></datalist></td><td></td>
+</tr>
+</tbody></table>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
 <tr><td rowspan="1" colspan="3">TC_2.1_01</td></tr>
@@ -36,8 +44,6 @@
 <tr><td>click</td><td>id=field-gender-male<datalist><option>id=field-gender-male</option><option>name=field-gender</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Sesso'])[1]/following::input[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Uomo'])[1]/preceding::input[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Donna'])[1]/preceding::input[2]</option><option>//input[@id='field-gender-male']</option><option>//div[8]/div/input</option><option>css=#field-gender-male</option></datalist></td><td></td>
 </tr>
 <tr><td>click</td><td>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Donna'])[1]/following::button[1]<datalist><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Donna'])[1]/following::button[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Uomo'])[1]/following::button[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Reset'])[1]/preceding::button[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Non sei loggato nella piattaforma.'])[1]/preceding::button[2]</option><option>//button[@type='submit']</option><option>//button</option><option>css=button.btn.btn-success</option></datalist></td><td></td>
-</tr>
-<tr><td></td><td><datalist><option></option></datalist></td><td></td>
 </tr>
 </tbody></table>
 <table cellpadding="1" cellspacing="1" border="1">
@@ -241,7 +247,7 @@
 </tr>
 <tr><td>click</td><td>id=field-repeat<datalist><option>id=field-repeat</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Ripeti Password'])[1]/following::input[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Email'])[1]/preceding::input[1]</option><option>//input[@id='field-repeat']</option><option>//div[3]/input</option><option>css=#field-repeat</option></datalist></td><td>Chiave123</td>
 </tr>
-<tr><td>type</td><td>id=field-repeat<datalist><option>id=field-repeat</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Ripeti Password'])[1]/following::input[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Email'])[1]/preceding::input[1]</option><option>//input[@id='field-repeat']</option><option>//div[3]/input</option><option>css=#field-repeat</option></datalist></td><td>1234</td>
+<tr><td>type</td><td>id=field-repeat<datalist><option>id=field-repeat</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Ripeti Password'])[1]/following::input[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Email'])[1]/preceding::input[1]</option><option>//input[@id='field-repeat']</option><option>//div[3]/input</option><option>css=#field-repeat</option></datalist></td><td>Chiave123</td>
 </tr>
 <tr><td>type</td><td>id=field-email<datalist><option>id=field-email</option><option>name=field-email</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Email'])[1]/following::input[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Nome'])[1]/preceding::input[1]</option><option>//input[@id='field-email']</option><option>//div[4]/input</option><option>css=#field-email</option></datalist></td><td>mario.rossi13@gmail.com</td>
 </tr>
@@ -379,39 +385,27 @@
 <tr><td rowspan="1" colspan="3">TC_2.1_13</td></tr>
 </thead>
 <tbody>
-<tr><td>open</td><td>http://localhost:8080/myassistance/<datalist><option>http://localhost:8080/myassistance/</option></datalist></td><td></td>
-</tr>
-<tr><td>click</td><td>link=Registrati<datalist><option>link=Registrati</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='MyAssistance'])[1]/following::a[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Funzionalità'])[1]/preceding::a[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Login CSU'])[1]/preceding::a[1]</option><option>//a[contains(text(),'Registrati')]</option><option>//a[contains(@href, './utente/registrati')]</option><option>//a</option><option>css=a.btn.btn-light</option></datalist></td><td></td>
+<tr><td>open</td><td>http://localhost:8080/myassistance/utente/registrati<datalist><option>http://localhost:8080/myassistance/utente/registrati</option></datalist></td><td></td>
 </tr>
 <tr><td>click</td><td>id=field-username<datalist><option>id=field-username</option><option>name=field-username</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Username'])[1]/following::input[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Registrazione Utente'])[1]/following::input[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Password'])[1]/preceding::input[1]</option><option>//input[@id='field-username']</option><option>//input</option><option>css=#field-username</option></datalist></td><td></td>
 </tr>
 <tr><td>type</td><td>id=field-username<datalist><option>id=field-username</option><option>name=field-username</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Username'])[1]/following::input[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Registrazione Utente'])[1]/following::input[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Password'])[1]/preceding::input[1]</option><option>//input[@id='field-username']</option><option>//input</option><option>css=#field-username</option></datalist></td><td>marissi</td>
 </tr>
-<tr><td>click</td><td>id=field-password<datalist><option>id=field-password</option><option>name=field-password</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Password'])[1]/following::input[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Ripeti Password'])[1]/preceding::input[1]</option><option>//input[@id='field-password']</option><option>//div[2]/input</option><option>css=#field-password</option></datalist></td><td></td>
+<tr><td>type</td><td>id=field-password<datalist><option>id=field-password</option><option>name=field-password</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Password'])[1]/following::input[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Ripeti Password'])[1]/preceding::input[1]</option><option>//input[@id='field-password']</option><option>//div[2]/input</option><option>css=#field-password</option></datalist></td><td>1234</td>
 </tr>
-<tr><td>type</td><td>id=field-password<datalist><option>id=field-password</option><option>name=field-password</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Password'])[1]/following::input[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Ripeti Password'])[1]/preceding::input[1]</option><option>//input[@id='field-password']</option><option>//div[2]/input</option><option>css=#field-password</option></datalist></td><td>Chiave123</td>
+<tr><td>type</td><td>id=field-repeat<datalist><option>id=field-repeat</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Ripeti Password'])[1]/following::input[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Email'])[1]/preceding::input[1]</option><option>//input[@id='field-repeat']</option><option>//div[3]/input</option><option>css=#field-repeat</option></datalist></td><td>1234</td>
 </tr>
-<tr><td>type</td><td>id=field-repeat<datalist><option>id=field-repeat</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Ripeti Password'])[1]/following::input[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Email'])[1]/preceding::input[1]</option><option>//input[@id='field-repeat']</option><option>//div[3]/input</option><option>css=#field-repeat</option></datalist></td><td>Chiave123</td>
-</tr>
-<tr><td>click</td><td>id=field-email<datalist><option>id=field-email</option><option>name=field-email</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Email'])[1]/following::input[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Nome'])[1]/preceding::input[1]</option><option>//input[@id='field-email']</option><option>//div[4]/input</option><option>css=#field-email</option></datalist></td><td></td>
-</tr>
-<tr><td>type</td><td>id=field-email<datalist><option>id=field-email</option><option>name=field-email</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Email'])[1]/following::input[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Nome'])[1]/preceding::input[1]</option><option>//input[@id='field-email']</option><option>//div[4]/input</option><option>css=#field-email</option></datalist></td><td>mario.rossi13@gmail.com</td>
-</tr>
-<tr><td>click</td><td>id=field-name<datalist><option>id=field-name</option><option>name=field-name</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Nome'])[1]/following::input[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Cognome'])[1]/preceding::input[1]</option><option>//input[@id='field-name']</option><option>//div[5]/input</option><option>css=#field-name</option></datalist></td><td></td>
+<tr><td>type</td><td>id=field-email<datalist><option>id=field-email</option><option>name=field-email</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Email'])[1]/following::input[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Nome'])[1]/preceding::input[1]</option><option>//input[@id='field-email']</option><option>//div[4]/input</option><option>css=#field-email</option></datalist></td><td>m.rossi13@studenti.unisa.it</td>
 </tr>
 <tr><td>type</td><td>id=field-name<datalist><option>id=field-name</option><option>name=field-name</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Nome'])[1]/following::input[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Cognome'])[1]/preceding::input[1]</option><option>//input[@id='field-name']</option><option>//div[5]/input</option><option>css=#field-name</option></datalist></td><td>mario</td>
 </tr>
-<tr><td>click</td><td>id=field-surname<datalist><option>id=field-surname</option><option>name=field-surname</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Cognome'])[1]/following::input[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Data Di Nascita'])[1]/preceding::input[1]</option><option>//input[@id='field-surname']</option><option>//div[6]/input</option><option>css=#field-surname</option></datalist></td><td></td>
-</tr>
 <tr><td>type</td><td>id=field-surname<datalist><option>id=field-surname</option><option>name=field-surname</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Cognome'])[1]/following::input[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Data Di Nascita'])[1]/preceding::input[1]</option><option>//input[@id='field-surname']</option><option>//div[6]/input</option><option>css=#field-surname</option></datalist></td><td>rossi</td>
-</tr>
-<tr><td>click</td><td>id=field-birthday<datalist><option>id=field-birthday</option><option>name=field-birthday</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Data Di Nascita'])[1]/following::input[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Sesso'])[1]/preceding::input[1]</option><option>//input[@id='field-birthday']</option><option>//div[7]/input</option><option>css=#field-birthday</option></datalist></td><td></td>
 </tr>
 <tr><td>type</td><td>id=field-birthday<datalist><option>id=field-birthday</option><option>name=field-birthday</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Data Di Nascita'])[1]/following::input[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Sesso'])[1]/preceding::input[1]</option><option>//input[@id='field-birthday']</option><option>//div[7]/input</option><option>css=#field-birthday</option></datalist></td><td>14-06-1985</td>
 </tr>
-<tr><td>click</td><td>id=field-gender-male<datalist><option>id=field-gender-male</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Sesso'])[1]/following::input[2]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Uomo'])[1]/preceding::input[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Donna'])[1]/preceding::input[2]</option><option>//input[@id='field-gender-male']</option><option>//div/div[2]/input</option><option>css=#field-gender-male</option></datalist></td><td></td>
+<tr><td>click</td><td>id=field-gender-male<datalist><option>id=field-gender-male</option><option>name=field-gender</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Sesso'])[1]/following::input[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Uomo'])[1]/preceding::input[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Donna'])[1]/preceding::input[2]</option><option>//input[@id='field-gender-male']</option><option>//div[8]/div/input</option><option>css=#field-gender-male</option></datalist></td><td></td>
 </tr>
-<tr><td>click</td><td>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Donna'])[1]/following::button[1]<datalist><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Donna'])[1]/following::button[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Uomo'])[1]/following::button[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Reset'])[1]/preceding::button[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Non sei loggato'])[1]/preceding::button[2]</option><option>//button[@type='submit']</option><option>//button</option><option>css=button.btn.btn-success</option></datalist></td><td></td>
+<tr><td>click</td><td>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Donna'])[1]/following::button[1]<datalist><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Donna'])[1]/following::button[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Uomo'])[1]/following::button[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Reset'])[1]/preceding::button[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Non sei loggato nella piattaforma.'])[1]/preceding::button[2]</option><option>//button[@type='submit']</option><option>//button</option><option>css=button.btn.btn-success</option></datalist></td><td></td>
 </tr>
 </tbody></table>
 </body>

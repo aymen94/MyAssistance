@@ -3,9 +3,27 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
 	<meta content="text/html; charset=UTF-8" http-equiv="content-type" />
-	<title>Segnare le segnalazioni come risolte</title>
+	<title>TC_1.8</title>
 </head>
 <body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">login gestore</td></tr>
+</thead>
+<tbody>
+<tr><td>open</td><td>http://localhost:8080/myassistance/logout<datalist><option>http://localhost:8080/myassistance/gestore/</option><option>http://localhost:8080/myassistance/logout</option></datalist></td><td></td>
+</tr>
+<tr><td>open</td><td>http://localhost:8080/myassistance/gestore/accedi<datalist><option>http://localhost:8080/myassistance/utente/accedi</option><option>http://localhost:8080/myassistance/gestore/accedi</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>id=usr<datalist><option>id=usr</option><option>name=username</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Username'])[1]/following::input[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Università degli Studi di Salerno'])[1]/following::input[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Password'])[1]/preceding::input[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Accedi'])[1]/preceding::input[2]</option><option>//input[@id='usr']</option><option>//form[@id='formLogin']/div/input</option><option>//input</option><option>css=#usr</option></datalist></td><td></td>
+</tr>
+<tr><td>type</td><td>id=usr<datalist><option>id=usr</option><option>name=username</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Username'])[1]/following::input[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Università degli Studi di Salerno'])[1]/following::input[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Password'])[1]/preceding::input[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Accedi'])[1]/preceding::input[2]</option><option>//input[@id='usr']</option><option>//form[@id='formLogin']/div/input</option><option>//input</option><option>css=#usr</option></datalist></td><td>gestore</td>
+</tr>
+<tr><td>type</td><td>id=pwd<datalist><option>id=pwd</option><option>name=password</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Password'])[1]/following::input[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Username'])[1]/following::input[2]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Accedi'])[1]/preceding::input[1]</option><option>//input[@id='pwd']</option><option>//form[@id='formLogin']/div[2]/input</option><option>//div[2]/input</option><option>css=#pwd</option></datalist></td><td>1234</td>
+</tr>
+<tr><td>click</td><td>id=btnLogin<datalist><option>id=btnLogin</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Password'])[1]/following::button[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Username'])[1]/following::button[1]</option><option>//button[@id='btnLogin']</option><option>//form[@id='formLogin']/button</option><option>//button</option><option>css=#btnLogin</option></datalist></td><td></td>
+</tr>
+</tbody></table>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
 <tr><td rowspan="1" colspan="3">TC_1.8_01</td></tr>

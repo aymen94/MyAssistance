@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta content="text/html; charset=UTF-8" http-equiv="content-type" />
+	<title>TC_1.3</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">login</td></tr>
+</thead>
+<tbody>
+<tr><td>open</td><td>http://localhost:8080/myassistance/logout<datalist><option>http://localhost:8080/myassistance/utente/accedi</option><option>http://localhost:8080/myassistance/utente/logout</option><option>http://localhost:8080/myassistance/logout</option></datalist></td><td></td>
+</tr>
+<tr><td>open</td><td>http://localhost:8080/myassistance/gestore/accedi<datalist><option>http://localhost:8080/myassistance/utente/accedi</option><option>http://localhost:8080/myassistance/gestore/accedi</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>id=usr<datalist><option>id=usr</option><option>name=username</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Username'])[1]/following::input[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Università degli Studi di Salerno'])[1]/following::input[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Password'])[1]/preceding::input[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Accedi'])[1]/preceding::input[2]</option><option>//input[@id='usr']</option><option>//form[@id='formLogin']/div/input</option><option>//input</option><option>css=#usr</option></datalist></td><td></td>
+</tr>
+<tr><td>type</td><td>id=usr<datalist><option>id=usr</option><option>name=username</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Username'])[1]/following::input[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Università degli Studi di Salerno'])[1]/following::input[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Password'])[1]/preceding::input[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Accedi'])[1]/preceding::input[2]</option><option>//input[@id='usr']</option><option>//form[@id='formLogin']/div/input</option><option>//input</option><option>css=#usr</option></datalist></td><td>gestore</td>
+</tr>
+<tr><td>type</td><td>id=pwd<datalist><option>id=pwd</option><option>name=password</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Password'])[1]/following::input[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Username'])[1]/following::input[2]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Accedi'])[1]/preceding::input[1]</option><option>//input[@id='pwd']</option><option>//form[@id='formLogin']/div[2]/input</option><option>//div[2]/input</option><option>css=#pwd</option></datalist></td><td>1234</td>
+</tr>
+<tr><td>submit</td><td>id=formLogin<datalist><option>id=formLogin</option></datalist></td><td></td>
+</tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">TC_1.3_01</td></tr>
+</thead>
+<tbody>
+<tr><td>open</td><td>http://localhost:8080/myassistance/gestore/<datalist><option>http://localhost:8080/myassistance/gestore/ufficioTecnico</option><option>http://localhost:8080/myassistance/gestore/</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>link=Segnalazioni Ricevute<datalist><option>link=Segnalazioni Ricevute</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Home'])[1]/following::a[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Funzionalità'])[1]/following::a[2]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Gestione Uffici Tecnici'])[1]/preceding::a[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Lista Utenti'])[1]/preceding::a[2]</option><option>//a[contains(text(),'Segnalazioni Ricevute')]</option><option>//a[contains(@href, '/myassistance/gestore/segnalazioni')]</option><option>//a[2]</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>link=Si è guastato il calorifero.<datalist><option>link=Si è guastato il calorifero.</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Rifiuta'])[2]/following::a[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Inoltra'])[2]/following::a[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Inoltra'])[3]/preceding::a[1]</option><option>//a[contains(text(),'Si è guastato il calorifero.')]</option><option>//div[@id='accordion_parent']/div[9]/div/h5/a</option><option>xpath=(//a[contains(@href, '#')])[9]</option><option>//div[9]/div/h5/a</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Rifiuta'])[2]/following::button[1]<datalist><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Rifiuta'])[2]/following::button[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Rifiuta'])[3]/preceding::button[1]</option><option>xpath=(//button[@type='button'])[5]</option><option>//div[@id='collapse_9']/div/button</option><option>//div[9]/div/div/div/button</option><option>css=#collapse_9 &gt; div.alert-buttons &gt; button.btn.btn-light</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Annulla'])[1]/following::button[1]<datalist><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Annulla'])[1]/following::button[1]</option><option>//button[@type='submit']</option><option>//form[@id='submit-dialog']/div/div/div[3]/button[2]</option><option>//div[3]/button[2]</option><option>css=button.btn.btn-primary.confirm</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Errore Registrazione'])[1]/following::button[2]<datalist><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Errore Registrazione'])[1]/following::button[2]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='P.IVA 00851300657 - C.F. 80018670655'])[1]/following::button[2]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Inoltra Segnalazione'])[1]/preceding::button[1]</option><option>xpath=(//button[@type='button'])[8]</option><option>//div[@id='error-dialog']/div/div/div[3]/button</option><option>//div[3]/button</option><option>css=button.btn.btn-secondary</option></datalist></td><td></td>
+</tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">TC_1.3_02</td></tr>
+</thead>
+<tbody>
+<tr><td>open</td><td>http://localhost:8080/myassistance/gestore/<datalist><option>http://localhost:8080/myassistance/gestore/ufficioTecnico</option><option>http://localhost:8080/myassistance/gestore/</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>link=Segnalazioni Ricevute<datalist><option>link=Segnalazioni Ricevute</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Home'])[1]/following::a[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Funzionalità'])[1]/following::a[2]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Gestione Uffici Tecnici'])[1]/preceding::a[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Lista Utenti'])[1]/preceding::a[2]</option><option>//a[contains(text(),'Segnalazioni Ricevute')]</option><option>//a[contains(@href, '/myassistance/gestore/segnalazioni')]</option><option>//a[2]</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>link=Si è guastato il calorifero.<datalist><option>link=Si è guastato il calorifero.</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Rifiuta'])[2]/following::a[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Inoltra'])[2]/following::a[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Inoltra'])[3]/preceding::a[1]</option><option>//a[contains(text(),'Si è guastato il calorifero.')]</option><option>//div[@id='accordion_parent']/div[9]/div/h5/a</option><option>xpath=(//a[contains(@href, '#')])[9]</option><option>//div[9]/div/h5/a</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Rifiuta'])[2]/following::button[1]<datalist><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Rifiuta'])[2]/following::button[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Rifiuta'])[3]/preceding::button[1]</option><option>xpath=(//button[@type='button'])[5]</option><option>//div[@id='collapse_9']/div/button</option><option>//div[9]/div/div/div/button</option><option>css=#collapse_9 &gt; div.alert-buttons &gt; button.btn.btn-light</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>id=ufficio-select<datalist><option>id=ufficio-select</option><option>name=ufficio</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Inoltra Segnalazione'])[1]/following::select[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Annulla'])[1]/preceding::select[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Procedi'])[1]/preceding::select[1]</option><option>//select[@id='ufficio-select']</option><option>//div[@id='inoltra-segnalazione']/select</option><option>//select</option><option>css=#ufficio-select</option></datalist></td><td></td>
+</tr>
+<tr><td>select</td><td>id=ufficio-select<datalist><option>id=ufficio-select</option><option>name=ufficio</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Inoltra Segnalazione'])[1]/following::select[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Annulla'])[1]/preceding::select[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Procedi'])[1]/preceding::select[1]</option><option>//select[@id='ufficio-select']</option><option>//div[@id='inoltra-segnalazione']/select</option><option>//select</option><option>css=#ufficio-select</option></datalist></td><td>label=ufficio tecnico 1</td>
+</tr>
+<tr><td>click</td><td>id=ufficio-select<datalist><option>id=ufficio-select</option><option>name=ufficio</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Inoltra Segnalazione'])[1]/following::select[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Annulla'])[1]/preceding::select[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Procedi'])[1]/preceding::select[1]</option><option>//select[@id='ufficio-select']</option><option>//div[@id='inoltra-segnalazione']/select</option><option>//select</option><option>css=#ufficio-select</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Annulla'])[1]/following::button[1]<datalist><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Annulla'])[1]/following::button[1]</option><option>//button[@type='submit']</option><option>//form[@id='submit-dialog']/div/div/div[3]/button[2]</option><option>//div[3]/button[2]</option><option>css=button.btn.btn-primary.confirm</option></datalist></td><td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

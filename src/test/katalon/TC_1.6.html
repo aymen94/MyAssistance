@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
 	<meta content="text/html; charset=UTF-8" http-equiv="content-type" />
-	<title>TC_1.5</title>
+	<title>TC_1.6</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
@@ -11,7 +11,7 @@
 <tr><td rowspan="1" colspan="3">login</td></tr>
 </thead>
 <tbody>
-<tr><td>open</td><td>http://localhost:8080/myassistance/logout<datalist><option>http://localhost:8080/myassistance/logout</option><option>http://localhost:8080/myassistance/gestore/</option></datalist></td><td></td>
+<tr><td>open</td><td>http://localhost:8080/myassistance/logout<datalist><option>http://localhost:8080/myassistance/logout</option><option>http://localhost:8080/myassistance/utente/accedi</option><option>http://localhost:8080/myassistance/utente/logout</option></datalist></td><td></td>
 </tr>
 <tr><td>open</td><td>http://localhost:8080/myassistance/utente/accedi<datalist><option>http://localhost:8080/myassistance/utente/accedi</option></datalist></td><td></td>
 </tr>
@@ -26,12 +26,18 @@
 </tbody></table>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">TC_1.5_01</td></tr>
+<tr><td rowspan="1" colspan="3">TC_1.6_01</td></tr>
 </thead>
 <tbody>
 <tr><td>open</td><td>http://localhost:8080/myassistance/utente/<datalist><option>http://localhost:8080/myassistance/utente/</option></datalist></td><td></td>
 </tr>
-<tr><td>click</td><td>link=Segnalazioni Effettuate<datalist><option>link=Segnalazioni Effettuate</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Effettua Segnalazione'])[1]/following::a[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Home'])[1]/following::a[2]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='andrea'])[1]/preceding::a[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='My Assistance'])[1]/preceding::a[2]</option><option>//a[contains(text(),'Segnalazioni Effettuate')]</option><option>//a[contains(@href, '/MyAssistance_war/utente/segnalazioni')]</option><option>//a[3]</option></datalist></td><td></td>
+<tr><td>click</td><td>link=Segnalazioni Effettuate<datalist><option>link=Segnalazioni Effettuate</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Effettua Segnalazione'])[1]/following::a[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Home'])[1]/following::a[2]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='aymen'])[1]/preceding::a[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='My Assistance'])[1]/preceding::a[2]</option><option>//a[contains(text(),'Segnalazioni Effettuate')]</option><option>//a[contains(@href, '/myassistance/utente/segnalazioni')]</option><option>//a[3]</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>link=Si è guastato il calorifero.<datalist><option>link=Si è guastato il calorifero.</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Elimina'])[1]/following::a[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Il calorifero vicino all’entrata dell’aula F8 emana aria fredda.'])[1]/preceding::a[1]</option><option>//a[contains(text(),'Si è guastato il calorifero.')]</option><option>//div[@id='accordion_parent']/form[3]/div/h5/a</option><option>xpath=(//a[contains(@href, '#')])[3]</option><option>//form[3]/div/h5/a</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Il calorifero vicino all’entrata dell’aula F8 emana aria fredda.'])[1]/following::button[2]<datalist><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Il calorifero vicino all’entrata dell’aula F8 emana aria fredda.'])[1]/following::button[2]</option><option>xpath=(//button[@type='button'])[2]</option><option>//div[@id='collapse_3']/div/button[2]</option><option>//form[3]/div/div/div/button[2]</option><option>css=#collapse_3 &gt; div &gt; button.btn.btn-danger</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Annulla'])[1]/following::button[1]<datalist><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Annulla'])[1]/following::button[1]</option><option>xpath=(//button[@type='submit'])[3]</option><option>//form[@id='submit-dialog']/div/div/div[3]/button[2]</option><option>//div[3]/button[2]</option><option>css=button.btn.btn-primary.confirm</option></datalist></td><td></td>
 </tr>
 </tbody></table>
 </body>
