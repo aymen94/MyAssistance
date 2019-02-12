@@ -1,10 +1,10 @@
-INSERT INTO my_assistance.utente (username, pass, email, nome, cognome, sesso, data_di_nascita, is_gestore) -- pass: 1234
-VALUES ('anaghmouchi', '2:0f:29157d97fa6a6d8cbe13eba297c27275718cf47a854a6a1ee3a6fe16f646782acd259ef350cb2f09331bec7c0b', 'a.naghmouchi@test.it', 'aymen', 'naghmouchi', 1,'1990-01-01', 0),
-       ('apauciello', '2:0f:29157d97fa6a6d8cbe13eba297c27275718cf47a854a6a1ee3a6fe16f646782acd259ef350cb2f09331bec7c0b', 'a.pauciello3@test.it', 'alfonso', 'pauciello', 1,'1990-01-01', 0),
-       ('amennillo', '2:0f:29157d97fa6a6d8cbe13eba297c27275718cf47a854a6a1ee3a6fe16f646782acd259ef350cb2f09331bec7c0b', 'a.mennillo1@test.it', 'andrea', 'mennillo', 1,'1990-01-01', 0),
-       ('galbanese', '2:0f:29157d97fa6a6d8cbe13eba297c27275718cf47a854a6a1ee3a6fe16f646782acd259ef350cb2f09331bec7c0b', 'g.albanese11@test.it', 'gaetano', 'albanese', 1,'1990-01-01', 0),
-       ('pdauria', '2:0f:29157d97fa6a6d8cbe13eba297c27275718cf47a854a6a1ee3a6fe16f646782acd259ef350cb2f09331bec7c0b', 'mario.rossi12@studenti.unisa.it', 'pio', 'd auria ', 1,'1990-01-01', 0),
-       ('gestore', '2:0f:29157d97fa6a6d8cbe13eba297c27275718cf47a854a6a1ee3a6fe16f646782acd259ef350cb2f09331bec7c0b', 'gestore@test.it', 'gestore', 'gestore ', 1,'1989-01-01', 1);
+INSERT INTO my_assistance.utente (username, pass, email, nome, cognome, sesso, data_di_nascita, is_gestore) -- pass: 12341234
+VALUES ('anaghmouchi', '2:c2:2839196b7a72fad805e83d39cead8139edcf1e063387ae970f4afe5148bae4bb335a0ee5da7b43e570bc5e98ce', 'a.naghmouchi@test.it', 'aymen', 'naghmouchi', 1,'1990-01-01', 0),
+       ('apauciello', '2:c2:2839196b7a72fad805e83d39cead8139edcf1e063387ae970f4afe5148bae4bb335a0ee5da7b43e570bc5e98ce', 'a.pauciello3@test.it', 'alfonso', 'pauciello', 1,'1990-01-01', 0),
+       ('amennillo', '2:c2:2839196b7a72fad805e83d39cead8139edcf1e063387ae970f4afe5148bae4bb335a0ee5da7b43e570bc5e98ce', 'a.mennillo1@test.it', 'andrea', 'mennillo', 1,'1990-01-01', 0),
+       ('galbanese', '2:c2:2839196b7a72fad805e83d39cead8139edcf1e063387ae970f4afe5148bae4bb335a0ee5da7b43e570bc5e98ce', 'g.albanese11@test.it', 'gaetano', 'albanese', 1,'1990-01-01', 0),
+       ('pdauria', '2:c2:2839196b7a72fad805e83d39cead8139edcf1e063387ae970f4afe5148bae4bb335a0ee5da7b43e570bc5e98ce', 'mario.rossi12@studenti.unisa.it', 'pio', 'd auria ', 1,'1990-01-01', 0),
+       ('gestore', '2:c2:2839196b7a72fad805e83d39cead8139edcf1e063387ae970f4afe5148bae4bb335a0ee5da7b43e570bc5e98ce', 'gestore@test.it', 'gestore', 'gestore ', 1,'1989-01-01', 1);
 
 INSERT INTO my_assistance.ufficio_tecnico (nome, tel, email, ubicazione)
 VALUES (' Ifix ', ' 1112223334', ' assistenza@ifix.it ', ' Via della Biblioteca, 84084 Fisciano SA '),
