@@ -14,7 +14,7 @@ import javax.servlet.annotation.WebFilter;
  * The Class CharacterEncodingFilter.
  */
 @WebFilter("/*")
-public class CharacterEncodingFilter implements Filter {
+public final class CharacterEncodingFilter implements Filter {
 
     /**
      *
